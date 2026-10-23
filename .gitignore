@@ -1,0 +1,43 @@
+# Python and development tools
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.cache/
+.coverage*
+htmlcov/
+build/
+dist/
+.ipynb_checkpoints/
+.DS_Store
+
+# Credentials and local settings
+.env
+.env.*
+!.env.example
+credentials*.json
+secrets*.json
+*.pem
+*.key
+.netrc
+
+# Local payloads: keep only directory explanations under version control
+/data/*
+!/data/README.md
+/artifacts/*
+!/artifacts/README.md
+/reports/raw/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.npy
+*.npz
+*.parquet
+*.arrow
+*.sqlite*
+*.db
+*.log
