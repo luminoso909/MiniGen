@@ -1,0 +1,60 @@
+[
+  {
+    "file": "DDPM_Denoising_Diffusion_Probabilistic_Models_2020_v2.pdf",
+    "title": "Denoising Diffusion Probabilistic Models",
+    "authors": [
+      "Jonathan Ho",
+      "Ajay Jain",
+      "Pieter Abbeel"
+    ],
+    "year": 2020,
+    "version": "2006.11239v2",
+    "role": "week1_core",
+    "source": "https://arxiv.org/abs/2006.11239v2",
+    "download_url": "https://arxiv.org/pdf/2006.11239v2",
+    "retrieved": "2026-10-24",
+    "sha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+    "bytes": 10267274,
+    "pages": 25,
+    "pdf_parse_verified": true
+  },
+  {
+    "file": "VAE_Auto_Encoding_Variational_Bayes_1312.6114v11.pdf",
+    "title": "Auto-Encoding Variational Bayes",
+    "authors": [
+      "Diederik P. Kingma",
+      "Max Welling"
+    ],
+    "year": 2013,
+    "version": "1312.6114v11",
+    "role": "week2_core",
+    "source": "https://arxiv.org/abs/1312.6114v11",
+    "download_url": "https://arxiv.org/pdf/1312.6114v11",
+    "retrieved": "2026-10-24",
+    "sha256": "bdcb63b79ed88f64f8ee2d43a721930d01dde5441a4dba20ecaa2342b34e017c",
+    "bytes": 3926758,
+    "pages": 14,
+    "pdf_parse_verified": true
+  },
+  {
+    "file": "LDM_High_Resolution_Image_Synthesis_2112.10752v2.pdf",
+    "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+    "authors": [
+      "Robin Rombach",
+      "Andreas Blattmann",
+      "Dominik Lorenz",
+      "Patrick Esser",
+      "Bjorn Ommer"
+    ],
+    "year": 2022,
+    "version": "2112.10752v2",
+    "role": "week2_bridge",
+    "source": "https://arxiv.org/abs/2112.10752v2",
+    "download_url": "https://arxiv.org/pdf/2112.10752v2",
+    "retrieved": "2026-10-24",
+    "sha256": "46ede043a8dc07ca1f0f445620523fe1ad8b2436bd83856a3835612a47e9f79e",
+    "bytes": 40842586,
+    "pages": 45,
+    "pdf_parse_verified": true
+  }
+]

@@ -766,6 +766,18 @@ wheels = [
 ]
 
 [[package]]
+name = "jaxtyping"
+version = "0.3.11"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "wadler-lindig" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/91/c1/091b8852bd7cbf50bd655543c8506033cf4029300c67f8c176c1286879a9/jaxtyping-0.3.11.tar.gz", hash = "sha256:b09c14acf6686feb9e0df5b0d8c6e7c5b6f8d36bf059ee54cd522a186c2ef050", size = 46489, upload-time = "2026-06-13T18:35:23.167Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8b/38/c66bbdc5047f4776c2bd3e47e5295a350e3fa44d5b8942105e71c2a876a0/jaxtyping-0.3.11-py3-none-any.whl", hash = "sha256:8a4bedc4e3f963fa82df41bd13c7ebc2bad925601eb48614c65798f21329d4e3", size = 56593, upload-time = "2026-06-13T18:35:22.01Z" },
+]
+
+[[package]]
 name = "jedi"
 version = "0.20.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1136,6 +1148,7 @@ name = "minigen"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "jaxtyping" },
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "pillow" },
@@ -1158,6 +1171,9 @@ generation = [
 notebook = [
     { name = "ipykernel" },
     { name = "jupyterlab" },
+    { name = "nbclient" },
+    { name = "nbconvert" },
+    { name = "nbformat" },
 ]
 
 [package.dev-dependencies]
@@ -1173,8 +1189,12 @@ requires-dist = [
     { name = "diffusers", marker = "extra == 'generation'", specifier = ">=0.33,<1" },
     { name = "huggingface-hub", marker = "extra == 'generation'", specifier = ">=0.30,<2" },
     { name = "ipykernel", marker = "extra == 'notebook'", specifier = ">=6,<8" },
+    { name = "jaxtyping", specifier = ">=0.3,<0.4" },
     { name = "jupyterlab", marker = "extra == 'notebook'", specifier = ">=4,<5" },
     { name = "matplotlib", specifier = ">=3.10,<4" },
+    { name = "nbclient", marker = "extra == 'notebook'", specifier = ">=0.10,<1" },
+    { name = "nbconvert", marker = "extra == 'notebook'", specifier = ">=7,<8" },
+    { name = "nbformat", marker = "extra == 'notebook'", specifier = ">=5,<6" },
     { name = "numpy", specifier = ">=2,<3" },
     { name = "peft", marker = "extra == 'generation'", specifier = ">=0.15,<1" },
     { name = "pillow", specifier = ">=11,<13" },
@@ -2310,6 +2330,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e3/05/b17359e1cefb4f909b5e40b1b90a496d987258916dbbf88e842c729f510e/urllib3-2.8.0.tar.gz", hash = "sha256:63bf2ead4c879426ebf22ef2a781eeb4aa3b4ae798a0435506f8687fd5bb9b63", size = 458972, upload-time = "2026-09-15T19:29:36.253Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl", hash = "sha256:0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3", size = 135717, upload-time = "2026-09-15T19:29:34.577Z" },
+]
+
+[[package]]
+name = "wadler-lindig"
+version = "0.1.8"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ea/bf/4caf1aada6c84eb3fadf9341a90367f436a759692456e1a234d444d428ee/wadler_lindig-0.1.8.tar.gz", hash = "sha256:1a94d51cd26100dda9e430c64539c5b92b9788c87f10db3e1c87503ab814411a", size = 16256, upload-time = "2026-10-25T19:06:02.92Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/00/0b/b170089cd44848f25dbc9efda08e5aa4a8402d9a13f0d4d0f3d7808be539/wadler_lindig-0.1.8-py3-none-any.whl", hash = "sha256:8671e8c98449ae3f4e4ba720eccd63a502b3983042f8d112b49a9c6be49e8d92", size = 20840, upload-time = "2026-10-25T19:06:01.79Z" },
 ]
 
 [[package]]

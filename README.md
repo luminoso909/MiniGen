@@ -4,7 +4,7 @@
 
 | 路线 | 内容 | 当前状态 |
 | --- | --- | --- |
-| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | 只有学习接口，核心未实现 |
+| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | 两周 DDPM/VAE 教学 Notebook 与训练工程已验证；src 核心待你完成 |
 | B：现代适配 | Sana 图标领域 LoRA 与前后评测 | 尚未下载权重或执行微调 |
 | 开发基础 | uv 环境、CLI 诊断、项目结构、测试与文档 | 见 [初始化验证报告](reports/bootstrap.md) |
 
@@ -13,6 +13,10 @@
 ### **1. 已实现与未实现**
 
 已提供环境诊断、必要基础测试、数据与 AI 工作流规范。`train`、`sample`、`evaluate`、`cache` 只保留命令位置，执行会明确报错，退出码为 2。
+
+第一周入口：[DDPM 原理与 MNIST Notebook](docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb)、[学习导航](docs/learning/README.md)。Notebook 显式使用获授权的教学 Scheduler，调用真实 U-Net、训练和采样工程；项目 CLI 不会自动使用这份参考。实验结果与限制见 [第一周报告](reports/stage1/week1.md)。
+
+第二周入口：[VAE 原理与潜空间 Notebook](docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb)、[第二周报告](reports/stage1/week2.md)、[论文与阅读导航](docs/papers/README.md)。四组真实短训、数学和单进程随机顺序恢复已验证；个人核心与理解仍待验收。
 
 五个算法学习区调用时抛出 `CoreImplementationRequired`。通过初始化测试只证明工程基础与未实现边界正确，不代表算法已验证、模型已训练或生成效果已达标。
 
@@ -70,7 +74,9 @@ uv run --locked minigen doctor --device cpu --json
 ```text
 src/minigen/        模型、目标、采样、条件、数据、训练与评测
 configs/            数据来源登记和小型清单示例
-learning/           五项核心学习任务
+learning/           五项核心任务入口
+docs/learning/      知识笔记与带真实输出的 Notebook
+docs/papers/        核心论文、版本哈希与阅读任务
 tests/              当前真实行为与未实现边界检查
 docs/               数据规范与 Agent 工作流
 templates/          数据卡、质量报告、任务及交接模板
@@ -81,7 +87,7 @@ artifacts/          缓存、权重、实验输出，默认忽略
 
 数据采用图片文件加 JSONL 清单，以 YAML 登记来源。三层数据为 MNIST、准确标注的合成几何图标、OpenMoji 筛选集。SQLite 暂不引入，未来只能作为可重建索引。
 
-来源登记见 [sources.yaml](configs/datasets/sources.yaml)，详细规则见 [数据管理](docs/data.md)。清单示例为明确标记的虚构记录，不含真实图像，不可直接用于训练。数据下载和质量检查脚本尚未实现。
+来源登记见 [sources.yaml](configs/datasets/sources.yaml)，详细规则见 [数据管理](docs/data.md)。清单示例为明确标记的虚构记录，不含真实图像，不可直接用于训练。MNIST 显式获取与文件校验已实现；合成图标、OpenMoji 采集与完整质量流水线仍待做。
 
 ## **四、学习与 Agent 协作**
 
@@ -91,7 +97,7 @@ artifacts/          缓存、权重、实验输出，默认忽略
 
 目前单 Agent 工作。四类角色模板预留数据、工程、评测和审查并行空间；未来显式启用后再分配互不冲突的修改范围。本项目不包含模型 API 编排系统，也不需要额外 API Key。
 
-下一步是 S1-03：学习 DDPM 的直接加噪与反向采样，完成核心实现。Agent 可以同时准备独立的工程与数学测试；不能用参考库绕过核心未实现错误。
+下一步是按学习导航完成 L01 / S1-03 与 [L02 / S1-06](learning/L02_VAE核心任务.md) 的个人核心。Agent 已提供独立数值对照和训练工程；不能用教学参考绕过项目核心未实现错误。VAE 验收命令为 `uv run --locked python scripts/check_vae_core.py`，当前诚实返回待做。
 
 ## **五、Git 与来源说明**
 

@@ -1,0 +1,24 @@
+{
+  "notebook_cells": 103,
+  "code_cells": 17,
+  "png_outputs": 6,
+  "unhandled_errors": 0,
+  "baseline_unchanged": true,
+  "local_links_checked": 8,
+  "core_acceptance_exit": 2,
+  "core_status": "待做",
+  "pytest_passed": 24,
+  "ruff": "passed",
+  "browser": {
+    "images_loaded": 6,
+    "mathjax_errors": 0,
+    "visual_scope": [
+      "opening",
+      "ELBO derivations",
+      "result table",
+      "six plot PNGs"
+    ]
+  },
+  "runtime_seconds": 23.324303917004727,
+  "notebook_sha256": "32a50966c6298563e02a8343207a81e13e0ffb1218cf411408bb828fd809e1ee"
+}

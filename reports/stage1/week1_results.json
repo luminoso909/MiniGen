@@ -1,0 +1,119 @@
+{
+  "scheduler_source": "notebook_reference",
+  "src_core_implemented": false,
+  "seed": 20261026,
+  "device": "mps",
+  "torch_version": "2.14.1",
+  "data": {
+    "train_count": 10000,
+    "validation_count": 1000,
+    "disk_bytes": 66544770,
+    "split_sha256": "caae80b4d0f9cc96b9761366f6d22d0597677efdd880dd86d6837ec3312fbde9",
+    "official_test_used": false
+  },
+  "data_resources": [
+    {
+      "file": "raw/MNIST/raw/train-images-idx3-ubyte.gz",
+      "bytes": 9912422,
+      "expected_md5": "f68b3c2dcbeaaa9fbdd348bbdeb94873",
+      "md5_verified": true,
+      "sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609"
+    },
+    {
+      "file": "raw/MNIST/raw/train-labels-idx1-ubyte.gz",
+      "bytes": 28881,
+      "expected_md5": "d53e105ee54ea40749a09fcbcd1e9432",
+      "md5_verified": true,
+      "sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c"
+    },
+    {
+      "file": "raw/MNIST/raw/t10k-images-idx3-ubyte.gz",
+      "bytes": 1648877,
+      "expected_md5": "9fb629c4189551a2d022fa330f9573f3",
+      "md5_verified": true,
+      "sha256": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6"
+    },
+    {
+      "file": "raw/MNIST/raw/t10k-labels-idx1-ubyte.gz",
+      "bytes": 4542,
+      "expected_md5": "ec29112dd5afa0611ce80d1b7f02629c",
+      "md5_verified": true,
+      "sha256": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6"
+    }
+  ],
+  "math_checks": {
+    "posterior": true,
+    "broadcast": true,
+    "last_step": true,
+    "loss_gradient": true,
+    "invalid_time": true,
+    "reverse_statistics": true
+  },
+  "oracle_max_error": 2.384185791015625e-07,
+  "fixed_pair": {
+    "final_step": 100,
+    "stop_reason": "max_steps",
+    "elapsed_seconds": 6.470001250039786,
+    "initial_probe_loss": 1.0771076679229736,
+    "final_probe_loss": 0.009980934672057629
+  },
+  "training": {
+    "final_step": 1000,
+    "stop_reason": "max_steps",
+    "elapsed_seconds": 106.1086801670026,
+    "initial_probe_loss": 1.0817253589630127,
+    "final_probe_loss": 0.032044146209955215,
+    "ema_probe_loss": 0.03137407451868057
+  },
+  "sampling": {
+    "completed": true,
+    "completed_steps": 1000,
+    "elapsed_seconds": 11.799002583953552,
+    "seed": 42,
+    "model_calls": 1000
+  },
+  "config": {
+    "run_dir": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/s1_week1/mnist_short",
+    "max_steps": 1000,
+    "max_seconds": 900,
+    "learning_rate": 0.0002,
+    "ema_decay": 0.99,
+    "seed": 20261026,
+    "device": "mps",
+    "checkpoint_every": 100,
+    "scheduler_source": "notebook_reference"
+  },
+  "experiment_elapsed_seconds": 133.72662666602992,
+  "limitations": [
+    "8 samples only",
+    "64-image fixed validation probe",
+    "single training seed",
+    "no shuffled-loader mid-epoch replay",
+    "not a paper reproduction"
+  ],
+  "cpu_fixed_loader_resume_exact": true,
+  "noise_schedule": {
+    "num_steps": 1000,
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "reverse_variance": "posterior",
+    "sampling_clip_x0": true
+  },
+  "model": {
+    "name": "TinyUNet",
+    "base": 32,
+    "time_width": 128,
+    "parameters": 654785,
+    "precision": "float32"
+  },
+  "source_sha256": {
+    "src/minigen/models/tiny_unet.py": "ccbf864d615739108bca3d28a82c622d14e13f1ba38ef0ab4356a516f9d356ab",
+    "src/minigen/training/denoising.py": "7cf7006eb8e7b5da80437c2c40be9bbd00c3c0c039b4279c9531a652a48c01a9",
+    "src/minigen/samplers/ddpm_loop.py": "500ac9f025f71f28392667009140be9cdba74c2400437b41f4b4a5bf259b7262",
+    "src/minigen/data/mnist.py": "5a539f6eb3b83f7ca0f8bbba7126a2959150517908c57e8dd69dacef53356611"
+  },
+  "baseline_commit": "861f2084cc58b1a801c26f502e6dfa36a3530f5e",
+  "code_state": "baseline plus current uncommitted source files identified by SHA-256",
+  "reference_class_ast_sha256": "441d7f86bf24d4ac1d2533169466113d93089ac64183a5d17d45fe4c971ac8fd",
+  "notebook_sha256": "2c288c841618402da28d4c5dec520d1b0707b17b3dc5f9acfe7c68530ecaf547"
+}
