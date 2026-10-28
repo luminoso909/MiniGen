@@ -4,7 +4,7 @@
 
 | 路线 | 内容 | 当前状态 |
 | --- | --- | --- |
-| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | 两周 DDPM/VAE 教学 Notebook 与训练工程已验证；src 核心待你完成 |
+| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | 三周 DDPM/VAE/DiT 教学与数据、表示、缓存试点已验证；src 核心待你完成 |
 | B：现代适配 | Sana 图标领域 LoRA 与前后评测 | 尚未下载权重或执行微调 |
 | 开发基础 | uv 环境、CLI 诊断、项目结构、测试与文档 | 见 [初始化验证报告](reports/bootstrap.md) |
 
@@ -87,7 +87,7 @@ artifacts/          缓存、权重、实验输出，默认忽略
 
 数据采用图片文件加 JSONL 清单，以 YAML 登记来源。三层数据为 MNIST、准确标注的合成几何图标、OpenMoji 筛选集。SQLite 暂不引入，未来只能作为可重建索引。
 
-来源登记见 [sources.yaml](configs/datasets/sources.yaml)，详细规则见 [数据管理](docs/data.md)。清单示例为明确标记的虚构记录，不含真实图像，不可直接用于训练。MNIST 显式获取与文件校验已实现；合成图标、OpenMoji 采集与完整质量流水线仍待做。
+来源登记见 [sources.yaml](configs/datasets/sources.yaml)，详细规则见 [数据管理](docs/data.md)。清单示例为明确标记的虚构记录，不含真实图像，不可直接用于训练。MNIST 显式获取与文件校验已实现；14000 张合成图标、划分和质量检查已实现；OpenMoji 采集与正式 S3 评测仍待做。
 
 ## **四、学习与 Agent 协作**
 
@@ -101,6 +101,19 @@ artifacts/          缓存、权重、实验输出，默认忽略
 
 ## **五、Git 与来源说明**
 
-当前只初始化本地 `main` 和首次提交，不设置远程、不推送。后续发布需要确认账号、仓库和可见性。`.gitignore` 排除数据、缓存、虚拟环境、权重与凭据；文本模板、小型配置和必要报告保留。
+当前在本地 `main` 按周提交，不设置远程、不推送。后续发布需要确认账号、仓库和可见性。`.gitignore` 排除数据、缓存、虚拟环境、权重与凭据；文本模板、小型配置和必要报告保留。
 
 主要算法参考 [官方 DiT](https://github.com/facebookresearch/DiT)，组件与微调参考 [Diffusers](https://github.com/huggingface/diffusers)。本次未复制两者的算法实现。数据、代码与权重的来源分别登记，不将第三方内容标为原创，也未擅自为整个项目指定开源许可证。
+
+## **六、S2 第三周：数据、潜空间与 DiT**
+
+交付入口：[第三周 Notebook](docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb)、[真实报告](reports/stage2/week3.md)、[L03 个人核心](learning/L03_DiT核心任务.md)。14000 张图标已生成，96 张冻结 VAE 重建通过预定属性门槛，256 张潜变量试点缓存完成；100 步 DiT 固定监督拟合只验证优化链路，没有反向生成。
+
+```bash
+uv sync --locked --extra notebook --extra latent
+uv run --locked --extra notebook --extra latent python scripts/prepare_week3_assets.py
+uv run --locked --extra notebook --extra latent python scripts/execute_learning.py docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb --html-output artifacts/runs/s2_week3/learning_preview.html
+uv run --locked python scripts/check_dit_core.py
+```
+
+资源准备会显式下载 DiT 论文与约 335 MB 的冻结 VAE 单组件，复核已有论文；Notebook 只读取本地模型。项目 CLI 的 train/sample/evaluate/cache 仍未实现。当前全局 Ruff 存在第一周笔记和 tiny_unet 的历史问题；第三周文件独立通过检查，详细基线见实验报告。

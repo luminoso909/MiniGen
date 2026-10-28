@@ -6,7 +6,7 @@ MiniGen 是学习与实验项目。先阅读根目录项目任务清单、README
 
 用户亲手实现 DDPM、VAE、DiT、CFG、Flow 五个核心。Agent 提供接口、形状、数学说明、独立测试与错误定位，不主动完成核心主体，不用库或参考实现静默替代。当前核心抛出 `CoreImplementationRequired`，它是学习边界，不是需要绕过的 bug。
 
-用户已授权第一周 Notebook 的完整 DDPM 教学参考，以及第二周 Notebook 的完整 VAE 教学参考。完整核心仅定义在对应笔记，教学训练显式传入对象或函数，记录为 notebook_reference。src 中的五项核心继续留给用户，禁止自动 fallback。教学实验、项目核心验收与用户理解验收分别记录。
+用户已授权第一周 DDPM、第二周 VAE，以及第三周 DiT Notebook 的完整教学参考。完整核心仅定义在对应笔记，教学训练显式传入对象或函数，记录为 notebook_reference。src 中的五项核心继续留给用户，禁止自动 fallback。教学实验、项目核心验收与用户理解验收分别记录。
 
 其余环境、数据工程、训练器、日志、Checkpoint、执行、图表、排错与文档由 Agent 主动完成。用户只需掌握原理、核心代码、整体数据流和研究判断；常规工程细节写入记录，避免反复把琐事转交用户。
 
@@ -49,3 +49,11 @@ S1-05 当前只验证单进程、确定数据访问的精确恢复，使用 Stat
 本地公式使用 `$...$` 与 `$$...$$`，块定界符与公式同行，定界符内不加空行；聊天使用聊天数学定界符。公式中的绝对值竖线用 `\vert`，范数用 `\lVert`、`\rVert`，条件分隔可用 `\mid`，避免多余转义。
 
 图片识别笔记先核对图片中的文字、公式和符号，再按上述标题层级整理，保持逻辑连贯。更新既有笔记保留正确原文、公式和任务编号，修改后检查格式和引用。
+
+## **五、第三周执行约定**
+
+第三周使用 `uv sync --locked --extra notebook --extra latent`，相关 uv run 同样带两项 extra。显式资源准备入口为 `scripts/prepare_week3_assets.py`；只获取固定论文和 SDXL VAE 单组件。权重身份在 configs/models/sdxl_vae.json，本地权重仍在忽略目录。
+
+执行第三周 Notebook 时显式使用 `--html-output artifacts/runs/s2_week3/learning_preview.html`。图标按 configs/datasets/icons_week3.yaml 重建；已有版本先核验，配置变化使用新 dataset_id。测试集不用于重建选型。
+
+S2-02 本轮只登记冻结表示的教学验证，S1 个人前置仍待验收。S2-03 仅冻结 256 张试点缓存，全量待做。S2-04 教学 DiT 在 Notebook，个人验收为 `uv run --locked python scripts/check_dit_core.py`，不替代 src 核心。固定时间与噪声拟合不是随机扩散训练，更不是生成结果。

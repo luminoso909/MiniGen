@@ -1,0 +1,18 @@
+{
+  "repo_id": "madebyollin/sdxl-vae-fp16-fix",
+  "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+  "files": {
+    "config.json": {
+      "sha256": "f18b16fa4381c90ab44a3d7abd2e90afd05a2c31b8ca69998bc93c6453aeb7b7",
+      "bytes": 631
+    },
+    "diffusion_pytorch_model.safetensors": {
+      "sha256": "1b909373b28f2137098b0fd9dbc6f97f8410854f31f84ddc9fa04b077b0ace2c",
+      "bytes": 334643238
+    }
+  },
+  "retrieved": "2026-10-28",
+  "source": "https://huggingface.co/madebyollin/sdxl-vae-fp16-fix",
+  "local_path": "artifacts/models/sdxl_vae/207b116dae70ace3637169f1ddd2434b91b3a8cd",
+  "use": "frozen_autoencoder_only"
+}

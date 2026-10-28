@@ -1,0 +1,18 @@
+schema_version: 1
+dataset_id: synthetic_icons_week3_v1
+generator_revision: geometric-icons-1
+seed: 20261028
+image_size: 128
+min_size: 24
+max_size: 32
+min_gap: 8
+split_counts:
+  train: 10000
+  validation: 1000
+  test_id: 1000
+  test_combo: 1000
+  test_template: 1000
+held_out_combinations:
+  - red_triangle
+  - blue_square
+description_origin: structured_scene_attributes

@@ -13,10 +13,10 @@ sources:
     validation_count: 1000
     official_test_used: false
   synthetic_icons_v1:
-    status: planned
-    acquisition: deterministic local renderer; not implemented
-    generator_revision: null
-    seed: 20261026
+    status: prepared_week3
+    acquisition: deterministic local geometric renderer
+    generator_revision: geometric-icons-1
+    seed: 20261028
     image_size:
     - 128
     - 128
@@ -43,6 +43,9 @@ sources:
     - red_triangle
     - blue_square
     download_enabled: false
+    dataset_id: synthetic_icons_week3_v1
+    manifest: data/manifests/synthetic_icons_week3_v1.jsonl
+    quality_report: reports/stage2/week3_results.json
   openmoji_subset:
     status: planned
     upstream: https://github.com/hfg-gmuend/openmoji

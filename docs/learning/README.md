@@ -38,3 +38,11 @@ uv run --locked --extra notebook python scripts/execute_learning.py docs/learnin
 ## **三、学习验收**
 
 阅读答案后，合上参考代码完成根目录 learning/README.md 的核心任务。教学参考、项目实现和你的理解分别验收；数学代码通过不代表已经掌握，更不代替项目生成能力评测。
+
+## **四、S2 第三周入口**
+
+[图标数据与潜空间 DiT 基础](S2_第3周_图标数据与潜空间DiT基础.ipynb) 连接数据、空间 VAE、潜空间扩散目标、patch、位置与时间、adaLN-Zero。保留 22 个代码单元的真实输出；教学参考不替代项目核心。
+
+使用 `--extra notebook --extra latent` 同步与运行。先调用显式资源准备脚本，再执行 Notebook，HTML 指定 `artifacts/runs/s2_week3/learning_preview.html`。单轮 VAE、缓存与拟合计算上限 30 分钟，最终执行约 14.7 秒，另计 CPU 预检和此前一次验证，合计约 117.8 秒。全量图像已生成，但缓存仅 256 张；未开展完整生成训练。
+
+下一项个人任务为 [L03](../../learning/L03_DiT核心任务.md)，同时保留 L01/L02 的未验收状态。

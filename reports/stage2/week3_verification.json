@@ -1,0 +1,283 @@
+{
+  "date": "2026-10-28",
+  "notebook": {
+    "path": "docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb",
+    "cells": 101,
+    "code_cells": 22,
+    "execution_counts": "1..22, clean kernel",
+    "unhandled_errors": 0,
+    "html": "artifacts/runs/s2_week3/learning_preview.html"
+  },
+  "pytest": {
+    "command": "uv run --locked --extra notebook --extra latent pytest -q --tb=short",
+    "exit_code": 0,
+    "passed": 33,
+    "seconds": 2.79
+  },
+  "locked_sync": {
+    "command": "uv sync --locked --extra notebook --extra latent --offline",
+    "exit_code": 0,
+    "resolved": 169,
+    "checked": 125
+  },
+  "scoped_ruff": {
+    "command": [
+      ".venv/bin/ruff",
+      "check",
+      "src/minigen/data/icons.py",
+      "src/minigen/evaluation/icons.py",
+      "src/minigen/evaluation/latent.py",
+      "src/minigen/autoencoders/frozen.py",
+      "scripts/prepare_week3_assets.py",
+      "scripts/check_dit_core.py",
+      "tests/test_week3_engineering.py",
+      "tests/test_week3_reference.py",
+      "docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb",
+      "--output-format",
+      "json"
+    ],
+    "exit_code": 0,
+    "stdout": "[]",
+    "stderr": ""
+  },
+  "scoped_format": {
+    "command": [
+      ".venv/bin/ruff",
+      "format",
+      "--check",
+      "src/minigen/data/icons.py",
+      "src/minigen/evaluation/icons.py",
+      "src/minigen/evaluation/latent.py",
+      "src/minigen/autoencoders/frozen.py",
+      "scripts/prepare_week3_assets.py",
+      "scripts/check_dit_core.py",
+      "tests/test_week3_engineering.py",
+      "tests/test_week3_reference.py",
+      "docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb"
+    ],
+    "exit_code": 0,
+    "stdout": "9 files already formatted\n",
+    "stderr": ""
+  },
+  "global_ruff": {
+    "exit_code": 1,
+    "issue_count": 13,
+    "matches_preexisting_baseline": true,
+    "locations": [
+      {
+        "path": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "rule": "E501",
+        "cell": 46,
+        "location": {
+          "column": 99,
+          "row": 94
+        }
+      },
+      {
+        "path": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "rule": "F811",
+        "cell": 66,
+        "location": {
+          "column": 1,
+          "row": 8
+        }
+      },
+      {
+        "path": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "rule": "I001",
+        "cell": 72,
+        "location": {
+          "column": 1,
+          "row": 1
+        }
+      },
+      {
+        "path": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "rule": "E501",
+        "cell": 72,
+        "location": {
+          "column": 85,
+          "row": 2
+        }
+      },
+      {
+        "path": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "rule": "E501",
+        "cell": 75,
+        "location": {
+          "column": 78,
+          "row": 14
+        }
+      },
+      {
+        "path": "src/minigen/models/tiny_unet.py",
+        "rule": "F821",
+        "cell": null,
+        "location": {
+          "column": 28,
+          "row": 24
+        }
+      },
+      {
+        "path": "src/minigen/models/tiny_unet.py",
+        "rule": "F722",
+        "cell": null,
+        "location": {
+          "column": 24,
+          "row": 25
+        }
+      },
+      {
+        "path": "src/minigen/models/tiny_unet.py",
+        "rule": "F722",
+        "cell": null,
+        "location": {
+          "column": 30,
+          "row": 52
+        }
+      },
+      {
+        "path": "src/minigen/models/tiny_unet.py",
+        "rule": "F722",
+        "cell": null,
+        "location": {
+          "column": 29,
+          "row": 53
+        }
+      },
+      {
+        "path": "src/minigen/models/tiny_unet.py",
+        "rule": "F722",
+        "cell": null,
+        "location": {
+          "column": 24,
+          "row": 54
+        }
+      },
+      {
+        "path": "src/minigen/models/tiny_unet.py",
+        "rule": "F722",
+        "cell": null,
+        "location": {
+          "column": 30,
+          "row": 85
+        }
+      },
+      {
+        "path": "src/minigen/models/tiny_unet.py",
+        "rule": "F821",
+        "cell": null,
+        "location": {
+          "column": 33,
+          "row": 86
+        }
+      },
+      {
+        "path": "src/minigen/models/tiny_unet.py",
+        "rule": "F722",
+        "cell": null,
+        "location": {
+          "column": 24,
+          "row": 87
+        }
+      }
+    ]
+  },
+  "protected_hashes_unchanged": {
+    "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb": false,
+    "docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb": true,
+    "docs/learning/week1QA/README_阅读导航.md": true,
+    "docs/learning/week1QA/MiniGen_DDPM_前向扩散八问.md": true,
+    "docs/learning/week1QA/MiniGen_UNet_结构与时间条件十一问.md": true,
+    "docs/learning/week1QA/MiniGen_DDPM_信噪比与反向后验三问.md": true,
+    "docs/learning/week1QA/MiniGen_DDPM_Scheduler代码十一问.md": true,
+    "docs/learning/week1QA/MiniGen_DDPM_变分界与噪声预测损失问答.md": true,
+    "src/minigen/objectives/ddpm_scheduler.py": true,
+    "src/minigen/autoencoders/vae_core.py": true,
+    "src/minigen/models/dit_block.py": true,
+    "src/minigen/samplers/cfg.py": true,
+    "src/minigen/objectives/flow_objective.py": true
+  },
+  "personal_core": {
+    "command": [
+      ".venv/bin/python",
+      "scripts/check_dit_core.py"
+    ],
+    "exit_code": 2,
+    "stdout": "{\"status\": \"待做\", \"source\": \"project_core\", \"reason\": \"L03 patchify: 请先完成 learning/README.md 中的核心学习任务\"}\n",
+    "stderr": ""
+  },
+  "notes": {
+    "command": [
+      ".venv/bin/python",
+      "/Users/lucius/.codex/skills/lucius-study-notes/scripts/check_notes.py",
+      "AGENTS.md",
+      "MiniGen项目任务清单与学习路径.md",
+      "README.md",
+      "docs/README.md",
+      "docs/ai-workflow.md",
+      "docs/data.md",
+      "docs/learning/README.md",
+      "docs/papers/README.md",
+      "learning/README.md",
+      "reports/README.md",
+      "reports/tasks/README.md",
+      "docs/data_cards/synthetic_icons_week3.md",
+      "learning/L03_DiT核心任务.md",
+      "reports/stage2/week3.md",
+      "reports/tasks/week3.md",
+      "docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"path\": \"AGENTS.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"MiniGen项目任务清单与学习路径.md\", \"formulas\": 19, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"README.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"docs/README.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"docs/ai-workflow.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"docs/data.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"docs/learning/README.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"docs/papers/README.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"learning/README.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"reports/README.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"reports/tasks/README.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"docs/data_cards/synthetic_icons_week3.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"learning/L03_DiT核心任务.md\", \"formulas\": 2, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"reports/stage2/week3.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"reports/tasks/week3.md\", \"formulas\": 0, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n{\"path\": \"docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb\", \"formulas\": 145, \"issues\": [], \"scope\": \"部分格式与可选基线保护检查\"}\n",
+    "stderr": ""
+  },
+  "local_links": {
+    "broken": [],
+    "checked_documents": 16
+  },
+  "papers": {
+    "verified": 4,
+    "pages": [
+      25,
+      14,
+      45,
+      25
+    ],
+    "hash_title_all_pages_parse": true
+  },
+  "visual_review": {
+    "browser": "local HTML in Codex IAB",
+    "formula_spot_checks": [
+      "scaling inverse",
+      "adaLN-Zero",
+      "paper reading table"
+    ],
+    "math_error_nodes": 0,
+    "loaded_images": 5,
+    "figure_spot_checks": [
+      "12 paired originals/reconstructions/errors",
+      "validation board",
+      "fixed-fit loss"
+    ],
+    "limits": "Spot checks only; no full-page line-by-line verification; no human learner acceptance"
+  },
+  "cost_yuan": 0,
+  "remaining": [
+    "L01/L02/L03 personal implementation and understanding",
+    "full latent cache",
+    "S2-05/S2-06 random-time training, recovery and generation",
+    "formal S3 evaluator"
+  ],
+  "global_format": {
+    "exit_code": 1,
+    "summary": "4 files would be reformatted, 72 files already formatted",
+    "scope_policy": "Pre-existing week1 notebook, QA Markdown and tiny_unet formatting left intact; changed week3 files passed."
+  },
+  "protected_user_edits": {
+    "agent_modified_protected_files": false,
+    "notebook_week1_changed_during_final_review": true,
+    "action": "Preserved current contents; excluded from staging together with week1QA",
+    "other_12_hashes_unchanged": true
+  }
+}

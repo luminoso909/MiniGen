@@ -7,3 +7,7 @@ bootstrap.md 是实际初始化验证；tasks/ 保存任务与交接，research/
 模板不填写预期结果冒充实际测量，模型任务完成必须对应真实证据。
 
 第二周真实结果见 [stage1/week2.md](stage1/week2.md)，下一步见 [交接](tasks/week2.md)。
+
+## **二、S2 第三周证据**
+
+[第三周报告](stage2/week3.md)、[结构化结果](stage2/week3_results.json) 与 [验证记录](stage2/week3_verification.json)。区分完整数据、96 张表示诊断、256 张缓存、100 步固定监督拟合和未实现的项目核心。

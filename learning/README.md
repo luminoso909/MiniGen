@@ -24,3 +24,9 @@
 ## **三、L02 第二周入口**
 
 [VAE Notebook](../docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb) 已提供完整教学参考与真实输出。按 [L02 核心任务包](L02_VAE核心任务.md) 完成自己的两个函数；验收不会自动使用参考。S1-05 的单进程随机顺序恢复已验证，教学实验不代替 S1-06 的个人实现。
+
+## **四、L03 第三周入口**
+
+阅读 [第三周 Notebook](../docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb)，再合上参考完成 [L03 个人任务包](L03_DiT核心任务.md)。运行 `uv run --locked python scripts/check_dit_core.py`；当前输出待做且返回 2，禁止 fallback。
+
+教学固定监督拟合、项目核心验收和你的理解分别登记。S1 的个人 DDPM/VAE 前置没有因为第三周工程完成而自动通过。
