@@ -105,7 +105,7 @@ artifacts/          缓存、权重、实验输出，默认忽略
 
 ## **五、Git 与来源说明**
 
-当前在本地 `main` 按周提交，不设置远程、不推送。后续发布需要确认账号、仓库和可见性。`.gitignore` 排除数据、缓存、虚拟环境、权重与凭据；文本模板、小型配置和必要报告保留。
+远程仓库为 [luminoso909/MiniGen](https://github.com/luminoso909/MiniGen)，当前为私有仓库。本地 `main` 跟踪 `origin/main`，提交更新后使用 `git push` 同步。`.gitignore` 排除数据、缓存、虚拟环境、权重与凭据；文本模板、小型配置和必要报告保留。
 
 主要算法参考 [官方 DiT](https://github.com/facebookresearch/DiT)，组件与微调参考 [Diffusers](https://github.com/huggingface/diffusers)。本次未复制两者的算法实现。数据、代码与权重的来源分别登记，不将第三方内容标为原创，也未擅自为整个项目指定开源许可证。
 
