@@ -1,15 +1,28 @@
-"""Validate the explicitly authorized notebook reference, never used as a runtime fallback."""
+"""仅验证已授权 Notebook 中的 DDPM 教学参考。"""
 
 import json
 import math
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 import pytest
 import torch
 
 
 @pytest.fixture(scope="module")
-def reference_class():
+def reference_class() -> Callable[..., Any]:
+    """只提取唯一带 ddpm_reference 标记的教学调度器类。
+
+    1 输入：
+        无显式参数；使用对象状态、闭包或命令行上下文。
+
+    2 输出：
+        可调用的教学类对象；动态 exec 命名空间不能当作普通 JSON。
+
+    3 报错（Raises）：
+        AssertionError：标记单元不唯一；文件、JSON、编译或代码装载异常透传。
+    """
     path = Path(__file__).resolve().parents[1] / "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb"
     notebook = json.loads(path.read_text())
     sources = [
@@ -23,7 +36,20 @@ def reference_class():
     return namespace["TeachingDDPMScheduler"]
 
 
-def test_reference_matches_independent_gaussian_precision(reference_class):
+def test_reference_matches_independent_gaussian_precision(
+    reference_class: Callable[..., Any],
+) -> None:
+    """用独立高斯精度计算对照教学加噪、后验与最终步随机项。
+
+    1 输入：
+        reference_class：动态从已授权 Notebook 提取的教学调度器类；只供数学测试。
+
+    2 输出：
+        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+
+    3 报错（Raises）：
+        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    """
     schedule = reference_class(num_steps=2, beta_start=0.1, beta_end=0.2)
     clean = torch.tensor([2.0]).reshape(1, 1, 1, 1)
     noise = torch.full_like(clean, -0.5)
@@ -40,7 +66,18 @@ def test_reference_matches_independent_gaussian_precision(reference_class):
     assert torch.equal(a, b)
 
 
-def test_reference_rejects_shape_and_time_errors(reference_class):
+def test_reference_rejects_shape_and_time_errors(reference_class: Callable[..., Any]) -> None:
+    """验证教学 DDPM 拒绝无效时间、广播和损失形状。
+
+    1 输入：
+        reference_class：动态从已授权 Notebook 提取的教学调度器类；只供数学测试。
+
+    2 输出：
+        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+
+    3 报错（Raises）：
+        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    """
     schedule = reference_class(num_steps=2)
     x = torch.zeros(2, 1, 4, 4)
     for invalid in [torch.tensor([-1, 0]), torch.tensor([0, 2]), torch.zeros(2)]:

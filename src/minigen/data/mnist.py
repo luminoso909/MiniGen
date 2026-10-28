@@ -1,4 +1,4 @@
-"""Explicit MNIST acquisition and reproducible subsets; never touch test labels."""
+"""显式 MNIST 获取、官方资源校验和固定训练/验证划分。"""
 
 import hashlib
 import json
@@ -11,10 +11,27 @@ from torchvision import transforms
 from torchvision.datasets import MNIST
 from torchvision.datasets.utils import check_integrity
 
+from minigen._typing import JsonDict
+
 
 def prepare_mnist(
     root: str | Path, *, train_size: int = 10000, validation_size: int = 1000, seed: int = 20261026
-) -> tuple[Subset, Subset, dict]:
+) -> tuple[Subset, Subset, JsonDict]:
+    """显式获取官方 MNIST 并冻结训练/验证子集与资源校验信息。
+
+    1 输入：
+        root：本地 data 根目录，raw 和 manifests 写入其下。
+        train_size：从官方训练部分选择的训练样本数。
+        validation_size：从同一官方训练部分留出的验证样本数。
+        seed：固定随机排列的独立种子，测试集不参与。
+
+    2 输出：
+        训练 Subset、验证 Subset、JSON 元数据；单样本为 [1,28,28] 浮点图及数字标签，像素 [-1,1]。
+
+    3 报错（Raises）：
+        ValueError：子集数量非正或总数超出官方训练集；RuntimeError：原始资源 MD5 不符。
+        下载异常及 OSError 原样透传；调用此函数本身即显式允许 MNIST 下载。
+    """
     root = Path(root)
     transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
     dataset = MNIST(root / "raw", train=True, transform=transform, download=True)

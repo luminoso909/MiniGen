@@ -1,14 +1,32 @@
-"""L03 acceptance only calls learner-owned project interfaces; no Notebook fallback."""
+"""个人 DiT 数学验收，不提供教学 fallback。"""
 
 import json
+from collections.abc import Callable
 
 import torch
+from torch import nn
 
 from minigen._learning import CoreImplementationRequired
+from minigen._typing import JsonDict, PatchifyFn, UnpatchifyFn
 from minigen.models.dit_block import DiTBlock, patchify, unpatchify
 
 
-def verify(patchify_fn, unpatchify_fn, block_factory):
+def verify(
+    patchify_fn: PatchifyFn, unpatchify_fn: UnpatchifyFn, block_factory: Callable[..., nn.Module]
+) -> JsonDict:
+    """以手排 patch 和门控梯度验证显式传入的 DiT 实现。
+
+    1 输入：
+        patchify_fn：[B,C,H,W] 与 p 到 [B,N,p²C] 的切块函数。
+        unpatchify_fn：接收 token、C、H、W、p 并恢复空间的函数。
+        block_factory：接受 hidden_size、num_heads 的构造器；forward 接收 [B,N,D] 与 [B,D]。
+
+    2 输出：
+        JSON 验证摘要，包含 patch 顺序、恒等初始化及更新后的条件差异。
+
+    3 报错（Raises）：
+        AssertionError：顺序、边界报错、恒等/梯度或条件作用不符合契约；传入实现的异常透传。
+    """
     image = torch.arange(16).float().reshape(1, 2, 2, 4)
     expected = torch.tensor([[[0, 8, 1, 9, 4, 12, 5, 13], [2, 10, 3, 11, 6, 14, 7, 15]]]).float()
     actual = patchify_fn(image, 2)
@@ -43,7 +61,18 @@ def verify(patchify_fn, unpatchify_fn, block_factory):
     return {"patch_order": "passed", "identity": "exact", "condition_difference": difference}
 
 
-def main():
+def main() -> int:
+    """只连接项目自己的 L03 接口与独立验收，不执行参考 fallback。
+
+    1 输入：
+        无显式参数；使用对象状态、闭包或命令行上下文。
+
+    2 输出：
+        退出码：待实现为 2，全部验收通过为 0，控制台打印 JSON。
+
+    3 报错（Raises）：
+        CoreImplementationRequired 被捕获为待做；AssertionError 或其他实现错误保留以便定位。
+    """
     try:
         result = verify(patchify, unpatchify, DiTBlock)
     except CoreImplementationRequired as error:

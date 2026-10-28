@@ -57,3 +57,15 @@ S1-05 当前只验证单进程、确定数据访问的精确恢复，使用 Stat
 执行第三周 Notebook 时显式使用 `--html-output artifacts/runs/s2_week3/learning_preview.html`。图标按 configs/datasets/icons_week3.yaml 重建；已有版本先核验，配置变化使用新 dataset_id。测试集不用于重建选型。
 
 S2-02 本轮只登记冻结表示的教学验证，S1 个人前置仍待验收。S2-03 仅冻结 256 张试点缓存，全量待做。S2-04 教学 DiT 在 Notebook，个人验收为 `uv run --locked python scripts/check_dit_core.py`，不替代 src 核心。固定时间与噪声拟合不是随机扩散训练，更不是生成结果。
+
+## **六、Python 类型、形状与接口文档规范**
+
+以后新增或修改项目 Python 代码时，必须同步维护参数、返回值、张量形状和中文接口说明。范围包括源码、脚本、测试、内部函数与 fixture；self、cls 不标注，构造函数返回 None，不要求修改 Notebook。
+
+Tensor 使用 jaxtyping 的 Float、Int、Bool 等准确标注数据类型与形状，例如 Float[Tensor, "batch channels height width"]。一维形状写成 " batch"，避免被 Ruff 误当作类型名称；零维写 ""；如 "batch *latent" 可被当作表达式，也写成 " batch *latent"。有明确用途的动态维度在文档解释。只为含 jaxtyping 的 Python 文件配置 F722 兼容项，不关闭 F821。共享协议仅描述接口，不实现个人核心或注册运行时检查。
+
+每个类、函数、方法用三引号写总体简介，并有“1 输入：”“2 输出：”“3 报错（Raises）：”。逐项说明参数是什么、有什么作用，以及输出形状/范围/关键字段。类说明构造和实例职责，__init__ 单独说明初始化。无参数、无返回、无显式 raise 时如实写明；区别主动异常和下层透传，不为了文档添加新 raise。未实现核心分别说明设计输出和当前实际抛出的 CoreImplementationRequired。
+
+保留正确的既有注释；关键公式、广播、空间变换、缓存身份和恢复状态解释原因，不逐行翻译代码。lambda 就近说明输入输出和所属回调接口，不为标注重写计算结构。异构 Checkpoint、动态 exec 命名空间可局部使用 Any；不要普遍用 Any 代替明确类型。仅供类型表达的可选依赖放在 TYPE_CHECKING，基础环境导入不能被可选依赖阻断。
+
+提交前运行 `uv run --locked python scripts/check_code_annotations.py`，并人工核对说明与实际行为。该 AST 检查只证明类型/文档结构，不证明形状、异常枚举或数学全部正确。仍需 Ruff、适用测试和真实入口验证，不启动与注释任务无关的训练或下载。

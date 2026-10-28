@@ -9,6 +9,7 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --locked
+      - run: uv run --locked python scripts/check_code_annotations.py
       - run: uv run --locked ruff check .
       - run: uv run --locked ruff format --check .
       - run: uv run --locked pytest

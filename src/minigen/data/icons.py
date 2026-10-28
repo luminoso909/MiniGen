@@ -1,4 +1,4 @@
-"""Deterministic, grouped geometric scenes and audited JSONL manifests."""
+"""确定性几何图标、结构化描述、分组划分与逐图清单审计。"""
 
 import hashlib
 import itertools
@@ -10,6 +10,8 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
+from minigen._typing import JsonDict, JsonValue
+
 PALETTE = {
     "red": (220, 45, 45),
     "blue": (40, 90, 220),
@@ -20,11 +22,41 @@ SHAPES = ("circle", "square", "triangle")
 HELD = {("red", "triangle"), ("blue", "square")}
 
 
-def digest(value):
+def digest(value: JsonValue) -> str:
+    """对 JSON 兼容内容计算与键顺序无关的稳定 SHA-256。
+
+    1 输入：
+        value：配置、场景属性等可 JSON 序列化对象。
+
+    2 输出：
+        十六进制摘要，用于冻结配置和场景组身份。
+
+    3 报错（Raises）：
+        TypeError/ValueError：输入不能 JSON 序列化时透传。
+    """
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
 
-def caption(objects, relations, held_template=False, template=0):
+def caption(
+    objects: list[JsonDict],
+    relations: list[JsonDict],
+    held_template: bool = False,
+    template: int = 0,
+) -> str:
+    """从真实对象和关系构造英文描述，不引入猜测标签。
+
+    1 输入：
+        objects：顺序对象列表，至少含 color 与 shape；同图组合唯一以便指代。
+        relations：含 subject、predicate、object 的关系索引列表。
+        held_template：是否使用仅属于模板外集合的表达。
+        template：训练模板选择值，0 与非 0 对应两种固定措辞。
+
+    2 输出：
+        与结构化场景一致的英文描述。
+
+    3 报错（Raises）：
+        KeyError/IndexError：对象字段缺失或关系索引越界时透传。
+    """
     nouns = [f"a {o['color']} {o['shape']}" for o in objects]
     names = [f"the {o['color']} {o['shape']}" for o in objects]
     clauses = [f"{names[r['subject']]} is {r['predicate']} {names[r['object']]}" for r in relations]
@@ -40,7 +72,18 @@ def caption(objects, relations, held_template=False, template=0):
     return text + (f" Positions: {layout}." if layout else "")
 
 
-def relations_for(objects):
+def relations_for(objects: list[JsonDict]) -> list[JsonDict]:
+    """依据对象中心推导明确的左右和上下关系。
+
+    1 输入：
+        objects：带 center=[x,y] 的有序对象列表；轴差至少 24 像素才记录关系。
+
+    2 输出：
+        关系字典列表，subject/object 保持原对象索引；对角布局可同时产生两类关系。
+
+    3 报错（Raises）：
+        KeyError/TypeError：中心坐标缺失或无法比较时透传。
+    """
     result = []
     for i, j in itertools.combinations(range(len(objects)), 2):
         a, b = objects[i]["center"], objects[j]["center"]
@@ -53,7 +96,19 @@ def relations_for(objects):
     return result
 
 
-def render(objects, image_size=128):
+def render(objects: list[JsonDict], image_size: int = 128) -> Image.Image:
+    """把已定义场景渲染成白底 RGB 几何图标。
+
+    1 输入：
+        objects：含 bbox、color、shape 的对象；bbox 为包含边界的像素坐标。
+        image_size：正方形画布边长，默认 128。
+
+    2 输出：
+        Pillow RGB 图像；不自动保存文件。
+
+    3 报错（Raises）：
+        ValueError：未知 shape 主动抛出；KeyError：未知颜色或必要字段缺失；Pillow 绘制异常透传。
+    """
     image = Image.new("RGB", (image_size, image_size), "white")
     draw = ImageDraw.Draw(image)
     for obj in objects:
@@ -70,13 +125,40 @@ def render(objects, image_size=128):
     return image
 
 
-def bbox_gap(a, b):
+def bbox_gap(a: list[int], b: list[int]) -> float:
+    """计算两个含边界像素外接框之间的最小间隔。
+
+    1 输入：
+        a：[x0,y0,x1,y1] 第一个框。
+        b：同格式的第二个框；边界间减 1 以按空隙像素计数。
+
+    2 输出：
+        非负欧氏间距；接触或重叠时为 0。
+
+    3 报错（Raises）：
+        IndexError/TypeError：框缺少坐标或坐标不能做数值运算时透传。
+    """
     dx = max(a[0] - b[2] - 1, b[0] - a[2] - 1, 0)
     dy = max(a[1] - b[3] - 1, b[1] - a[3] - 1, 0)
     return math.hypot(dx, dy)
 
 
-def _scene(rng, count, config):
+def _scene(
+    rng: np.random.Generator, count: int, config: JsonDict
+) -> tuple[list[JsonDict], str, str] | None:
+    """采样对象属性和离散布局，先分组与分配集合，再进行后续渲染。
+
+    1 输入：
+        rng：独立 NumPy 随机发生器。
+        count：本图对象数，当前生成配置为 1–3。
+        config：尺寸、画布和间距规则，决定候选能否保留。
+
+    2 输出：
+        有效时返回 (objects,group_id,split)；越界或间距不足返回 None。
+
+    3 报错（Raises）：
+        ValueError：采样数量超出候选池时由 NumPy 透传；KeyError：配置缺项。
+    """
     pairs = [(c, s) for c in PALETTE for s in SHAPES]
     selected = rng.choice(len(pairs), size=count, replace=False)
     cells = sorted(rng.choice(9, size=count, replace=False).tolist())
@@ -102,6 +184,7 @@ def _scene(rng, count, config):
                 "size": size,
             }
         )
+    # 组身份不含尺寸和微小位移，让同一粗场景的近似变体留在同一集合。
     group = digest([(o["color"], o["shape"], o["cell"]) for o in objects])
     combo = any((o["color"], o["shape"]) in HELD for o in objects)
     if combo:
@@ -116,7 +199,23 @@ def _scene(rng, count, config):
     return objects, group, split
 
 
-def load_manifest(path, data_root, verify_hashes=False):
+def load_manifest(
+    path: str | Path, data_root: str | Path, verify_hashes: bool = False
+) -> list[JsonDict]:
+    """读取逐图 JSONL，拒绝示例、越界路径、重复标识和可选的哈希错误。
+
+    1 输入：
+        path：JSONL 清单路径，每行一个样本。
+        data_root：所有相对图像路径必须位于此根目录内。
+        verify_hashes：是否实际读取文件并校验 SHA-256。
+
+    2 输出：
+        按文件顺序排列的样本字典列表，不执行模型加载。
+
+    3 报错（Raises）：
+        ValueError：示例记录、哈希缺失、必要字段缺失、重复 ID、路径越界或哈希不符。
+        JSONDecodeError/OSError：清单或图像文件读取失败时透传。
+    """
     root = Path(data_root).resolve()
     records = [json.loads(line) for line in Path(path).read_text().splitlines() if line]
     ids = set()
@@ -149,8 +248,20 @@ def load_manifest(path, data_root, verify_hashes=False):
     return records
 
 
-def build_icons(config, data_root):
-    """Explicit generation only; frozen existing versions are verified, never overwritten."""
+def build_icons(config: JsonDict, data_root: str | Path) -> Path:
+    """显式生成确定性图标与清单；已冻结版本先校验而不覆盖。
+
+    1 输入：
+        config：包含 dataset_id、generator_revision、种子、尺寸和各集合配额的 JSON 兼容配置。
+        data_root：输出根目录，图片写 processed，清单写 manifests。
+
+    2 输出：
+        真实 JSONL 清单路径；冻结元数据同时记录配置指纹与尝试数量。
+
+    3 报错（Raises）：
+        ValueError：同版本配置变化、已有未完成目录或已冻结文件校验失败。
+        RuntimeError：超过候选尝试上限仍无法满足配额；OSError/配置错误透传。
+    """
     root = Path(data_root)
     folder = root / "processed" / config["dataset_id"]
     manifest = root / "manifests" / f"{config['dataset_id']}.jsonl"
@@ -235,8 +346,20 @@ def build_icons(config, data_root):
     return manifest
 
 
-def audit_icons(records, data_root):
-    """Full hash/group checks and a bounded color-aware thumbnail near-duplicate screen."""
+def audit_icons(records: list[JsonDict], data_root: str | Path) -> JsonDict:
+    """审查像素重复、场景分组、组合/模板隔离及图像格式。
+
+    1 输入：
+        records：已加载的真实样本清单；通常为非空的完整冻结版本。
+        data_root：定位图像及生成采样元数据的根目录。
+
+    2 输出：
+        JSON 质量摘要：数量、分布、最小尺寸/间距、采样拒绝总数和有边界的缩略图近似候选。
+
+    3 报错（Raises）：
+        ValueError：完全重复、跨集合场景组、组合/模板泄漏、描述不符或图像格式不符。
+        OSError/KeyError：图像损坏或记录字段缺失时透传；空记录集的统计错误不另行拦截。
+    """
     root = Path(data_root)
     hashes, groups = {}, {}
     thumbnails = defaultdict(list)
@@ -313,13 +436,25 @@ def audit_icons(records, data_root):
     }
 
 
-def select_validation(records, count=96):
-    """Deterministic count strata, small sizes and narrow gaps; no test images."""
+def select_validation(records: list[JsonDict], count: int = 96) -> list[JsonDict]:
+    """固定抽取按对象数量分层的小对象和窄间距验证压力子集。
+
+    1 输入：
+        records：完整清单，只从 split=validation 的记录选择，不读测试图调参。
+        count：总抽样数，当前使用 96，需能按 1/2/3 对象等分。
+
+    2 输出：
+        三类对象数量各 count/3 的记录，按小尺寸、窄间距、ID 稳定排序。
+
+    3 报错（Raises）：
+        ValueError：验证分层数量不足或 count 无法形成要求的等分。
+    """
     chosen = []
     for n in (1, 2, 3):
         candidates = [
             r for r in records if r["split"] == "validation" and r["attributes"]["count"] == n
         ]
+        # key: Callable[[JsonDict], tuple[int, float, str]]；优先小尺寸和窄间距。
         candidates.sort(
             key=lambda r: (
                 min(o["size"] for o in r["attributes"]["objects"]),

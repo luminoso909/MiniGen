@@ -1,4 +1,4 @@
-"""Learner acceptance: test only the project core; never import the Notebook reference."""
+"""个人 VAE 数学验收，不导入 Notebook 教学参考。"""
 
 import json
 
@@ -8,7 +8,18 @@ from minigen._learning import CoreImplementationRequired
 from minigen.autoencoders.vae_core import kl_standard_normal, reparameterize
 
 
-def main():
+def main() -> int:
+    """仅验收个人 VAE 核心的数值、归一化和梯度，不读取教学答案。
+
+    1 输入：
+        无显式参数；使用对象状态、闭包或命令行上下文。
+
+    2 输出：
+        退出码：未实现输出待做并返回 2；数学和梯度通过返回 0。
+
+    3 报错（Raises）：
+        AssertionError：数值或梯度不符；CoreImplementationRequired 被捕获为待做，其他核心异常透传。
+    """
     mean = torch.tensor([[1.0, 0.0], [-1.0, 2.0]], dtype=torch.float64, requires_grad=True)
     logvar = torch.tensor([[1.0, 0.0], [-0.5, 0.5]], dtype=torch.float64, requires_grad=True)
     noise = torch.tensor([[0.5, -0.5], [0.0, 1.0]], dtype=torch.float64)

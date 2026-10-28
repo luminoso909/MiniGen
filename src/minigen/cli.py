@@ -1,4 +1,4 @@
-"""Honest command surface: only doctor is implemented in the bootstrap."""
+"""诚实命令入口；目前仅 doctor 已实现。"""
 
 import argparse
 import json
@@ -8,6 +8,17 @@ from minigen import __version__
 
 
 def main(argv: list[str] | None = None) -> int:
+    """解析 MiniGen 命令，只执行已实现的 doctor 功能。
+
+    1 输入：
+        argv：可选命令参数，不包含程序名；None 使用 sys.argv。
+
+    2 输出：
+        退出码：doctor 成功为 0，检查失败为 1，尚未实现命令为 2；结果输出到控制台。
+
+    3 报错（Raises）：
+        SystemExit：argparse 的帮助、版本或参数错误触发退出；诊断中未捕获的异常透传。
+    """
     parser = argparse.ArgumentParser(prog="minigen", description="MiniGen 开发与学习工具")
     parser.add_argument("--version", action="version", version=f"minigen {__version__}")
     commands = parser.add_subparsers(dest="command", required=True)

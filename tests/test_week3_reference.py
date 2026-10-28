@@ -1,15 +1,27 @@
-"""Test only the tagged, authorized teaching core; never install it into src."""
+"""第三周唯一教学 DiT 的独立数值、形状和梯度测试。"""
 
 import importlib.util
 import json
 from pathlib import Path
+from typing import Any
 
 import pytest
 import torch
 
 
 @pytest.fixture(scope="module")
-def reference():
+def reference() -> dict[str, Any]:
+    """只装载第三周带 dit_reference 标记的教学核心命名空间。
+
+    1 输入：
+        无显式参数；使用对象状态、闭包或命令行上下文。
+
+    2 输出：
+        含 patch 函数、Block 与模型类的异构命名空间，供测试显式调用。
+
+    3 报错（Raises）：
+        AssertionError：标记单元不唯一；文件、JSON 或动态装载错误透传。
+    """
     path = Path("docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb")
     notebook = json.loads(path.read_text())
     cells = [
@@ -21,7 +33,18 @@ def reference():
     return namespace
 
 
-def test_reference_passes_independent_learner_contract(reference):
+def test_reference_passes_independent_learner_contract(reference: dict[str, Any]) -> None:
+    """用独立 L03 契约检查唯一的 Notebook 教学 DiT 参考。
+
+    1 输入：
+        reference：从教学 Notebook 提取的类/函数命名空间，仅供显式参考测试。
+
+    2 输出：
+        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+
+    3 报错（Raises）：
+        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    """
     spec = importlib.util.spec_from_file_location("checks", "scripts/check_dit_core.py")
     checks = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(checks)
@@ -32,7 +55,18 @@ def test_reference_passes_independent_learner_contract(reference):
     )
 
 
-def test_patch_mapping_gradient_and_noncontiguous_shapes(reference):
+def test_patch_mapping_gradient_and_noncontiguous_shapes(reference: dict[str, Any]) -> None:
+    """按独立逐索引映射验证 patch 排列、梯度、非连续输入与错误形状。
+
+    1 输入：
+        reference：从教学 Notebook 提取的类/函数命名空间，仅供显式参考测试。
+
+    2 输出：
+        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+
+    3 报错（Raises）：
+        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    """
     patch = reference["patchify_reference"]
     unpatch = reference["unpatchify_reference"]
     image = torch.randn(2, 3, 4, 6, dtype=torch.float64, requires_grad=True)
@@ -47,6 +81,7 @@ def test_patch_mapping_gradient_and_noncontiguous_shapes(reference):
                                 tokens[b, r * 3 + s, (i * 2 + j) * 3 + c]
                                 == image[b, c, r * 2 + i, s * 2 + j]
                             )
+    # gradcheck 回调接收空间浮点张量，返回 patch token；通过数值微分核对梯度。
     assert torch.autograd.gradcheck(lambda x: patch(x, 2), (image,))
     transposed = image.transpose(-1, -2)
     torch.testing.assert_close(unpatch(patch(transposed, 2), 3, 6, 4, 2), transposed)
@@ -54,7 +89,18 @@ def test_patch_mapping_gradient_and_noncontiguous_shapes(reference):
         unpatch(tokens, 4, 4, 6, 2)
 
 
-def test_attention_matches_independent_torch_kernel(reference):
+def test_attention_matches_independent_torch_kernel(reference: dict[str, Any]) -> None:
+    """用 Torch 独立注意力算子与 gradcheck 验证教学注意力数值和梯度。
+
+    1 输入：
+        reference：从教学 Notebook 提取的类/函数命名空间，仅供显式参考测试。
+
+    2 输出：
+        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+
+    3 报错（Raises）：
+        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    """
     torch.manual_seed(8)
     attn = reference["TeachingAttention"](16, 4).double()
     x = torch.randn(2, 5, 16, dtype=torch.float64, requires_grad=True)
@@ -65,7 +111,18 @@ def test_attention_matches_independent_torch_kernel(reference):
     assert torch.autograd.gradcheck(attn, (x,))
 
 
-def test_zero_head_gradient_stages_and_condition_broadcast(reference):
+def test_zero_head_gradient_stages_and_condition_broadcast(reference: dict[str, Any]) -> None:
+    """验证零输出头下门控、注意力梯度按阶段开启，并拒绝条件 batch 不符。
+
+    1 输入：
+        reference：从教学 Notebook 提取的类/函数命名空间，仅供显式参考测试。
+
+    2 输出：
+        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+
+    3 报错（Raises）：
+        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    """
     torch.manual_seed(7)
     model = reference["TeachingDiT"](depth=1, hidden=32)
     z, t = torch.randn(2, 4, 16, 16), torch.tensor([1, 700])

@@ -1,15 +1,54 @@
-"""Single-process shuffled batches with a serializable cursor (no worker prefetch)."""
+"""单进程确定数据访问的排列与游标恢复，无 worker 预取。"""
+
+from typing import Any, Self
 
 import torch
-from torch.utils.data import default_collate
+from torch.utils.data import Dataset, default_collate
+
+from minigen._typing import Batch, Checkpoint
 
 
 class StatefulBatchStream:
-    """Infinite epochs, retaining the short final batch; dataset access must be deterministic."""
+    """可序列化排列与游标的单进程无限 batch 流。
+
+    1 输入：
+        dataset：访问确定的数据集，无 worker 预取。
+        batch_size：正 batch 大小；保留每轮最后不足一批的样本。
+        data_id：用于恢复兼容性检查的非空数据身份。
+        seed：独立排序发生器种子。
+        shuffle：是否每轮重新生成随机排列。
+
+    2 输出：
+        自身可迭代的 batch 流，state_dict 可保存精确数据位置。
+
+    3 报错（Raises）：
+        ValueError：空数据、非正 batch_size 或空 data_id。
+    """
 
     def __init__(
-        self, dataset, batch_size: int, *, data_id: str, seed: int = 0, shuffle: bool = True
-    ):
+        self,
+        dataset: Dataset[Any],
+        batch_size: int,
+        *,
+        data_id: str,
+        seed: int = 0,
+        shuffle: bool = True,
+    ) -> None:
+        """初始化独立随机排列、轮次与读取游标。
+
+        1 输入：
+            dataset：支持长度与按索引读取的 Torch 数据集；样本结构由 default_collate 保留。
+            batch_size：每批最多读取的样本数。
+            data_id：重建时必须一致的数据身份。
+            seed：排序发生器种子，不替代其他训练 RNG。
+            shuffle：False 时按顺序读取，适合固定监督检查。
+
+        2 输出：
+            无返回值；创建数据流内部状态。
+
+        3 报错（Raises）：
+            ValueError：数据为空、batch_size 非正或 data_id 为空。
+        """
         if len(dataset) == 0 or batch_size <= 0 or not data_id:
             raise ValueError("Nonempty dataset, positive batch_size and data_id required")
         self.dataset = dataset
@@ -26,10 +65,32 @@ class StatefulBatchStream:
         self.epoch = 0
         self.last_indices = []
 
-    def __iter__(self):
+    def __iter__(self) -> Self:
+        """返回自身以支持 iter 和训练循环。
+
+        1 输入：
+            无显式参数；使用对象状态、闭包或命令行上下文。
+
+        2 输出：
+            当前 StatefulBatchStream 实例；不会重置游标。
+
+        3 报错（Raises）：
+            无显式 raise。
+        """
         return self
 
-    def __next__(self):
+    def __next__(self) -> Batch:
+        """读取下一批并在轮次结束时建立新排列。
+
+        1 输入：
+            无显式参数；使用对象状态、闭包或命令行上下文。
+
+        2 输出：
+            default_collate 得到的 batch：本项目使用张量或张量列表/元组；最后一批可以较短。
+
+        3 报错（Raises）：
+            IndexError/TypeError/RuntimeError：数据读取或样本无法 collate 时由下层透传。
+        """
         if self.cursor == len(self.dataset):
             self.order = (
                 torch.randperm(len(self.dataset), generator=self.generator)
@@ -45,7 +106,18 @@ class StatefulBatchStream:
         self.last_indices = indices
         return batch
 
-    def state_dict(self):
+    def state_dict(self) -> Checkpoint:
+        """导出数据身份、排列、游标和独立排序 RNG。
+
+        1 输入：
+            无显式参数；使用对象状态、闭包或命令行上下文。
+
+        2 输出：
+            异构状态字典；order 为 [dataset_size] 整数张量，generator 为 RNG 字节张量，均为副本。
+
+        3 报错（Raises）：
+            无显式 raise；张量复制异常透传。
+        """
         return {
             "version": 1,
             "data_id": self.data_id,
@@ -58,7 +130,19 @@ class StatefulBatchStream:
             "generator": self.generator.get_state().clone(),
         }
 
-    def load_state_dict(self, state):
+    def load_state_dict(self, state: Checkpoint) -> None:
+        """验证身份与排列，再恢复精确的单进程数据位置。
+
+        1 输入：
+            state：由 state_dict 生成的状态，需匹配版本、数据规模、batch_size 和 shuffle。
+
+        2 输出：
+            无返回值；恢复轮次、游标、排列与排序 RNG，并清空 last_indices。
+
+        3 报错（Raises）：
+            ValueError：身份/配置不符、排列非法、epoch 或 cursor 越界。
+            KeyError：必要状态键缺失。
+        """
         expected = (1, self.data_id, len(self.dataset), self.batch_size, self.shuffle)
         actual = (
             state["version"],

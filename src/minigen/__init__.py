@@ -1,3 +1,3 @@
-"""MiniGen's learning-first image generation workspace."""
+"""MiniGen 学习与受控生成实验包，仅在此声明版本。"""
 
 __version__ = "0.1.0"

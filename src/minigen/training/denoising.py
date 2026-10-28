@@ -1,19 +1,41 @@
-"""Bounded training with an explicitly supplied scheduler; no reference fallback."""
+"""显式注入目标的有界去噪训练、EMA、日志与恢复工程。"""
 
 import copy
 import json
 import random
 import time
+from collections.abc import Iterable
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import numpy as np
 import torch
+from jaxtyping import Float, Int
 from torch import Tensor, nn
+
+from minigen._typing import Batch, Checkpoint, DenoisingObjective, JsonDict
 
 
 @dataclass(frozen=True)
 class TrainConfig:
+    """保存单卡去噪短训和恢复所需的不可变配置。
+
+    1 输入：
+        run_dir：本地输出目录。
+        max_steps/max_seconds：优化总步数和本次运行时间上限。
+        learning_rate/ema_decay：优化器学习率和 EMA 衰减。
+        seed/device：随机种子与执行设备。
+        checkpoint_every：保存间隔。
+        scheduler_source：显式调度器来源标记。
+        require_exact_resume：是否拒绝缺少数据顺序状态的恢复。
+
+    2 输出：
+        TrainConfig 实例，交给 train_denoiser；合法性由训练入口检查。
+
+    3 报错（Raises）：
+        无显式 raise；配置构造本身不执行训练参数检查。
+    """
+
     run_dir: str
     max_steps: int = 1000
     max_seconds: float = 900
@@ -27,6 +49,17 @@ class TrainConfig:
 
 
 def seed_all(seed: int) -> None:
+    """同步 Python、NumPy、Torch 与可用加速设备的随机种子。
+
+    1 输入：
+        seed：本次实验种子；跨设备设置不保证逐位相同。
+
+    2 输出：
+        无返回值；更新进程内随机状态。
+
+    3 报错（Raises）：
+        ValueError：NumPy 不接受该种子范围时透传；设备初始化异常透传。
+    """
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -36,9 +69,21 @@ def seed_all(seed: int) -> None:
         torch.cuda.manual_seed_all(seed)
 
 
-def _rng_state(device: str) -> dict:
+def _rng_state(device: str) -> Checkpoint:
+    """采集恢复训练需要的进程和指定设备随机状态。
+
+    1 输入：
+        device：设备名，mps/cuda 时额外保存相应 RNG 状态。
+
+    2 输出：
+        异构字典，含 Python 元组、NumPy 状态列表和 Torch 字节张量。
+
+    3 报错（Raises）：
+        RuntimeError：请求的设备 RNG 不可用时由 Torch 透传。
+    """
     state = {"python": random.getstate(), "torch": torch.get_rng_state()}
     name, values, position, has_gauss, cached_gauss = np.random.get_state()
+    # 用普通列表保存 NumPy 状态，使 weights_only 加载无需恢复任意数组对象。
     state["numpy"] = [name, values.tolist(), position, has_gauss, cached_gauss]
     if device.startswith("mps"):
         state["mps"] = torch.mps.get_rng_state().cpu()
@@ -47,7 +92,18 @@ def _rng_state(device: str) -> dict:
     return state
 
 
-def _restore_rng(state: dict) -> None:
+def _restore_rng(state: Checkpoint) -> None:
+    """恢复 Checkpoint 中的 Python、NumPy 与 Torch 随机状态。
+
+    1 输入：
+        state：由 _rng_state 产生的异构字典；包含可选 MPS/CUDA 状态。
+
+    2 输出：
+        无返回值；覆盖当前进程的随机状态。
+
+    3 报错（Raises）：
+        KeyError：缺少必要状态键；ValueError/RuntimeError：保存状态格式或设备不兼容时透传。
+    """
     random.setstate(state["python"])
     torch.set_rng_state(state["torch"].cpu())
     name, values, position, has_gauss, cached_gauss = state["numpy"]
@@ -60,7 +116,19 @@ def _restore_rng(state: dict) -> None:
         torch.cuda.set_rng_state_all([s.cpu() for s in state["cuda"]])
 
 
-def save_checkpoint(path: Path, payload: dict) -> None:
+def save_checkpoint(path: Path, payload: Checkpoint) -> None:
+    """先写临时文件，再替换目标 Checkpoint，避免留下半文件。
+
+    1 输入：
+        path：最终本地文件路径，父目录由调用者准备。
+        payload：模型、优化器、EMA、步数、配置与随机状态等异构内容。
+
+    2 输出：
+        无返回值；持久化 payload，不修改其中的模型参数。
+
+    3 报错（Raises）：
+        OSError/RuntimeError：路径不可写或 Torch 序列化失败时透传。
+    """
     temporary = path.with_suffix(".tmp")
     torch.save(payload, temporary)
     temporary.replace(path)
@@ -68,8 +136,29 @@ def save_checkpoint(path: Path, payload: dict) -> None:
 
 @torch.no_grad()
 def probe_loss(
-    model: nn.Module, scheduler, probe: tuple[Tensor, Tensor, Tensor], device: str
+    model: nn.Module,
+    scheduler: DenoisingObjective,
+    probe: tuple[
+        Float[Tensor, "batch channels height width"],
+        Float[Tensor, "batch channels height width"],
+        Int[Tensor, " batch"],
+    ],
+    device: str,
 ) -> float:
+    """在固定图像、噪声和时间上测量无梯度去噪损失。
+
+    1 输入：
+        model：forward 接收带噪图像和时间的网络，调用前的训练模式会恢复。
+        scheduler：调用方显式提供的加噪与损失对象。
+        probe：依次为 clean、noise、timesteps，形状 [B,C,H,W]、同形和 [B]。
+        device：测量设备，三个固定输入会迁移到该设备。
+
+    2 输出：
+        Python float 损失，用于同一监督下的训练进展对照。
+
+    3 报错（Raises）：
+        下层模型或调度器异常原样透传；当前仅在正常返回时恢复训练模式。
+    """
     was_training = model.training
     model.eval()
     clean, noise, times = (x.to(device) for x in probe)
@@ -81,15 +170,42 @@ def probe_loss(
 
 def train_denoiser(
     model: nn.Module,
-    scheduler,
-    loader,
+    scheduler: DenoisingObjective,
+    loader: Iterable[Batch],
     config: TrainConfig,
     *,
-    probe: tuple[Tensor, Tensor, Tensor] | None = None,
-    fixed_batch: tuple[Tensor, Tensor, Tensor] | None = None,
+    probe: tuple[
+        Float[Tensor, "batch channels height width"],
+        Float[Tensor, "batch channels height width"],
+        Int[Tensor, " batch"],
+    ]
+    | None = None,
+    fixed_batch: tuple[
+        Float[Tensor, "batch channels height width"],
+        Float[Tensor, "batch channels height width"],
+        Int[Tensor, " batch"],
+    ]
+    | None = None,
     resume_path: str | None = None,
-) -> dict:
-    """Exact order recovery requires StatefulBatchStream and deterministic dataset access."""
+) -> JsonDict:
+    """执行有步数和时间上限的噪声预测训练，记录 EMA 与恢复证据。
+
+    1 输入：
+        model：待更新网络，forward([B,C,H,W],[B]) 返回同形噪声。
+        scheduler：显式目标对象，提供 num_steps、add_noise、loss；不自动使用参考实现。
+        loader：可迭代 batch；batch 可为图像张量或首项为图像的列表/元组。
+        config：训练资源、日志、种子、设备和恢复约束。
+        probe：可选固定 (clean,noise,times)，用于前后与 EMA 测量。
+        fixed_batch：可选固定监督，提供后不随机抽样噪声和时间。
+        resume_path：可选恢复文件；精确数据顺序需要 stateful loader。
+
+    2 输出：
+        JSON 兼容摘要：配置、实际步数、停止原因、损失、日志、文件位置和恢复模式；同时写本地记录。
+
+    3 报错（Raises）：
+        ValueError：训练限制非正、恢复配置或数据状态不匹配；FloatingPointError：非有限损失。
+        RuntimeError：非有限梯度或权重/设备不兼容时透传；OSError/KeyError：文件或旧状态缺项时透传。
+    """
     if config.max_steps <= 0 or config.max_seconds <= 0 or config.checkpoint_every <= 0:
         raise ValueError("步数、时间和保存间隔必须为正")
     run_dir = Path(config.run_dir)
@@ -156,6 +272,7 @@ def train_denoiser(
             optimizer.step()
             with torch.no_grad():
                 for target, source in zip(ema.parameters(), model.parameters(), strict=True):
+                    # EMA = decay × 旧值 + (1-decay) × 当前参数。
                     target.lerp_(source, 1 - config.ema_decay)
             row = {
                 "step": step,

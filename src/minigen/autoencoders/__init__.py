@@ -1,1 +1,1 @@
-"""MiniGen autoencoders: staged implementation; see the project roadmap."""
+"""autoencoders 子包的公共入口；仅声明范围，不在导入时训练或下载。"""
