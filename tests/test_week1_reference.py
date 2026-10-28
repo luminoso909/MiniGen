@@ -14,14 +14,11 @@ import torch
 def reference_class() -> Callable[..., Any]:
     """只提取唯一带 ddpm_reference 标记的教学调度器类。
 
-    1 输入：
-        无显式参数；使用对象状态、闭包或命令行上下文。
+    Raises:
+        AssertionError: 标记单元不唯一；文件、JSON、编译或代码装载异常透传。
 
-    2 输出：
-        可调用的教学类对象；动态 exec 命名空间不能当作普通 JSON。
-
-    3 报错（Raises）：
-        AssertionError：标记单元不唯一；文件、JSON、编译或代码装载异常透传。
+    Results:
+        Callable[..., Any]: 可调用的教学类对象；动态 exec 命名空间不能当作普通 JSON。
     """
     path = Path(__file__).resolve().parents[1] / "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb"
     notebook = json.loads(path.read_text())
@@ -41,14 +38,11 @@ def test_reference_matches_independent_gaussian_precision(
 ) -> None:
     """用独立高斯精度计算对照教学加噪、后验与最终步随机项。
 
-    1 输入：
-        reference_class：动态从已授权 Notebook 提取的教学调度器类；只供数学测试。
+    Args:
+        reference_class: 动态从已授权 Notebook 提取的教学调度器类；只供数学测试。
 
-    2 输出：
-        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
-
-    3 报错（Raises）：
-        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    Raises:
+        AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
     """
     schedule = reference_class(num_steps=2, beta_start=0.1, beta_end=0.2)
     clean = torch.tensor([2.0]).reshape(1, 1, 1, 1)
@@ -66,17 +60,16 @@ def test_reference_matches_independent_gaussian_precision(
     assert torch.equal(a, b)
 
 
-def test_reference_rejects_shape_and_time_errors(reference_class: Callable[..., Any]) -> None:
+def test_reference_rejects_shape_and_time_errors(
+    reference_class: Callable[..., Any],
+) -> None:
     """验证教学 DDPM 拒绝无效时间、广播和损失形状。
 
-    1 输入：
-        reference_class：动态从已授权 Notebook 提取的教学调度器类；只供数学测试。
+    Args:
+        reference_class: 动态从已授权 Notebook 提取的教学调度器类；只供数学测试。
 
-    2 输出：
-        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
-
-    3 报错（Raises）：
-        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    Raises:
+        AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
     """
     schedule = reference_class(num_steps=2)
     x = torch.zeros(2, 1, 4, 4)

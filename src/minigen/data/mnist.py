@@ -15,22 +15,30 @@ from minigen._typing import JsonDict
 
 
 def prepare_mnist(
-    root: str | Path, *, train_size: int = 10000, validation_size: int = 1000, seed: int = 20261026
+    root: str | Path,
+    *,
+    train_size: int = 10000,
+    validation_size: int = 1000,
+    seed: int = 20261026,
 ) -> tuple[Subset, Subset, JsonDict]:
     """显式获取官方 MNIST 并冻结训练/验证子集与资源校验信息。
 
-    1 输入：
-        root：本地 data 根目录，raw 和 manifests 写入其下。
-        train_size：从官方训练部分选择的训练样本数。
-        validation_size：从同一官方训练部分留出的验证样本数。
-        seed：固定随机排列的独立种子，测试集不参与。
+    Args:
+        root: 本地 data 根目录，raw 和 manifests 写入其下。
+        train_size: 从官方训练部分选择的训练样本数。
+        validation_size: 从同一官方训练部分留出的验证样本数。
+        seed: 固定随机排列的独立种子，测试集不参与。
 
-    2 输出：
-        训练 Subset、验证 Subset、JSON 元数据；单样本为 [1,28,28] 浮点图及数字标签，像素 [-1,1]。
-
-    3 报错（Raises）：
-        ValueError：子集数量非正或总数超出官方训练集；RuntimeError：原始资源 MD5 不符。
+    Raises:
+        ValueError: 子集数量非正或总数超出官方训练集；RuntimeError: 原始资源 MD5 不符。
         下载异常及 OSError 原样透传；调用此函数本身即显式允许 MNIST 下载。
+
+    Results:
+        tuple[Subset, Subset, JsonDict]: 训练 Subset、验证 Subset、JSON 元数据；单样本为
+            [1,28,28] 浮点图及数字标签，像素 [-1,1]。
+
+    副作用:
+        按需下载/解压官方 MNIST，写子集索引、资源校验与清单。
     """
     root = Path(root)
     transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])

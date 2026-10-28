@@ -4,7 +4,7 @@
 
 | 阶段 | 学习笔记 | 内容与边界 |
 | --- | --- | --- |
-| S1 第一周 | [DDPM 原理与 MNIST 实验](S1_第1周_DDPM原理与MNIST实验.ipynb) | 全流程、概率、前向与后验推导、变分目标、教学核心、真实短训与采样；src 核心仍待你实现 |
+| S1 第一周 | [DDPM 原理与 MNIST 实验](S1_第1周_DDPM原理与MNIST实验.ipynb) | 全流程、概率、前向与后验推导、变分目标、教学核心、真实短训与采样；src DDPM 核心已独立验证，理解另验 |
 
 | S1 第二周 | [VAE 原理与潜空间实验](S1_第2周_VAE原理与潜空间实验.ipynb) | 两种 ELBO 推导、KL 与梯度、四组真实短训、潜空间可视化和恢复；个人核心待做 |
 
@@ -45,4 +45,4 @@ uv run --locked --extra notebook python scripts/execute_learning.py docs/learnin
 
 使用 `--extra notebook --extra latent` 同步与运行。先调用显式资源准备脚本，再执行 Notebook，HTML 指定 `artifacts/runs/s2_week3/learning_preview.html`。单轮 VAE、缓存与拟合计算上限 30 分钟，最终执行约 14.7 秒，另计 CPU 预检和此前一次验证，合计约 117.8 秒。全量图像已生成，但缓存仅 256 张；未开展完整生成训练。
 
-下一项个人任务为 [L03](../../learning/L03_DiT核心任务.md)，同时保留 L01/L02 的未验收状态。
+下一项个人任务为 [L03](../../learning/L03_DiT核心任务.md)；L01 代码已通过 [独立验收](../../reports/tasks/ddpm_review.md)，L02 个人核心和个人理解验收仍待做。

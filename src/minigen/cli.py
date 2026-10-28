@@ -7,17 +7,22 @@ import sys
 from minigen import __version__
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(
+    argv: list[str] | None = None,
+) -> int:
     """解析 MiniGen 命令，只执行已实现的 doctor 功能。
 
-    1 输入：
-        argv：可选命令参数，不包含程序名；None 使用 sys.argv。
+    Args:
+        argv: 可选命令参数，不包含程序名；None 使用 sys.argv。
 
-    2 输出：
-        退出码：doctor 成功为 0，检查失败为 1，尚未实现命令为 2；结果输出到控制台。
+    Raises:
+        SystemExit: argparse 的帮助、版本或参数错误触发退出；诊断中未捕获的异常透传。
 
-    3 报错（Raises）：
-        SystemExit：argparse 的帮助、版本或参数错误触发退出；诊断中未捕获的异常透传。
+    Results:
+        int: 退出码：doctor 成功为 0，检查失败为 1，尚未实现命令为 2；结果输出到控制台。
+
+    副作用:
+        向 stdout/stderr 输出诊断或未实现提示；argparse 可能直接结束进程。
     """
     parser = argparse.ArgumentParser(prog="minigen", description="MiniGen 开发与学习工具")
     parser.add_argument("--version", action="version", version=f"minigen {__version__}")

@@ -21,18 +21,21 @@ PACKAGES = {
 }
 
 
-def tensor_check(torch: ModuleType, device: str) -> JsonDict:
+def tensor_check(
+    torch: ModuleType,
+    device: str,
+) -> JsonDict:
     """在目标设备真实执行矩阵前向、反向与同步，检查数值有限性。
 
-    1 输入：
-        torch：由诊断入口动态导入的 Torch 模块，便于先报告导入失败。
-        device：cpu、mps 或 cuda；不下载数据或权重。
+    Args:
+        torch: 由诊断入口动态导入的 Torch 模块，便于先报告导入失败。
+        device: cpu、mps 或 cuda；不下载数据或权重。
 
-    2 输出：
-        JSON 结果，包含 passed 状态、Python loss 值和输入形状 [3,4]。
+    Raises:
+        RuntimeError: 梯度缺失、前向或梯度非有限时主动抛出；设备不可用等异常透传。
 
-    3 报错（Raises）：
-        RuntimeError：梯度缺失、前向或梯度非有限时主动抛出；设备不可用等异常透传。
+    Results:
+        JsonDict: JSON 结果，包含 passed 状态、Python loss 值和输入形状 [3,4]。
     """
     x = torch.arange(12, dtype=torch.float32, device=device).reshape(3, 4)
     x.requires_grad_(True)
@@ -49,17 +52,22 @@ def tensor_check(torch: ModuleType, device: str) -> JsonDict:
     return {"status": "passed", "loss": loss.detach().cpu().item(), "shape": list(x.shape)}
 
 
-def diagnose(device: str = "auto") -> JsonDict:
+def diagnose(
+    device: str = "auto",
+) -> JsonDict:
     """检查实际包导入、设备可用性与小张量自动求导。
 
-    1 输入：
-        device：auto 检查可用设备，或指定 cpu/mps/cuda；CPU 始终参与可用路径。
+    Args:
+        device: auto 检查可用设备，或指定 cpu/mps/cuda；CPU 始终参与可用路径。
 
-    2 输出：
-        JSON 报告：Python、各包版本、各设备状态及总体 ok；普通检查异常转换为失败记录。
+    Raises:
+        ValueError: device 不属于支持列表；包导入和设备检查的常见异常被捕获并写入报告。
 
-    3 报错（Raises）：
-        ValueError：device 不属于支持列表；包导入和设备检查的常见异常被捕获并写入报告。
+    Results:
+        JsonDict: JSON 报告: Python、各包版本、各设备状态及总体 ok；普通检查异常转换为失败记录。
+
+    副作用:
+        未配置时设置进程 MPLCONFIGDIR；包导入可能创建项目内的缓存。
     """
     if device not in {"auto", "cpu", "mps", "cuda"}:
         raise ValueError(f"不支持的设备: {device}")

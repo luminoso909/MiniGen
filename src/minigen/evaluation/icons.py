@@ -11,17 +11,17 @@ from minigen._typing import JsonDict
 from minigen.data.icons import PALETTE
 
 
-def parse_icons(image: Image.Image) -> list[JsonDict]:
+def parse_icons(
+    image: Image.Image,
+) -> list[JsonDict]:
     """基于颜色距离、连通区域与填充比例解析规则几何图标。
 
-    1 输入：
-        image：Pillow 图像，内部转 RGB；只适用于本项目受控调色板。
+    Args:
+        image: Pillow 图像，内部转 RGB；只适用于本项目受控调色板。
 
-    2 输出：
-        预测对象列表，含 color、shape、center、bbox、fill、area；按位置排序，小区域被滤除。
-
-    3 报错（Raises）：
-        无显式 raise；图像转换或 OpenCV 连通区域运算异常透传。
+    Results:
+        list[JsonDict]: 预测对象列表，含 color、shape、center、bbox、fill、area；按位置排序，
+            小区域被滤除。
     """
     pixels = np.asarray(image.convert("RGB"), dtype=np.float32)
     names = list(PALETTE)
@@ -53,18 +53,21 @@ def parse_icons(image: Image.Image) -> list[JsonDict]:
     return sorted(objects, key=lambda o: (o["center"][1], o["center"][0]))
 
 
-def score_image(image: Image.Image, record: JsonDict) -> dict[str, int]:
+def score_image(
+    image: Image.Image,
+    record: JsonDict,
+) -> dict[str, int]:
     """先按空间位置匹配对象，再核对颜色、形状、数量和关系。
 
-    1 输入：
-        image：待评测的原图或重建 RGB 图。
-        record：真实场景标注，含 attributes.objects 与 relations。
+    Args:
+        image: 待评测的原图或重建 RGB 图。
+        record: 真实场景标注，含 attributes.objects 与 relations。
 
-    2 输出：
-        整数命中数、各分母及整图是否成功；数量不符时对象与关系均按失败计。
+    Raises:
+        KeyError/IndexError: 真实标注不完整或关系索引无效时透传；解析器异常透传。
 
-    3 报错（Raises）：
-        KeyError/IndexError：真实标注不完整或关系索引无效时透传；解析器异常透传。
+    Results:
+        dict[str, int]: 整数命中数、各分母及整图是否成功；数量不符时对象与关系均按失败计。
     """
     truth = record["attributes"]["objects"]
     predicted = parse_icons(image)
@@ -102,17 +105,20 @@ def score_image(image: Image.Image, record: JsonDict) -> dict[str, int]:
     }
 
 
-def aggregate_scores(scores: list[dict[str, int]]) -> dict[str, float | int]:
+def aggregate_scores(
+    scores: list[dict[str, int]],
+) -> dict[str, float | int]:
     """用全部样本的命中和分母汇总属性指标。
 
-    1 输入：
-        scores：非空逐图评分列表；失败样本不能删除。
+    Args:
+        scores: 非空逐图评分列表；失败样本不能删除。
 
-    2 输出：
-        图像数、各类准确率、解析失败率、对象与关系分母；关系空时分母至少取 1。
+    Raises:
+        IndexError: scores 为空；KeyError: 逐图字段不完整时透传。
 
-    3 报错（Raises）：
-        IndexError：scores 为空；KeyError：逐图字段不完整时透传。
+    Results:
+        dict[str, float | int]: 图像数、各类准确率、解析失败率、对象与关系分母；
+            关系空时分母至少取 1。
     """
     total = {k: sum(s[k] for s in scores) for k in scores[0]}
     n = len(scores)
@@ -129,17 +135,19 @@ def aggregate_scores(scores: list[dict[str, int]]) -> dict[str, float | int]:
     }
 
 
-def gate_passes(metrics: Mapping[str, float | int]) -> bool:
+def gate_passes(
+    metrics: Mapping[str, float | int],
+) -> bool:
     """检查预先固定的表示保留门槛，不随结果调整。
 
-    1 输入：
-        metrics：汇总指标，颜色/形状需 ≥98%，数量/关系/全部属性需 ≥95%。
+    Args:
+        metrics: 汇总指标，颜色/形状需 ≥98%，数量/关系/全部属性需 ≥95%。
 
-    2 输出：
-        全部达到门槛为 True，否则 False；不额外检查样本数。
+    Raises:
+        KeyError: 所需指标缺失时透传。
 
-    3 报错（Raises）：
-        KeyError：所需指标缺失时透传。
+    Results:
+        bool: 全部达到门槛为 True，否则 False；不额外检查样本数。
     """
     return (
         metrics["color_accuracy"] >= 0.98

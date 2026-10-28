@@ -19,21 +19,25 @@ def reconstruct(
     data_root: Path,
     deadline: float,
     batch_size: int = 4,
-) -> tuple[Float[Tensor, "batch channels height width"], list[Image.Image], JsonDict]:
+) -> tuple[Float[Tensor, "b c h w"], list[Image.Image], JsonDict]:
     """在绝对时间上限内测量真实冻结 VAE 的重建与属性。
 
-    1 输入：
-        adapter：显式冻结组件，负责像素/潜变量缩放。
-        records：待诊断的有序清单，至少应能完成一个 batch。
-        data_root：图片根目录 Path。
-        deadline：time.monotonic 的绝对截止时间，不是时长。
-        batch_size：编码与解码分块大小，调用者提供正值。
+    Args:
+        adapter: 显式冻结组件，负责像素/潜变量缩放。
+        records: 待诊断的有序清单，至少应能完成一个 batch。
+        data_root: 图片根目录 Path。
+        deadline: time.monotonic 的绝对截止时间，不是时长。
+        batch_size: 编码与解码分块大小，调用者提供正值。
 
-    2 输出：
-        CPU 潜变量、重建 PIL 图像列表、真实完成数量/属性/MSE/通道统计；超时保留已完成部分。
+    Raises:
+        TimeoutError: 截止前连一个 batch 都未完成；数据、编码、解码与评分异常原样透传。
 
-    3 报错（Raises）：
-        TimeoutError：截止前连一个 batch 都未完成；数据、编码、解码与评分异常原样透传。
+    Results:
+        tuple[Float[Tensor, "b c h w"], list[Image.Image], JsonDict]: CPU 潜变量、重建 PIL
+            图像列表、真实完成数量/属性/MSE/通道统计；超时保留已完成部分。
+
+    副作用:
+        打印已完成批次的进度。
     """
     latents, decoded, original_scores, reconstructed_scores, pixel_errors = [], [], [], [], []
     begin = time.monotonic()
@@ -81,21 +85,25 @@ def encode_pilot(
     data_root: Path,
     deadline: float,
     batch_size: int = 4,
-) -> tuple[Float[Tensor, "batch channels height width"], JsonDict]:
+) -> tuple[Float[Tensor, "b c h w"], JsonDict]:
     """在预算内编码训练子集，不把部分结果记为完整试点。
 
-    1 输入：
-        adapter：冻结 VAE 组件。
-        records：计划缓存的有序训练样本。
-        data_root：图像根目录。
-        deadline：monotonic 绝对截止时间。
-        batch_size：每次编码张数，调用者保证为正。
+    Args:
+        adapter: 冻结 VAE 组件。
+        records: 计划缓存的有序训练样本。
+        data_root: 图像根目录。
+        deadline: monotonic 绝对截止时间。
+        batch_size: 每次编码张数，调用者保证为正。
 
-    2 输出：
-        CPU FP32 潜变量与请求数、完成数、停止原因和耗时。
+    Raises:
+        TimeoutError: 未完成任何一批；数据读取和模型异常透传。
 
-    3 报错（Raises）：
-        TimeoutError：未完成任何一批；数据读取和模型异常透传。
+    Results:
+        tuple[Float[Tensor, "b c h w"], JsonDict]: CPU FP32 潜变量与请求数、完成数、
+            停止原因和耗时。
+
+    副作用:
+        打印试点编码进度。
     """
     chunks = []
     begin = time.monotonic()
@@ -120,27 +128,30 @@ def encode_pilot(
 
 def fit_fixed_target(
     model: nn.Module,
-    inputs: Float[Tensor, "batch channels height width"],
-    times: Int[Tensor, " batch"],
-    target: Float[Tensor, "batch channels height width"],
+    inputs: Float[Tensor, "b c h w"],
+    times: Int[Tensor, " b"],
+    target: Float[Tensor, "b c h w"],
     deadline: float,
     max_steps: int = 100,
 ) -> JsonDict:
     """对调用方显式传入的教学模型做固定监督优化检查。
 
-    1 输入：
-        model：forward(inputs,times) 返回同形噪声预测的模型，不在此创建核心。
-        inputs：[batch,channels,height,width] 固定带噪输入。
-        times：[batch] 固定整数时间。
-        target：与 inputs 同形的固定监督噪声。
-        deadline：monotonic 绝对截止时间。
-        max_steps：本次最多更新次数，默认 100。
+    Args:
+        model: forward(inputs,times) 返回同形噪声预测的模型，不在此创建核心。
+        inputs: [b,c,h,w] 固定带噪输入。
+        times: [b] 固定整数时间。
+        target: 与 inputs 同形的固定监督噪声。
+        deadline: monotonic 绝对截止时间。
+        max_steps: 本次最多更新次数，默认 100。
 
-    2 输出：
-        JSON 记录：初末损失、实际步数、梯度范数、耗时及停止原因；只证明固定目标优化。
+    Raises:
+        FloatingPointError: 损失出现非有限值；模型、优化器与设备异常原样透传。
 
-    3 报错（Raises）：
-        FloatingPointError：损失出现非有限值；模型、优化器与设备异常原样透传。
+    Results:
+        JsonDict: JSON 记录: 初末损失、实际步数、梯度范数、耗时及停止原因；只证明固定目标优化。
+
+    副作用:
+        更新传入模型参数并将其保留在 eval 模式；不自动保存权重。
     """
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=0)
     model.train()

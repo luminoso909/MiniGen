@@ -24,17 +24,23 @@ score_image = icon_eval.score_image
 
 
 @pytest.fixture
-def dataset(tmp_path: Path) -> tuple[JsonDict, Path, list[JsonDict], Path]:
+def dataset(
+    tmp_path: Path,
+) -> tuple[JsonDict, Path, list[JsonDict], Path]:
     """在 pytest 临时目录构建五集合各九张的规则图标 fixture。
 
-    1 输入：
-        tmp_path：pytest 隔离目录，不改正式数据。
+    Args:
+        tmp_path: pytest 隔离目录，不改正式数据。
 
-    2 输出：
-        配置、清单路径、校验后的记录列表和 data 根目录。
-
-    3 报错（Raises）：
+    Raises:
         生成配置、文件或清单验证错误原样透传，使 fixture 创建失败。
+
+    Results:
+        tuple[JsonDict, Path, list[JsonDict], Path]: 配置、清单路径、校验后的记录列表和 data
+            根目录。
+
+    副作用:
+        在 pytest 临时目录创建隔离的图标与清单。
     """
     config = {
         "dataset_id": "test",
@@ -53,19 +59,20 @@ def dataset(tmp_path: Path) -> tuple[JsonDict, Path, list[JsonDict], Path]:
 
 
 def test_generation_is_deterministic_and_splits_are_grouped(
-    dataset: tuple[JsonDict, Path, list[JsonDict], Path], tmp_path: Path
+    dataset: tuple[JsonDict, Path, list[JsonDict], Path],
+    tmp_path: Path,
 ) -> None:
     """验证图标重建确定性、冻结配置、唯一像素与分组隔离。
 
-    1 输入：
-        dataset：图标 fixture，依次为配置、清单路径、真实记录和临时 data 根。
-        tmp_path：pytest 提供的隔离临时目录，用于文件、Checkpoint 或缓存检查。
+    Args:
+        dataset: 图标 fixture，依次为配置、清单路径、真实记录和临时 data 根。
+        tmp_path: pytest 提供的隔离临时目录，用于文件、Checkpoint 或缓存检查。
 
-    2 输出：
-        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+    Raises:
+        AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
 
-    3 报错（Raises）：
-        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    副作用:
+        在 pytest 隔离临时目录中写入或修改测试文件。
     """
     config, path, records, root = dataset
     before = path.read_bytes()
@@ -89,14 +96,14 @@ def test_manifest_rejects_fake_escape_tamper_and_leakage(
 ) -> None:
     """验证示例、路径越界、哈希篡改和分组泄漏不能进入数据流程。
 
-    1 输入：
-        dataset：图标 fixture，依次为配置、清单路径、真实记录和临时 data 根。
+    Args:
+        dataset: 图标 fixture，依次为配置、清单路径、真实记录和临时 data 根。
 
-    2 输出：
-        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+    Raises:
+        AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
 
-    3 报错（Raises）：
-        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    副作用:
+        在 pytest 隔离临时目录中写入或修改测试文件。
     """
     _, path, records, root = dataset
     wrong = copy.deepcopy(records)
@@ -125,14 +132,11 @@ def test_parser_detects_missing_recolored_and_blank_objects(
 ) -> None:
     """验证属性解析器将删对象、换色与空白图判为失败。
 
-    1 输入：
-        dataset：图标 fixture，依次为配置、清单路径、真实记录和临时 data 根。
+    Args:
+        dataset: 图标 fixture，依次为配置、清单路径、真实记录和临时 data 根。
 
-    2 输出：
-        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
-
-    3 报错（Raises）：
-        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    Raises:
+        AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
     """
     _, _, records, root = dataset
     record = next(r for r in records if r["attributes"]["count"] == 3)
@@ -154,58 +158,51 @@ def test_parser_detects_missing_recolored_and_blank_objects(
 class FakeVAE(nn.Module):
     """以成对倍乘/除法模拟 VAE 外壳，只验证缩放适配器。
 
-    1 输入：
-        无显式参数；使用对象状态、闭包或命令行上下文。
+    Results:
+        FakeVAE: 带 scaling_factor、可冻结参数和 encode/decode 结果包装的测试模块。
 
-    2 输出：
-        带 scaling_factor、可冻结参数和 encode/decode 结果包装的测试模块。
-
-    3 报错（Raises）：
-        无显式 raise。
+    副作用:
+        注册测试模块或记录列表；带随机参数的模块初始化会消耗 Torch RNG。
     """
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+    ) -> None:
         """创建测试缩放系数与标量参数，以便检查冻结。
 
-        1 输入：
-            无显式参数；使用对象状态、闭包或命令行上下文。
-
-        2 输出：
-            无返回值；设置 scaling_factor=0.13 和一个可训练标量。
-
-        3 报错（Raises）：
-            下层参数构造错误透传。
+        副作用:
+            注册测试模块或记录列表；带随机参数的模块初始化会消耗 Torch RNG。
         """
         super().__init__()
         self.config = SimpleNamespace(scaling_factor=0.13)
         self.parameter = nn.Parameter(torch.ones(()))
 
-    def encode(self, value: Float[Tensor, "batch channels height width"]) -> SimpleNamespace:
+    def encode(
+        self,
+        value: Float[Tensor, "b c h w"],
+    ) -> SimpleNamespace:
         """包装两倍输入作为假后验均值，不进行表示学习。
 
-        1 输入：
-            value：[batch,channels,height,width] 浮点测试输入。
+        Args:
+            value: [b,c,h,w] 浮点测试输入。
 
-        2 输出：
-            SimpleNamespace，其中 latent_dist.mode 为无参函数，返回同形 value×2。
-
-        3 报错（Raises）：
-            底层张量操作异常透传；本函数不主动检查图像范围。
+        Results:
+            SimpleNamespace: SimpleNamespace，其中 latent_dist.mode 为无参函数，返回同形 value×2。
         """
-        # mode 的契约为 Callable[[], Float[Tensor, "batch channels height width"]]。
+        # mode 的契约为 Callable[[], Float[Tensor, "b c h w"]]。
         return SimpleNamespace(latent_dist=SimpleNamespace(mode=lambda: value * 2))
 
-    def decode(self, value: Float[Tensor, "batch channels height width"]) -> SimpleNamespace:
+    def decode(
+        self,
+        value: Float[Tensor, "b c h w"],
+    ) -> SimpleNamespace:
         """包装输入的一半作为假解码输出，形成解析往返。
 
-        1 输入：
-            value：与假编码相匹配的同形张量。
+        Args:
+            value: 与假编码相匹配的同形张量。
 
-        2 输出：
-            SimpleNamespace，sample 字段为 value/2 的同形张量。
-
-        3 报错（Raises）：
-            底层张量操作异常透传。
+        Results:
+            SimpleNamespace: SimpleNamespace，sample 字段为 value/2 的同形张量。
         """
         return SimpleNamespace(sample=value / 2)
 
@@ -213,14 +210,11 @@ class FakeVAE(nn.Module):
 def test_scaling_roundtrip_freeze_and_pixel_contract() -> None:
     """使用假 VAE 验证缩放往返、参数冻结、模式和像素范围检查。
 
-    1 输入：
-        无显式参数；使用对象状态、闭包或命令行上下文。
+    Raises:
+        AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
 
-    2 输出：
-        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
-
-    3 报错（Raises）：
-        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    副作用:
+        构造测试张量/模块或调整进程内 Torch 随机状态；相关设置仅用于该测试。
     """
     adapter = FrozenVAE(FakeVAE(), {"revision": "test"})
     image = torch.rand(2, 3, 8, 8) * 2 - 1
@@ -232,17 +226,20 @@ def test_scaling_roundtrip_freeze_and_pixel_contract() -> None:
         adapter.encode(image * 20)
 
 
-def test_cache_identity_and_payload_are_checked(tmp_path: Path) -> None:
+def test_cache_identity_and_payload_are_checked(
+    tmp_path: Path,
+) -> None:
     """验证缓存重新加载一致，并拒绝身份变化与载荷篡改。
 
-    1 输入：
-        tmp_path：pytest 提供的隔离临时目录，用于文件、Checkpoint 或缓存检查。
+    Args:
+        tmp_path: pytest 提供的隔离临时目录，用于文件、Checkpoint 或缓存检查。
 
-    2 输出：
-        无返回值；以断言验证该项契约，临时资源只写 pytest 目录。
+    Raises:
+        AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
 
-    3 报错（Raises）：
-        AssertionError：结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
+    副作用:
+        构造测试张量/模块或调整进程内 Torch 随机状态；相关设置仅用于该测试。
+        在 pytest 隔离临时目录中写入或修改测试文件。
     """
     path = tmp_path / "latents.npy"
     latents = torch.randn(3, 4, 2, 2)

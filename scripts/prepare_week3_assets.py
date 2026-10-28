@@ -12,34 +12,39 @@ ROOT = Path(__file__).resolve().parents[1]
 REPO = "madebyollin/sdxl-vae-fp16-fix"
 
 
-def sha256(path: Path) -> str:
+def sha256(
+    path: Path,
+) -> str:
     """对本地论文或权重文件计算分块 SHA-256。
 
-    1 输入：
-        path：待核验的文件 Path。
+    Args:
+        path: 待核验的文件 Path。
 
-    2 输出：
-        十六进制摘要，供已有资源与固定身份比较。
+    Raises:
+        OSError: 文件缺失或无法读取时透传。
 
-    3 报错（Raises）：
-        OSError：文件缺失或无法读取时透传。
+    Results:
+        str: 十六进制摘要，供已有资源与固定身份比较。
     """
     with path.open("rb") as handle:
         return hashlib.file_digest(handle, "sha256").hexdigest()
 
 
-def fetch(url: str, path: Path) -> None:
+def fetch(
+    url: str,
+    path: Path,
+) -> None:
     """显式下载公开资源到临时文件，成功后替换目标。
 
-    1 输入：
-        url：已选定的公开资源 URL。
-        path：目标本地路径，父目录按需创建。
+    Args:
+        url: 已选定的公开资源 URL。
+        path: 目标本地路径，父目录按需创建。
 
-    2 输出：
-        无返回值；保存文件，不自动解析或加载权重。
+    Raises:
+        URLError/HTTPError/TimeoutError: 网络或服务失败时透传；OSError: 本地写入失败。
 
-    3 报错（Raises）：
-        URLError/HTTPError/TimeoutError：网络或服务失败时透传；OSError：本地写入失败。
+    副作用:
+        访问远程 URL；写临时文件，成功后替换本地目标。
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".partial")
@@ -53,14 +58,11 @@ def fetch(url: str, path: Path) -> None:
 def papers() -> None:
     """复核已有核心论文，并获取固定 DiT v2 后更新来源清单。
 
-    1 输入：
-        无显式参数；使用对象状态、闭包或命令行上下文。
+    Raises:
+        ValueError: 已有论文哈希不符或 DiT 首页标题不匹配；PDF 解析、网络和文件错误透传。
 
-    2 输出：
-        无返回值；保存缺失或待恢复的 PDF，更新版本/作者/哈希/页数记录并打印 JSON。
-
-    3 报错（Raises）：
-        ValueError：已有论文哈希不符或 DiT 首页标题不匹配；PDF 解析、网络和文件错误透传。
+    副作用:
+        按需下载 PDF，更新论文来源清单并打印核验结果。
     """
     folder = ROOT / "docs/papers"
     manifest_path = folder / "manifest.json"
@@ -108,14 +110,11 @@ def papers() -> None:
 def model() -> None:
     """显式获取或复用固定 SDXL VAE 单组件，校验其配置与 Safetensors。
 
-    1 输入：
-        无显式参数；使用对象状态、闭包或命令行上下文。
+    Raises:
+        ValueError: 冻结模型文件哈希不符；JSON、网络、文件或必要身份字段错误透传。
 
-    2 输出：
-        无返回值；把本地组件身份写入模型配置并打印，不启动推理或训练。
-
-    3 报错（Raises）：
-        ValueError：冻结模型文件哈希不符；JSON、网络、文件或必要身份字段错误透传。
+    副作用:
+        按需下载固定组件，写本地权重与模型身份，打印资源记录。
     """
     lock_path = ROOT / "configs/models/sdxl_vae.json"
     if lock_path.exists():

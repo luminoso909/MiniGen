@@ -4,7 +4,7 @@
 
 | 路线 | 内容 | 当前状态 |
 | --- | --- | --- |
-| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | 三周 DDPM/VAE/DiT 教学与数据、表示、缓存试点已验证；src 核心待你完成 |
+| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | DDPM 个人核心已验证；三周教学、数据与缓存试点已验证；其余个人核心待做 |
 | B：现代适配 | Sana 图标领域 LoRA 与前后评测 | 尚未下载权重或执行微调 |
 | 开发基础 | uv 环境、CLI 诊断、项目结构、测试与文档 | 见 [初始化验证报告](reports/bootstrap.md) |
 
@@ -18,7 +18,11 @@
 
 第二周入口：[VAE 原理与潜空间 Notebook](docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb)、[第二周报告](reports/stage1/week2.md)、[论文与阅读导航](docs/papers/README.md)。四组真实短训、数学和单进程随机顺序恢复已验证；个人核心与理解仍待验收。
 
-五个算法学习区调用时抛出 `CoreImplementationRequired`。通过初始化测试只证明工程基础与未实现边界正确，不代表算法已验证、模型已训练或生成效果已达标。
+DDPM 个人核心已通过独立数值、分布、梯度与 CPU 训练/恢复/完整短采样链检查，见 [验收报告](reports/tasks/ddpm_review.md)。VAE、DiT、CFG、Flow 仍抛出 `CoreImplementationRequired`。核心正确性与生成质量、个人理解分别验收，本轮没有重新训练 MNIST。
+
+```bash
+uv run --locked python scripts/check_ddpm_core.py
+```
 
 ## **二、建立与使用环境**
 
@@ -97,7 +101,7 @@ artifacts/          缓存、权重、实验输出，默认忽略
 
 目前单 Agent 工作。四类角色模板预留数据、工程、评测和审查并行空间；未来显式启用后再分配互不冲突的修改范围。本项目不包含模型 API 编排系统，也不需要额外 API Key。
 
-下一步是按学习导航完成 L01 / S1-03 与 [L02 / S1-06](learning/L02_VAE核心任务.md) 的个人核心。Agent 已提供独立数值对照和训练工程；不能用教学参考绕过项目核心未实现错误。VAE 验收命令为 `uv run --locked python scripts/check_vae_core.py`，当前诚实返回待做。
+下一步是复盘 L01 的推导与索引约定，并完成 [L02 / S1-06](learning/L02_VAE核心任务.md) 的个人核心。L01 代码已验证，个人理解仍待验收；VAE 验收命令为 `uv run --locked python scripts/check_vae_core.py`，当前诚实返回待做。
 
 ## **五、Git 与来源说明**
 
@@ -116,4 +120,4 @@ uv run --locked --extra notebook --extra latent python scripts/execute_learning.
 uv run --locked python scripts/check_dit_core.py
 ```
 
-资源准备会显式下载 DiT 论文与约 335 MB 的冻结 VAE 单组件，复核已有论文；Notebook 只读取本地模型。项目 CLI 的 train/sample/evaluate/cache 仍未实现。当前全局 Ruff 存在第一周笔记和 tiny_unet 的历史问题；第三周文件独立通过检查，详细基线见实验报告。
+资源准备会显式下载 DiT 论文与约 335 MB 的冻结 VAE 单组件，复核已有论文；Notebook 只读取本地模型。项目 CLI 的 train/sample/evaluate/cache 仍未实现。Python 文件的 Ruff 与格式检查已通过；第一周用户笔记仍有原有检查问题，Notebook 不属于本轮修改范围，详见 DDPM 验收报告。

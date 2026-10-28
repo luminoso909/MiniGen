@@ -12,20 +12,25 @@ from minigen.models.dit_block import DiTBlock, patchify, unpatchify
 
 
 def verify(
-    patchify_fn: PatchifyFn, unpatchify_fn: UnpatchifyFn, block_factory: Callable[..., nn.Module]
+    patchify_fn: PatchifyFn,
+    unpatchify_fn: UnpatchifyFn,
+    block_factory: Callable[..., nn.Module],
 ) -> JsonDict:
     """以手排 patch 和门控梯度验证显式传入的 DiT 实现。
 
-    1 输入：
-        patchify_fn：[B,C,H,W] 与 p 到 [B,N,p²C] 的切块函数。
-        unpatchify_fn：接收 token、C、H、W、p 并恢复空间的函数。
-        block_factory：接受 hidden_size、num_heads 的构造器；forward 接收 [B,N,D] 与 [B,D]。
+    Args:
+        patchify_fn: [b,c,h,w] 与 p 到 [b,n,p²c] 的切块函数。
+        unpatchify_fn: 接收 token、C、H、W、p 并恢复空间的函数。
+        block_factory: 接受 hidden_size、num_heads 的构造器；forward 接收 [b,n,d] 与 [b,d]。
 
-    2 输出：
-        JSON 验证摘要，包含 patch 顺序、恒等初始化及更新后的条件差异。
+    Raises:
+        AssertionError: 顺序、边界报错、恒等/梯度或条件作用不符合契约；传入实现的异常透传。
 
-    3 报错（Raises）：
-        AssertionError：顺序、边界报错、恒等/梯度或条件作用不符合契约；传入实现的异常透传。
+    Results:
+        JsonDict: JSON 验证摘要，包含 patch 顺序、恒等初始化及更新后的条件差异。
+
+    副作用:
+        设置 Torch 种子，构造测试模块并执行极短的参数更新；不修改个人实现源码。
     """
     image = torch.arange(16).float().reshape(1, 2, 2, 4)
     expected = torch.tensor([[[0, 8, 1, 9, 4, 12, 5, 13], [2, 10, 3, 11, 6, 14, 7, 15]]]).float()
@@ -64,14 +69,16 @@ def verify(
 def main() -> int:
     """只连接项目自己的 L03 接口与独立验收，不执行参考 fallback。
 
-    1 输入：
-        无显式参数；使用对象状态、闭包或命令行上下文。
+    Raises:
+        AssertionError: patch 顺序、恒等映射、梯度或条件作用不符合验收契约。
+        其他未捕获的个人实现异常原样透传。
 
-    2 输出：
-        退出码：待实现为 2，全部验收通过为 0，控制台打印 JSON。
+    Results:
+        int: 退出码：待实现为 2，全部验收通过为 0，控制台打印 JSON。
 
-    3 报错（Raises）：
-        CoreImplementationRequired 被捕获为待做；AssertionError 或其他实现错误保留以便定位。
+    副作用:
+        调用 verify 会设置 Torch 种子并更新新建的测试模块；向 stdout 打印验收 JSON。
+        CoreImplementationRequired 被转换为待做/退出码 2，不向上抛出。
     """
     try:
         result = verify(patchify, unpatchify, DiTBlock)

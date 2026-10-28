@@ -20,20 +20,17 @@ from minigen._typing import Batch, Checkpoint, DenoisingObjective, JsonDict
 class TrainConfig:
     """保存单卡去噪短训和恢复所需的不可变配置。
 
-    1 输入：
-        run_dir：本地输出目录。
-        max_steps/max_seconds：优化总步数和本次运行时间上限。
-        learning_rate/ema_decay：优化器学习率和 EMA 衰减。
-        seed/device：随机种子与执行设备。
-        checkpoint_every：保存间隔。
-        scheduler_source：显式调度器来源标记。
-        require_exact_resume：是否拒绝缺少数据顺序状态的恢复。
+    Args:
+        run_dir: 本地输出目录。
+        max_steps/max_seconds: 优化总步数和本次运行时间上限。
+        learning_rate/ema_decay: 优化器学习率和 EMA 衰减。
+        seed/device: 随机种子与执行设备。
+        checkpoint_every: 保存间隔。
+        scheduler_source: 显式调度器来源标记。
+        require_exact_resume: 是否拒绝缺少数据顺序状态的恢复。
 
-    2 输出：
-        TrainConfig 实例，交给 train_denoiser；合法性由训练入口检查。
-
-    3 报错（Raises）：
-        无显式 raise；配置构造本身不执行训练参数检查。
+    Results:
+        TrainConfig: TrainConfig 实例，交给 train_denoiser；合法性由训练入口检查。
     """
 
     run_dir: str
@@ -48,17 +45,19 @@ class TrainConfig:
     require_exact_resume: bool = False
 
 
-def seed_all(seed: int) -> None:
+def seed_all(
+    seed: int,
+) -> None:
     """同步 Python、NumPy、Torch 与可用加速设备的随机种子。
 
-    1 输入：
-        seed：本次实验种子；跨设备设置不保证逐位相同。
+    Args:
+        seed: 本次实验种子；跨设备设置不保证逐位相同。
 
-    2 输出：
-        无返回值；更新进程内随机状态。
+    Raises:
+        ValueError: NumPy 不接受该种子范围时透传；设备初始化异常透传。
 
-    3 报错（Raises）：
-        ValueError：NumPy 不接受该种子范围时透传；设备初始化异常透传。
+    副作用:
+        覆盖 Python、NumPy、Torch 及可用 MPS/CUDA 的全局随机状态。
     """
     random.seed(seed)
     np.random.seed(seed)
@@ -69,17 +68,19 @@ def seed_all(seed: int) -> None:
         torch.cuda.manual_seed_all(seed)
 
 
-def _rng_state(device: str) -> Checkpoint:
+def _rng_state(
+    device: str,
+) -> Checkpoint:
     """采集恢复训练需要的进程和指定设备随机状态。
 
-    1 输入：
-        device：设备名，mps/cuda 时额外保存相应 RNG 状态。
+    Args:
+        device: 设备名，mps/cuda 时额外保存相应 RNG 状态。
 
-    2 输出：
-        异构字典，含 Python 元组、NumPy 状态列表和 Torch 字节张量。
+    Raises:
+        RuntimeError: 请求的设备 RNG 不可用时由 Torch 透传。
 
-    3 报错（Raises）：
-        RuntimeError：请求的设备 RNG 不可用时由 Torch 透传。
+    Results:
+        Checkpoint: 异构字典，含 Python 元组、NumPy 状态列表和 Torch 字节张量。
     """
     state = {"python": random.getstate(), "torch": torch.get_rng_state()}
     name, values, position, has_gauss, cached_gauss = np.random.get_state()
@@ -92,17 +93,19 @@ def _rng_state(device: str) -> Checkpoint:
     return state
 
 
-def _restore_rng(state: Checkpoint) -> None:
+def _restore_rng(
+    state: Checkpoint,
+) -> None:
     """恢复 Checkpoint 中的 Python、NumPy 与 Torch 随机状态。
 
-    1 输入：
-        state：由 _rng_state 产生的异构字典；包含可选 MPS/CUDA 状态。
+    Args:
+        state: 由 _rng_state 产生的异构字典；包含可选 MPS/CUDA 状态。
 
-    2 输出：
-        无返回值；覆盖当前进程的随机状态。
+    Raises:
+        KeyError: 缺少必要状态键；ValueError/RuntimeError: 保存状态格式或设备不兼容时透传。
 
-    3 报错（Raises）：
-        KeyError：缺少必要状态键；ValueError/RuntimeError：保存状态格式或设备不兼容时透传。
+    副作用:
+        覆盖当前进程和保存状态所涉及设备的随机状态。
     """
     random.setstate(state["python"])
     torch.set_rng_state(state["torch"].cpu())
@@ -116,18 +119,21 @@ def _restore_rng(state: Checkpoint) -> None:
         torch.cuda.set_rng_state_all([s.cpu() for s in state["cuda"]])
 
 
-def save_checkpoint(path: Path, payload: Checkpoint) -> None:
+def save_checkpoint(
+    path: Path,
+    payload: Checkpoint,
+) -> None:
     """先写临时文件，再替换目标 Checkpoint，避免留下半文件。
 
-    1 输入：
-        path：最终本地文件路径，父目录由调用者准备。
-        payload：模型、优化器、EMA、步数、配置与随机状态等异构内容。
+    Args:
+        path: 最终本地文件路径，父目录由调用者准备。
+        payload: 模型、优化器、EMA、步数、配置与随机状态等异构内容。
 
-    2 输出：
-        无返回值；持久化 payload，不修改其中的模型参数。
+    Raises:
+        OSError/RuntimeError: 路径不可写或 Torch 序列化失败时透传。
 
-    3 报错（Raises）：
-        OSError/RuntimeError：路径不可写或 Torch 序列化失败时透传。
+    副作用:
+        写临时文件后替换目标 Checkpoint。
     """
     temporary = path.with_suffix(".tmp")
     torch.save(payload, temporary)
@@ -139,25 +145,25 @@ def probe_loss(
     model: nn.Module,
     scheduler: DenoisingObjective,
     probe: tuple[
-        Float[Tensor, "batch channels height width"],
-        Float[Tensor, "batch channels height width"],
-        Int[Tensor, " batch"],
+        Float[Tensor, "b c h w"],
+        Float[Tensor, "b c h w"],
+        Int[Tensor, " b"],
     ],
     device: str,
 ) -> float:
     """在固定图像、噪声和时间上测量无梯度去噪损失。
 
-    1 输入：
-        model：forward 接收带噪图像和时间的网络，调用前的训练模式会恢复。
-        scheduler：调用方显式提供的加噪与损失对象。
-        probe：依次为 clean、noise、timesteps，形状 [B,C,H,W]、同形和 [B]。
-        device：测量设备，三个固定输入会迁移到该设备。
+    Args:
+        model: forward 接收带噪图像和时间的网络，调用前的训练模式会恢复。
+        scheduler: 调用方显式提供的加噪与损失对象。
+        probe: 依次为 clean、noise、timesteps，形状 [b,c,h,w]、同形和 [b]。
+        device: 测量设备，三个固定输入会迁移到该设备。
 
-    2 输出：
-        Python float 损失，用于同一监督下的训练进展对照。
+    Results:
+        float: Python float 损失，用于同一监督下的训练进展对照。
 
-    3 报错（Raises）：
-        下层模型或调度器异常原样透传；当前仅在正常返回时恢复训练模式。
+    副作用:
+        临时切换模型到 eval，正常返回时恢复原模式；异常路径不保证恢复。
     """
     was_training = model.training
     model.eval()
@@ -175,36 +181,48 @@ def train_denoiser(
     config: TrainConfig,
     *,
     probe: tuple[
-        Float[Tensor, "batch channels height width"],
-        Float[Tensor, "batch channels height width"],
-        Int[Tensor, " batch"],
+        Float[Tensor, "b c h w"],
+        Float[Tensor, "b c h w"],
+        Int[Tensor, " b"],
     ]
     | None = None,
     fixed_batch: tuple[
-        Float[Tensor, "batch channels height width"],
-        Float[Tensor, "batch channels height width"],
-        Int[Tensor, " batch"],
+        Float[Tensor, "b c h w"],
+        Float[Tensor, "b c h w"],
+        Int[Tensor, " b"],
     ]
     | None = None,
     resume_path: str | None = None,
 ) -> JsonDict:
     """执行有步数和时间上限的噪声预测训练，记录 EMA 与恢复证据。
 
-    1 输入：
-        model：待更新网络，forward([B,C,H,W],[B]) 返回同形噪声。
-        scheduler：显式目标对象，提供 num_steps、add_noise、loss；不自动使用参考实现。
-        loader：可迭代 batch；batch 可为图像张量或首项为图像的列表/元组。
-        config：训练资源、日志、种子、设备和恢复约束。
-        probe：可选固定 (clean,noise,times)，用于前后与 EMA 测量。
-        fixed_batch：可选固定监督，提供后不随机抽样噪声和时间。
-        resume_path：可选恢复文件；精确数据顺序需要 stateful loader。
+    Args:
+        model: 待更新网络，forward([b,c,h,w],[b]) 返回同形噪声。
+        scheduler: 显式目标对象，提供 num_steps、add_noise、loss；不自动使用参考实现。
+        loader: 可迭代 batch；batch 可为图像张量或首项为图像的列表/元组。
+        config: 训练资源、日志、种子、设备和恢复约束。
+        probe: 可选固定 (clean,noise,times)，用于前后与 EMA 测量。
+        fixed_batch: 可选固定监督，提供后不随机抽样噪声和时间。
+        resume_path: 可选恢复文件；精确数据顺序需要 stateful loader。
 
-    2 输出：
-        JSON 兼容摘要：配置、实际步数、停止原因、损失、日志、文件位置和恢复模式；同时写本地记录。
+    Raises:
+        ValueError: 训练限制非正、恢复配置或数据状态不匹配；FloatingPointError: 非有限损失。
+        RuntimeError: 非有限梯度或权重/设备不兼容时透传；
+            OSError/KeyError: 文件或旧状态缺项时透传。
 
-    3 报错（Raises）：
-        ValueError：训练限制非正、恢复配置或数据状态不匹配；FloatingPointError：非有限损失。
-        RuntimeError：非有限梯度或权重/设备不兼容时透传；OSError/KeyError：文件或旧状态缺项时透传。
+    Results:
+        JsonDict: 去噪训练摘要与复现信息。
+            config: 实际运行配置。
+            start_step/final_step: 恢复起点和实际结束步数。
+            stop_reason: max_steps 或 time_limit。
+            metrics: 每步损失、梯度范数与耗时。
+            initial_probe_loss/final_probe_loss/ema_probe_loss: 固定探针指标，未提供时为 None。
+            checkpoint: 最终文件位置。
+            resume_mode/resume_limitation: 恢复方式及真实保证范围。
+
+    副作用:
+        更新传入模型的参数和训练模式，消耗/恢复随机状态，推进数据流。
+        写日志、摘要和 Checkpoint，维护 EMA 并打印训练进度。
     """
     if config.max_steps <= 0 or config.max_seconds <= 0 or config.checkpoint_every <= 0:
         raise ValueError("步数、时间和保存间隔必须为正")

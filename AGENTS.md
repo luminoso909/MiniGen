@@ -4,7 +4,7 @@ MiniGen 是学习与实验项目。先阅读根目录项目任务清单、README
 
 ### **1. 用户与 Agent 的责任**
 
-用户亲手实现 DDPM、VAE、DiT、CFG、Flow 五个核心。Agent 提供接口、形状、数学说明、独立测试与错误定位，不主动完成核心主体，不用库或参考实现静默替代。当前核心抛出 `CoreImplementationRequired`，它是学习边界，不是需要绕过的 bug。
+用户亲手实现 DDPM、VAE、DiT、CFG、Flow 五个核心。Agent 提供接口、形状、数学说明、独立测试与错误定位，不主动完成核心主体，不用库或参考实现静默替代。DDPM 个人核心已完成并通过独立数学与 CPU 工程验收，见 reports/tasks/ddpm_review.md；VAE、DiT、CFG、Flow 仍抛出 `CoreImplementationRequired`，它是学习边界，不是需要绕过的 bug。
 
 用户已授权第一周 DDPM、第二周 VAE，以及第三周 DiT Notebook 的完整教学参考。完整核心仅定义在对应笔记，教学训练显式传入对象或函数，记录为 notebook_reference。src 中的五项核心继续留给用户，禁止自动 fallback。教学实验、项目核心验收与用户理解验收分别记录。
 
@@ -13,6 +13,8 @@ MiniGen 是学习与实验项目。先阅读根目录项目任务清单、README
 ### **2. 当前命令与边界**
 
 运行 Notebook 使用 `uv sync --locked --extra notebook`，后续相关 uv run 同样带 --extra notebook。第二周执行脚本指定 --html-output artifacts/runs/s1_week2/learning_preview.html，避免覆盖第一周预览。个人 VAE 核心验收使用 `uv run --locked python scripts/check_vae_core.py`；未实现返回待做，不自动调用参考。
+
+个人 DDPM 数学复验使用 `uv run --locked python scripts/check_ddpm_core.py`，只调用 src 个人实现。Notebook 保留其明确授权的教学对象；独立验收通过不自动代表个人理解、MNIST 正式生成或整个 S1 完成。恢复训练必须重建相同日程；当前训练器不校验 num_steps、beta 和裁剪开关，不能把改过日程的恢复称为精确恢复。
 
 使用项目 uv 环境：`uv sync --locked`、`uv run --locked minigen doctor --json`、`uv run --locked ruff check .`、`uv run --locked ruff format --check .`、`uv run --locked pytest`。
 
@@ -56,16 +58,23 @@ S1-05 当前只验证单进程、确定数据访问的精确恢复，使用 Stat
 
 执行第三周 Notebook 时显式使用 `--html-output artifacts/runs/s2_week3/learning_preview.html`。图标按 configs/datasets/icons_week3.yaml 重建；已有版本先核验，配置变化使用新 dataset_id。测试集不用于重建选型。
 
-S2-02 本轮只登记冻结表示的教学验证，S1 个人前置仍待验收。S2-03 仅冻结 256 张试点缓存，全量待做。S2-04 教学 DiT 在 Notebook，个人验收为 `uv run --locked python scripts/check_dit_core.py`，不替代 src 核心。固定时间与噪声拟合不是随机扩散训练，更不是生成结果。
+S2-02 本轮只登记冻结表示的教学验证，S1 的 VAE 个人前置仍待验收，DDPM 核心代码已验证。S2-03 仅冻结 256 张试点缓存，全量待做。S2-04 教学 DiT 在 Notebook，个人验收为 `uv run --locked python scripts/check_dit_core.py`，不替代 src 核心。固定时间与噪声拟合不是随机扩散训练，更不是生成结果。
 
 ## **六、Python 类型、形状与接口文档规范**
 
-以后新增或修改项目 Python 代码时，必须同步维护参数、返回值、张量形状和中文接口说明。范围包括源码、脚本、测试、内部函数与 fixture；self、cls 不标注，构造函数返回 None，不要求修改 Notebook。
+以后新增或修改项目 Python 代码时同步维护类型、维度和中文接口说明。范围包括源码、脚本、测试、内部函数及 fixture；self、cls 不标注，构造函数返回类型写 None，Notebook 不在本轮统一范围。
 
-Tensor 使用 jaxtyping 的 Float、Int、Bool 等准确标注数据类型与形状，例如 Float[Tensor, "batch channels height width"]。一维形状写成 " batch"，避免被 Ruff 误当作类型名称；零维写 ""；如 "batch *latent" 可被当作表达式，也写成 " batch *latent"。有明确用途的动态维度在文档解释。只为含 jaxtyping 的 Python 文件配置 F722 兼容项，不关闭 F821。共享协议仅描述接口，不实现个人核心或注册运行时检查。
+函数签名参考 ddpm_scheduler.py：有参数时采用多行形式，每个参数一行并保留尾逗号；保留 /、*、*args、**kwargs 的语义，不重命名业务参数或改变默认值。无参入口可保留一行签名。
 
-每个类、函数、方法用三引号写总体简介，并有“1 输入：”“2 输出：”“3 报错（Raises）：”。逐项说明参数是什么、有什么作用，以及输出形状/范围/关键字段。类说明构造和实例职责，__init__ 单独说明初始化。无参数、无返回、无显式 raise 时如实写明；区别主动异常和下层透传，不为了文档添加新 raise。未实现核心分别说明设计输出和当前实际抛出的 CoreImplementationRequired。
+Tensor 使用 jaxtyping 的 Float、Int、Bool 等。维度统一为 b（批量）、c（通道）、c_i/c_o（输入/输出通道）、h/w（高宽）、d（特征宽度）、n（token 数）、t（时间级别总数）。其他简称包括 z 或 *z（潜变量轴）、d_p（patch 特征）、c_z/h_z/w_z（潜空间通道和尺寸）、b_v（验证批量）、n_s（数据长度）。同一接口内同名轴必须一致；参数与返回、类型别名和形状简注使用相同简称。一维形状写 " b"，可被误读为表达式的形状写 " b *z"，前导空格仅为 Ruff 兼容；标量写 ""，只有确实未知的形状才用 "..."。仅为含 jaxtyping 的 Python 文件配置 F722，不关闭 F821。
 
-保留正确的既有注释；关键公式、广播、空间变换、缓存身份和恢复状态解释原因，不逐行翻译代码。lambda 就近说明输入输出和所属回调接口，不为标注重写计算结构。异构 Checkpoint、动态 exec 命名空间可局部使用 Any；不要普遍用 Any 代替明确类型。仅供类型表达的可选依赖放在 TYPE_CHECKING，基础环境导入不能被可选依赖阻断。
+每个类、函数和方法用三引号写中文总体简介。适用段落依次为 Args:、Raises:、Results:、副作用:，只写真实存在的部分，不保留空标题或“无”占位：
 
-提交前运行 `uv run --locked python scripts/check_code_annotations.py`，并人工核对说明与实际行为。该 AST 检查只证明类型/文档结构，不证明形状、异常枚举或数学全部正确。仍需 Ruff、适用测试和真实入口验证，不启动与注释任务无关的训练或下载。
+- Args: 逐项写参数名、含义、用途、形状和约束；除 self/cls 外没有显式参数时省略。
+- Raises: 写实际向上传播的异常类型及触发条件；没有主动或已知透传异常时省略，不臆测每一种非法调用。已捕获并转换成结果的异常，放在结果说明或必要注意事项中，不冒充向上抛出。
+- Results: 先写返回类型与含义；复杂对象和元组在下一层缩进列出字段/分量。没有返回值、仅返回 None 或构造函数时省略；未实现核心的设计输出放在简介中，并明确当前只抛出待实现异常。协议可说明约定的输出类型。
+- 副作用: 只在确有状态修改、模型/数据流更新、文件写入、终端输出或随机数状态变化时写明。没有副作用时省略，不能写“无副作用”。局部变量和纯计算不算需要登记的外部状态修改。
+
+保留正确知识与注释。关键公式、广播、空间变换、缓存身份、恢复状态解释原因，不逐行翻译代码；lambda 就近说明输入输出或所属回调。异构 Checkpoint、动态 exec 命名空间可局部使用 Any，不普遍用 Any 代替明确类型。仅供类型表达的可选组件放在 TYPE_CHECKING，不增加运行时类型检查，不静默替代个人核心。
+
+提交前运行 `uv run --locked python scripts/check_code_annotations.py` 并人工复核语义。检查器验证条件式段落、直接输入/返回/raise/assert、类型和维度简称；不穷尽下层异常或所有副作用，不能把结构通过当作全部语义正确。所有现有维护代码已统一采用新格式；后续继续沿用，不再新增编号式旧格式或不适用段落。
