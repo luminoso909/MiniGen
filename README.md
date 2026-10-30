@@ -121,3 +121,16 @@ uv run --locked python scripts/check_dit_core.py
 ```
 
 资源准备会显式下载 DiT 论文与约 335 MB 的冻结 VAE 单组件，复核已有论文；Notebook 只读取本地模型。项目 CLI 的 train/sample/evaluate/cache 仍未实现。Python 文件的 Ruff 与格式检查已通过；第一周用户笔记仍有原有检查问题，Notebook 不属于本轮修改范围，详见 DDPM 验收报告。
+
+## **七、S2 第四周：潜空间扩散训练与采样**
+
+学习入口：[第四周 Notebook](docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb)、[实验预登记](configs/experiments/s2_week4.yaml)、[个人训练连接任务](learning/L03_第四周训练连接任务.md)。本周在无条件设置中连接冻结 VAE、完整训练/验证缓存、随机时间噪声目标、DiT、EMA、恢复与 1000 步采样。已完成 10000 张训练与 1000 张验证缓存、1000 步教学随机训练和完整采样；8 张中 6 张规则解析失败，生成质量未达标。真实证据见 [第四周报告](reports/stage2/week4.md)。
+
+教学 DiT 显式复用第三周唯一标记单元并记录源码哈希；噪声日程使用已验证的 src DDPM。个人 VAE 与 DiT 核心仍待你实现，教学闭环不会将其勾选完成。6 层/256 的主规格与 2 层/128 的短实验分别记录，重建、拟合与随机生成分开展示。
+
+```bash
+uv sync --locked --extra notebook --extra latent
+uv run --locked --extra notebook --extra latent python scripts/execute_learning.py docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb --html-output artifacts/runs/s2_week4/learning_preview.html
+```
+
+显式重跑会复用或生成缓存并执行有界本地教学训练；总计算预算为 30 分钟，时间不足时按实际部分交付，不使用收费资源。本轮不暂存、不提交、不推送，第二周作业与既有笔记改动保留。建议提交名称为 `feat(s2): 添加第四周潜空间扩散训练与采样实验`。

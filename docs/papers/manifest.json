@@ -75,5 +75,25 @@
     "bytes": 43824062,
     "pages": 25,
     "pdf_parse_verified": true
+  },
+  {
+    "file": "DDIM_Denoising_Diffusion_Implicit_Models_2010.02502v4.pdf",
+    "title": "Denoising Diffusion Implicit Models",
+    "authors": [
+      "Jiaming Song",
+      "Chenlin Meng",
+      "Stefano Ermon"
+    ],
+    "year": 2021,
+    "first_submitted_year": 2020,
+    "version": "2010.02502v4",
+    "role": "week4_optional_sampler",
+    "source": "https://arxiv.org/abs/2010.02502v4",
+    "download_url": "https://arxiv.org/pdf/2010.02502v4",
+    "retrieved": "2026-10-30",
+    "sha256": "07cb8796d7c100bf7c02bc575f16aab72c32630a8f85abd54ad45dc4f63e80fb",
+    "bytes": 10857218,
+    "pages": 22,
+    "pdf_parse_verified": true
   }
 ]

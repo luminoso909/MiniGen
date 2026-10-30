@@ -3,6 +3,7 @@
 from jaxtyping import Float
 from torch import Tensor
 
+import torch
 from minigen._learning import pending
 
 
@@ -19,12 +20,9 @@ def reparameterize(
         mean: [b,*z] 后验均值。
         log_variance: 与 mean 同形的对数方差。
         noise: 与 mean 同形的独立标准高斯噪声。
-
-    Raises:
-        CoreImplementationRequired: L02 重参数化核心尚待个人实现。
     """
-    pending("L02 reparameterize")
 
+    return mean + torch.exp(0.5 * log_variance) * noise
 
 def kl_standard_normal(
     mean: Float[Tensor, " b *z"],
@@ -37,8 +35,8 @@ def kl_standard_normal(
     Args:
         mean: [b,*z] 后验均值。
         log_variance: 同形对数方差；需明确特征求和和 batch 均值。
-
-    Raises:
-        CoreImplementationRequired: L02 KL 核心尚待个人实现。
     """
-    pending("L02 kl_standard_normal")
+
+    D_kl = 0.5 * (torch.pow(mean, 2) + torch.exp(log_variance) - 1 - log_variance)
+
+    return D_kl.flatten(start_dim=1).sum(dim=1).mean()      # .mean() 用于平均化 Batch 维

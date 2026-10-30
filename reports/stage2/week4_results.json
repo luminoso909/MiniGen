@@ -1,0 +1,449 @@
+{
+  "date": "2026-10-30",
+  "model_source": "notebook_reference",
+  "reference_sha256": "1add9941d358c3d50aef18cb6cc0f3b9dd37568befcea0499d8bc308b79a8669",
+  "scheduler_source": "project_core",
+  "device": "mps",
+  "precision": "float32",
+  "seed": 20261030,
+  "python": "3.12.14",
+  "torch": "2.14.1",
+  "configuration": {
+    "schema_version": 1,
+    "experiment_id": "s2_week4_unconditional_teaching_v1",
+    "date": "2026-10-30",
+    "scope": "unconditional_latent_diffusion_teaching",
+    "sources": {
+      "model_kind": "notebook_reference",
+      "model_notebook": "docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb",
+      "model_cell_tag": "dit_reference",
+      "objective_kind": "project_core",
+      "objective": "minigen.objectives.ddpm_scheduler.DDPMScheduler",
+      "vae_identity": "configs/models/sdxl_vae.json",
+      "dataset_config": "configs/datasets/icons_week3.yaml"
+    },
+    "compute": {
+      "preferred_device": "mps",
+      "fallback_device": "cpu",
+      "precision": "float32",
+      "cpu_threads": 2,
+      "total_max_seconds": 1800,
+      "paid_resources": false
+    },
+    "cache": {
+      "splits": [
+        "train",
+        "validation"
+      ],
+      "expected_counts": {
+        "train": 10000,
+        "validation": 1000
+      },
+      "root": "artifacts/cache/s2_week4",
+      "batch_size": 16,
+      "shard_size": 512,
+      "encoder_mode": "posterior_mean",
+      "dtype": "float32",
+      "require_complete_for_full_claim": true,
+      "test_splits_used": false
+    },
+    "schedule": {
+      "num_steps": 1000,
+      "beta_start": 0.0001,
+      "beta_end": 0.02,
+      "clip_denoised": false,
+      "prediction_type": "epsilon",
+      "reverse_variance": "fixed_posterior"
+    },
+    "models": {
+      "baseline_specification": {
+        "depth": 6,
+        "hidden": 256,
+        "heads": 4,
+        "channels": 4,
+        "size": 16,
+        "patch": 2,
+        "use": "shape_and_parameter_count_only"
+      },
+      "teaching_experiment": {
+        "depth": 2,
+        "hidden": 128,
+        "heads": 4,
+        "channels": 4,
+        "size": 16,
+        "patch": 2
+      }
+    },
+    "fixed_fit": {
+      "batch_size": 4,
+      "timesteps": [
+        99,
+        399,
+        699,
+        999
+      ],
+      "max_steps": 100,
+      "max_seconds": 120,
+      "learning_rate": 0.001,
+      "seed": 20261030
+    },
+    "training": {
+      "batch_size": 16,
+      "max_steps": 1000,
+      "max_seconds": 900,
+      "learning_rate": 0.0002,
+      "ema_decay": 0.99,
+      "checkpoint_every": 100,
+      "seed": 20261030,
+      "require_exact_resume": true
+    },
+    "probe": {
+      "size": 64,
+      "seed": 20261031,
+      "time_bins": [
+        [
+          0,
+          100
+        ],
+        [
+          100,
+          400
+        ],
+        [
+          400,
+          700
+        ],
+        [
+          700,
+          1000
+        ]
+      ],
+      "comparisons": [
+        "zero_prediction",
+        "channel_moment_gaussian",
+        "model",
+        "ema"
+      ],
+      "use_test_set": false
+    },
+    "sampling": {
+      "num_samples": 8,
+      "num_steps": 1000,
+      "seed_initial": 41,
+      "seed_reverse": 42,
+      "max_seconds": 300,
+      "capture": [
+        999,
+        749,
+        499,
+        249,
+        99,
+        0
+      ],
+      "skip_steps": false
+    },
+    "outputs": {
+      "run_dir": "artifacts/runs/s2_week4",
+      "results": "reports/stage2/week4_results.json",
+      "report": "reports/stage2/week4.md",
+      "figures": "reports/stage2/figures/week4",
+      "html": "artifacts/runs/s2_week4/learning_preview.html"
+    },
+    "git": {
+      "stage": false,
+      "commit": false,
+      "push": false,
+      "suggested_message": "feat(s2): 添加第四周潜空间扩散训练与采样实验"
+    }
+  },
+  "manifest_sha256": "4ab52fc580d9a5bf9b315a1c2449ab78a20cabcfb18a0d50631990b63b7371e4",
+  "cache": {
+    "train": {
+      "status": "complete",
+      "completed": true,
+      "completed_count": 10000,
+      "total_count": 10000,
+      "index_path": "/Users/lucius/projects/personal/MiniGen/artifacts/cache/s2_week4/train/index.json",
+      "discarded_partial_count": 0,
+      "elapsed_seconds": 0.1310457920189947
+    },
+    "validation": {
+      "status": "complete",
+      "completed": true,
+      "completed_count": 1000,
+      "total_count": 1000,
+      "index_path": "/Users/lucius/projects/personal/MiniGen/artifacts/cache/s2_week4/validation/index.json",
+      "discarded_partial_count": 0,
+      "elapsed_seconds": 0.010084292036481202
+    }
+  },
+  "cache_seconds": 1.6836272500222549,
+  "prior_successful_execution_seconds": 262.844145125011,
+  "model_parameters": 663952,
+  "main_specification_parameters": 7372560,
+  "main_specification_trained": false,
+  "fixed_fit": {
+    "config": {
+      "run_dir": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/s2_week4/verified_v2/fixed",
+      "max_steps": 100,
+      "max_seconds": 120,
+      "learning_rate": 0.001,
+      "ema_decay": 0.99,
+      "seed": 20261030,
+      "device": "mps",
+      "checkpoint_every": 100,
+      "scheduler_source": "project_core",
+      "require_exact_resume": false
+    },
+    "start_step": 0,
+    "final_step": 100,
+    "stop_reason": "max_steps",
+    "elapsed_seconds": 1.0272059999406338,
+    "initial_probe_loss": 1.0234898328781128,
+    "final_probe_loss": 0.0005955618689768016,
+    "ema_probe_loss": 0.39007556438446045,
+    "checkpoint": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/s2_week4/verified_v2/fixed/latest.pt",
+    "resume_mode": "stateful_exact",
+    "resume_limitation": "Deterministic dataset, num_workers=0, same device/environment only",
+    "contract_path": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/s2_week4/verified_v2/fixed/latent_contract.json",
+    "contract_sha256": "8f9b4168b39cd8aba8a740568f4a240bb998d45969e815dacefec616b237f4f2",
+    "data_id": "latent_training:8f9b4168b39cd8aba8a740568f4a240bb998d45969e815dacefec616b237f4f2",
+    "model_source": "notebook_reference"
+  },
+  "random_training": {
+    "config": {
+      "run_dir": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/s2_week4/verified_v2/random_resumed",
+      "max_steps": 1000,
+      "max_seconds": 894.3812779580476,
+      "learning_rate": 0.0002,
+      "ema_decay": 0.99,
+      "seed": 20261030,
+      "device": "mps",
+      "checkpoint_every": 100,
+      "scheduler_source": "project_core",
+      "require_exact_resume": true
+    },
+    "start_step": 500,
+    "final_step": 1000,
+    "stop_reason": "max_steps",
+    "elapsed_seconds": 5.3074725830229,
+    "initial_probe_loss": null,
+    "final_probe_loss": null,
+    "ema_probe_loss": null,
+    "checkpoint": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/s2_week4/verified_v2/random_resumed/latest.pt",
+    "resume_mode": "stateful_exact",
+    "resume_limitation": "Deterministic dataset, num_workers=0, same device/environment only",
+    "contract_path": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/s2_week4/verified_v2/random_resumed/latent_contract.json",
+    "contract_sha256": "c0cc49e02e6bcaabed57801a5e78765ee53b45cc9e4d310e1f023cfbc1cbf779",
+    "data_id": "latent_training:c0cc49e02e6bcaabed57801a5e78765ee53b45cc9e4d310e1f023cfbc1cbf779",
+    "model_source": "notebook_reference"
+  },
+  "resume": {
+    "first_final_step": 500,
+    "start_step": 500,
+    "mode": "stateful_exact",
+    "continuous_equality_test": "see engineering verification"
+  },
+  "validation_probe": {
+    "initial": [
+      {
+        "model": "initial",
+        "time_bin": [
+          0,
+          100
+        ],
+        "images": 16,
+        "model_mse": 1.0125914812088013,
+        "zero_mse": 1.0125914812088013,
+        "moment_mse": 0.9268346428871155
+      },
+      {
+        "model": "initial",
+        "time_bin": [
+          100,
+          400
+        ],
+        "images": 16,
+        "model_mse": 1.0021075010299683,
+        "zero_mse": 1.0021076202392578,
+        "moment_mse": 0.35247644782066345
+      },
+      {
+        "model": "initial",
+        "time_bin": [
+          400,
+          700
+        ],
+        "images": 16,
+        "model_mse": 0.9901295900344849,
+        "zero_mse": 0.9901295900344849,
+        "moment_mse": 0.015401585027575493
+      },
+      {
+        "model": "initial",
+        "time_bin": [
+          700,
+          1000
+        ],
+        "images": 16,
+        "model_mse": 1.0043883323669434,
+        "zero_mse": 1.0043883323669434,
+        "moment_mse": 0.0004633560893125832
+      }
+    ],
+    "final": [
+      {
+        "model": "final",
+        "time_bin": [
+          0,
+          100
+        ],
+        "images": 16,
+        "model_mse": 0.4357239007949829,
+        "zero_mse": 1.0125914812088013,
+        "moment_mse": 0.9268346428871155
+      },
+      {
+        "model": "final",
+        "time_bin": [
+          100,
+          400
+        ],
+        "images": 16,
+        "model_mse": 0.13838769495487213,
+        "zero_mse": 1.0021076202392578,
+        "moment_mse": 0.35247644782066345
+      },
+      {
+        "model": "final",
+        "time_bin": [
+          400,
+          700
+        ],
+        "images": 16,
+        "model_mse": 0.016093362122774124,
+        "zero_mse": 0.9901295900344849,
+        "moment_mse": 0.015401585027575493
+      },
+      {
+        "model": "final",
+        "time_bin": [
+          700,
+          1000
+        ],
+        "images": 16,
+        "model_mse": 0.0054582469165325165,
+        "zero_mse": 1.0043883323669434,
+        "moment_mse": 0.0004633560893125832
+      }
+    ],
+    "ema": [
+      {
+        "model": "ema",
+        "time_bin": [
+          0,
+          100
+        ],
+        "images": 16,
+        "model_mse": 0.4156447947025299,
+        "zero_mse": 1.0125914812088013,
+        "moment_mse": 0.9268346428871155
+      },
+      {
+        "model": "ema",
+        "time_bin": [
+          100,
+          400
+        ],
+        "images": 16,
+        "model_mse": 0.13426253199577332,
+        "zero_mse": 1.0021076202392578,
+        "moment_mse": 0.35247644782066345
+      },
+      {
+        "model": "ema",
+        "time_bin": [
+          400,
+          700
+        ],
+        "images": 16,
+        "model_mse": 0.013844429515302181,
+        "zero_mse": 0.9901295900344849,
+        "moment_mse": 0.015401585027575493
+      },
+      {
+        "model": "ema",
+        "time_bin": [
+          700,
+          1000
+        ],
+        "images": 16,
+        "model_mse": 0.0029033764731138945,
+        "zero_mse": 1.0043883323669434,
+        "moment_mse": 0.0004633560893125832
+      }
+    ]
+  },
+  "sampling": {
+    "completed": true,
+    "completed_steps": 1000,
+    "elapsed_seconds": 3.6614514170214534,
+    "seed": 42,
+    "model_calls": 1000
+  },
+  "generated_latent_range": [
+    -23.834796905517578,
+    14.579974174499512
+  ],
+  "diagnostics": {
+    "images": 8,
+    "parse_failures": 6,
+    "parsed_object_counts": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "nearest_distances": [
+      27.807891845703125,
+      32.0224609375,
+      14.994172096252441,
+      12.839149475097656,
+      48.91663360595703,
+      21.985136032104492,
+      18.733169555664062,
+      10.993717193603516
+    ],
+    "nearest_train_ids": [
+      "synthetic_icons_week3_v1-train-00670",
+      "synthetic_icons_week3_v1-train-02291",
+      "synthetic_icons_week3_v1-train-06206",
+      "synthetic_icons_week3_v1-train-05339",
+      "synthetic_icons_week3_v1-train-01872",
+      "synthetic_icons_week3_v1-train-06572",
+      "synthetic_icons_week3_v1-train-05323",
+      "synthetic_icons_week3_v1-train-08492"
+    ],
+    "conditional_accuracy": null
+  },
+  "decode_and_diagnostics_seconds": 1.9352952089393511,
+  "experiment_seconds": 20.223982458002865,
+  "personal_dit_verified": false,
+  "personal_vae_verified": false,
+  "understanding_verified": false,
+  "cloud_cost_cny": 0,
+  "test_set_used": false,
+  "git_commit_performed": false,
+  "limitations": [
+    "single training seed and small teaching architecture",
+    "no text condition or CFG",
+    "rule parser is diagnostic only",
+    "training loss is not generation quality",
+    "full main architecture only checked for shape/parameter count"
+  ],
+  "total_successful_execution_seconds": 283.06812758301385
+}

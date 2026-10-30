@@ -46,3 +46,17 @@ uv run --locked --extra notebook python scripts/execute_learning.py docs/learnin
 使用 `--extra notebook --extra latent` 同步与运行。先调用显式资源准备脚本，再执行 Notebook，HTML 指定 `artifacts/runs/s2_week3/learning_preview.html`。单轮 VAE、缓存与拟合计算上限 30 分钟，最终执行约 14.7 秒，另计 CPU 预检和此前一次验证，合计约 117.8 秒。全量图像已生成，但缓存仅 256 张；未开展完整生成训练。
 
 下一项个人任务为 [L03](../../learning/L03_DiT核心任务.md)；L01 代码已通过 [独立验收](../../reports/tasks/ddpm_review.md)，L02 个人核心和个人理解验收仍待做。
+
+## **五、S2 第四周入口**
+
+[潜空间扩散训练与采样](S2_第4周_潜空间扩散训练与采样.ipynb) 从第三周的固定监督拟合进入完整训练与采样链路：缓存版本与分片、潜空间噪声目标、训练/验证、时间分桶、零预测和高斯矩基线、EMA、精确恢复与随机初始噪声的完整反向链。
+
+本周显式复用第三周唯一 dit_reference 单元，避免维护第二份教学 DiT，记录源码哈希；使用已验证的 src DDPM。VAE、DiT 个人核心及你的理解仍单独验收。完整训练/验证缓存与教学短训、采样已执行，个人核心与生成质量仍另验；实际结果见 [第四周报告](../../reports/stage2/week4.md)；个人接手见 [第四周连接任务](../../learning/L03_第四周训练连接任务.md)。
+
+使用项目环境显式执行，不覆盖旧笔记预览：
+
+```bash
+uv run --locked --extra notebook --extra latent python scripts/execute_learning.py docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb --html-output artifacts/runs/s2_week4/learning_preview.html
+```
+
+这会重新执行有界本地教学实验，读写 data/ 与 artifacts/ 中相应缓存和运行目录；不会启动收费资源。报告分别解释重建质量、固定目标拟合、随机时间验证损失与随机生成质量，不把其中一种代替其余项目。

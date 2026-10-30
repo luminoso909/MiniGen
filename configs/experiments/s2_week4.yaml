@@ -1,0 +1,108 @@
+# 第四周预登记；实际设备、步数、耗时和停止原因以 week4_results.json 为准。
+# 本文件由教学 Notebook 读取；不表示项目 CLI train/sample 已实现。
+schema_version: 1
+experiment_id: s2_week4_unconditional_teaching_v1
+date: "2026-10-30"
+scope: unconditional_latent_diffusion_teaching
+
+sources:
+  model_kind: notebook_reference
+  model_notebook: docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb
+  model_cell_tag: dit_reference
+  objective_kind: project_core
+  objective: minigen.objectives.ddpm_scheduler.DDPMScheduler
+  vae_identity: configs/models/sdxl_vae.json
+  dataset_config: configs/datasets/icons_week3.yaml
+
+compute:
+  preferred_device: mps
+  fallback_device: cpu
+  precision: float32
+  cpu_threads: 2
+  total_max_seconds: 1800
+  paid_resources: false
+
+cache:
+  splits: [train, validation]
+  expected_counts:
+    train: 10000
+    validation: 1000
+  root: artifacts/cache/s2_week4
+  batch_size: 16
+  shard_size: 512
+  encoder_mode: posterior_mean
+  dtype: float32
+  require_complete_for_full_claim: true
+  test_splits_used: false
+
+schedule:
+  num_steps: 1000
+  beta_start: 0.0001
+  beta_end: 0.02
+  clip_denoised: false
+  prediction_type: epsilon
+  reverse_variance: fixed_posterior
+
+models:
+  baseline_specification:
+    depth: 6
+    hidden: 256
+    heads: 4
+    channels: 4
+    size: 16
+    patch: 2
+    use: shape_and_parameter_count_only
+  teaching_experiment:
+    depth: 2
+    hidden: 128
+    heads: 4
+    channels: 4
+    size: 16
+    patch: 2
+
+fixed_fit:
+  batch_size: 4
+  timesteps: [99, 399, 699, 999]
+  max_steps: 100
+  max_seconds: 120
+  learning_rate: 0.001
+  seed: 20261030
+
+training:
+  batch_size: 16
+  max_steps: 1000
+  max_seconds: 900
+  learning_rate: 0.0002
+  ema_decay: 0.99
+  checkpoint_every: 100
+  seed: 20261030
+  require_exact_resume: true
+
+probe:
+  size: 64
+  seed: 20261031
+  time_bins: [[0, 100], [100, 400], [400, 700], [700, 1000]]
+  comparisons: [zero_prediction, channel_moment_gaussian, model, ema]
+  use_test_set: false
+
+sampling:
+  num_samples: 8
+  num_steps: 1000
+  seed_initial: 41
+  seed_reverse: 42
+  max_seconds: 300
+  capture: [999, 749, 499, 249, 99, 0]
+  skip_steps: false
+
+outputs:
+  run_dir: artifacts/runs/s2_week4
+  results: reports/stage2/week4_results.json
+  report: reports/stage2/week4.md
+  figures: reports/stage2/figures/week4
+  html: artifacts/runs/s2_week4/learning_preview.html
+
+git:
+  stage: false
+  commit: false
+  push: false
+  suggested_message: "feat(s2): 添加第四周潜空间扩散训练与采样实验"

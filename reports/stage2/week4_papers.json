@@ -1,0 +1,111 @@
+{
+  "checked_on": "2026-10-30",
+  "stage": "S2 week4",
+  "source_manifest": "docs/papers/manifest.json",
+  "existing_papers": [
+    {
+      "file": "DDPM_Denoising_Diffusion_Probabilistic_Models_2020_v2.pdf",
+      "bytes": 10267274,
+      "sha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+      "pages": 25,
+      "identity_verified": true,
+      "pages_with_text": 25,
+      "all_pages_parsed": true,
+      "action": "reused_existing"
+    },
+    {
+      "file": "VAE_Auto_Encoding_Variational_Bayes_1312.6114v11.pdf",
+      "bytes": 3926758,
+      "sha256": "bdcb63b79ed88f64f8ee2d43a721930d01dde5441a4dba20ecaa2342b34e017c",
+      "pages": 14,
+      "identity_verified": true,
+      "pages_with_text": 14,
+      "all_pages_parsed": true,
+      "action": "reused_existing"
+    },
+    {
+      "file": "LDM_High_Resolution_Image_Synthesis_2112.10752v2.pdf",
+      "bytes": 40842586,
+      "sha256": "46ede043a8dc07ca1f0f445620523fe1ad8b2436bd83856a3835612a47e9f79e",
+      "pages": 45,
+      "identity_verified": true,
+      "pages_with_text": 45,
+      "all_pages_parsed": true,
+      "action": "reused_existing"
+    },
+    {
+      "file": "DiT_Scalable_Diffusion_Models_with_Transformers_2212.09748v2.pdf",
+      "bytes": 43824062,
+      "sha256": "5fbb0ec35e3ae76826240171ca63ed4c27de6cb43180367453019e9d28a8b076",
+      "pages": 25,
+      "identity_verified": true,
+      "pages_with_text": 25,
+      "all_pages_parsed": true,
+      "action": "reused_existing"
+    }
+  ],
+  "downloaded_papers": [
+    {
+      "file": "DDIM_Denoising_Diffusion_Implicit_Models_2010.02502v4.pdf",
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": [
+        "Jiaming Song",
+        "Chenlin Meng",
+        "Stefano Ermon"
+      ],
+      "year": 2021,
+      "first_submitted_year": 2020,
+      "version": "2010.02502v4",
+      "role": "week4_optional_sampler",
+      "source": "https://arxiv.org/abs/2010.02502v4",
+      "download_url": "https://arxiv.org/pdf/2010.02502v4",
+      "retrieved": "2026-10-30",
+      "sha256": "07cb8796d7c100bf7c02bc575f16aab72c32630a8f85abd54ad45dc4f63e80fb",
+      "bytes": 10857218,
+      "pages": 22,
+      "pdf_parse_verified": true,
+      "action": "downloaded",
+      "identity_verified": true,
+      "all_pages_parsed": true,
+      "pages_with_text": 22
+    }
+  ],
+  "downloaded_total_bytes": 10857218,
+  "readings": {
+    "required": [
+      "LDM: Figure 3, Sections 3.1-3.2; scaling and frozen representation",
+      "DiT: Section 3, Figure 3, Appendix A; random-time training and model scale"
+    ],
+    "review": [
+      "DDPM: Equations 4/7/11/14 and Algorithms 1/2",
+      "VAE: posterior, reparameterization and KL"
+    ],
+    "optional": [
+      "DDIM: Section 4.1 Equation 12; Section 4.2 and Appendix C.1; Equation 16"
+    ]
+  },
+  "not_implemented_claim": "Downloading DDIM does not establish a DDIM sampler or short-step generation in this project.",
+  "user_notes_untouched": "docs/papers/ddpm/",
+  "visual_inspection": {
+    "paper": "DDIM 2010.02502v4",
+    "pages": [
+      1,
+      5
+    ],
+    "tool": "pdftoppm + view_image",
+    "result": "Title/authors/version and sampling formula/trajectory figure visibly readable; no full-document visual claim",
+    "renderer_warning": "Fontconfig cache warnings occurred; output PNGs were created and directly inspected."
+  },
+  "notebook": "docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb",
+  "engineering_map": {
+    "latent_cache": [
+      "src/minigen/data/latent.py:latent_cache_identity",
+      "src/minigen/data/latent.py:build_latent_cache",
+      "src/minigen/data/latent.py:CachedLatentDataset"
+    ],
+    "trainer": "src/minigen/training/latent.py:train_latent_denoiser",
+    "sampler": "src/minigen/samplers/ddpm_loop.py:sample_ddpm",
+    "objective": "src/minigen/objectives/ddpm_scheduler.py:DDPMScheduler",
+    "reference": "Explicit third-week dit_reference cells with SHA-256; notebook_reference"
+  }
+}
