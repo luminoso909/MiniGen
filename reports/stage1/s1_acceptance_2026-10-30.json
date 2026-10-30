@@ -1,0 +1,235 @@
+{
+  "vae_math": [
+    {
+      "shape": [
+        1,
+        1
+      ],
+      "kl_error": 3.3306690738754696e-16,
+      "gradcheck": true
+    },
+    {
+      "shape": [
+        2,
+        3
+      ],
+      "kl_error": 2.220446049250313e-16,
+      "gradcheck": true
+    },
+    {
+      "shape": [
+        2,
+        3,
+        2,
+        2
+      ],
+      "kl_error": 8.881784197001252e-16,
+      "gradcheck": true
+    }
+  ],
+  "scalar_example": {
+    "sample": 2.0,
+    "kl": 1.3068528194400546
+  },
+  "data": {
+    "train": 10000,
+    "validation": 1000,
+    "disjoint": true,
+    "resources_sha256": "passed"
+  },
+  "personal_vae_integration": {
+    "source": "project_core",
+    "data": "19 real MNIST training images, batch7, validation7",
+    "continuous_steps": 8,
+    "resumed_from": 3,
+    "parameter_update": true,
+    "model_optimizer_rng_data_exact_match": true,
+    "initial_reconstruction": 544.691162109375,
+    "final_reconstruction": 431.1091003417969
+  },
+  "existing_checkpoint_evaluation_with_personal_core": {
+    "d16_beta0": {
+      "step": 1000,
+      "source": "notebook_reference",
+      "beta": 0.0,
+      "reconstruction": 97.09885919189453,
+      "kl": 345.2751889648438,
+      "mean_reconstruction": 97.0956142578125,
+      "count": 1000
+    },
+    "d16_beta05": {
+      "step": 1000,
+      "source": "notebook_reference",
+      "beta": 0.5,
+      "reconstruction": 105.66728515625,
+      "kl": 23.32922752380371,
+      "mean_reconstruction": 101.87057800292969,
+      "count": 1000
+    },
+    "d16_beta1": {
+      "step": 1000,
+      "source": "notebook_reference",
+      "beta": 1.0,
+      "reconstruction": 114.561158203125,
+      "kl": 15.528039978027344,
+      "mean_reconstruction": 109.26421765136719,
+      "count": 1000
+    },
+    "d16_beta4": {
+      "step": 1000,
+      "source": "notebook_reference",
+      "beta": 4.0,
+      "reconstruction": 143.70865759277345,
+      "kl": 5.521960227966309,
+      "mean_reconstruction": 132.64796166992187,
+      "count": 1000
+    },
+    "d2_beta1": {
+      "step": 1000,
+      "source": "notebook_reference",
+      "beta": 1.0,
+      "reconstruction": 156.95284619140625,
+      "kl": 5.124966346740723,
+      "mean_reconstruction": 155.7638173828125,
+      "count": 1000
+    }
+  },
+  "date": "2026-10-30",
+  "scope": "S1 weeks 1-2 acceptance; no source/test/notebook edits",
+  "reviewed_head": "781c90f",
+  "ddpm_personal_sampling": {
+    "completed": true,
+    "completed_steps": 1000,
+    "elapsed_seconds": 5.082139250007458,
+    "seed": 42,
+    "model_calls": 1000,
+    "device": "mps",
+    "scheduler_source": "project_core",
+    "weights_training_source": "notebook_reference",
+    "weights_step": 1000,
+    "use": "inference acceptance only, no new long training",
+    "initial_seed": 41
+  },
+  "notebooks": {
+    "S1_第1周_DDPM原理与MNIST实验.ipynb": {
+      "cells": 104,
+      "code_cells": 25,
+      "executed_cells": 21,
+      "missing_execution_cell_indices": [
+        57,
+        66,
+        85,
+        89
+      ],
+      "sequential_counts": false,
+      "error_outputs": 0,
+      "compiles": true,
+      "sha256": "b9d21a00094821dbe62966269a119c23857290fa555e09bcdb912692141f9aad"
+    },
+    "S1_第2周_VAE原理与潜空间实验.ipynb": {
+      "cells": 104,
+      "code_cells": 18,
+      "executed_cells": 18,
+      "missing_execution_cell_indices": [],
+      "sequential_counts": false,
+      "error_outputs": 0,
+      "compiles": true,
+      "sha256": "2c252c47af46471817786b3393aef511d2288f7c81348661cdcebcde7dba1698"
+    }
+  },
+  "tests": {
+    "full_passed": 88,
+    "full_failed": 2,
+    "failed_names": [
+      "test_remaining_core_interfaces_never_silently_fall_back",
+      "test_project_core_still_explicitly_pending"
+    ],
+    "failure_reason": "Stale assertions expect newly implemented VAE to remain pending"
+  },
+  "findings": [
+    {
+      "priority": "P2",
+      "file": "docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb",
+      "cell_index": 64,
+      "issue": "common_step accepts len(runs)>=3 but immediately reads four named d16 recipes; reproduced KeyError d16_beta4 with first three finished recipes"
+    },
+    {
+      "priority": "P2",
+      "file": "reports/stage1/week2_results.json",
+      "issue": "Missing newly added d16_beta05 despite its existing completed 1000-step checkpoint"
+    },
+    {
+      "priority": "P2",
+      "file": "tests/test_week2.py",
+      "issue": "Pending assertions conflict with implemented personal VAE"
+    },
+    {
+      "priority": "P3",
+      "file": "src/minigen/autoencoders/vae_core.py",
+      "issue": "Two Results doc sections missing; stale no-return description, unused pending import, import ordering and formatting"
+    },
+    {
+      "priority": "P3",
+      "file": "src/minigen/models/tiny_vae.py",
+      "issue": "Formatting; decode doc says RuntimeError but explicit invalid-shape guard raises ValueError"
+    }
+  ],
+  "understanding_assessment": {
+    "status": "partially_passed_needs_correction",
+    "answers_received": true,
+    "ddpm": {
+      "status": "basically_passed",
+      "correct": [
+        "input xt and t; noise prediction loss",
+        "closed-form forward noising",
+        "reverse chain needs successive updates",
+        "code index 0 is first noised state"
+      ],
+      "clarifications": [
+        "Random time is a Monte Carlo estimator of an objective averaged over time",
+        "Network predicts epsilon; estimated x0 is derived algebraically"
+      ]
+    },
+    "vae_reparameterization": {
+      "status": "passed",
+      "sample": 2.0,
+      "reason": "exp(log_variance/2) is standard deviation"
+    },
+    "vae_kl": {
+      "status": "needs_correction",
+      "user_expression": "0.5*(1**2+4-1+log(4)) = 2+log(2)",
+      "correct_expression": "0.5*(1**2+4-1-log(4)) = 2-log(2)",
+      "correct_value": 1.3068528194400546,
+      "source_implementation": "The reviewed personal code already uses the correct minus sign"
+    },
+    "tradeoffs_and_statistics": {
+      "status": "partially_passed",
+      "correct": "Recognizes reconstruction/regularization tradeoff and that loss alone is insufficient",
+      "clarifications": [
+        "KL term is not a prior-sample quality loss; stronger KL does not guarantee better generated samples",
+        "Per-example diagonal-Gaussian parameters near 0/1 imply small conditional KL; aggregated first two moments do not imply either a Gaussian aggregate or small per-example KL",
+        "Excessive regularization may erase input information"
+      ]
+    },
+    "aggregate_counterexample": {
+      "q1_mean": -0.8,
+      "q2_mean": 0.8,
+      "conditional_variance": 0.36,
+      "mixture_weights": [
+        0.5,
+        0.5
+      ],
+      "aggregate_mean": 0,
+      "aggregate_variance": 1,
+      "per_example_kl": 0.5108256237659907
+    },
+    "remaining": [
+      "Correct the verbal KL sign",
+      "Distinguish per-example posterior parameters from aggregate moments",
+      "Explain time sampling as objective estimation",
+      "One-page S1 retrospective not yet reviewed"
+    ]
+  },
+  "decision": "Core mathematics and bounded integration pass; learner answers partly pass, with KL-sign and aggregate-statistics corrections required; full stage closure still pending material/test cleanup and S1 retrospective",
+  "cost_cny": 0
+}
