@@ -1,0 +1,79 @@
+schema_version: 1
+registered_on: '2026-11-04'
+run_id: s3_conditional_v3
+source: notebook_reference
+scope: bounded_local_teaching_not_formal_image_comparison
+budget:
+  compute_seconds: 1800
+  paid_resources: false
+text:
+  repo_id: openai/clip-vit-base-patch32
+  revision: 3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268
+  context: 77
+  max_chunks: 2
+  segmentation: complete_token_sequence_split_into_75_content_token_windows_with_BOS_EOS
+  truncation: forbidden
+  cache_dtype: float16
+  training_dtype: float32
+  empty_condition: encoded_empty_string
+model:
+  depth: 2
+  hidden: 128
+  heads: 4
+  channels: 4
+  size: 16
+  patch: 2
+  text_width: 512
+  main_spec_shape_only: {depth: 6, hidden: 256, heads: 4}
+training:
+  seeds: [0, 1]
+  steps: 3000
+  batch_size: 32
+  max_seconds_per_seed: 360
+  learning_rate: 0.0002
+  ema_decay: 0.99
+  drop_probability: 0.1
+schedule:
+  objective: epsilon
+  num_steps: 1000
+  beta_start: 0.0001
+  beta_end: 0.02
+  clip_denoised: false
+selection:
+  validation_prompts: 24
+  cfg_candidates: [1.0, 3.0, 5.0]
+  sampler: ddim
+  steps: 40
+  tie_break: lowest_cfg
+  select_with_seed: 0
+controls:
+  conditions: [correct, empty, shuffled]
+  paired_initial_seed: 41
+  reverse_seed: 42
+  intervention_attributes: [color, count, relation]
+  completed_chain_required: true
+holdout:
+  splits: [test_id, test_combo, test_template]
+  prompts_per_split: 32
+  prerequisites: [positive_conditional_gain_in_both_training_seeds, reliable_human_parser_review, personal_core_acceptance]
+  if_gate_fails: keep_sealed_and_report_pending
+metrics:
+  parser_version: request_multisets_binding_relations_v1
+  primary: all_attributes_per_image
+  failure_in_denominator: true
+  relation_absence: null_not_zero
+  hidden_absolute_coordinates: forbidden
+  bootstrap: paired_2000_sample_level_only
+  human_review: {originals: 100, generated_or_degraded: 100, status: pending}
+efficiency:
+  update_budgets: [10, 20, 40]
+  report_effective_nfe: true
+  report_branch_examples: true
+  warmup: true
+  synchronize: true
+flow_toy:
+  path: noise_to_data_linear
+  steps: 600
+  seed: 7
+  device: cpu
+  euler_steps: [10, 20, 40]

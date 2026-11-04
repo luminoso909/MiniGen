@@ -4,7 +4,7 @@
 
 | 路线 | 内容 | 当前状态 |
 | --- | --- | --- |
-| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | DDPM 个人核心已验证；三周教学、数据与缓存试点已验证；其余个人核心待做 |
+| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | DDPM/VAE 个人数学核心已验证；S2 教学闭环已执行，S3 见文末；DiT/CFG/Flow 个人核心待做 |
 | B：现代适配 | Sana 图标领域 LoRA 与前后评测 | 尚未下载权重或执行微调 |
 | 开发基础 | uv 环境、CLI 诊断、项目结构、测试与文档 | 见 [初始化验证报告](reports/bootstrap.md) |
 
@@ -18,7 +18,7 @@
 
 第二周入口：[VAE 原理与潜空间 Notebook](docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb)、[第二周报告](reports/stage1/week2.md)、[论文与阅读导航](docs/papers/README.md)。四组真实短训、数学和单进程随机顺序恢复已验证；个人核心与理解仍待验收。
 
-DDPM 个人核心已通过独立数值、分布、梯度与 CPU 训练/恢复/完整短采样链检查，见 [验收报告](reports/tasks/ddpm_review.md)。VAE、DiT、CFG、Flow 仍抛出 `CoreImplementationRequired`。核心正确性与生成质量、个人理解分别验收，本轮没有重新训练 MNIST。
+DDPM 个人核心已通过独立数值、分布、梯度与 CPU 训练/恢复/完整短采样链检查，见 [验收报告](reports/tasks/ddpm_review.md)。VAE 个人数学核心也已通过 [S1 验收](reports/stage1/s1_acceptance_2026-10-30.md)；DiT、CFG、Flow 仍明确待做。核心正确性与生成质量、个人理解分别验收，本轮没有重新训练 MNIST。
 
 ```bash
 uv run --locked python scripts/check_ddpm_core.py
@@ -101,7 +101,7 @@ artifacts/          缓存、权重、实验输出，默认忽略
 
 目前单 Agent 工作。四类角色模板预留数据、工程、评测和审查并行空间；未来显式启用后再分配互不冲突的修改范围。本项目不包含模型 API 编排系统，也不需要额外 API Key。
 
-下一步是复盘 L01 的推导与索引约定，并完成 [L02 / S1-06](learning/L02_VAE核心任务.md) 的个人核心。L01 代码已验证，个人理解仍待验收；VAE 验收命令为 `uv run --locked python scripts/check_vae_core.py`，当前诚实返回待做。
+S1 的 DDPM/VAE 代码已验收，理解与材料收尾见 [S1 报告](reports/stage1/s1_acceptance_2026-10-30.md)。个人接手依次为 [L03](learning/L03_DiT核心任务.md) 与 [L04](learning/L04_文本条件与CFG核心任务.md)；VAE 复验命令为 `uv run --locked python scripts/check_vae_core.py`。
 
 ## **五、Git 与来源说明**
 
@@ -126,7 +126,7 @@ uv run --locked python scripts/check_dit_core.py
 
 学习入口：[第四周 Notebook](docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb)、[实验预登记](configs/experiments/s2_week4.yaml)、[个人训练连接任务](learning/L03_第四周训练连接任务.md)。本周在无条件设置中连接冻结 VAE、完整训练/验证缓存、随机时间噪声目标、DiT、EMA、恢复与 1000 步采样。已完成 10000 张训练与 1000 张验证缓存、1000 步教学随机训练和完整采样；8 张中 6 张规则解析失败，生成质量未达标。真实证据见 [第四周报告](reports/stage2/week4.md)。
 
-教学 DiT 显式复用第三周唯一标记单元并记录源码哈希；噪声日程使用已验证的 src DDPM。个人 VAE 与 DiT 核心仍待你实现，教学闭环不会将其勾选完成。6 层/256 的主规格与 2 层/128 的短实验分别记录，重建、拟合与随机生成分开展示。
+教学 DiT 显式复用第三周唯一标记单元并记录源码哈希；噪声日程使用已验证的 src DDPM。个人 VAE 已验收，DiT 核心仍待你实现，教学闭环不会将其勾选完成。6 层/256 的主规格与 2 层/128 的短实验分别记录，重建、拟合与随机生成分开展示。
 
 ```bash
 uv sync --locked --extra notebook --extra latent
@@ -134,3 +134,19 @@ uv run --locked --extra notebook --extra latent python scripts/execute_learning.
 ```
 
 显式重跑会复用或生成缓存并执行有界本地教学训练；总计算预算为 30 分钟，时间不足时按实际部分交付，不使用收费资源。本轮不暂存、不提交、不推送，第二周作业与既有笔记改动保留。建议提交名称为 `feat(s2): 添加第四周潜空间扩散训练与采样实验`。
+
+## **八、S3：文本条件、CFG 与可信评测**
+
+入口：[S3 Notebook](docs/learning/S3_文本条件CFG与可信评测.ipynb)、[执行报告](reports/stage3/stage3.md)、[任务交接](reports/tasks/stage3.md)、[L04 核心任务](learning/L04_文本条件与CFG核心任务.md)。覆盖完整条件信息流、数学推导、核心教学代码、全量对照、评测与失败分析，并包括二维 Flow、S4 实验预登记、Sana 预研及三张研究卡。
+
+冻结 CLIP 与文本缓存已核验，两训练种子各 3000 步、DDIM 对照和完整 1000 步 DDPM 已执行。正确条件综合成功仅 2/24、1/24，区间含零，单属性干预失败；**生成质量和 S3 第一里程碑仍未通过**。个人 DiT/CFG/Flow 与人工评测仍待验收，三个测试划分保持封存。
+
+```bash
+uv sync --locked --extra notebook --extra latent --extra conditioning
+uv run --locked --extra notebook --extra latent --extra conditioning python scripts/prepare_stage3_assets.py
+uv run --locked --extra notebook --extra latent --extra conditioning python scripts/execute_learning.py docs/learning/S3_文本条件CFG与可信评测.ipynb --html-output artifacts/runs/s3_conditional_v3/learning_preview.html
+uv run --locked python scripts/check_conditioning_core.py
+uv run --locked python scripts/check_cfg_core.py
+```
+
+显式资源准备补齐论文和 CLIP 文本组件；Notebook 使用本地缓存与免费有界实验，未下载完整 Sana。Notebook 的 19 代码单元执行通过，完整 pytest 104 项通过。全局 Ruff/格式仍有用户 TinyVAE 与旧笔记的原有问题，保留未改。个人核心和教学代码来源分开，没有自动 fallback。新增六篇 PDF 与第一周等已有五篇的复核记录见 [论文导航](docs/papers/README.md)。

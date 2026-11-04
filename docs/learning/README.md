@@ -60,3 +60,19 @@ uv run --locked --extra notebook --extra latent python scripts/execute_learning.
 ```
 
 这会重新执行有界本地教学实验，读写 data/ 与 artifacts/ 中相应缓存和运行目录；不会启动收费资源。报告分别解释重建质量、固定目标拟合、随机时间验证损失与随机生成质量，不把其中一种代替其余项目。
+
+## **六、S3 全部工作入口**
+
+[文本条件、CFG 与可信评测](S3_文本条件CFG与可信评测.ipynb) 覆盖冻结 CLIP、77-token 完整分段、Cross-Attention、条件丢弃与 CFG、两种子训练、同噪声对照、属性评分、效率、Flow 二维预研和研究设计。完整参考只在新 Notebook；个人接口与验收见 [L04](../../learning/L04_文本条件与CFG核心任务.md)。
+
+```bash
+uv sync --locked --extra notebook --extra latent --extra conditioning
+uv run --locked --extra notebook --extra latent --extra conditioning python scripts/prepare_stage3_assets.py
+uv run --locked --extra notebook --extra latent --extra conditioning python scripts/execute_learning.py docs/learning/S3_文本条件CFG与可信评测.ipynb --html-output artifacts/runs/s3_conditional_v3/learning_preview.html
+uv run --locked python scripts/check_conditioning_core.py
+uv run --locked python scripts/check_cfg_core.py
+```
+
+资源准备显式下载论文和固定 CLIP 文本组件；导入、doctor 和测试不下载。重跑 Notebook 会重新执行最多 30 分钟本地教学计算；源码或监督身份变化使用新 run_id。完整执行与质量结论见 [S3 报告](../../reports/stage3/stage3.md)，逐项状态见 [交接](../../reports/tasks/stage3.md)。
+
+S1 最新结论以 [验收报告](../../reports/stage1/s1_acceptance_2026-10-30.md) 为准：DDPM 与 VAE 个人数学核心已验证，S1 的文档/理解收尾不自动全部完成。前几周教学历史记录中“个人待做”描述的是当时状态，不能覆盖新的验收证据。

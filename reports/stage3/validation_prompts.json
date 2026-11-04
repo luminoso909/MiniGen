@@ -1,0 +1,791 @@
+[
+  {
+    "index": 0,
+    "sample_id": "synthetic_icons_week3_v1-validation-00217",
+    "group_id": "f3b46723510358eab6798bce708e8c24ee360f01762b3a67984c6f3933b7e41d",
+    "caption": "An icon with a blue circle on white.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "e04cceacd1c3dad34137419e6176921d0e5d8a0868a5d8dd2bdbe80ce77732bd",
+    "attributes": {
+      "objects": [
+        {
+          "color": "blue",
+          "shape": "circle"
+        }
+      ],
+      "count": 1,
+      "relations": []
+    }
+  },
+  {
+    "index": 1,
+    "sample_id": "synthetic_icons_week3_v1-validation-00518",
+    "group_id": "f11d8b599f5c0b8d66096ca48001656d3a91abe82ee76096243529a8c809a90e",
+    "caption": "On a white background: a yellow square.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "2adbd3c57cb956da08849b5bc97950e7bc0c337f3180039ee349544a76ff12da",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "square"
+        }
+      ],
+      "count": 1,
+      "relations": []
+    }
+  },
+  {
+    "index": 2,
+    "sample_id": "synthetic_icons_week3_v1-validation-00633",
+    "group_id": "f3b46723510358eab6798bce708e8c24ee360f01762b3a67984c6f3933b7e41d",
+    "caption": "An icon with a blue circle on white.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "3867407d317a9176ec9d2ab10bed21ac162ebc9de3c55be0b7c04414de8e74dd",
+    "attributes": {
+      "objects": [
+        {
+          "color": "blue",
+          "shape": "circle"
+        }
+      ],
+      "count": 1,
+      "relations": []
+    }
+  },
+  {
+    "index": 3,
+    "sample_id": "synthetic_icons_week3_v1-validation-00660",
+    "group_id": "f3b46723510358eab6798bce708e8c24ee360f01762b3a67984c6f3933b7e41d",
+    "caption": "On a white background: a blue circle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "373ba58f4b5af98de71da2f365de913cbb831f987a810a2d93d3d535ebdd67fa",
+    "attributes": {
+      "objects": [
+        {
+          "color": "blue",
+          "shape": "circle"
+        }
+      ],
+      "count": 1,
+      "relations": []
+    }
+  },
+  {
+    "index": 4,
+    "sample_id": "synthetic_icons_week3_v1-validation-00563",
+    "group_id": "3f499ba3bd6fc5de3f1fbd3c041bac4640e8e4c93bcb99cb08abe7e4a5dcdb3c",
+    "caption": "An icon with a yellow circle on white.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "66ac10d00eee5db0e7189404b271deb536e18b26872eea691073d5ef360fa88b",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "circle"
+        }
+      ],
+      "count": 1,
+      "relations": []
+    }
+  },
+  {
+    "index": 5,
+    "sample_id": "synthetic_icons_week3_v1-validation-00718",
+    "group_id": "57e6d8cb14794f90ac3fbc975fdfa74f08808aaae4edf0a1c78bdfa416974a23",
+    "caption": "On a white background: a yellow circle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "f7b838a7cccf8f71f0dd4d7f42948af40361090ffffa6764a45fba631434964e",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "circle"
+        }
+      ],
+      "count": 1,
+      "relations": []
+    }
+  },
+  {
+    "index": 6,
+    "sample_id": "synthetic_icons_week3_v1-validation-00404",
+    "group_id": "3f499ba3bd6fc5de3f1fbd3c041bac4640e8e4c93bcb99cb08abe7e4a5dcdb3c",
+    "caption": "On a white background: a yellow circle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "646d56035a62dde9205887c6a072d3e2629ec7663efcce9a02e447349e697eca",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "circle"
+        }
+      ],
+      "count": 1,
+      "relations": []
+    }
+  },
+  {
+    "index": 7,
+    "sample_id": "synthetic_icons_week3_v1-validation-00222",
+    "group_id": "f11d8b599f5c0b8d66096ca48001656d3a91abe82ee76096243529a8c809a90e",
+    "caption": "On a white background: a yellow square.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "b206213664c970ffc2fd10fb226d594286208d59f3ea0fe564c338fca694e1c1",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "square"
+        }
+      ],
+      "count": 1,
+      "relations": []
+    }
+  },
+  {
+    "index": 8,
+    "sample_id": "synthetic_icons_week3_v1-validation-00743",
+    "group_id": "441ef9a224ad9646042d99d8c6a7345ddb193a53807b633e9e58df7e9dc86713",
+    "caption": "An icon with a blue triangle, a yellow square on white. Positions: the blue triangle is above the yellow square.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "ae8c8484ded6374b4233c848ca68f9e753b2ad577bec9663f645cde57d70e325",
+    "attributes": {
+      "objects": [
+        {
+          "color": "blue",
+          "shape": "triangle"
+        },
+        {
+          "color": "yellow",
+          "shape": "square"
+        }
+      ],
+      "count": 2,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        }
+      ]
+    }
+  },
+  {
+    "index": 9,
+    "sample_id": "synthetic_icons_week3_v1-validation-00875",
+    "group_id": "ec24be3c1e799e6108b3a05d2ee663da4d3c1064f8269787c3d953cb1eba6e47",
+    "caption": "An icon with a blue triangle, a green square on white. Positions: the blue triangle is left of the green square; the blue triangle is above the green square.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "59a9d51a179518d164290b8464894f807f844f1483aba8fb506f86c93723be35",
+    "attributes": {
+      "objects": [
+        {
+          "color": "blue",
+          "shape": "triangle"
+        },
+        {
+          "color": "green",
+          "shape": "square"
+        }
+      ],
+      "count": 2,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        }
+      ]
+    }
+  },
+  {
+    "index": 10,
+    "sample_id": "synthetic_icons_week3_v1-validation-00779",
+    "group_id": "6f76299e2ed7126ae09ee162ac24ca5d3b0b56f27696b74a78b8d73915a45cb5",
+    "caption": "An icon with a yellow square, a yellow triangle on white. Positions: the yellow square is above the yellow triangle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "9f159ba98dd164b7690b38eb9c54413cad82713334cec043a0cbd2fcd3162179",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "square"
+        },
+        {
+          "color": "yellow",
+          "shape": "triangle"
+        }
+      ],
+      "count": 2,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        }
+      ]
+    }
+  },
+  {
+    "index": 11,
+    "sample_id": "synthetic_icons_week3_v1-validation-00641",
+    "group_id": "d4772192242ba75d37682ee70a6b2452e08db62185608790fea334aa460815fe",
+    "caption": "An icon with a blue circle, a green triangle on white. Positions: the blue circle is left of the green triangle; the blue circle is above the green triangle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "5511107e31eb2cdac7be19a88a36461e0f2f8242b30fed9c9869b391ae0f2911",
+    "attributes": {
+      "objects": [
+        {
+          "color": "blue",
+          "shape": "circle"
+        },
+        {
+          "color": "green",
+          "shape": "triangle"
+        }
+      ],
+      "count": 2,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        }
+      ]
+    }
+  },
+  {
+    "index": 12,
+    "sample_id": "synthetic_icons_week3_v1-validation-00340",
+    "group_id": "0701e6f942f01b09390907642fc23ae993a819592879bf5b9f291d52a1e1d255",
+    "caption": "On a white background: a blue triangle, a yellow triangle. Positions: the blue triangle is left of the yellow triangle; the blue triangle is above the yellow triangle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "118fbc68adac69e2df2f2fbc8ea8c0411a75b25b086898f002c78169acca5457",
+    "attributes": {
+      "objects": [
+        {
+          "color": "blue",
+          "shape": "triangle"
+        },
+        {
+          "color": "yellow",
+          "shape": "triangle"
+        }
+      ],
+      "count": 2,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        }
+      ]
+    }
+  },
+  {
+    "index": 13,
+    "sample_id": "synthetic_icons_week3_v1-validation-00462",
+    "group_id": "276e0316cfdfdcabbc7a136fe97974bbb8bdb5bb16ae2698d29255882c687cec",
+    "caption": "On a white background: a red circle, a yellow square. Positions: the red circle is above the yellow square.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "47edd133fa1a42908fbd22294b1772b57d94f67fa20c365395fc5506c52ab6eb",
+    "attributes": {
+      "objects": [
+        {
+          "color": "red",
+          "shape": "circle"
+        },
+        {
+          "color": "yellow",
+          "shape": "square"
+        }
+      ],
+      "count": 2,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        }
+      ]
+    }
+  },
+  {
+    "index": 14,
+    "sample_id": "synthetic_icons_week3_v1-validation-00796",
+    "group_id": "c8d41d780271f6dd2a9be78fb0e6d20a7c56cb986f35876afde669523354675e",
+    "caption": "On a white background: a yellow circle, a green circle. Positions: the yellow circle is left of the green circle; the yellow circle is above the green circle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "6073f601eb6d5148a3747783bda76c65b9332833ca4a9815ef4f3f7fbabf7977",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "circle"
+        },
+        {
+          "color": "green",
+          "shape": "circle"
+        }
+      ],
+      "count": 2,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        }
+      ]
+    }
+  },
+  {
+    "index": 15,
+    "sample_id": "synthetic_icons_week3_v1-validation-00000",
+    "group_id": "34352ab204cbc87530633210ba45650fa442d5d1555562feadd5ecb997ef2403",
+    "caption": "On a white background: a red circle, a blue circle. Positions: the red circle is left of the blue circle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "bdf1a2b76d12b981e562ddf5edb4db8c92c83a940c978393c781925aa7499654",
+    "attributes": {
+      "objects": [
+        {
+          "color": "red",
+          "shape": "circle"
+        },
+        {
+          "color": "blue",
+          "shape": "circle"
+        }
+      ],
+      "count": 2,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        }
+      ]
+    }
+  },
+  {
+    "index": 16,
+    "sample_id": "synthetic_icons_week3_v1-validation-00908",
+    "group_id": "8dd2724fd432d97750cf0046c613891da90995e27d889b9c192608d6cfe5f93b",
+    "caption": "On a white background: a green triangle, a blue triangle, a green circle. Positions: the green triangle is above the blue triangle; the green circle is left of the green triangle; the green triangle is above the green circle; the green circle is left of the blue triangle; the blue triangle is above the green circle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "8adbe2c097db56d8733b15a7434c400f628b3c2aab82eb466c3b3c4d37eeb3c1",
+    "attributes": {
+      "objects": [
+        {
+          "color": "green",
+          "shape": "triangle"
+        },
+        {
+          "color": "blue",
+          "shape": "triangle"
+        },
+        {
+          "color": "green",
+          "shape": "circle"
+        }
+      ],
+      "count": 3,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 0,
+          "predicate": "left of",
+          "subject": 2
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 2
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 1
+        }
+      ]
+    }
+  },
+  {
+    "index": 17,
+    "sample_id": "synthetic_icons_week3_v1-validation-00978",
+    "group_id": "c8b0008a70bc25af4a5364c43216b1b8f0ff678410f857e2dad984431bcc9b56",
+    "caption": "On a white background: a green square, a yellow circle, a green circle. Positions: the green square is left of the yellow circle; the green square is left of the green circle; the green square is above the green circle; the yellow circle is above the green circle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "e4bb69f250e5f446db8b183186c8e938175ac9ae9d5076fceda8ccf9a33c1e76",
+    "attributes": {
+      "objects": [
+        {
+          "color": "green",
+          "shape": "square"
+        },
+        {
+          "color": "yellow",
+          "shape": "circle"
+        },
+        {
+          "color": "green",
+          "shape": "circle"
+        }
+      ],
+      "count": 3,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 1
+        }
+      ]
+    }
+  },
+  {
+    "index": 18,
+    "sample_id": "synthetic_icons_week3_v1-validation-00744",
+    "group_id": "f25208cdf450353f4c5dfcd8dc329f2724c8ec66601af29666fa85e4e42bf0b4",
+    "caption": "On a white background: a yellow triangle, a green triangle, a green circle. Positions: the yellow triangle is left of the green triangle; the yellow triangle is above the green circle; the green circle is left of the green triangle; the green triangle is above the green circle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "59b855f9431276e3969c0e6bfa3426551fdd61ce700aa98dfb604d6acc312bdf",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "triangle"
+        },
+        {
+          "color": "green",
+          "shape": "triangle"
+        },
+        {
+          "color": "green",
+          "shape": "circle"
+        }
+      ],
+      "count": 3,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 2
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 1
+        }
+      ]
+    }
+  },
+  {
+    "index": 19,
+    "sample_id": "synthetic_icons_week3_v1-validation-00230",
+    "group_id": "6f84dbb625c3f1a0407bbec93beceb38b7b3f413dbfe11e93a17ed8daa54d625",
+    "caption": "On a white background: a green circle, a blue circle, a blue triangle. Positions: the green circle is left of the blue circle; the green circle is left of the blue triangle; the green circle is above the blue triangle; the blue triangle is left of the blue circle; the blue circle is above the blue triangle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "672e84e4bb9bea17df51b5d41844c6fb3d774aa0d402a3323174f7bad8d164a7",
+    "attributes": {
+      "objects": [
+        {
+          "color": "green",
+          "shape": "circle"
+        },
+        {
+          "color": "blue",
+          "shape": "circle"
+        },
+        {
+          "color": "blue",
+          "shape": "triangle"
+        }
+      ],
+      "count": 3,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 2
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 1
+        }
+      ]
+    }
+  },
+  {
+    "index": 20,
+    "sample_id": "synthetic_icons_week3_v1-validation-00958",
+    "group_id": "d9434a90518e640eb7151bcfed17f60cd05e11f1f967e72ed3498091679c817c",
+    "caption": "On a white background: a yellow square, a yellow triangle, a red square. Positions: the yellow square is left of the yellow triangle; the yellow square is above the yellow triangle; the yellow square is left of the red square; the yellow square is above the red square; the yellow triangle is above the red square.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "a67fcdd98c50f6c71340654438d14b3aced5cafe4cc5a6252c8e576d05bfa47e",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "square"
+        },
+        {
+          "color": "yellow",
+          "shape": "triangle"
+        },
+        {
+          "color": "red",
+          "shape": "square"
+        }
+      ],
+      "count": 3,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 1
+        }
+      ]
+    }
+  },
+  {
+    "index": 21,
+    "sample_id": "synthetic_icons_week3_v1-validation-00883",
+    "group_id": "08bdc3e3a824fdec7fdb9bcdbc33a4c87bcf5f34a2b35e2cfa7299be79e10ef2",
+    "caption": "An icon with a green square, a yellow circle, a red square on white. Positions: the green square is left of the yellow circle; the green square is above the red square; the red square is left of the yellow circle; the yellow circle is above the red square.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "87b25c47ae91c83f787d174ec5cece896ff387d5f9af968797487c8e876caf75",
+    "attributes": {
+      "objects": [
+        {
+          "color": "green",
+          "shape": "square"
+        },
+        {
+          "color": "yellow",
+          "shape": "circle"
+        },
+        {
+          "color": "red",
+          "shape": "square"
+        }
+      ],
+      "count": 3,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 2
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 1
+        }
+      ]
+    }
+  },
+  {
+    "index": 22,
+    "sample_id": "synthetic_icons_week3_v1-validation-00311",
+    "group_id": "7b32e74784c496878baad02faff4942452d3c3c7512374722d6d330b6c9e07c2",
+    "caption": "An icon with a yellow square, a red square, a yellow triangle on white. Positions: the yellow square is left of the red square; the yellow square is left of the yellow triangle; the yellow square is above the yellow triangle; the red square is left of the yellow triangle; the red square is above the yellow triangle.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "b735e7f29184ed18f6a1bdbefe078611f5680d1accbb08896d57fc87f1422e0e",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "square"
+        },
+        {
+          "color": "red",
+          "shape": "square"
+        },
+        {
+          "color": "yellow",
+          "shape": "triangle"
+        }
+      ],
+      "count": 3,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "left of",
+          "subject": 1
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 1
+        }
+      ]
+    }
+  },
+  {
+    "index": 23,
+    "sample_id": "synthetic_icons_week3_v1-validation-00965",
+    "group_id": "a7634ea7a3efe1de44f8e52095d4d6e61a6537ac456882b9c2e33e6b147199f5",
+    "caption": "An icon with a yellow square, a green triangle, a red square on white. Positions: the yellow square is left of the green triangle; the yellow square is left of the red square; the yellow square is above the red square; the red square is left of the green triangle; the green triangle is above the red square.",
+    "caption_origin": "structured_scene_attributes",
+    "image_sha256": "e499ec4fefba2849217010cafb4732d9ed4a996b613eae83ce3cb49309eef956",
+    "attributes": {
+      "objects": [
+        {
+          "color": "yellow",
+          "shape": "square"
+        },
+        {
+          "color": "green",
+          "shape": "triangle"
+        },
+        {
+          "color": "red",
+          "shape": "square"
+        }
+      ],
+      "count": 3,
+      "relations": [
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "left of",
+          "subject": 0
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 0
+        },
+        {
+          "object": 1,
+          "predicate": "left of",
+          "subject": 2
+        },
+        {
+          "object": 2,
+          "predicate": "above",
+          "subject": 1
+        }
+      ]
+    }
+  }
+]

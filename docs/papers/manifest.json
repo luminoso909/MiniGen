@@ -95,5 +95,109 @@
     "bytes": 10857218,
     "pages": 22,
     "pdf_parse_verified": true
+  },
+  {
+    "file": "CFG_Classifier_Free_Diffusion_Guidance_2207.12598v1.pdf",
+    "title": "Classifier-Free Diffusion Guidance",
+    "authors": [
+      "Jonathan Ho",
+      "Tim Salimans"
+    ],
+    "year": 2022,
+    "version": "2207.12598v1",
+    "role": "stage3_core",
+    "source": "https://arxiv.org/abs/2207.12598v1",
+    "download_url": "https://arxiv.org/pdf/2207.12598v1",
+    "retrieved": "2026-11-04",
+    "sha256": "ccbdf2da65903ed579d35240165aba2d0e9ad6f015ade81af6e30823eb0a7f24",
+    "bytes": 3773509,
+    "pages": 14,
+    "pdf_parse_verified": true
+  },
+  {
+    "file": "CLIP_Learning_Transferable_Visual_Models_2103.00020v1.pdf",
+    "title": "Learning Transferable Visual Models From Natural Language Supervision",
+    "authors": [
+      "Alec Radford et al."
+    ],
+    "year": 2021,
+    "version": "2103.00020v1",
+    "role": "stage3_text_encoder",
+    "source": "https://arxiv.org/abs/2103.00020v1",
+    "download_url": "https://arxiv.org/pdf/2103.00020v1",
+    "retrieved": "2026-11-04",
+    "sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+    "bytes": 6813639,
+    "pages": 48,
+    "pdf_parse_verified": true
+  },
+  {
+    "file": "Flow_Matching_for_Generative_Modeling_2210.02747v2.pdf",
+    "title": "Flow Matching for Generative Modeling",
+    "authors": [
+      "Yaron Lipman et al."
+    ],
+    "year": 2023,
+    "version": "2210.02747v2",
+    "role": "stage3_flow_preparation",
+    "source": "https://arxiv.org/abs/2210.02747v2",
+    "download_url": "https://arxiv.org/pdf/2210.02747v2",
+    "retrieved": "2026-11-04",
+    "sha256": "5eeb39ba516396924aba4787452f9d0abdee88467a4d0c264d9f66cad0c5ee14",
+    "bytes": 25147129,
+    "pages": 28,
+    "pdf_parse_verified": true
+  },
+  {
+    "file": "REPA_Representation_Alignment_for_Generation_2410.06940v4.pdf",
+    "title": "Representation Alignment for Generation: Training Diffusion Transformers Is Easier Than You Think",
+    "authors": [
+      "Sihyun Yu et al."
+    ],
+    "year": 2025,
+    "version": "2410.06940v4",
+    "role": "stage3_research_card",
+    "source": "https://arxiv.org/abs/2410.06940v4",
+    "download_url": "https://arxiv.org/pdf/2410.06940v4",
+    "retrieved": "2026-11-04",
+    "sha256": "cc5be5a56cc9bbc9cdf3f1e4299af894f3e1548e36838863b405e98cd4382806",
+    "bytes": 34940112,
+    "pages": 43,
+    "pdf_parse_verified": true,
+    "first_submitted_year": 2024
+  },
+  {
+    "file": "RAE_Diffusion_Transformers_with_Representation_Autoencoders_2510.11690v1.pdf",
+    "title": "Diffusion Transformers with Representation Autoencoders",
+    "authors": [
+      "Boyang Zheng et al."
+    ],
+    "year": 2025,
+    "version": "2510.11690v1",
+    "role": "stage3_research_card",
+    "source": "https://arxiv.org/abs/2510.11690v1",
+    "download_url": "https://arxiv.org/pdf/2510.11690v1",
+    "retrieved": "2026-11-04",
+    "sha256": "01767e61be3ee4503275e69babc1fcae77eec9dd86356bc824c168751a013590",
+    "bytes": 16469799,
+    "pages": 31,
+    "pdf_parse_verified": true
+  },
+  {
+    "file": "MeanFlow_Mean_Flows_for_One_step_Generative_Modeling_2505.13447v1.pdf",
+    "title": "Mean Flows for One-step Generative Modeling",
+    "authors": [
+      "Zhengyang Geng et al."
+    ],
+    "year": 2025,
+    "version": "2505.13447v1",
+    "role": "stage3_research_card",
+    "source": "https://arxiv.org/abs/2505.13447v1",
+    "download_url": "https://arxiv.org/pdf/2505.13447v1",
+    "retrieved": "2026-11-04",
+    "sha256": "322ba9244ad2c72382038e421fe0ffa92510c51d4f9c740bd7282b36bfc25206",
+    "bytes": 6192153,
+    "pages": 16,
+    "pdf_parse_verified": true
   }
 ]

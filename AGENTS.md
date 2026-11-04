@@ -4,11 +4,11 @@ MiniGen 是学习与实验项目。先阅读根目录项目任务清单、README
 
 ### **1. 用户与 Agent 的责任**
 
-用户亲手实现 DDPM、VAE、DiT、CFG、Flow 五个核心。Agent 提供接口、形状、数学说明、独立测试与错误定位，不主动完成核心主体，不用库或参考实现静默替代。DDPM 个人核心已完成并通过独立数学与 CPU 工程验收，见 reports/tasks/ddpm_review.md；VAE、DiT、CFG、Flow 仍抛出 `CoreImplementationRequired`，它是学习边界，不是需要绕过的 bug。
+用户亲手实现 DDPM、VAE、DiT、CFG、Flow 五个核心。Agent 提供接口、形状、数学说明、独立测试与错误定位，不主动完成核心主体，不用库或参考实现静默替代。DDPM 个人核心已完成并通过独立数学与 CPU 工程验收，见 reports/tasks/ddpm_review.md；VAE 两项个人函数已通过 S1 验收（见 reports/stage1/s1_acceptance_2026-10-30.md）；DiT、CFG、Flow 仍抛出 `CoreImplementationRequired`，它是学习边界，不是需要绕过的 bug。
 
 用户已授权第一周 DDPM、第二周 VAE，以及第三周 DiT Notebook 的完整教学参考。完整核心仅定义在对应笔记，教学训练显式传入对象或函数，记录为 notebook_reference。src 中的五项核心继续留给用户，禁止自动 fallback。教学实验、项目核心验收与用户理解验收分别记录。
 
-第四周沿用同一授权的教学参考：Notebook 显式提取第三周唯一 dit_reference 单元并登记源码哈希，噪声目标显式使用已验收的 src DDPM；不在 src 新增第二份 DiT 答案，也不替换个人 VAE/DiT 的待实现接口。
+第四周沿用同一授权的教学参考：Notebook 显式提取第三周唯一 dit_reference 单元并登记源码哈希，噪声目标显式使用已验收的 src DDPM；不在 src 新增第二份 DiT 答案，也不替换已完成的个人 VAE 或待实现的 DiT 接口。
 
 其余环境、数据工程、训练器、日志、Checkpoint、执行、图表、排错与文档由 Agent 主动完成。用户只需掌握原理、核心代码、整体数据流和研究判断；常规工程细节写入记录，避免反复把琐事转交用户。
 
@@ -60,7 +60,7 @@ S1-05 当前只验证单进程、确定数据访问的精确恢复，使用 Stat
 
 执行第三周 Notebook 时显式使用 `--html-output artifacts/runs/s2_week3/learning_preview.html`。图标按 configs/datasets/icons_week3.yaml 重建；已有版本先核验，配置变化使用新 dataset_id。测试集不用于重建选型。
 
-S2-02 本轮只登记冻结表示的教学验证，S1 的 VAE 个人前置仍待验收，DDPM 核心代码已验证。S2-03 仅冻结 256 张试点缓存，全量待做。S2-04 教学 DiT 在 Notebook，个人验收为 `uv run --locked python scripts/check_dit_core.py`，不替代 src 核心。固定时间与噪声拟合不是随机扩散训练，更不是生成结果。
+S2-02 本轮只登记冻结表示的教学验证，S1 的 VAE/DDPM 个人数学前置已验收，理解与材料收尾另验。S2-03 仅冻结 256 张试点缓存，全量待做。S2-04 教学 DiT 在 Notebook，个人验收为 `uv run --locked python scripts/check_dit_core.py`，不替代 src 核心。固定时间与噪声拟合不是随机扩散训练，更不是生成结果。
 
 ## **六、Python 类型、形状与接口文档规范**
 
@@ -96,3 +96,17 @@ Tensor 使用 jaxtyping 的 Float、Int、Bool 等。维度统一为 b（批量�
 用户仍在完成第二周作业。本轮保护第一、二周 Notebook、第二周图片、week1QA 和 docs/papers/ddpm 的现有改动；不执行 git add、commit 或 push，只交付建议提交名 `feat(s2): 添加第四周潜空间扩散训练与采样实验`。
 
 当前第四周真实结果：10000训练+1000验证缓存、100步固定拟合、1000步随机教学训练与完整采样已执行；生成规则解析失败6/8，未达到可用图标质量。恢复保护属于新 training.latent 包装层，原 train_denoiser 的限制仍保留。重跑使用 artifacts/runs/s2_week4/verified_v2 独立训练目录，代码身份变化时须创建新 run_id，不能删检查器或绕过身份拒绝。
+
+## **八、S3 执行约定与当前前置**
+
+S1 最新验收以 reports/stage1/s1_acceptance_2026-10-30.md 为准：DDPM 与 VAE 两项个人数学核心已验证；DiT、CFG、Flow 个人核心仍待做。前文与历史周报中的 VAE 待做描述是旧快照，不能据此恢复成未实现代码。S1 理解与材料收尾不自动完成。
+
+S3 入口为 docs/learning/S3_文本条件CFG与可信评测.ipynb，使用 notebook、latent、conditioning 三项 extra。资源显式准备入口 scripts/prepare_stage3_assets.py；导入、测试和 doctor 不下载。固定 CLIP 只保留文本 Safetensors 与 tokenizer，权重身份见 configs/models/clip_text.json。上游组合权重严格校验后提取文本，旧确定性 position_ids 先核验再移除，不能用 strict=False 忽略可训练参数。
+
+本次“输出同上”沿用完整教学参考授权：新增文本注意力、条件丢弃、CFG 与二维 Flow 参考仅在 S3 Notebook，显式复用 W3 唯一 DiT 核心单元并记录哈希。个人 TextCrossAttention、CFG、DiT、Flow 不自动 fallback。新增个人验收入口为 scripts/check_conditioning_core.py 和 scripts/check_cfg_core.py。
+
+CLIP 原始文本不得静默截断。本轮最多两段各 75 内容 token，加 BOS/EOS 后各 77 位置；每段局部上下文，跨段没有 CLIP 内部交流。mask True 为有效 token；空条件为同一网络编码的空文本。缓存、text_id、mask、分段、FP16 量化、丢弃回调实际代码与完整日程进入恢复身份。更改身份使用新 run_id，不删除检查或覆盖旧结果。
+
+预登记 configs/experiments/s3.yaml：两训练种子各最多 3000 步/360 秒，完整计算上限 30 分钟，不用付费资源。分别记录条件预测变化、噪声 MSE 与生成属性成功。请求评分不用隐藏绝对中心；所有解析失败保持分母。标准图/退化控制和 Agent 抽查不等于 100+100 人工审核，human=null 时正式评测仍待验收。
+
+测试只在条件收益、人工评测可靠性与个人核心门槛通过后打开。S4 主实验预登记为 configs/experiments/s4_preregistered.yaml；主要采样预算是每图分支等价 NFE，CFG>1 时两分支合批仍算双倍。二维 Flow、Sana 可行性说明与前沿研究卡不代表图像 Flow/LoRA 已实现。本轮只提交 S3 与必要验收状态同步，用户已修改的旧笔记、TinyVAE、问答移动保持不动。

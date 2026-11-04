@@ -38,3 +38,9 @@ DDPM 个人核心已完成，独立验收入口为 `uv run --locked python scrip
 先读懂“缓存与缩放 → 随机时间训练 → 分桶验证 → EMA/恢复 → 完整反向采样”的数据流，再自行实现 L03。你当前的第二周 VAE 作业继续按 L02 完成；本周不把教学分支的成功记作 VAE、DiT 或个人理解已通过。
 
 建议 Git 提交名为 `feat(s2): 添加第四周潜空间扩散训练与采样实验`；本轮不执行暂存、提交或推送，待你完成作业后自行整理范围。
+
+## **六、S3 接手任务**
+
+先通过 L03，再打开 [L04 文本条件与 CFG](L04_文本条件与CFG核心任务.md)。完整教材与实验统一放 [S3 Notebook](../docs/learning/S3_文本条件CFG与可信评测.ipynb)。Agent 已准备冻结文本缓存、工程与独立测试；你的重点是注意力、mask、CFG、整体数据流和研究结论。
+
+个人命令：`uv run --locked python scripts/check_conditioning_core.py`、`uv run --locked python scripts/check_cfg_core.py`。未实现返回待做和退出码 2，不会走教学参考。S1 的 VAE 已通过代码验收，理解与材料收尾分别记录。

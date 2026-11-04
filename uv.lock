@@ -1159,6 +1159,10 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+conditioning = [
+    { name = "safetensors" },
+    { name = "transformers" },
+]
 generation = [
     { name = "accelerate" },
     { name = "datasets" },
@@ -1210,14 +1214,16 @@ requires-dist = [
     { name = "pillow", specifier = ">=11,<13" },
     { name = "pypdf", marker = "extra == 'latent'", specifier = ">=5,<7" },
     { name = "pyyaml", specifier = ">=6,<7" },
+    { name = "safetensors", marker = "extra == 'conditioning'", specifier = ">=0.5,<1" },
     { name = "safetensors", marker = "extra == 'generation'", specifier = ">=0.5,<1" },
     { name = "safetensors", marker = "extra == 'latent'", specifier = ">=0.5,<1" },
     { name = "torch", specifier = ">=2.7,<3" },
     { name = "torchvision", specifier = ">=0.22,<1" },
     { name = "tqdm", specifier = ">=4.67,<5" },
+    { name = "transformers", marker = "extra == 'conditioning'", specifier = ">=4.51,<6" },
     { name = "transformers", marker = "extra == 'generation'", specifier = ">=4.51,<6" },
 ]
-provides-extras = ["latent", "generation", "notebook"]
+provides-extras = ["conditioning", "latent", "generation", "notebook"]
 
 [package.metadata.requires-dev]
 dev = [

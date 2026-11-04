@@ -1,0 +1,197 @@
+{
+  "date": "2026-11-05",
+  "notebook": {
+    "cells": 74,
+    "code_cells": 19,
+    "execution_counts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "nbformat_valid": true,
+    "code_compiles": true,
+    "unhandled_errors": 0,
+    "code_source_sha256": "4261a441eeb8e389ea277bb5b5e0d7c3e7fbf8c6a860b2dc4a2b54ed142e23e9",
+    "final_edits": "Markdown math correction, complete validation figures and review instructions only; code/outputs unchanged"
+  },
+  "math_review": [
+    "Cross-Attention hand example and independent Torch SDPA",
+    "CFG s=1+w; extrapolation and gradients",
+    "full DDPM / eta=0 DDIM clean endpoint",
+    "CFM conditional expectation and Gaussian velocity; Euler convergence"
+  ],
+  "browser": {
+    "MathJax_nodes": 99,
+    "math_errors": 0,
+    "images_loaded": 8,
+    "images_total": 8,
+    "visual_scope": [
+      "overview and tables",
+      "CFG derivation",
+      "Gaussian Flow derivation"
+    ],
+    "limitation": "spot checks, not full page pixel review"
+  },
+  "pytest": {
+    "passed": 104,
+    "failed": 0,
+    "command": "uv run --locked --extra notebook --extra latent --extra conditioning pytest",
+    "evidence_log": "local execution; no downloads"
+  },
+  "annotation": {
+    "files": 57,
+    "functions": 236,
+    "classes": 28,
+    "issues": [],
+    "scope": "类型/条件式文档结构；异常与副作用仍需人工核对"
+  },
+  "ruff": {
+    "changed_scope": "passed; 14 Python/Notebook files",
+    "global_issue_count": 7,
+    "global_issues": [
+      {
+        "file": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "code": "E501",
+        "line": 94
+      },
+      {
+        "file": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "code": "F811",
+        "line": 8
+      },
+      {
+        "file": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "code": "I001",
+        "line": 1
+      },
+      {
+        "file": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "code": "E501",
+        "line": 2
+      },
+      {
+        "file": "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb",
+        "code": "E501",
+        "line": 14
+      },
+      {
+        "file": "docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb",
+        "code": "E501",
+        "line": 34
+      },
+      {
+        "file": "src/minigen/models/tiny_vae.py",
+        "code": "E501",
+        "line": 125
+      }
+    ],
+    "global_format": "6 existing user/older files would be reformatted; preserved"
+  },
+  "doctor_cpu": {
+    "python": "3.12.14",
+    "packages": {
+      "minigen": {
+        "version": "0.1.0",
+        "status": "passed"
+      },
+      "torch": {
+        "version": "2.14.1",
+        "status": "passed"
+      },
+      "torchvision": {
+        "version": "0.29.1",
+        "status": "passed"
+      },
+      "numpy": {
+        "version": "2.5.4",
+        "status": "passed"
+      },
+      "pillow": {
+        "version": "12.3.0",
+        "status": "passed"
+      },
+      "pyyaml": {
+        "version": "6.0.3",
+        "status": "passed"
+      },
+      "matplotlib": {
+        "version": "3.11.2",
+        "status": "passed"
+      },
+      "tqdm": {
+        "version": "4.70.1",
+        "status": "passed"
+      }
+    },
+    "devices": {
+      "cpu": {
+        "status": "passed",
+        "loss": 28021.77734375,
+        "shape": [
+          3,
+          4
+        ]
+      },
+      "mps": {
+        "status": "unavailable"
+      },
+      "cuda": {
+        "status": "unavailable"
+      }
+    },
+    "ok": true
+  },
+  "optional_base_imports": "passed with transformers/diffusers/cv2/nbformat intentionally blocked",
+  "personal_core": {
+    "DDPM": "CPU mathematics passed",
+    "VAE": "CPU scalar/KL/gradcheck passed; execution AST unchanged",
+    "DiT": "pending",
+    "TextCrossAttention": "pending, exit 2",
+    "CFG": "pending, exit 2",
+    "Flow": "pending"
+  },
+  "holdout_gate": {
+    "exit_code": 2,
+    "test_opened": false,
+    "reason": "Need 100 reviewed originals and 100 generated/degraded images"
+  },
+  "review": {
+    "anonymous_rows": 344,
+    "human_labels_filled": 0,
+    "public_parser_or_condition_exposed": false,
+    "existing_labels_preserved_on_reprepare": "tested"
+  },
+  "protection": {
+    "baseline_files": 8,
+    "changed": [],
+    "all_relative_links_exist": 149,
+    "VAE_math_AST_unchanged": true
+  },
+  "resources": {
+    "final_run_compute_seconds": 443.19688362511806,
+    "first_complete_run_compute_seconds": 490.78843329194933,
+    "interrupted_v2_training_steps": 296,
+    "interrupted_v2_training_seconds": 20.34389662509784,
+    "tracked_subtotal_seconds": 954.3292135421652,
+    "extra_preflight_and_CPU_checks": "additional short checks, bounded; not a precise full-session duration",
+    "paid_cost_cny": 0,
+    "full_Sana_downloaded": false
+  },
+  "stage3_complete": false
+}

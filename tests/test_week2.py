@@ -11,7 +11,6 @@ from jaxtyping import Float, Int
 from torch import Tensor, nn
 from torch.utils.data import TensorDataset
 
-from minigen._learning import CoreImplementationRequired
 from minigen._typing import JsonDict, KLFn, ReparameterizeFn
 from minigen.autoencoders import vae_core
 from minigen.data.stateful import StatefulBatchStream
@@ -70,17 +69,22 @@ def test_reference_math_gradients_and_reduction(
         reparam(mean, logvar, noise[:, :1])
 
 
-def test_project_core_still_explicitly_pending() -> None:
-    """验证个人 VAE 核心仍明确待实现，不读取教学答案。
+def test_project_core_matches_independent_gaussian_contract() -> None:
+    """复验已完成的个人 VAE，与独立高斯分布对照而不读取教学答案。
 
     Raises:
         AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
     """
-    values = torch.zeros(2, 3)
-    with pytest.raises(CoreImplementationRequired):
-        vae_core.reparameterize(values, values, values)
-    with pytest.raises(CoreImplementationRequired):
-        vae_core.kl_standard_normal(values, values)
+    mean = torch.tensor([[1.0, -0.5], [0.2, 2.0]], dtype=torch.float64, requires_grad=True)
+    logvar = torch.tensor([[1.0, 0.0], [-0.5, 0.5]], dtype=torch.float64, requires_grad=True)
+    noise = torch.tensor([[0.5, -0.5], [1.0, 0.0]], dtype=torch.float64)
+    q = torch.distributions.Normal(mean, (logvar / 2).exp())
+    p = torch.distributions.Normal(torch.zeros_like(mean), torch.ones_like(mean))
+    expected = torch.distributions.kl_divergence(q, p).sum(-1).mean()
+    torch.testing.assert_close(vae_core.reparameterize(mean, logvar, noise), mean + q.scale * noise)
+    torch.testing.assert_close(vae_core.kl_standard_normal(mean, logvar), expected)
+    assert torch.autograd.gradcheck(vae_core.reparameterize, (mean, logvar, noise))
+    assert torch.autograd.gradcheck(vae_core.kl_standard_normal, (mean, logvar))
 
 
 def test_data_stream_short_batch_epoch_and_recovery() -> None:

@@ -1,0 +1,79 @@
+[
+  {
+    "version": "2006.11239v2",
+    "pages": 25,
+    "sha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+    "bytes": 10267274,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "1312.6114v11",
+    "pages": 14,
+    "sha256": "bdcb63b79ed88f64f8ee2d43a721930d01dde5441a4dba20ecaa2342b34e017c",
+    "bytes": 3926758,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2112.10752v2",
+    "pages": 45,
+    "sha256": "46ede043a8dc07ca1f0f445620523fe1ad8b2436bd83856a3835612a47e9f79e",
+    "bytes": 40842586,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2212.09748v2",
+    "pages": 25,
+    "sha256": "5fbb0ec35e3ae76826240171ca63ed4c27de6cb43180367453019e9d28a8b076",
+    "bytes": 43824062,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2010.02502v4",
+    "pages": 22,
+    "sha256": "07cb8796d7c100bf7c02bc575f16aab72c32630a8f85abd54ad45dc4f63e80fb",
+    "bytes": 10857218,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2207.12598v1",
+    "pages": 14,
+    "sha256": "ccbdf2da65903ed579d35240165aba2d0e9ad6f015ade81af6e30823eb0a7f24",
+    "bytes": 3773509,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2103.00020v1",
+    "pages": 48,
+    "sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+    "bytes": 6813639,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2210.02747v2",
+    "pages": 28,
+    "sha256": "5eeb39ba516396924aba4787452f9d0abdee88467a4d0c264d9f66cad0c5ee14",
+    "bytes": 25147129,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2410.06940v4",
+    "pages": 43,
+    "sha256": "cc5be5a56cc9bbc9cdf3f1e4299af894f3e1548e36838863b405e98cd4382806",
+    "bytes": 34940112,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2510.11690v1",
+    "pages": 31,
+    "sha256": "01767e61be3ee4503275e69babc1fcae77eec9dd86356bc824c168751a013590",
+    "bytes": 16469799,
+    "all_pages_parsed": true
+  },
+  {
+    "version": "2505.13447v1",
+    "pages": 16,
+    "sha256": "322ba9244ad2c72382038e421fe0ffa92510c51d4f9c740bd7282b36bfc25206",
+    "bytes": 6192153,
+    "all_pages_parsed": true
+  }
+]

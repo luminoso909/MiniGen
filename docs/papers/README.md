@@ -74,3 +74,18 @@ DiT 阅读卡：问题是能否让 Transformer 成为可扩展的扩散主干；
 **限制**：确定性指固定模型与初始噪声后没有新的随机采样项，不表示所有随机种子输出相同，也不证明少步质量一定足够。改变求值次数、时间子序列和更新配方时，都应记录实际设置。
 
 **与 MiniGen 的联系**：第四周先建立可复查的潜空间训练与完整反向链，本周不实现或运行 DDIM 采样。DDIM 留作理解采样成本与后续少步实验的入口；后续是否实现、是否运行、最终样本是否完成反向链，须以对应实验记录为准。
+
+## **五、S3 核心论文与阅读顺序**
+
+本轮复核 DDPM、VAE、LDM、DiT、DDIM 的既有哈希，未重复下载第一周论文；新增六篇固定版本 PDF。完整身份、页数、体积与 SHA-256 已登记 manifest。下面三篇主读与三篇研究卡分开，控制阅读负担。
+
+| 优先级 | 论文 | 读哪里、回答什么 | 对应项目 |
+| --- | --- | --- | --- |
+| 必读 | [CFG v1](CFG_Classifier_Free_Diffusion_Guidance_2207.12598v1.pdf) | 条件/无条件联合训练、组合式和算法；为什么本项目 scale=1 对应论文 w=0？ | S3 Notebook `cfg_reference`、L04、采样分支计数 |
+| 定点读 | [CLIP v1](CLIP_Learning_Transferable_Visual_Models_2103.00020v1.pdf) | 第 2 节与训练图；对比学习优化什么，为何 pooled 相似度不等于属性真值？ | FrozenTextEncoder、token/mask、77 长度约定 |
+| 必读预研 | [Flow Matching v2](Flow_Matching_for_Generative_Modeling_2210.02747v2.pdf) | 条件路径与边际场、条件回归目标、Gaussian 路径；独立端点线性插值为何不是求解全局 OT？ | S3 `flow_reference` 二维例子；S4 图像目标尚待做 |
+| 一页卡 | [REPA v4](REPA_Representation_Alignment_for_Generation_2410.06940v4.pdf) | 方法、表示分析与生成消融；教师监督哪一层，何时可能忽略图标细节？ | [研究卡](../../reports/research/s3_research_cards.md) |
+| 一页卡 | [RAE v1](RAE_Diffusion_Transformers_with_Representation_Autoencoders_2510.11690v1.pdf) | 第 3–4 节、表 1/2；为什么高维表示不能直接沿用 VAE 配方？ | 表示瓶颈扩展入口，本期不替换 |
+| 一页卡 | [MeanFlow v1](MeanFlow_Mean_Flows_for_One_step_Generative_Modeling_2505.13447v1.pdf) | 平均速度定义、与瞬时速度的关系、训练算法；为何 Euler 一步不等于 MeanFlow？ | 少步生成扩展入口，本期不训练 |
+
+复习顺序：DDPM 的噪声参数化 → LDM 第 3.3 节条件注入 → DiT 时间/门控 → CFG → DDIM 跨步更新 → Flow 二维。论文中的实验数字不写成本项目实测；Notebook 的两种子短训与高斯玩具结果各自保留范围。

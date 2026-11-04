@@ -8,7 +8,7 @@ import pytest
 import torch
 
 from minigen._learning import CoreImplementationRequired
-from minigen.autoencoders.vae_core import kl_standard_normal, reparameterize
+from minigen.conditioning.cross_attention import TextCrossAttention
 from minigen.doctor import diagnose
 from minigen.models.dit_block import DiTBlock, patchify, unpatchify
 from minigen.objectives.flow_objective import euler_step, linear_path, velocity_loss
@@ -109,7 +109,7 @@ def test_requested_unavailable_device_is_failure() -> None:
 
 
 def test_remaining_core_interfaces_never_silently_fall_back() -> None:
-    """验证 DDPM 之外的四类个人核心仍抛出待实现异常。
+    """验证 DiT、CFG、Flow 个人核心仍明确待做，DDPM/VAE 已独立验收。
 
     Raises:
         AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
@@ -118,11 +118,10 @@ def test_remaining_core_interfaces_never_silently_fall_back() -> None:
     t = torch.zeros(2, dtype=torch.long)
     # 每个 lambda 的契约为 Callable[[], object]；预期调用都以待实现异常终止。
     calls = [
-        lambda: reparameterize(x, x, x),
-        lambda: kl_standard_normal(x, x),
         lambda: patchify(x, 2),
         lambda: unpatchify(x, 4, 4, 4, 2),
         lambda: DiTBlock()(x, x),
+        lambda: TextCrossAttention()(x, x, torch.ones(2, 4, dtype=torch.bool)),
         lambda: classifier_free_guidance(x, x, 1.0),
         lambda: linear_path(x, x, t.float()),
         lambda: velocity_loss(x, x),

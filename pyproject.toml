@@ -20,6 +20,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+conditioning = [
+  "transformers>=4.51,<6",
+  "safetensors>=0.5,<1",
+]
 latent = [
   "diffusers>=0.33,<1",
   "huggingface-hub>=0.30,<2",
@@ -86,3 +90,8 @@ select = ["E", "F", "I", "UP", "B"]
 "src/minigen/data/latent.py" = ["F722"]
 "src/minigen/training/latent.py" = ["F722"]
 "tests/test_week4_engineering.py" = ["F722"]
+"src/minigen/conditioning/text.py" = ["F722"]
+"src/minigen/conditioning/cross_attention.py" = ["F722"]
+"src/minigen/training/conditional.py" = ["F722"]
+"src/minigen/samplers/conditional.py" = ["F722"]
+"tests/test_stage3.py" = ["F722"]
