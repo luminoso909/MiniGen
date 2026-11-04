@@ -30,6 +30,21 @@
     "code_source_sha256": "4261a441eeb8e389ea277bb5b5e0d7c3e7fbf8c6a860b2dc4a2b54ed142e23e9",
     "final_edits": "Markdown math correction, complete validation figures and review instructions only; code/outputs unchanged"
   },
+  "resource_recovery": {
+    "date": "2026-11-05",
+    "method": "real cold project root, only committed lock copied; no model/tokenizer files present initially",
+    "repo_id": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "official_upstream_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+    "frozen_lock_unchanged": true,
+    "files_rebuilt_and_verified": 7,
+    "resume_elapsed_seconds": 11.700831125024706,
+    "elapsed_wall_seconds_including_network_retry": 494.5284974575043,
+    "retry_note": "Large official weight already downloaded during the same cold acquisition; small-file retry switched to bounded system curl. No production component files copied.",
+    "training_started": false,
+    "paid_cost_cny": 0,
+    "scope": "real official download, strict text extraction, staged conversion, immutable expected hashes; not a fixture"
+  },
   "math_review": [
     "Cross-Attention hand example and independent Torch SDPA",
     "CFG s=1+w; extrapolation and gradients",
@@ -44,19 +59,21 @@
     "visual_scope": [
       "overview and tables",
       "CFG derivation",
-      "Gaussian Flow derivation"
+      "Gaussian Flow derivation",
+      "final CLIP direction and distinct DDIM index"
     ],
     "limitation": "spot checks, not full page pixel review"
   },
   "pytest": {
-    "passed": 104,
+    "passed": 107,
     "failed": 0,
     "command": "uv run --locked --extra notebook --extra latent --extra conditioning pytest",
-    "evidence_log": "local execution; no downloads"
+    "evidence_log": "local execution; no downloads",
+    "elapsed_seconds": 18.96
   },
   "annotation": {
     "files": 57,
-    "functions": 236,
+    "functions": 243,
     "classes": 28,
     "issues": [],
     "scope": "类型/条件式文档结构；异常与副作用仍需人工核对"
@@ -180,7 +197,7 @@
   "protection": {
     "baseline_files": 8,
     "changed": [],
-    "all_relative_links_exist": 149,
+    "all_relative_links_exist": 150,
     "VAE_math_AST_unchanged": true
   },
   "resources": {

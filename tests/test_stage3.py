@@ -2,7 +2,7 @@
 
 import json
 from pathlib import Path
-from types import SimpleNamespace
+from types import ModuleType, SimpleNamespace
 from typing import Any
 
 import pytest
@@ -651,3 +651,195 @@ def test_blind_review_rejects_request_and_image_changes(
     path.write_text(json.dumps(row) + "\n")
     with pytest.raises(ValueError, match="identity changed"):
         merge_human_review(path, tmp_path / "review_key.json")
+
+
+@pytest.fixture
+def assets_module(
+    monkeypatch: pytest.MonkeyPatch,
+) -> "ModuleType":
+    """加载显式准备脚本的定义，测试不访问远程资源。
+
+    Args:
+        monkeypatch: pytest 路径/函数替换工具。
+
+    Raises:
+        ImportError: 脚本缺必需依赖时透传；pypdf 未安装则该组跳过。
+
+    Results:
+        ModuleType: 独立脚本模块，ROOT 和网络函数由具体测试替换。
+
+    副作用:
+        临时增加 scripts 的导入路径，加载脚本定义。
+    """
+    import importlib.util
+
+    pytest.importorskip("pypdf")
+    monkeypatch.syspath_prepend(str(Path("scripts").resolve()))
+    spec = importlib.util.spec_from_file_location(
+        "s3_assets_check", "scripts/prepare_stage3_assets.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def write_asset_lock(
+    module: "ModuleType",
+    root: Path,
+    payloads: dict[str, bytes],
+) -> Path:
+    """写固定身份的临时测试版本，模拟 Git 带来身份但没有忽略目录。
+
+    Args:
+        module: 提供 repo/revision/upstream 常量的脚本模块。
+        root: 独立临时项目根。
+        payloads: 期望文件的内容，函数只登记哈希、不创建这些文件。
+
+    Results:
+        Path: 已写入的模型身份文件。
+
+    副作用:
+        在临时目录写 configs/models/clip_text.json。
+    """
+    import hashlib
+
+    lock = root / "configs/models/clip_text.json"
+    lock.parent.mkdir(parents=True)
+    lock.write_text(
+        json.dumps(
+            {
+                "repo_id": module.REPO,
+                "revision": module.REVISION,
+                "upstream_sha256": module.UPSTREAM_HASH,
+                "local_path": f"artifacts/models/clip_text/{module.REVISION}",
+                "files": {
+                    name: {"sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}
+                    for name, data in payloads.items()
+                },
+            }
+        )
+    )
+    return lock
+
+
+def test_asset_lock_restores_missing_tokenizer_without_weights(
+    assets_module: "ModuleType",
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """已有 lock 的缺失小文件应按固定版本恢复，而非 FileNotFound 或整份权重重下。
+
+    Args:
+        assets_module: 独立资源脚本。
+        tmp_path: 临时项目路径。
+        monkeypatch: 替换 ROOT 与下载函数。
+
+    Raises:
+        AssertionError: 资源或冻结身份不符；测试网络由本地替身阻断。
+
+    副作用:
+        写临时身份和小型假 tokenizer 文件，不下载真实资源。
+    """
+    payloads = {"tokenizer.json": b'{"fixture": true}'}
+    lock = write_asset_lock(assets_module, tmp_path, payloads)
+    before = lock.read_bytes()
+    monkeypatch.setattr(assets_module, "ROOT", tmp_path)
+    calls = []
+
+    def fetch_fixture(
+        url: str,
+        path: Path,
+    ) -> None:
+        """用本地固定内容代替网络下载。
+
+        Args:
+            url: 固定公开资源 URL，用于验证 revision。
+            path: 临时目标路径。
+
+        副作用:
+            记录调用并写入测试字节。
+        """
+        calls.append(url)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payloads[path.name])
+
+    monkeypatch.setattr(assets_module, "fetch_resource", fetch_fixture)
+    assets_module.text_model()
+    assert lock.read_bytes() == before and len(calls) == 1
+    assert assets_module.REVISION in calls[0] and calls[0].endswith("tokenizer.json")
+
+
+def test_asset_lock_with_absent_converted_weights_enters_download(
+    assets_module: "ModuleType",
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """新克隆有 lock 无权重时走显式上游下载；不直接对缺失文件计算哈希。
+
+    Args:
+        assets_module: 资源脚本。
+        tmp_path: 临时项目根。
+        monkeypatch: 替换路径和下载。
+
+    Raises:
+        AssertionError: 未进入固定资源下载，或冻结身份被改写。
+
+    副作用:
+        建立临时配置；显式下载在本地替身入口被终止，不访问网络。
+    """
+    pytest.importorskip("transformers")
+    lock = write_asset_lock(assets_module, tmp_path, {"config.json": b"fixture"})
+    before = lock.read_bytes()
+    monkeypatch.setattr(assets_module, "ROOT", tmp_path)
+
+    def stop_download(
+        url: str,
+        path: Path,
+    ) -> None:
+        """确认公开固定权重入口后阻断测试下载。
+
+        Args:
+            url: 需要包含固定 revision 的 URL。
+            path: 临时 upstream.bin 路径。
+
+        Raises:
+            AssertionError: 不是预期权重入口。
+            RuntimeError: 测试主动阻断下载，证明已到达正确分支。
+        """
+        assert assets_module.REVISION in url and url.endswith("pytorch_model.bin")
+        assert path.name == "upstream.bin"
+        raise RuntimeError("expected explicit upstream retrieval")
+
+    monkeypatch.setattr(assets_module, "fetch", stop_download)
+    with pytest.raises(RuntimeError, match="expected explicit upstream retrieval"):
+        assets_module.text_model()
+    assert lock.read_bytes() == before
+
+
+def test_asset_lock_rejects_present_corruption(
+    assets_module: "ModuleType",
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """已存在但哈希错误的文件应拒绝，不能把错误内容重新登记为期望值。
+
+    Args:
+        assets_module: 独立准备脚本。
+        tmp_path: 临时根目录。
+        monkeypatch: 修改 ROOT。
+
+    Raises:
+        AssertionError: 损坏未被拒绝或 lock 被覆盖。
+
+    副作用:
+        写临时损坏文件，不下载任何内容。
+    """
+    lock = write_asset_lock(assets_module, tmp_path, {"tokenizer.json": b"expected"})
+    before = lock.read_bytes()
+    folder = tmp_path / f"artifacts/models/clip_text/{assets_module.REVISION}"
+    folder.mkdir(parents=True)
+    (folder / "tokenizer.json").write_bytes(b"broken")
+    monkeypatch.setattr(assets_module, "ROOT", tmp_path)
+    with pytest.raises(ValueError, match="file mismatch"):
+        assets_module.text_model()
+    assert lock.read_bytes() == before

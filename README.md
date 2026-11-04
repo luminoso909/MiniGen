@@ -149,4 +149,6 @@ uv run --locked python scripts/check_conditioning_core.py
 uv run --locked python scripts/check_cfg_core.py
 ```
 
-显式资源准备补齐论文和 CLIP 文本组件；Notebook 使用本地缓存与免费有界实验，未下载完整 Sana。Notebook 的 19 代码单元执行通过，完整 pytest 104 项通过。全局 Ruff/格式仍有用户 TinyVAE 与旧笔记的原有问题，保留未改。个人核心和教学代码来源分开，没有自动 fallback。新增六篇 PDF 与第一周等已有五篇的复核记录见 [论文导航](docs/papers/README.md)。
+显式资源准备补齐论文和 CLIP 文本组件；Notebook 使用本地缓存与免费有界实验，未下载完整 Sana。Notebook 的 19 代码单元执行通过，完整 pytest 107 项通过。全局 Ruff/格式仍有用户 TinyVAE 与旧笔记的原有问题，保留未改。个人核心和教学代码来源分开，没有自动 fallback。新增六篇 PDF 与第一周等已有五篇的复核记录见 [论文导航](docs/papers/README.md)。
+
+显式资源准备支持新环境缺失组件的固定身份重建，已有哈希不重写；真实冷启动 7 文件复验通过。小文件优先使用已有系统 curl，否则使用 Python 下载。

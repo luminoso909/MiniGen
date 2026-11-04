@@ -2,6 +2,8 @@
 
 import argparse
 import json
+import shutil
+import subprocess
 import urllib.error
 from pathlib import Path
 
@@ -78,18 +80,51 @@ def fetch_resource(
 
     Raises:
         URLError/OSError: 三次仍失败时透传最后错误。
+        CalledProcessError/TimeoutExpired: 系统 curl 下载失败或超时时透传。
 
     副作用:
         必要时访问公开网络并保存文件。
     """
     if path.exists():
         return
+    path.parent.mkdir(parents=True, exist_ok=True)
     for attempt in range(3):
         try:
             # Git 文本文件使用官方 raw 地址，避开 resolve-cache 重定向的连接故障。
-            fetch(url.replace("/resolve/", "/raw/"), path)
+            raw_url = url.replace("/resolve/", "/raw/")
+            curl = shutil.which("curl")
+            if curl:
+                # 系统 curl 的连接超时/地址回退更稳定；无此工具的平台保留 Python 路径。
+                temporary = path.with_suffix(path.suffix + ".partial")
+                subprocess.run(
+                    [
+                        curl,
+                        "--fail",
+                        "--location",
+                        "--silent",
+                        "--show-error",
+                        "--connect-timeout",
+                        "10",
+                        "--max-time",
+                        "45",
+                        "--output",
+                        str(temporary),
+                        raw_url,
+                    ],
+                    check=True,
+                    capture_output=True,
+                    timeout=60,
+                )
+                temporary.replace(path)
+            else:
+                fetch(raw_url, path)
             return
-        except (urllib.error.URLError, OSError):
+        except (
+            urllib.error.URLError,
+            OSError,
+            subprocess.CalledProcessError,
+            subprocess.TimeoutExpired,
+        ):
             if attempt == 2:
                 raise
 
@@ -155,16 +190,40 @@ def text_model() -> None:
         下载约 605 MB 上游组合权重并暂存；校验后只保留约 254 MB 文本组件。
         创建本地模型与固定身份文件；不加载视觉网络，不下载图像生成主干。
     """
+    lock_path = ROOT / "configs/models/clip_text.json"
+    expected = None
+    if lock_path.exists():
+        expected = json.loads(lock_path.read_text())
+        if (
+            expected["repo_id"] != REPO
+            or expected["revision"] != REVISION
+            or expected["upstream_sha256"] != UPSTREAM_HASH
+            or expected["local_path"] != f"artifacts/models/clip_text/{REVISION}"
+        ):
+            raise ValueError("Frozen CLIP repository/revision changed")
+        directory = ROOT / expected["local_path"]
+        missing = []
+        for name, info in expected["files"].items():
+            if not (directory / name).exists():
+                missing.append(name)
+            elif sha256(directory / name) != info["sha256"]:
+                raise ValueError(f"Frozen CLIP file mismatch: {name}")
+        if not missing:
+            print("Reused verified frozen CLIP text component", flush=True)
+            return
+        if not set(missing) & {"config.json", "model.safetensors"}:
+            # 缺少原始 tokenizer 小文件时不重下整份组合权重。
+            for name in missing:
+                fetch_resource(
+                    f"https://huggingface.co/{REPO}/resolve/{REVISION}/{name}", directory / name
+                )
+                if sha256(directory / name) != expected["files"][name]["sha256"]:
+                    raise ValueError(f"Restored tokenizer hash mismatch: {name}")
+            print("Restored verified tokenizer files without rebuilding weights", flush=True)
+            return
     from transformers import CLIPConfig, CLIPTextModel
 
-    lock_path = ROOT / "configs/models/clip_text.json"
-    if lock_path.exists():
-        identity = json.loads(lock_path.read_text())
-        for name, info in identity["files"].items():
-            if sha256(ROOT / identity["local_path"] / name) != info["sha256"]:
-                raise ValueError(f"Frozen CLIP file mismatch: {name}")
-        print("Reused verified frozen CLIP text component", flush=True)
-        return
+    # 新克隆也有已提交的 lock，必须继续走下载/转换，再验证已有身份，不能重写期望哈希。
     directory = ROOT / "artifacts/models/clip_text" / REVISION
     directory.mkdir(parents=True, exist_ok=True)
     raw = directory / "upstream.bin"
@@ -188,7 +247,8 @@ def text_model() -> None:
                 raise ValueError("Unexpected legacy CLIP position_ids")
             del text_state[key]
     model.load_state_dict(text_state, strict=True)
-    model.save_pretrained(directory, safe_serialization=True)
+    converted = directory / ".converted"
+    model.save_pretrained(converted, safe_serialization=True)
     names = ["config.json", "model.safetensors"]
     for name in [
         "merges.txt",
@@ -212,11 +272,32 @@ def text_model() -> None:
         ),
         "local_path": directory.relative_to(ROOT).as_posix(),
         "files": {
-            name: {"sha256": sha256(directory / name), "bytes": (directory / name).stat().st_size}
+            name: {
+                "sha256": sha256(
+                    (converted if name in {"config.json", "model.safetensors"} else directory)
+                    / name
+                ),
+                "bytes": (
+                    (converted if name in {"config.json", "model.safetensors"} else directory)
+                    / name
+                )
+                .stat()
+                .st_size,
+            }
             for name in names
         },
     }
-    lock_path.write_text(json.dumps(identity, indent=2) + "\n")
+    if expected:
+        if identity["files"] != expected["files"]:
+            raise ValueError("Rebuilt CLIP component differs from the frozen file identity")
+        identity = expected
+    # 转换结果先独立写入并对照已提交身份，成功后才替换组件，避免失败时覆盖已有正确权重。
+    for name in ("config.json", "model.safetensors"):
+        (converted / name).replace(directory / name)
+    converted.rmdir()
+    if expected is None:
+        lock_path.parent.mkdir(parents=True, exist_ok=True)
+        lock_path.write_text(json.dumps(identity, indent=2) + "\n")
     raw.unlink()
     original_config.unlink()
     print(json.dumps(identity), flush=True)
