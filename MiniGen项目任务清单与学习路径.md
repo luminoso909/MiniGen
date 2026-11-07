@@ -8,8 +8,8 @@
 | --- | --- | --- |
 | P0 仓库审计与迁移 | 当前文件与代码映射，五份 Notebook 哈希，基础检查，统一文档入口 | 已完成，见 [审计](reports/v2/00_repository_audit.md)、[迁移差异](reports/v2/00_migration_diff.md)、[交接](reports/v2/00_handoff.md) |
 | P1 数据接入与审计 | ArtBench 全量 46,298 张，固定来源、逐图解码、组级切分与图文复核 | 全量接入、Caption 清洗与 240 张图文抽查完成。见 [P0/P1 交付](reports/v2/01_p0_p1_delivery.md) |
-| P2 冻结组件 | 随机 200 张重建、人审，CLIP 单段特征与 mask，冻结版本化缓存 | [P2 工程交付](reports/v2/02_p2_delivery.md)：200 张数值审计、CLIP 与缓存试点完成；待用户审核及正式构建 |
-| P3 B0 工程 | 共用 Flow 契约和 B0，真实 CLI，短跑、采样、恢复与成本估算 | 待做，依赖数据、组件和缓存验收 |
+| P2 冻结组件 | 随机 200 张重建、人审，CLIP 单段特征与 mask，固定 20 张本机验收，冻结版本化缓存 | 已完成，见 [P2 工程交付](reports/v2/02_p2_delivery.md)。train 37,042 行、validation 4,637 行均通过 [独立回读](reports/v2/components/artbench_cache_formal.json) |
+| P3 B0 工程 | 共用 Flow 契约和 B0，真实 CLI，短跑、采样、恢复与成本估算 | 停在 P3-01 入口，未启动 |
 | P4 三主干正式训练 | 先审批并训练 B0，随后加入 B1/B2，统一数据、条件、目标与协议 | 待做，依赖对应核心、短跑、质量及预算验收 |
 | P5 MiniGen-Bench | 训练前冻结测试设计，按同更新步数和同算力报告，匹配 NFE 对照采样 | 待做。预登记提前，正式评测依赖可比检查点 |
 | P6 可选扩展 | 第二种子、单一架构的 10M/50M 扩展或 Chimera-Lite | 默认跳过，由用户在主结果明确后决定 |

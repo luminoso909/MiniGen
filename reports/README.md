@@ -6,6 +6,7 @@
 | [P0 迁移差异](v2/00_migration_diff.md) | 新旧正式范围、文件导航和后续迁移顺序 |
 | [P1 ArtBench 审计](v2/data/artbench_audit.md) | 全量解码、数据划分、Caption 清洗及配对抽查 |
 | [P0/P1 交付](v2/01_p0_p1_delivery.md) | 数据切换、旧产物清理、版本冻结与 P2 门槛 |
+| [P2 工程验收](v2/02_p2_delivery.md) | VAE 用户批准、CLIP、固定 20 张本机检查与正式缓存状态 |
 | [当前交接](v2/00_handoff.md) | 阶段证据与下一项工作 |
 | [OpenClipart 历史记录](v2/archive/openclipart/p0_p1_delivery_openclipart.md) | 已下线的数据试跑摘要 |
 

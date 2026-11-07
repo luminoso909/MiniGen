@@ -1,8 +1,10 @@
 ## **一、当前交接**
 
-ArtBench Public Domain 256x256 冻结版 `v1` 含 46,298 张，train 37,042、validation 4,637、test 4,619。P2 已跑完 SDXL VAE 随机 200 张重建与 9 张诊断、CLIP 单段条件验收、256px 配对缓存试点。工程源码与学习源码已分离，旧 QwenVL 标注资产和可重建的 v1 数据缓存已清理。本轮在本机 CPU 执行；GPU 训练时间 0，云和 API 费用 0 元。
+ArtBench Public Domain 256x256 冻结版 `v1` 含 46,298 张，train 37,042、validation 4,637、test 4,619。P2 已完成 SDXL VAE 随机 200 张重建与 9 张诊断、CLIP 单段条件验收、256px 配对缓存试点。用户批准保留当前冻结 VAE；细密线条、文字和小物体的高频损失记为局限，不据此剔除样本。[用户批准](components/vae_user_approval.json) · [含 LPIPS 最差 20 张的审核证据](components/vae_review_evidence.json)
 
-**唯一下一任务：P2-02 用户视觉审核。** 对照边缘、细线、颜色、小物体和背景伪影；接受后才构建完整 train/validation 缓存。工程与试点已验证，完整缓存和 P3 尚未执行。代理建议保留 SDXL VAE；已发现细节软化与局部文字不可用。正式条件训练还有独立的 Caption 噪声决策（P1 的 240 对中 71 条明确错误）。[P2 工程验收](02_p2_delivery.md) · [重建报告](components/vae_reconstruction_200.md) · [P0/P1 交付](01_p0_p1_delivery.md) · [待办清单](../../待办清单.md)
+**P2 已验收。** 固定 20 张的本机 CPU FP32 对照通过；VAE 和 CLIP 均使用 MPS FP32 构建正式缓存。train 37,042 行、validation 4,637 行全部通过独立回读；test 的 4,619 张保持封存。本地缓存位于 `artifacts/cache/artbench_pd_256/v1_formal`，缓存数组未入 Git。[P2 工程验收](02_p2_delivery.md) · [正式缓存回执](components/artbench_cache_formal.json) · [本机固定 20 张回执](components/artbench_local_fp32_20.json) · [P0/P1 交付](01_p0_p1_delivery.md)
+
+**停在 P3 入口。** 下一任务为 P3-01：统一 `Condition`、VAE 包装、`FlowObjective`、Euler Sampler 和 CFG 契约。P3、模型训练和 CUDA 运行均未开始。正式条件训练前仍需决定如何处理 Caption 噪声（P1 的 240 对中有 71 条明确事实错误）。[重构规划](../../docs/MiniGen2重构规划.md) · [待办清单](../../待办清单.md)
 
 ## **二、P0 历史交接**
 

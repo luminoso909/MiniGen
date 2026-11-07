@@ -245,9 +245,11 @@ def forward(
 3. 计算每图与汇总的 PSNR ↑、SSIM ↑、LPIPS ↓，固定图像动态范围、LPIPS 网络和版本；提供均值/中位数、分位数及最差样本索引。不得把 PSNR/SSIM/LPIPS 当作完整的绘画语义指标。
 4. 人工检查**轮廓锐度、细线、小物体、颜色偏移、背景伪影**，记录失败等级（轻微/明显/无法使用）与代表性案例。**不在看结果之前伪造通过阈值**；先以可见主体、重要颜色、局部细节是否保留为 go/no-go 条件，再据真实分布拟定阈值并在报告说明。
 5. 若存在系统性丢线/糊边：优先排查解码、归一化、缩放或 FP16 问题，再比较一个明确可用的替代 VAE/Autoencoder；替换将导致**所有模型共享 VAE 并重新计算全量缓存**，禁止只给其中一个主干换 VAE。
-6. 输出 `reports/v2/components/vae_reconstruction_200.md`、`metrics.json`、200 样本清单与图表；你审核通过之后才允许构建正式 Latent 缓存和开始长训。
+6. 输出 `reports/v2/components/vae_reconstruction_200.md`、`metrics.json`、200 样本清单与图表；用户审核通过且本机数值验收通过后，才允许构建正式 Latent 缓存。正式长训仍有独立的验收和授权门槛。
 
 **注意**：旧版 S2 的“96 张几何图标重建通过”不能代替新数据域的 200 张验收。
+
+**当前判定**：用户已批准保留冻结的 `madebyollin/sdxl-vae-fp16-fix`，用于 256×256 的一般艺术绘画生成；细密线条、文字和小物体的高频信息损失记录为已知局限，不因重建损失剔除 ArtBench 样本。模型不更换、不微调。保留 [200 张统计、9 张诊断和 LPIPS 最差 20 张证据](../reports/v2/components/vae_review_evidence.json) 与 [用户批准](../reports/v2/components/vae_user_approval.json)。
 
 ### 4.2 CLIP 文本编码验收
 
@@ -262,6 +264,8 @@ def forward(
 - 新 Latent 形状应为 `4×32×32`；旧几何图标缓存 `4×16×16` 不可复用。
 - VAE Encoder 在缓存预计算阶段用；VAE Decoder 在验证图、推理、重建审计阶段用。训练主循环可只读 Latent Cache，不反复加载 Encoder。
 - CLIP 文本特征可缓存训练集、验证集的已冻结 Caption；模型文本投影属于**可训练 DiT**，不能被缓存为冻结特征。Blank/unconditional 条件单独缓存并保存 mask。
+- 正式编码前从原随机重建批固定 20 张，核验 RGB 归一化、后验 mode/均值、模型缩放和输出稳定性；以 CPU FP32 为参考，分别验证 VAE 和 CLIP 的 MPS 数值一致性。对无法在 MPS 正常运行或超出误差门槛的组件，显式选用已验证的 CPU，逐组件记录原因。
+- P2 冻结组件只做前向编码，没有 CUDA 依赖。正式缓存按批准的后端在本机分批写入并支持断点恢复；发布后验证 train/validation 的完整性、顺序、样本对应、形状和 dtype，测试切分封存。CUDA 训练运行在后续阶段另验。
 
 ---
 
@@ -501,9 +505,9 @@ B0/B1/B2 各补 seed=1 → 共 **6 次正式训练**。每个模型不仅汇报�
 - [x] **资产准备。** 核验 SDXL VAE 与 CLIP 文本塔，并下载 AlexNet 和 LPIPS 校准权重。[资产回执](../reports/v2/components/p2_assets.json)
 
 - [x] `P2-01` **随机 200 张** VAE 重建与 PSNR/SSIM/LPIPS 已运行，附可复查材料与代理抽查。用户视觉审核单列为 P2-02 的门槛（第 4 章不可删）。
-- [ ] `P2-02` 判定 VAE 是否可接受；如失败，提交替代组件的证据与统一替换方案，**不擅自改模型**。
+- [x] `P2-02` 用户视觉审核通过，冻结保留 SDXL VAE；登记细线、文字及小物体的信息损失，不删样本。[用户批准](../reports/v2/components/vae_user_approval.json)
 - [x] `P2-03` CLIP token/mask/空条件/维度/长度验收，全量 Caption 重新分词，另做真实输出与投影梯度对照。
-- [ ] `P2-04` 256px Latent 与 Text Cache 构建器、读取器与试点已验收；用户视觉批准后生成并校验完整 train/validation。
+- [x] `P2-04` [固定 20 张本机数值验收](../reports/v2/components/artbench_local_fp32_20.json) 通过；正式 256px Latent 与 Text Cache 已构建，train 37,042、validation 4,637 全部通过 [独立回读](../reports/v2/components/artbench_cache_formal.json)，test 未编码。
 
 **交付**：[P2 工程验收](../reports/v2/02_p2_delivery.md) 与 `artifacts/cache/artbench_pd_256/`。旧 128px 可重建缓存已清理，相关源码、配置与结果保持历史身份。
 
@@ -644,7 +648,7 @@ B0/B1/B2 各补 seed=1 → 共 **6 次正式训练**。每个模型不仅汇报�
 
 - P0→P1：Notebook Hash 不变、旧进度不伪造、当前入口一致。
 - P1→P2：46,298 张图像身份和 256×256 解码验收、图文抽查和 Caption 清洗有记录，分组隔离可复现，正式清单冻结。语义或近重问题按审计证据报告。
-- P2→P3：VAE 200 张验收和 CLIP 验收通过、缓存与尺寸正确。
+- P2→P3：VAE 200 张用户审核、CLIP 验收、固定 20 张本机数值检查和完整 train/validation 缓存验收通过。CUDA 运行验收另记；是否进入 P3 由用户决定。
 - P3→P4：Flow 数学/梯度、B0 小样本过拟合、采样、恢复和预算审批通过。
 - P4→P5：至少有真实 B0/B1/B2 的可比检查点与冻结评测配置；若某模型失败，可做失败分析但必须标记“不构成有效架构对比”。
 - P5→P7：评分校准、完整实验配置、失败案例和复现链都可追溯。

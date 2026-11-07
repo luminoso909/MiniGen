@@ -4,7 +4,7 @@ MiniGen 在现有仓库渐进重构。先读 [v2 重构规划](docs/MiniGen2重�
 
 ### **1. 正式范围与依赖**
 
-正式数据使用 ArtBench Public Domain 256x256 全量 46,298 张，按组划分训练、验证和测试，输入为原生 256×256 RGB。离线读取固定 Parquet，清洗上游英文 Caption 并保留原文与处理记录。SDXL VAE 与 CLIP-B/32 文本塔冻结，Caption 限 75 个内容 token 加 BOS/EOS。先验收随机 200 张 VAE 重建及 CLIP，再由用户批准正式缓存。QwenVL 旧标注路线及其专用资产已下线。
+正式数据使用 ArtBench Public Domain 256x256 全量 46,298 张，按组划分训练、验证和测试，输入为原生 256×256 RGB。离线读取固定 Parquet，清洗上游英文 Caption 并保留原文与处理记录。SDXL VAE 与 CLIP-B/32 文本塔冻结，Caption 限 75 个内容 token 加 BOS/EOS。正式缓存须通过随机 200 张 VAE 重建的用户视觉审核、CLIP 验收和固定 20 张本机数值检查。冻结组件的 FP32 前向编码可在 Mac 上执行：以 CPU 为参考分别验证 MPS 上的 VAE 和 CLIP，某组件不兼容或误差超限时显式改用已验证的 CPU。CUDA 训练运行验收单列，不阻塞 P2。QwenVL 旧标注路线及其专用资产已下线。
 
 B0 PlainConditionalDiT、B1 SingleStreamDiT、B2 HybridDiT 从随机初始化训练，每个约 30M 可训练参数，共用 Flow Matching 速度目标、数据、组件和训练评测协议。先验证 B0，再加 B1/B2。匹配 NFE 评测 Euler/Heun，区分等步数和等计算预算。10M/50M、额外种子、Chimera 和多卡是后续选项。旧 DDPM 对 Flow 正式比较与 Sana/OpenMoji/LoRA 只作历史。
 
@@ -20,7 +20,7 @@ B0 PlainConditionalDiT、B1 SingleStreamDiT、B2 HybridDiT 从随机初始化训
 
 `minigen doctor` 是现有功能入口。`train`、`sample`、`evaluate`、`cache` 仍明确返回未实现，`data` 和 `report` 尚未注册。环境同步用 `uv sync --locked`。已有环境的基础核查用 `uv run --locked --offline --no-sync minigen doctor --device cpu --json` 与 `uv run --locked --offline --no-sync pytest -p no:cacheprovider`。设备、测试与检查基线见 P0 审计。
 
-P2 的离线入口为 `scripts/check_vae_reconstruction.py`、`scripts/check_clip_p2.py` 与 `scripts/build_artbench_cache.py`。正式缓存禁止复用试点，身份必须绑定用户审核证据。项目源码在 `src/minigen/`；旧学习模块在 `docs/learning/src/`，只由 Notebook 执行工具、个人验收脚本和历史测试显式加载。
+P2 离线入口、用户审批和数值验收见 [P2 交付](reports/v2/02_p2_delivery.md)。正式缓存禁止复用试点，身份须绑定用户视觉审核、本机数值验收和组件锁；只编码 train/validation，逐批写入、可恢复，验证完整后才供 P3 读取。项目源码在 `src/minigen/`；旧学习模块在 `docs/learning/src/`，只由 Notebook 执行工具、个人验收脚本和历史测试显式加载。
 
 ## **二、数据、实验与证据**
 

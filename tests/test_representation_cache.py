@@ -6,6 +6,7 @@ from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 
+import numpy as np
 import pytest
 import torch
 from jaxtyping import Float
@@ -21,6 +22,7 @@ from minigen.data.representation_cache import (
     RepresentationCache,
     build_cache,
     cache_source,
+    verify_cache_acceptance,
     verify_review,
 )
 
@@ -50,6 +52,7 @@ class _VAE:
 class _CLIP:
     """用可手算的数字描述编码到每个位置，并区分空条件。"""
 
+    device = "cpu"
     identity: JsonDict = {"revision": "toy-clip", "files": {}, "encoding": CLIP_ENCODING}
 
     def encode(
@@ -191,6 +194,7 @@ def test_pairing_batching_and_reopen(
     assert len(train) == len(valid) == 1
     assert train[0].sample_id == "item-0"
     assert valid[0].sample_id == "item-1"
+    assert cache.verify_rows(source) == {"train": 1, "validation": 1}
     assert train[0].latent[0, 0, 0] == -1
     assert float(valid[0].latent[0, 0, 0]) == pytest.approx(32 / 127.5 - 1, abs=5e-4)
     assert valid[0].text[0, 0] == 1
@@ -205,6 +209,37 @@ def test_pairing_batching_and_reopen(
         cache.split("test")
     with pytest.raises(FileExistsError):
         _build(source, target)
+    partial = target.rename(target.with_name(".payload.partial"))
+    with pytest.raises(ValueError, match="unpublished partial"):
+        RepresentationCache(partial, source)
+
+
+def test_row_scan_rejects_mask_shift_with_valid_payload_hash(
+    tiny_source: tuple[Path, Path, Path, Path],
+) -> None:
+    """确认完整扫描会拒绝哈希正确但已偏离 Caption 对齐约定的掩码。
+
+    Args:
+        tiny_source: 含已知 Caption 长度的小型冻结清单。
+
+    Raises:
+        AssertionError: 内容扫描没有拒绝实际 token 位置错误的数组。
+    """
+    source = cache_source(*tiny_source, 1)
+    target = source.root / "payload"
+    _build(source, target)
+    mask_path = target / "validation_mask.npy"
+    mask = np.load(mask_path)
+    mask[0, 0] = False
+    mask[0, 3] = True
+    np.save(mask_path, mask)
+    index_path = target / "index.json"
+    index = json.loads(index_path.read_text())
+    index["payload_sha256"][mask_path.name] = hash_file(mask_path)
+    _write(index_path, index)
+    reader = RepresentationCache(target, source)
+    with pytest.raises(ValueError, match="Caption mask mismatch: validation"):
+        reader.verify_rows(source)
 
 
 def test_corrupt_inputs_or_payload_rejected(
@@ -290,6 +325,8 @@ def test_formal_requires_bound_review(
         },
     )
     assert verify_review(source, receipt, evidence) == hash_file(receipt)
+    with pytest.raises(ValueError, match="20-image local FP32"):
+        verify_cache_acceptance(source, receipt, evidence, None)
     evidence.write_text(evidence.read_text() + "\n")
     with pytest.raises(ValueError, match="approval does not match"):
         verify_review(source, receipt, evidence)
@@ -314,12 +351,33 @@ def test_formal_reader_requires_exact_receipt(
     _build(source, target)
     formal = replace(source, identity={**source.identity, "kind": "formal"})
     with pytest.raises(ValueError, match="identity"):
-        RepresentationCache(target, formal, approval_sha256="a" * 64)
+        RepresentationCache(
+            target, formal, approval_sha256="a" * 64, local_acceptance_sha256="c" * 64
+        )
     index = target / "index.json"
     metadata = json.loads(index.read_text())
-    _write(index, {**metadata, "identity": formal.identity, "approval_sha256": "a" * 64})
+    _write(
+        index,
+        {
+            **metadata,
+            "identity": formal.identity,
+            "approval_sha256": "a" * 64,
+            "local_acceptance_sha256": "c" * 64,
+        },
+    )
     with pytest.raises(ValueError, match="approval"):
         RepresentationCache(target, formal)
     with pytest.raises(ValueError, match="approval"):
-        RepresentationCache(target, formal, approval_sha256="b" * 64)
-    assert len(RepresentationCache(target, formal, approval_sha256="a" * 64).split("train")) == 1
+        RepresentationCache(
+            target, formal, approval_sha256="b" * 64, local_acceptance_sha256="c" * 64
+        )
+    with pytest.raises(ValueError, match="local_acceptance"):
+        RepresentationCache(target, formal, approval_sha256="a" * 64)
+    with pytest.raises(ValueError, match="local_acceptance"):
+        RepresentationCache(
+            target, formal, approval_sha256="a" * 64, local_acceptance_sha256="d" * 64
+        )
+    reader = RepresentationCache(
+        target, formal, approval_sha256="a" * 64, local_acceptance_sha256="c" * 64
+    )
+    assert len(reader.split("train")) == 1

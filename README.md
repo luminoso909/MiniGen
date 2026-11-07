@@ -17,7 +17,7 @@ MiniGen 在同一套 ArtBench Public Domain 256x256 数据的训练切分上，�
 | `minigen doctor` | 可用。支持 `--device` 和 `--json`，检查依赖与小张量前向、反向 |
 | `minigen train`、`sample`、`evaluate`、`cache` | 已注册为占位，执行退出码为 2 |
 | `minigen data`、`report` | 计划中的入口，尚未注册 |
-| 数据、冻结组件与训练工具 | ArtBench 46,298 张已接入，离线数据准备使用 `scripts/prepare_artbench.py`。256px VAE/CLIP 审计和配对缓存试点已运行；正式缓存待用户视觉审核。Flow 训练留待 P3 |
+| 数据、冻结组件与训练工具 | ArtBench 46,298 张已接入，离线数据准备使用 `scripts/prepare_artbench.py`。冻结 VAE、CLIP 和 train/validation 正式缓存已完成 [P2 验收](reports/v2/02_p2_delivery.md)。项目停在 P3-01 入口，未启动训练 |
 | 个人学习核心 | DDPM、VAE 数学已验收。当前 DiT 的 L03 独立小案例通过。文本 Cross-Attention、CFG、Flow 仍待实现 |
 
 项目使用 Python 3.12.14 和 uv。初始化或恢复依赖时使用 `uv sync --locked`。已有环境可以执行以下离线检查：
@@ -33,7 +33,7 @@ P0 的 CPU 诊断和独立 L03 检查通过。旧 DiT 启动测试已修复。�
 ## **三、数据、实验与协作**
 
 - 正式数据采用 ArtBench Public Domain 256x256。三份固定 Parquet 共 46,298 张，按组分为训练、验证和测试，保留原生 256×256 RGB。使用清洗后的英文 Caption；图文语义噪声见实际审计。[P0/P1 交付](reports/v2/01_p0_p1_delivery.md) · [数据管理](docs/data.md) · [P0–P7 下载清单](docs/MiniGen2下载清单.md)
-- P2 已提供随机 200 张 ArtBench 的 VAE 重建与 CLIP 单段条件证据；审核重建后才构建正式缓存。P3 先做 B0 小样本验证与单卡成本试验，训练预算由你审批。
+- P2 保留随机 200 张重建统计、9 张诊断与 LPIPS 最差 20 张；用户已接受 SDXL VAE 用于普通绘画。正式缓存依赖本机固定 20 张数值检查，可用通过检查的 MPS 或 CPU，CUDA 训练运行另行验收。P3 先做 B0 小样本验证与单卡成本试验，训练预算由你审批。
 - MiniGen-Bench 在正式训练前冻结提示词与对照协议，分别报告图像质量、文本遵循、质量与算力曲线。完整矩阵见 [重构规划第 7–8 章](docs/MiniGen2重构规划.md)。
 - 工程阶段用 P0–P7 编号，个人课程用 S4–S7 编号。课件从 S4-01 开始，按反馈逐课交付。来源明确的工程实现、课程参考与个人 TODO 分别验收。见 [学习目录](docs/MiniGen2学习目录.md)、[个人任务入口](learning/README.md) 和 [AI 工作流](docs/ai-workflow.md)。
 

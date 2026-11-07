@@ -3,7 +3,8 @@
 import json
 import math
 import re
-import tempfile
+import shutil
+import sys
 from collections import Counter
 from collections.abc import Iterator
 from dataclasses import dataclass
@@ -20,6 +21,7 @@ from torch.utils.data import Dataset
 from minigen._typing import JsonDict
 from minigen.autoencoders.sdxl import FrozenVAE, hash_file, image_batch
 from minigen.conditioning.clip import FrozenCLIPText
+from minigen.data.cache_writer import IncrementalCacheWriter
 from minigen.data.manifest import load_manifest
 
 SPLITS = ("train", "validation")
@@ -41,6 +43,27 @@ CLIP_ENCODING = {
     "eos_token_id": 49407,
     "pad_token_id": 49407,
 }
+
+
+def _published_path(
+    path: Path,
+) -> Path:
+    """解析正式发布路径，排除写入器保留的暂存目录及其别名。
+
+    Args:
+        path: 拟发布或读取的缓存目录。
+
+    Raises:
+        ValueError: 指向保留的暂存目录名称。
+        OSError: 目录解析失败时透传。
+
+    Results:
+        Path: 解析后的正式目录。
+    """
+    resolved = path.resolve()
+    if resolved.name.startswith(".") and resolved.name.endswith(".partial"):
+        raise ValueError("An unpublished partial cache is not a publication path")
+    return resolved
 
 
 @dataclass(frozen=True)
@@ -241,6 +264,57 @@ def verify_review(
     return hash_file(approval_path)
 
 
+class CacheAcceptance(NamedTuple):
+    """绑定正式缓存的审核摘要和实际编码设备；试点字段均为 None。
+
+    Args:
+        approval_sha256: 用户视觉验收文件的 SHA-256。
+        local_acceptance_sha256: 固定 20 张本机组件验收回执的 SHA-256。
+        vae_device: 验收后选定的 VAE 编码设备。
+        clip_device: 验收后选定的 CLIP 编码设备。
+    """
+
+    approval_sha256: str | None
+    local_acceptance_sha256: str | None
+    vae_device: str | None
+    clip_device: str | None
+
+
+def verify_cache_acceptance(
+    source: CacheSource,
+    approval_path: Path | None,
+    evidence_path: Path | None,
+    local_path: Path | None,
+) -> CacheAcceptance:
+    """核验用户视觉批准和绑定同一模型、数据的本机 FP32 验收回执。
+
+    Args:
+        source: 当前冻结的缓存来源与组件身份。
+        approval_path: 用户批准回执；试点不传。
+        evidence_path: 原始 200 张重建报告；试点不传。
+        local_path: 固定 20 张的本机 FP32 验收回执；试点不传。
+
+    Raises:
+        ValueError: 两道门槛之一缺失、不匹配或被用于试点。
+        OSError: 本地证据文件缺失或读取失败。
+
+    Results:
+        CacheAcceptance: 用于构建及读取正式快照的摘要和设备。
+    """
+    approval = verify_review(source, approval_path, evidence_path)
+    if approval is None:
+        if local_path is not None:
+            raise ValueError("Pilot cache does not use formal local FP32 acceptance")
+        return CacheAcceptance(None, None, None, None)
+    if local_path is None or evidence_path is None:
+        raise ValueError("Formal cache requires the fixed 20-image local FP32 acceptance")
+
+    from minigen.evaluation.local_components import validate_local_receipt
+
+    digest, vae_device, clip_device = validate_local_receipt(source, local_path, evidence_path)
+    return CacheAcceptance(approval, digest, vae_device, clip_device)
+
+
 def _inputs(
     source: CacheSource,
     records: list[JsonDict],
@@ -311,6 +385,8 @@ def build_cache(
     batch_size: int,
     approval_path: Path | None = None,
     evidence_path: Path | None = None,
+    local_acceptance_path: Path | None = None,
+    report_progress: bool = False,
 ) -> None:
     """分批生成图像和文本表示，完整写入后一次发布。
 
@@ -322,15 +398,21 @@ def build_cache(
         batch_size: 编解码的最大批大小。
         approval_path: 正式缓存必需的用户审核回执。
         evidence_path: 正式审核对应的重建报告。
+        local_acceptance_path: 正式缓存必需的 20 张本机 FP32 通过回执。
+        report_progress: 是否在标准错误流记录分割内已提交的行数。
 
     Raises:
         ValueError: 审核、组件、批大小或编码内容不符。
         FileExistsError/OSError: 目标已存在、图像或磁盘访问失败时透传。
 
     副作用:
-        在目标的父目录写临时文件；成功时将其重命名为最终缓存，失败时清理。
+        增量写入目标旁的暂存目录；失败时保留已提交的前缀，成功后一次发布。
+        启用 report_progress 时向标准错误流输出进度。
     """
-    receipt = verify_review(source, approval_path, evidence_path)
+    output = _published_path(output)
+    acceptance = verify_cache_acceptance(
+        source, approval_path, evidence_path, local_acceptance_path
+    )
     if batch_size < 1 or any(not source.records[split] for split in SPLITS):
         raise ValueError("Cache requires positive batch size and nonempty splits")
     for component, expected in (
@@ -343,37 +425,65 @@ def build_cache(
         raise ValueError("Loaded VAE scaling does not match cache source")
     if clip.identity.get("encoding") != source.identity["clip"]["encoding"]:
         raise ValueError("Loaded CLIP encoding does not match cache source")
+    devices = {"vae": str(vae.device), "clip": str(clip.device)}
+    if acceptance.approval_sha256 is not None and any(
+        torch.device(devices[name]).type != expected
+        for name, expected in (("vae", acceptance.vae_device), ("clip", acceptance.clip_device))
+    ):
+        raise ValueError("Encoder devices do not match the approved local FP32 receipt")
     if output.exists():
         raise FileExistsError(output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix=".cache-", dir=output.parent) as temporary:
-        staging = Path(temporary) / "payload"
-        staging.mkdir()
-        blank = clip.encode([""])
-        if (
-            tuple(blank.features.shape) != (1, 77, 512)
-            or tuple(blank.mask.shape) != (1, 77)
-            or blank.features.dtype != torch.float32
-            or blank.mask.dtype != torch.bool
-            or not torch.equal(blank.mask.cpu(), torch.arange(77)[None, :] < 2)
-            or not torch.isfinite(blank.features).all()
-            or blank.features.abs().amax() > torch.finfo(torch.float16).max
-        ):
-            raise ValueError("Invalid blank CLIP conditioning")
-        np.save(staging / "blank_text.npy", blank.features.cpu().numpy()[0].astype("<f2"))
-        np.save(staging / "blank_mask.npy", blank.mask.cpu().numpy()[0])
+    metadata = {
+        "identity": source.identity,
+        "approval_sha256": acceptance.approval_sha256,
+        "local_acceptance_sha256": acceptance.local_acceptance_sha256,
+        "execution": {
+            "torch": str(torch.__version__),
+            "devices": devices,
+            "batch_size": batch_size,
+            "cpu_threads": torch.get_num_threads(),
+        },
+        "sample_ids": {
+            split: [row["sample_id"] for row in source.records[split]] for split in SPLITS
+        },
+    }
+    layouts = {
+        split: {
+            name: ((len(source.records[split]), *shape), dtype)
+            for name, (shape, dtype) in LAYOUT.items()
+        }
+        for split in SPLITS
+    }
+    # 已提交的前缀不需再次分配；mmap 文件也可能只有逻辑大小。
+    row_bytes = sum(math.prod(shape) * dtype.itemsize for shape, dtype in LAYOUT.values())
+    resume_identity = {key: value for key, value in metadata.items() if key != "sample_ids"}
+    with IncrementalCacheWriter(output, resume_identity=resume_identity, layouts=layouts) as writer:
+        remaining = sum(len(source.records[split]) - writer.progress(split) for split in SPLITS)
+        if shutil.disk_usage(output.parent).free < (remaining + 1) * row_bytes + 64 * 1024**2:
+            raise OSError("Insufficient disk space for the remaining cache arrays and index")
+        if not writer.has_blank:
+            blank = clip.encode([""])
+            if (
+                tuple(blank.features.shape) != (1, 77, 512)
+                or tuple(blank.mask.shape) != (1, 77)
+                or blank.features.dtype != torch.float32
+                or blank.mask.dtype != torch.bool
+                or not torch.equal(blank.mask.cpu(), torch.arange(77)[None, :] < 2)
+                or not torch.isfinite(blank.features).all()
+                or blank.features.abs().amax() > torch.finfo(torch.float16).max
+            ):
+                raise ValueError("Invalid blank CLIP conditioning")
+            writer.write_blank(
+                blank.features.cpu().numpy()[0].astype("<f2"), blank.mask.cpu().numpy()[0]
+            )
         for split in SPLITS:
             records = source.records[split]
-            arrays = {
-                name: np.lib.format.open_memmap(
-                    staging / f"{split}_{name}.npy",
-                    mode="w+",
-                    dtype=dtype,
-                    shape=(len(records), *shape),
-                )
-                for name, (shape, dtype) in LAYOUT.items()
-            }
-            for start in range(0, len(records), batch_size):
+            arrays = writer.arrays(split)
+            committed = writer.progress(split)
+            if report_progress:
+                print(f"{split}: {committed}/{len(records)}", file=sys.stderr, flush=True)
+            for start in range(committed, len(records), batch_size):
                 batch = records[start : start + batch_size]
                 latent = vae.encode(_inputs(source, batch))
                 condition = clip.encode([row["caption"] for row in batch])
@@ -388,26 +498,20 @@ def build_cache(
                     len(batch),
                     {"latents": latent, "text": condition.features, "mask": condition.mask},
                 )
-            for array in arrays.values():
-                array.flush()
-            del arrays, array
-        metadata = {
-            "identity": source.identity,
-            "approval_sha256": receipt,
-            "execution": {
-                "torch": str(torch.__version__),
-                "device": str(vae.device),
-                "batch_size": batch_size,
-            },
-            "sample_ids": {
-                split: [row["sample_id"] for row in source.records[split]] for split in SPLITS
-            },
-            "payload_sha256": {
-                path.name: hash_file(path) for path in sorted(staging.glob("*.npy"))
-            },
-        }
-        (staging / "index.json").write_text(json.dumps(metadata, indent=2) + "\n")
-        staging.rename(output)
+                stop = start + len(batch)
+                if stop - committed >= 256 or stop == len(records):
+                    writer.commit(split, stop)
+                    if report_progress and (stop // 256 > committed // 256 or stop == len(records)):
+                        print(f"{split}: {stop}/{len(records)}", file=sys.stderr, flush=True)
+                    committed = stop
+        writer.publish(
+            {
+                **metadata,
+                "payload_sha256": {
+                    path.name: hash_file(path) for path in sorted(writer.directory.glob("*.npy"))
+                },
+            }
+        )
 
 
 class RepresentationCache:
@@ -416,7 +520,8 @@ class RepresentationCache:
     Args:
         directory: 已完整发布的缓存目录。
         source: 由调用方从当前冻结源和组件锁独立派生的期待身份。
-        approval_sha256: 正式模式中由 verify_review 返回的回执摘要；试点为 None。
+        approval_sha256: 正式模式下已经核验的用户视觉批准摘要；试点为 None。
+        local_acceptance_sha256: 正式模式下已经核验的本机 FP32 回执摘要；试点为 None。
 
     Raises:
         ValueError: 身份、顺序、文件摘要、dtype 或形状不符。
@@ -429,6 +534,7 @@ class RepresentationCache:
         source: CacheSource,
         *,
         approval_sha256: str | None = None,
+        local_acceptance_sha256: str | None = None,
     ) -> None:
         """校验全部数组后建立只读映射；初始化不把所有张量载入内存。
 
@@ -436,24 +542,30 @@ class RepresentationCache:
             directory: 含 index.json 和数组的缓存目录。
             source: 当前期待的来源契约与样本顺序。
             approval_sha256: 本次已核验的正式审核回执摘要；试点不传。
+            local_acceptance_sha256: 本次已核验的本机 FP32 回执摘要；试点不传。
 
         Raises:
             ValueError: 缓存身份、顺序或有效载荷不符。
             OSError/JSONDecodeError: 文件读取或解析失败。
         """
+        directory = _published_path(directory)
         metadata = json.loads((directory / "index.json").read_text())
         ids = {split: [row["sample_id"] for row in source.records[split]] for split in SPLITS}
         if metadata["identity"] != source.identity or metadata["sample_ids"] != ids:
             raise ValueError("Cache identity or sample order mismatch")
         formal = source.identity["kind"] == "formal"
-        if (
-            formal != (approval_sha256 is not None)
-            or (formal and not re.fullmatch(r"[0-9a-f]{64}", approval_sha256))
-            or metadata["approval_sha256"] != approval_sha256
+        for key, expected in (
+            ("approval_sha256", approval_sha256),
+            ("local_acceptance_sha256", local_acceptance_sha256),
         ):
-            raise ValueError("Cache kind and approval receipt mismatch")
+            if (
+                formal != (expected is not None)
+                or (expected is not None and not re.fullmatch(r"[0-9a-f]{64}", expected))
+                or metadata.get(key) != expected
+            ):
+                raise ValueError(f"Cache kind and receipt mismatch: {key}")
         self._ids = ids
-        self._directory = directory.resolve()
+        self._directory = directory
         names = {"blank_text": LAYOUT["text"], "blank_mask": LAYOUT["mask"]}
         for split, rows in ids.items():
             for name, (shape, dtype) in LAYOUT.items():
@@ -467,6 +579,48 @@ class RepresentationCache:
             array = np.load(path, mmap_mode="r", allow_pickle=False)
             if array.shape != shape or array.dtype != dtype:
                 raise ValueError(f"Cache payload shape/dtype mismatch: {path.name}")
+
+    def verify_rows(
+        self,
+        source: CacheSource,
+    ) -> dict[str, int]:
+        """顺序检查每行的有限性与有效 token 位置，保持内存用量有界。
+
+        Args:
+            source: 打开缓存时使用的冻结清单及其顺序。
+
+        Raises:
+            ValueError: 清单顺序、表示有限性或 token 掩码不符。
+            OSError: 缓存文件不可读时透传。
+
+        Results:
+            dict[str, int]: 每个划分实际扫描的行数。
+        """
+        blank, blank_mask = self.blank()
+        if not torch.isfinite(blank).all() or not torch.equal(blank_mask, torch.arange(77) < 2):
+            raise ValueError("Invalid cached blank conditioning")
+        positions = np.arange(77)[None, :]
+        counts = {}
+        for split in SPLITS:
+            records = source.records[split]
+            if [row["sample_id"] for row in records] != self._ids[split]:
+                raise ValueError(f"Cache row verification order mismatch: {split}")
+            arrays = {
+                field: np.load(self._directory / f"{split}_{field}.npy", mmap_mode="r")
+                for field in LAYOUT
+            }
+            for start in range(0, len(records), 128):
+                stop = min(start + 128, len(records))
+                lengths = np.asarray([row["caption_tokens"] + 2 for row in records[start:stop]])
+                if not np.array_equal(arrays["mask"][start:stop], positions < lengths[:, None]):
+                    raise ValueError(f"Cached Caption mask mismatch: {split} rows {start}:{stop}")
+                if any(
+                    not np.isfinite(arrays[field][start:stop]).all()
+                    for field in ("latents", "text")
+                ):
+                    raise ValueError(f"Non-finite cache values: {split} rows {start}:{stop}")
+            counts[split] = len(records)
+        return counts
 
     def split(
         self,

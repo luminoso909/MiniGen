@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "decision": "approved",
+  "reviewed_by": "MiniGen 项目用户",
+  "recorded_at": "2026-11-07T22:17:20+08:00",
+  "decision_source": "用户在当前 MiniGen 会话中完成并明确批准重建质量审核",
+  "scope": "一般艺术绘画生成（256×256）",
+  "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+  "vae_lock_sha256": "a50db26012b0f1523f97cd2c4008393807092f9a2c207fb32d9b9e71e14617d1",
+  "reconstruction_sha256": "538daaa55ba83e2af19efff0b72b233bd392791834345b06a51a12be40932533",
+  "review_evidence_sha256": "14c685d033744c3ad49b924c55e3ba98f3835db5fc6fcaa666e4234751599ccc",
+  "review_archive_sha256": "81fe2d6dd2fdfdda39a3ce267dd60a84c604430c2359b66254bbc500931e3363",
+  "known_limitations": [
+    "细密线条的消失或融合",
+    "小字和文字可读性下降",
+    "小物体边界与高频信息流失"
+  ],
+  "keep_frozen_vae": true,
+  "remove_artbench_samples": false,
+  "requires_local_fp32_20_before_formal_cache": true,
+  "training_approval": false
+}
