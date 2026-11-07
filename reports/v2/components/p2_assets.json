@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-06",
+  "stage": "P2 asset preparation",
+  "p2_formal_validation_completed": false,
+  "frozen_resources": {
+    "sdxl_vae": {
+      "lock": "configs/models/sdxl_vae.json",
+      "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+      "directory": "artifacts/models/sdxl_vae/207b116dae70ace3637169f1ddd2434b91b3a8cd",
+      "verified_files": 2,
+      "verified_bytes": 334643869,
+      "status": "reused_verified"
+    },
+    "clip_text": {
+      "lock": "configs/models/clip_text.json",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "directory": "artifacts/models/clip_text/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "verified_files": 7,
+      "verified_bytes": 256297846,
+      "status": "reused_verified"
+    }
+  },
+  "lpips_alex": {
+    "backbone": {
+      "model": "torchvision.models.AlexNet_Weights.IMAGENET1K_V1",
+      "path": "artifacts/models/eval/lpips_alex/alexnet-owt-7be5be79.pth",
+      "bytes": 244408911,
+      "sha256": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+      "source": "https://download.pytorch.org/models/alexnet-owt-7be5be79.pth"
+    },
+    "calibration": {
+      "revision": "c33f89e9f46522a584cf41d8880eb0afa982708b",
+      "version": "0.1",
+      "path": "artifacts/models/eval/lpips_alex/lpips-v0.1-alex.pth",
+      "bytes": 6009,
+      "sha256": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+      "source": "https://raw.githubusercontent.com/richzhang/PerceptualSimilarity/c33f89e9f46522a584cf41d8880eb0afa982708b/lpips/weights/v0.1/alex.pth"
+    },
+    "cpu_smoke": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "strict_backbone_load": true,
+      "weights_only_load": true,
+      "channels": [
+        64,
+        192,
+        384,
+        256,
+        256
+      ],
+      "feature_shapes": [
+        [
+          64,
+          15,
+          15
+        ],
+        [
+          192,
+          7,
+          7
+        ],
+        [
+          384,
+          3,
+          3
+        ],
+        [
+          256,
+          3,
+          3
+        ],
+        [
+          256,
+          3,
+          3
+        ]
+      ],
+      "identical_fixture_score": 0.0,
+      "different_fixture_score": 0.1342018097639084,
+      "seed": 20261106,
+      "fixture": "synthetic 64x64 RGB in [-1,1], offline weight wiring check"
+    }
+  }
+}

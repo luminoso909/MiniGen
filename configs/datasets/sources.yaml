@@ -62,3 +62,22 @@ sources:
       test: 0.1
     caption_origin: per_image_metadata_plus_review
     download_enabled: false
+  artbench_pd_256:
+    status: frozen_v1_for_component_validation
+    upstream: https://huggingface.co/datasets/alfredplpl/artbench-pd-256x256
+    original_source: https://github.com/liaopeiyuan/artbench
+    revision: '4056b70025f0e3f916fb271c7a792633ba637484'
+    license_label: MIT (mirror tag); Public Domain subset (publisher statement)
+    license_reference: https://huggingface.co/datasets/alfredplpl/artbench-pd-256x256/blob/4056b70025f0e3f916fb271c7a792633ba637484/README.md
+    config: configs/datasets/artbench_pd_256.yaml
+    acquisition: verified pinned parquet shards and offline preprocessing
+    download_enabled: true
+    row_count: 46298
+    image_size: [256, 256]
+    image_field: image
+    caption_field: caption
+    caption_origin: Florence-2-large DETAILED_CAPTION as reported by publisher
+    metadata_fields: [caption_jp, artist, url]
+    quality_report: reports/v2/data/artbench_audit.md
+    freeze_receipt: reports/v2/data/artbench_freeze.json
+    manifest: data/processed/artbench_pd_256/v1/manifest.jsonl

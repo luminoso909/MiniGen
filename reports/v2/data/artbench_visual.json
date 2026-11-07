@@ -1,0 +1,1891 @@
+{
+  "method": "agent_visual_review",
+  "reviewer_count": 3,
+  "sampling_frame": "train",
+  "sample_count": 240,
+  "seed": 20261107,
+  "human_reviewed": 0,
+  "image_results": {
+    "ok": 229,
+    "uncertain": 11
+  },
+  "caption_results": {
+    "uncertain": 47,
+    "issue": 71,
+    "ok": 122
+  },
+  "overlapping_caption_error_types": {
+    "color": 23,
+    "relation": 21,
+    "subject": 27,
+    "count": 13,
+    "scene": 17,
+    "medium": 1,
+    "pose": 6,
+    "spatial": 3
+  },
+  "rows": [
+    {
+      "sample_id": "ab-46247",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "眼部低垂，缩略图难确认是否完全闭眼。"
+    },
+    {
+      "sample_id": "ab-31165",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "桌椅所在空间似开放式露台，室内说法有歧义。"
+    },
+    {
+      "sample_id": "ab-36155",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "下方未见清楚题字，签名与速写线需区分。"
+    },
+    {
+      "sample_id": "ab-02783",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color"
+      ],
+      "notes": "人物穿赭红外衣与蓝灰大领，背景有大片暖橙色；描述把背景写成灰蓝绿。"
+    },
+    {
+      "sample_id": "ab-12241",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-25547",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation"
+      ],
+      "notes": "画面可见题字在顶部，描述置于底部。"
+    },
+    {
+      "sample_id": "ab-20004",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject",
+        "count",
+        "relation"
+      ],
+      "notes": "画中是一位女性和两名幼儿，未见描述所称持杖及书的两名站立人物。"
+    },
+    {
+      "sample_id": "ab-17823",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "建筑与人物吻合，是否是神社及台面细节不清。"
+    },
+    {
+      "sample_id": "ab-05817",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject",
+        "count"
+      ],
+      "notes": "画中可辨三名田间劳动者，没有清楚的狗。"
+    },
+    {
+      "sample_id": "ab-45642",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation"
+      ],
+      "notes": "悬挂鸟的双腿突出，翼并未展开，画面未显示可见的黑色眼睛。"
+    },
+    {
+      "sample_id": "ab-25478",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-05275",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-12286",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "骑手挥舞一条弯曲长鞭，未见箭，图中物件不像弓箭。"
+    },
+    {
+      "sample_id": "ab-17478",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-32827",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "建筑装饰与人物吻合，人物姿势与叙述站立的对应不清。"
+    },
+    {
+      "sample_id": "ab-06117",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "桌前坐姿与镜面吻合，家具是否钢琴无法确认。"
+    },
+    {
+      "sample_id": "ab-23147",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "场景与人像大体吻合，拱形背景是否壁炉不清。"
+    },
+    {
+      "sample_id": "ab-15312",
+      "image_status": "uncertain",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "作品头部、下腿在边缘被截去，缺少上游原图以判断是既有构图还是方形裁切。"
+    },
+    {
+      "sample_id": "ab-27083",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-13682",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-45103",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "暗部中动物物种和数量不够清晰，牛的解读难确认。"
+    },
+    {
+      "sample_id": "ab-19362",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-23599",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-14267",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "主体与人群可见，飞鸟与画框在此暗幅面中未确认。"
+    },
+    {
+      "sample_id": "ab-34909",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "count",
+        "color"
+      ],
+      "notes": "室内是多人小组，描述只给一男一女，白色主要是女子衣领与头饰。"
+    },
+    {
+      "sample_id": "ab-02172",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-06160",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-42068",
+      "image_status": "uncertain",
+      "caption_status": "issue",
+      "error_types": [
+        "count"
+      ],
+      "notes": "描述先写三人，又另外补三名背景武士；画中没有可辨的另外三人。 多个人物在边缘不完整，可能来自版画本身或本版构图裁切。"
+    },
+    {
+      "sample_id": "ab-42405",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "人物附近为华丽发式与弧形伞面，是否有另戴帽子不清。"
+    },
+    {
+      "sample_id": "ab-19057",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "成群飞鸟吻合，无法从画面确认是否为鸭。"
+    },
+    {
+      "sample_id": "ab-19483",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-05080",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "主体与人群吻合，未确认所说画框。"
+    },
+    {
+      "sample_id": "ab-34931",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "左侧织物与座位可见，不能确认是否另有床。"
+    },
+    {
+      "sample_id": "ab-42468",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "中央和边侧人物可见，中心人物身份及围栏不够清楚。"
+    },
+    {
+      "sample_id": "ab-03919",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "两张脸清楚，服装颜色在构图中不可核实。"
+    },
+    {
+      "sample_id": "ab-36618",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-42272",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation"
+      ],
+      "notes": "女性在低矮梳妆镜附近，未见描述中的椅子；左侧是镜具和容器。"
+    },
+    {
+      "sample_id": "ab-12486",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "scene"
+      ],
+      "notes": "天空低饱和灰紫色，海面也无明显明亮日照；与深蓝晴空描述有别。"
+    },
+    {
+      "sample_id": "ab-11083",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-10660",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "室内台阶与持械人物清楚，图中未见大象或白裙女性。"
+    },
+    {
+      "sample_id": "ab-42244",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "两个人物和图中文字可见，人物性别和手中小物不能确认。"
+    },
+    {
+      "sample_id": "ab-05923",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene",
+        "relation"
+      ],
+      "notes": "画面是有线稿/笔触的建筑插画，未见所称坐地的众人。"
+    },
+    {
+      "sample_id": "ab-37639",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "着装及天空吻合，后景建筑不够清楚。"
+    },
+    {
+      "sample_id": "ab-33695",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-43246",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation"
+      ],
+      "notes": "鸟在人物左下方而非肩上，肩头没有可见的鸟。"
+    },
+    {
+      "sample_id": "ab-08267",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-37800",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-35304",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "relation"
+      ],
+      "notes": "椅后背景明显红橙色，非蓝绿；双手的位置也未同时落在扶手上。"
+    },
+    {
+      "sample_id": "ab-16893",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-10930",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-05347",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-39602",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "熨烫活动吻合，室内是否厨房不清。"
+    },
+    {
+      "sample_id": "ab-18108",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-08676",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-00962",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "野牛清楚，右侧有猫形剪影，但无法确认是独立动物还是背景形状。"
+    },
+    {
+      "sample_id": "ab-21375",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-28598",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject",
+        "count",
+        "relation"
+      ],
+      "notes": "花园及坐姿人物吻合，后景没有可辨的马，也没有两人站在马上。"
+    },
+    {
+      "sample_id": "ab-25935",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-29446",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-38171",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-01834",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-23939",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "count",
+        "relation"
+      ],
+      "notes": "前景人物主要站立或倒卧，牵领牲畜；没有可辨的一群骑马人。"
+    },
+    {
+      "sample_id": "ab-30599",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "树与山景清楚，局部岩石和枝叶间是否有人不能确认。"
+    },
+    {
+      "sample_id": "ab-23311",
+      "image_status": "uncertain",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "亮竖纹与近黑色雾状区域可见，无法确认是夜空、反光或水面。 画面极暗且细节难辨，无法仅据样本区分夜景表现与复制品质。"
+    },
+    {
+      "sample_id": "ab-00687",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-00337",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-20404",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "三人和小舟可见，举在面部的小物像双筒镜，也可能是相机。"
+    },
+    {
+      "sample_id": "ab-15679",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-18947",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject",
+        "count"
+      ],
+      "notes": "三个人物中左侧为剃发袍服人物；将三人全部描述为艺伎不可靠。"
+    },
+    {
+      "sample_id": "ab-13165",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-37082",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-34600",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-10555",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-21100",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation"
+      ],
+      "notes": "裁图仅显示头肩和上胸，画面未显示所述交握双手。"
+    },
+    {
+      "sample_id": "ab-18740",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-36510",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color"
+      ],
+      "notes": "天空以暖淡粉和米白为主，并非清晰蓝天。"
+    },
+    {
+      "sample_id": "ab-00221",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "雕塑与木台可见，材质及手部是否为叙述的放在腿上不够确定。"
+    },
+    {
+      "sample_id": "ab-08230",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-00788",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-24792",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "可见成排齿状的梳形物或扇形图案，未见可辨的剪刀。"
+    },
+    {
+      "sample_id": "ab-27467",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "The fireplace and doorway are visible; speculation about the room or painter remains in the text."
+    },
+    {
+      "sample_id": "ab-21547",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Two panels and their subjects are visible; the actual wall or method of display is not established."
+    },
+    {
+      "sample_id": "ab-05195",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-34611",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color"
+      ],
+      "notes": "The sky is muted cream/gray, not clear blue."
+    },
+    {
+      "sample_id": "ab-36014",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "subject"
+      ],
+      "notes": "Mary wears blue and red, the child is visibly unclothed rather than swaddled, and the stated golden halo is not around Mary’s head."
+    },
+    {
+      "sample_id": "ab-28567",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "The stream and mountains are clear; a possessive artist attribution remains after cleaning."
+    },
+    {
+      "sample_id": "ab-16705",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-06553",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "scene",
+        "subject"
+      ],
+      "notes": "Blue and pink clothing are visible. A beach and sailing boat are not identifiable in the stylized scene."
+    },
+    {
+      "sample_id": "ab-00695",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-17544",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-35329",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation"
+      ],
+      "notes": "The rooster appears above and behind the face, with no clear shoulder perch."
+    },
+    {
+      "sample_id": "ab-25738",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "subject"
+      ],
+      "notes": "The stamp is essentially a red and cream reproduction. Navy suit, white shirt, and red tie are unsupported."
+    },
+    {
+      "sample_id": "ab-09690",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "relation"
+      ],
+      "notes": "The figure wears dark clothing with red accents. The bird-like figure is separate, not perched on the shoulder."
+    },
+    {
+      "sample_id": "ab-25151",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color"
+      ],
+      "notes": "The print is predominantly shades of blue and pale paper, rather than the claimed pink, purple, yellow, and deep green."
+    },
+    {
+      "sample_id": "ab-43336",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "The two depicted figures and sword are plausible. A print-series/history clause remains."
+    },
+    {
+      "sample_id": "ab-01098",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "A beach and figures on the left are visible, but which two are sitting on the wall is difficult to distinguish."
+    },
+    {
+      "sample_id": "ab-25184",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "Several fan forms appear in the print; what the woman actually holds is unclear."
+    },
+    {
+      "sample_id": "ab-25839",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Stained glass is visible; lighting outside the window area is difficult to establish."
+    },
+    {
+      "sample_id": "ab-02832",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "The yellow skirt and orange-red bodice are visible. Identity speculation remains and was not scored as visual truth."
+    },
+    {
+      "sample_id": "ab-34332",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-40685",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "Several boat-like dark forms are visible; tall light shapes may be sails or architectural forms."
+    },
+    {
+      "sample_id": "ab-21214",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-03892",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-01050",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-44090",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation",
+        "color",
+        "scene"
+      ],
+      "notes": "The two women are upright or leaning; no clear bench is visible. The foreground garment is yellow-patterned, and the pictured background is mostly dark greenery."
+    },
+    {
+      "sample_id": "ab-01605",
+      "image_status": "uncertain",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "The crucifix and crowd are visible; the title phrase Adoration of the Magi is not a reliable visual label. Lower edge cuts the altarpiece; source is needed to decide whether this is an unintended crop."
+    },
+    {
+      "sample_id": "ab-15569",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene",
+        "relation",
+        "color"
+      ],
+      "notes": "Bust drawing on blank beige paper. No hands, field, grass, or blue sky are visible."
+    },
+    {
+      "sample_id": "ab-42369",
+      "image_status": "uncertain",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Credit and print-series wording remains after cleaning. The foreground face is cut by the lower edge; original print framing was not available to identify an unintended crop."
+    },
+    {
+      "sample_id": "ab-10459",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "subject"
+      ],
+      "notes": "The child’s garment appears pale blue, while no separate blue shawl over a white dress is visible."
+    },
+    {
+      "sample_id": "ab-44112",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-07868",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-31066",
+      "image_status": "uncertain",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Strong halftone/screening pattern over low-contrast line work may be a reproduction artifact; provenance or original scan would clarify."
+    },
+    {
+      "sample_id": "ab-36706",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-22426",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "The seated man raises one hand; whether the other holds a bowl is difficult to confirm."
+    },
+    {
+      "sample_id": "ab-24371",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation",
+        "color",
+        "subject"
+      ],
+      "notes": "These are silhouetted figures, including a standing figure, without a visible serious expression. The panels are olive-gray."
+    },
+    {
+      "sample_id": "ab-19167",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation"
+      ],
+      "notes": "The creatures are in the foreground and the standing figures are behind them."
+    },
+    {
+      "sample_id": "ab-05114",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-24357",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "count",
+        "scene"
+      ],
+      "notes": "The supplied image depicts a single continuous cart scene, without three separate illustrated panels."
+    },
+    {
+      "sample_id": "ab-34225",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject",
+        "count"
+      ],
+      "notes": "The caption misses the centrally held infant between the adults."
+    },
+    {
+      "sample_id": "ab-06831",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation",
+        "subject"
+      ],
+      "notes": "One central woman stands; a second figure, if counted, is low at the lower right and not a white-hatted man standing beside her."
+    },
+    {
+      "sample_id": "ab-33178",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Landscape is visible; the specific city is unverified and an artist attribution remains."
+    },
+    {
+      "sample_id": "ab-19425",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Portrait and beard/glasses are consistent; occupation speculation remains."
+    },
+    {
+      "sample_id": "ab-44150",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene",
+        "color"
+      ],
+      "notes": "The view is closed off by woodland and shade. A bright blue sky is not visible in the supplied image."
+    },
+    {
+      "sample_id": "ab-16693",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene",
+        "color"
+      ],
+      "notes": "The vase extends to the bottom edge, with no visible light wood tabletop. Dark red flowers are prominent."
+    },
+    {
+      "sample_id": "ab-11717",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "The dark group and kitchen are plausible, but ages and genders are hard to distinguish."
+    },
+    {
+      "sample_id": "ab-28916",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation",
+        "subject"
+      ],
+      "notes": "The figure looks to the right rather than toward the viewer. A lap and both hands around the object are not shown in the crop."
+    },
+    {
+      "sample_id": "ab-27824",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-39929",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-12938",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "The shawl and figure are clear; hand positions and the hair bun are hidden by the dark fabric."
+    },
+    {
+      "sample_id": "ab-21419",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-43009",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "The scene is broadly consistent. Artist and print-series attribution remains."
+    },
+    {
+      "sample_id": "ab-17296",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color"
+      ],
+      "notes": "The display word Tropon is burgundy/maroon, not black."
+    },
+    {
+      "sample_id": "ab-26470",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject",
+        "scene"
+      ],
+      "notes": "The center shows a dark graphic on an oval panel and architectural/shop forms. No identifiable man in a kimono appears."
+    },
+    {
+      "sample_id": "ab-01229",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-01909",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "relation"
+      ],
+      "notes": "One hand is against the chest and the other is low on the drapery. The arms are not crossed."
+    },
+    {
+      "sample_id": "ab-31570",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-13698",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Darkness is compatible with a deliberately rendered night scene."
+    },
+    {
+      "sample_id": "ab-24310",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-19940",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-43169",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "The man and vessels are clear; the upper architectural detail is hard to identify as a window."
+    },
+    {
+      "sample_id": "ab-35160",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-08982",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "subject"
+      ],
+      "notes": "The woman’s dress/cloak is dark. Her white head covering appears to have been mistaken for a white dress."
+    },
+    {
+      "sample_id": "ab-34514",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-31980",
+      "image_status": "uncertain",
+      "caption_status": "issue",
+      "error_types": [
+        "color"
+      ],
+      "notes": "The line art is predominantly monochrome with a small red accent, not broadly vibrant colors. The right-side figure is heavily clipped at the edge; source print composition was not inspected."
+    },
+    {
+      "sample_id": "ab-32292",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Symmetrical floral pattern and borders are visible; physical object type is hard to prove."
+    },
+    {
+      "sample_id": "ab-41956",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "count",
+        "relation",
+        "scene"
+      ],
+      "notes": "At least three foreground figures are visible at the edge of a bank or sloping path, rather than two seated in a boat."
+    },
+    {
+      "sample_id": "ab-32078",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-17951",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color"
+      ],
+      "notes": "The rider wears a red upper garment. The sky is pale beige and gray rather than clear blue."
+    },
+    {
+      "sample_id": "ab-30342",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "The pale object is a sculpted figure with extended limbs, not merely a piece of cloth."
+    },
+    {
+      "sample_id": "ab-23881",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "count",
+        "scene"
+      ],
+      "notes": "Three other men are clearly visible around the central figure. No cross or carrying away is depicted in the provided frame."
+    },
+    {
+      "sample_id": "ab-20973",
+      "image_status": "uncertain",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "Several heads meet or are clipped at the upper edge. It may be the artist’s framing rather than downstream cropping."
+    },
+    {
+      "sample_id": "ab-28443",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-13754",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "The statue and ecclesiastical headwear are visible; papal identity is unverified."
+    },
+    {
+      "sample_id": "ab-05404",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-27577",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-28887",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-27489",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene",
+        "subject"
+      ],
+      "notes": "The painting shows a dense bed or cluster of flowers. No clear vase or table is visible."
+    },
+    {
+      "sample_id": "ab-35113",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "The hat is a tall pointed bishop’s mitre, not a crown."
+    },
+    {
+      "sample_id": "ab-39393",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "count",
+        "relation"
+      ],
+      "notes": "Only one bottle is clearly visible and the woman’s hand is on or by the table, not clearly holding a glass."
+    },
+    {
+      "sample_id": "ab-19854",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-08372",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "主体大体吻合，是否为宝座和相框在画面难以确认。"
+    },
+    {
+      "sample_id": "ab-22153",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "medium",
+        "pose"
+      ],
+      "notes": "图像更像版画肖像，人物侧身呈坐姿或倚靠。"
+    },
+    {
+      "sample_id": "ab-10629",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-32612",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "pose"
+      ],
+      "notes": "一人站立，另一人坐着。"
+    },
+    {
+      "sample_id": "ab-02778",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-31910",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "打斗和武器清楚，第二人的身份/衣着难判。"
+    },
+    {
+      "sample_id": "ab-03584",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-03649",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-25761",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "主体是装饰性印刷文字页，未见穿西装的男性。"
+    },
+    {
+      "sample_id": "ab-23266",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-00889",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene"
+      ],
+      "notes": "房间以炉灶和炊具为主，所述的桌椅布局不符。"
+    },
+    {
+      "sample_id": "ab-15169",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-18582",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene"
+      ],
+      "notes": "人物位于带船篷的小舟，描述遗漏小舟而写成竹林长凳。"
+    },
+    {
+      "sample_id": "ab-17052",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-38885",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "两人可见，长凳关系在浅色线稿中不明确。"
+    },
+    {
+      "sample_id": "ab-20695",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-24636",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "右边人物穿长袍，描述成西装。"
+    },
+    {
+      "sample_id": "ab-33400",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene"
+      ],
+      "notes": "人物身后为草地和土坡，未见水体。"
+    },
+    {
+      "sample_id": "ab-20758",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-26813",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "废墟和车轮清楚，手持大炮的说法无法确认。"
+    },
+    {
+      "sample_id": "ab-06174",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-37961",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "scene"
+      ],
+      "notes": "盔甲人物身后为山地与浅色人形，没有可辨建筑屋顶。"
+    },
+    {
+      "sample_id": "ab-22572",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "pose"
+      ],
+      "notes": "人物身穿盔甲倚坐于桌旁，描述为穿黑裙站立。"
+    },
+    {
+      "sample_id": "ab-12175",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-18561",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color",
+        "scene"
+      ],
+      "notes": "画面背景为暗色树丛，未见描述中的明亮蓝天。"
+    },
+    {
+      "sample_id": "ab-19736",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-08137",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-35560",
+      "image_status": "uncertain",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": "明信片拼贴外侧局部被切，可能为上游构图。"
+    },
+    {
+      "sample_id": "ab-15404",
+      "image_status": "uncertain",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "上缘切掉人物头部，无法仅从当前副本判定是作者构图还是上游裁剪。 画中裸体人物手持浅色布料，描述成穿白裙。"
+    },
+    {
+      "sample_id": "ab-04104",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "线描人物及手持物不够清楚。"
+    },
+    {
+      "sample_id": "ab-05683",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "近景人物清楚，另一位身份以及衣物和动物难判。"
+    },
+    {
+      "sample_id": "ab-37997",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "鼠与文字可见，具体文字语言不在此次视觉判定范围。"
+    },
+    {
+      "sample_id": "ab-37963",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-01985",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "木箱中可见灵长类与兔样动物，其他暗处细节不明确。"
+    },
+    {
+      "sample_id": "ab-06797",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-07469",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-09020",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-37833",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "建筑及人物清楚，是否战斗难以判断。"
+    },
+    {
+      "sample_id": "ab-07966",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-44656",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "两位人物可见，人物性别与围裙细节难以判断。"
+    },
+    {
+      "sample_id": "ab-23796",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-05490",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-07090",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-44604",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-12996",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "人物及植物清楚，手中物件难以确认。"
+    },
+    {
+      "sample_id": "ab-13332",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "count"
+      ],
+      "notes": "桌边清晰可见三名男子，描述说两名。"
+    },
+    {
+      "sample_id": "ab-07531",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "spatial"
+      ],
+      "notes": "钟楼立在岸边码头上，描述写成河中。"
+    },
+    {
+      "sample_id": "ab-15959",
+      "image_status": "uncertain",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "两侧人物头部明显在画框边缘截断，原因需对照上游图像。可见人物和文字；手中长物是否为剑无法独立确认。"
+    },
+    {
+      "sample_id": "ab-32004",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-02630",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-44672",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "红裙坐姿和植物清楚，顶部形状是否为鸟难以判断。"
+    },
+    {
+      "sample_id": "ab-29743",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "城市广场和塔状建筑可见，是否钟楼难判断。"
+    },
+    {
+      "sample_id": "ab-07535",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-45020",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "低对比单色原图有坡地，描述的中央碎石堆难以确认。"
+    },
+    {
+      "sample_id": "ab-13249",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-45446",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-39198",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "图中人物握细长手杖类物件，未见举标牌。"
+    },
+    {
+      "sample_id": "ab-05028",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "pose"
+      ],
+      "notes": "半身肖像未画出双手，描述给出双手交握。"
+    },
+    {
+      "sample_id": "ab-42971",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-37446",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-25837",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-14856",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-32925",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "pose",
+        "spatial"
+      ],
+      "notes": "一名男子站在左侧、女子仰卧，描述为两人躺在一起。"
+    },
+    {
+      "sample_id": "ab-39724",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-42059",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-30757",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "两位戏服人物可见，衣装的文化归属难以仅据图确认。"
+    },
+    {
+      "sample_id": "ab-28103",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-41671",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-02910",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "color"
+      ],
+      "notes": "主色是褐黄坡地和灰蓝天空，描述成鲜绿草地与亮蓝天。"
+    },
+    {
+      "sample_id": "ab-08450",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "spatial"
+      ],
+      "notes": "蛇沿树下部向上弯曲，没有缠绕人物。"
+    },
+    {
+      "sample_id": "ab-17962",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-30095",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject",
+        "pose"
+      ],
+      "notes": "前景是三位浅色雕像般人物，描述中披白袍抱孩子的动作不符。"
+    },
+    {
+      "sample_id": "ab-38280",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "女子手中是羽状长枝，未见描述的剑与盾。"
+    },
+    {
+      "sample_id": "ab-19669",
+      "image_status": "ok",
+      "caption_status": "uncertain",
+      "error_types": [],
+      "notes": "两人、罐和桶可见，是否正在倒水难以确认。"
+    },
+    {
+      "sample_id": "ab-43297",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-16960",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-40572",
+      "image_status": "ok",
+      "caption_status": "issue",
+      "error_types": [
+        "subject"
+      ],
+      "notes": "同一描述同时称裸体和穿白裙配蓝腰带，图中没有白裙。"
+    },
+    {
+      "sample_id": "ab-07021",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-03690",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    },
+    {
+      "sample_id": "ab-04041",
+      "image_status": "ok",
+      "caption_status": "ok",
+      "error_types": [],
+      "notes": ""
+    }
+  ]
+}

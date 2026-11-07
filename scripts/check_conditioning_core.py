@@ -3,10 +3,14 @@
 import json
 
 import torch
+from _learning_overlay import enable_learning_imports
 from torch.nn import functional as F
 
-from minigen._learning import CoreImplementationRequired
-from minigen.conditioning.cross_attention import TextCrossAttention
+# 历史脚本先启用显式课件路径，再加载旧模块名。
+enable_learning_imports()
+
+from minigen._learning import CoreImplementationRequired  # noqa: E402
+from minigen.conditioning.cross_attention import TextCrossAttention  # noqa: E402
 
 
 def main() -> int:

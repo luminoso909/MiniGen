@@ -122,9 +122,7 @@ class TinyVAE(nn.Module):
             ValueError: 图像形状错误，由 encode 抛出；重参数化函数的异常原样透传。
 
         Results:
-            tuple[Float[Tensor, "b 1 28 28"], Float[Tensor, "b z"], Float[Tensor, "b z"]]: tuple[
-                Float[Tensor, "b 1 28 28"], Float[Tensor, "b z"], Float[Tensor, "b z"]
-            ]: 重建 logits、均值、log variance 三个张量。
+            tuple[Float[Tensor, "b 1 28 28"], Float[Tensor, "b z"], Float[Tensor, "b z"]]: 重建 logits、均值、log variance 三个张量。
         """
         mean, log_variance = self.encode(images)
         latent = reparameterize_fn(mean, log_variance, noise)

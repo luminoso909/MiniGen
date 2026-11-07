@@ -4,8 +4,8 @@ L04 对应 S3-01、S3-02。先完成 L03 的 patch、adaLN-Zero 和个人验收�
 
 | 你负责的核心 | 输入 → 输出 | 位置 | 独立验收 |
 | --- | --- | --- | --- |
-| Cross-Attention | image `[b,n_x,d]`、text `[b,n_y,d_c]`、mask `[b,n_y]` → `[b,n_x,d]` | src/minigen/conditioning/cross_attention.py | scripts/check_conditioning_core.py |
-| CFG | 同形无条件/条件预测、scale → 同形引导预测 | src/minigen/samplers/cfg.py | scripts/check_cfg_core.py |
+| Cross-Attention | image `[b,n_x,d]`、text `[b,n_y,d_c]`、mask `[b,n_y]` → `[b,n_x,d]` | docs/learning/src/minigen/conditioning/cross_attention.py | scripts/check_conditioning_core.py |
+| CFG | 同形无条件/条件预测、scale → 同形引导预测 | docs/learning/src/minigen/samplers/cfg.py | scripts/check_cfg_core.py |
 | 条件模型整合 | noisy、t、text、mask → 噪声 | 在个人 DiT 完成后接入，不预写答案 | mask、梯度、缓存对齐、对照实验 |
 
 Agent 已负责冻结编码器、缓存、数据顺序、训练与采样、指标、成本和报告。你需要理解各步输入、核心公式和证据能支持的结论，不必重写文件下载或日志系统。

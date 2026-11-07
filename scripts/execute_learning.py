@@ -83,12 +83,16 @@ def main() -> None:
     cache = ROOT / ".cache/jupyter"
     kernel_dir = cache / "kernels/minigen-local"
     kernel_dir.mkdir(parents=True, exist_ok=True)
+    learning_path = str(ROOT / "docs" / "learning" / "src")
+    python_path = os.environ.get("PYTHONPATH")
+    kernel_path = learning_path + (os.pathsep + python_path if python_path else "")
     (kernel_dir / "kernel.json").write_text(
         json.dumps(
             {
                 "argv": [sys.executable, "-m", "ipykernel_launcher", "-f", "{connection_file}"],
                 "display_name": "MiniGen local interpreter",
                 "language": "python",
+                "env": {"PYTHONPATH": kernel_path},
             }
         )
     )

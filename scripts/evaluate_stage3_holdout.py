@@ -10,19 +10,23 @@ from typing import Any
 
 import torch
 import yaml
+from _learning_overlay import enable_learning_imports
 from torch import nn
 
-from minigen.autoencoders.frozen import FrozenVAE, hash_file, to_image
-from minigen.conditioning.text import FrozenTextEncoder
-from minigen.data.icons import load_manifest
-from minigen.evaluation.conditional import (
+# 历史脚本先启用显式课件路径，再加载旧模块名。
+enable_learning_imports()
+
+from minigen.autoencoders.frozen import FrozenVAE, hash_file, to_image  # noqa: E402
+from minigen.conditioning.text import FrozenTextEncoder  # noqa: E402
+from minigen.data.icons import load_manifest  # noqa: E402
+from minigen.evaluation.conditional import (  # noqa: E402
     merge_human_review,
     prepare_blind_review,
     score_request,
     summarize,
 )
-from minigen.objectives.ddpm_scheduler import DDPMScheduler
-from minigen.samplers.conditional import sample_conditional
+from minigen.objectives.ddpm_scheduler import DDPMScheduler  # noqa: E402
+from minigen.samplers.conditional import sample_conditional  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 

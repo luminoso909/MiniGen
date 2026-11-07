@@ -1,4 +1,4 @@
-"""验证环境、CLI 与个人核心未实现边界的真实行为。"""
+"""验证环境、CLI 与个人核心的真实行为。"""
 
 import json
 import subprocess
@@ -108,24 +108,52 @@ def test_requested_unavailable_device_is_failure() -> None:
             assert requested["devices"][device]["status"] == "unavailable"
 
 
+def test_personal_dit_patch_order_and_round_trip() -> None:
+    """验证个人 DiT 的切块顺序、逆变换及零门控初始化。
+
+    Raises:
+        AssertionError: patch 数值、恢复结果或初始化输出不符合契约。
+
+    副作用:
+        初始化临时 DiT Block，消耗当前进程的 Torch 随机状态。
+    """
+    latents = torch.arange(32, dtype=torch.float32).reshape(1, 2, 4, 4)
+    # 先按 patch 网格从左到右、从上到下，再按 patch 内像素顺序交织通道。
+    expected = latents.new_tensor(
+        [
+            [0, 16, 1, 17, 4, 20, 5, 21],
+            [2, 18, 3, 19, 6, 22, 7, 23],
+            [8, 24, 9, 25, 12, 28, 13, 29],
+            [10, 26, 11, 27, 14, 30, 15, 31],
+        ]
+    ).unsqueeze(0)
+    tokens = patchify(latents, 2)
+    torch.testing.assert_close(tokens, expected, rtol=0, atol=0)
+    torch.testing.assert_close(unpatchify(tokens, 2, 4, 4, 2), latents, rtol=0, atol=0)
+    block = DiTBlock(hidden_size=8, num_heads=2)
+    torch.testing.assert_close(block(tokens, latents.new_ones(1, 8)), tokens, rtol=0, atol=0)
+
+
 def test_remaining_core_interfaces_never_silently_fall_back() -> None:
-    """验证 DiT、CFG、Flow 个人核心仍明确待做，DDPM/VAE 已独立验收。
+    """验证尚待个人实现的文本注意力、CFG 和 Flow 接口明确报错。
 
     Raises:
         AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
     """
-    x = torch.zeros(2, 4, 4, 4)
-    t = torch.zeros(2, dtype=torch.long)
+    latents = torch.zeros(2, 4, 4, 4)
+    time = torch.zeros(2)
+    image_tokens = torch.zeros(2, 3, 8)
+    text_tokens = torch.zeros(2, 4, 12)
+    text_mask = torch.ones(2, 4, dtype=torch.bool)
     # 每个 lambda 的契约为 Callable[[], object]；预期调用都以待实现异常终止。
     calls = [
-        lambda: patchify(x, 2),
-        lambda: unpatchify(x, 4, 4, 4, 2),
-        lambda: DiTBlock()(x, x),
-        lambda: TextCrossAttention()(x, x, torch.ones(2, 4, dtype=torch.bool)),
-        lambda: classifier_free_guidance(x, x, 1.0),
-        lambda: linear_path(x, x, t.float()),
-        lambda: velocity_loss(x, x),
-        lambda: euler_step(x, x, 0.1),
+        lambda: TextCrossAttention(hidden=8, text_width=12, heads=2)(
+            image_tokens, text_tokens, text_mask
+        ),
+        lambda: classifier_free_guidance(latents, latents, 1.0),
+        lambda: linear_path(latents, latents, time),
+        lambda: velocity_loss(latents, latents),
+        lambda: euler_step(latents, latents, 0.1),
     ]
     for call in calls:
         with pytest.raises(CoreImplementationRequired, match="learning/README.md"):

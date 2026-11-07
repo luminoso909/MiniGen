@@ -1,3 +1,38 @@
+## **一、MiniGen v2.0 任务索引**
+
+正式设计、阶段验收与实验矩阵统一维护在 [MiniGen v2 重构规划](docs/MiniGen2重构规划.md)。本索引追踪 P0–P7 的实际进度。个人课程序号 S4–S7 单独见 [MiniGen v2 学习目录](docs/MiniGen2学习目录.md)。
+
+### **1. 工程阶段与当前进度**
+
+| 阶段 | 本阶段验收重点 | 状态与证据 |
+| --- | --- | --- |
+| P0 仓库审计与迁移 | 当前文件与代码映射，五份 Notebook 哈希，基础检查，统一文档入口 | 已完成，见 [审计](reports/v2/00_repository_audit.md)、[迁移差异](reports/v2/00_migration_diff.md)、[交接](reports/v2/00_handoff.md) |
+| P1 数据接入与审计 | ArtBench 全量 46,298 张，固定来源、逐图解码、组级切分与图文复核 | 全量接入、Caption 清洗与 240 张图文抽查完成。见 [P0/P1 交付](reports/v2/01_p0_p1_delivery.md) |
+| P2 冻结组件 | 随机 200 张重建、人审，CLIP 单段特征与 mask，冻结版本化缓存 | [P2 工程交付](reports/v2/02_p2_delivery.md)：200 张数值审计、CLIP 与缓存试点完成；待用户审核及正式构建 |
+| P3 B0 工程 | 共用 Flow 契约和 B0，真实 CLI，短跑、采样、恢复与成本估算 | 待做，依赖数据、组件和缓存验收 |
+| P4 三主干正式训练 | 先审批并训练 B0，随后加入 B1/B2，统一数据、条件、目标与协议 | 待做，依赖对应核心、短跑、质量及预算验收 |
+| P5 MiniGen-Bench | 训练前冻结测试设计，按同更新步数和同算力报告，匹配 NFE 对照采样 | 待做。预登记提前，正式评测依赖可比检查点 |
+| P6 可选扩展 | 第二种子、单一架构的 10M/50M 扩展或 Chimera-Lite | 默认跳过，由用户在主结果明确后决定 |
+| P7 交付与复现 | 数据卡、模型卡、报告、运行入口、失败分析和可复现示例 | 待做，依赖 P5 |
+
+正式对照采用 256×256 ArtBench、冻结 SDXL VAE/CLIP-B/32 与同一 Flow Matching 目标，训练三个从零初始化的约 30M 条件主干。层数与计算预算由参数计数、短跑和审批冻结。配置、短训、个人理解、生成质量和正式结果分别登记。
+
+### **2. 个人学习与既有证据**
+
+S4-01 从线性 Flow、Euler/Heun 与 NFE 开始，再按 [课程顺序](docs/MiniGen2学习目录.md) 进入 Plain、Joint Attention/2D RoPE、Single-Stream、Hybrid 和实验评测。首份课件由用户启动学习回合后交付。
+
+- S1 的 DDPM/VAE 个人数学核心已验收，教学结果和理解收尾分别记录。见 [S1 验收](reports/stage1/s1_acceptance_2026-10-30.md)。
+- S2 保留几何数据、冻结表示、缓存和训练恢复证据。历史生成质量未达标。当前工作树 L03 小案例通过，完整模型的 v2 适配待验。见 [S2 第四周报告](reports/stage2/week4.md) 与 [P0 审计](reports/v2/00_repository_audit.md)。
+- S3 保留条件实验、人工待审、封存测试与二维 Flow。见 [S3 报告](reports/stage3/stage3.md)。
+- 五份课件从 [只读学习导航](docs/learning/README.md) 打开，个人任务见 [任务导航](learning/README.md)。
+
+## **二、v1 任务与学习记录存档**
+
+以下保留 v1 原文及其当时的执行记录。旧 S4/S5 的未来任务、正式 DDPM/Flow 比较、Sana/OpenMoji/LoRA、原日期与预算均已由 v2 方案取代。旧教学任务编号和已发生的结果继续可追溯。
+
+<details>
+<summary>展开 v1 历史清单与原始实验设计</summary>
+
 ## **一、总任务清单与使用方法**
 
 > **MiniGen：面向可控图标与插画生成的小型生成模型实验系统。** 亲手实现核心算法，以受控实验研究扩散与 Flow 的质量、条件遵循和计算效率，并完成一次现代预训练模型的领域适配。
@@ -901,3 +936,5 @@ S3 沿用第五章的 S3-01 至 S3-06，不重编号。本轮交付完整中文�
 S3-06 只预研：二维独立端点 Flow 不是全局 OT，也不是图像生成；Sana 组件加载/推理/50 步更新另在 S4 验收；REPA/RAE/MeanFlow 各一页卡，不并行扩张。主实验固定四组训练和真实成本，比较两套路径、时间目标与采样配方，不预设 Flow 胜出，见 [S4 预登记](configs/experiments/s4_preregistered.yaml)。
 
 本轮真实状态与后续项以 [S3 交接](reports/tasks/stage3.md) 为准；新证据不能改写前几周教学实验的模型来源。
+
+</details>

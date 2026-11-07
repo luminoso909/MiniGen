@@ -4,7 +4,7 @@
 
 ### **1. 输入、输出与修改范围**
 
-只修改 `src/minigen/autoencoders/vae_core.py` 中现有两个函数主体，保留签名。Agent 负责数学审查和工程接入，不从 Notebook 导入答案到项目核心。
+只修改 `docs/learning/src/minigen/autoencoders/vae_core.py` 中现有两个函数主体，保留签名。Agent 负责数学审查和工程接入，不从 Notebook 导入答案到项目核心。
 
 | 接口 | 输入 | 输出与约定 |
 | --- | --- | --- |

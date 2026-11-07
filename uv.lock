@@ -228,6 +228,34 @@ css = [
 ]
 
 [[package]]
+name = "cairocffi"
+version = "1.7.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cffi" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/70/c5/1a4dc131459e68a173cbdab5fad6b524f53f9c1ef7861b7698e998b837cc/cairocffi-1.7.1.tar.gz", hash = "sha256:2e48ee864884ec4a3a34bfa8c9ab9999f688286eb714a15a43ec9d068c36557b", size = 88096, upload-time = "2024-06-18T10:56:06.741Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/93/d8/ba13451aa6b745c49536e87b6bf8f629b950e84bd0e8308f7dc6883b67e2/cairocffi-1.7.1-py3-none-any.whl", hash = "sha256:9803a0e11f6c962f3b0ae2ec8ba6ae45e957a146a004697a1ac1bbf16b073b3f", size = 75611, upload-time = "2024-06-18T10:55:59.489Z" },
+]
+
+[[package]]
+name = "cairosvg"
+version = "2.9.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cairocffi" },
+    { name = "cssselect2" },
+    { name = "defusedxml" },
+    { name = "pillow" },
+    { name = "tinycss2" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c6/80/db62c0a96d2e55282c83524f6b1d02f09c7fd7f612e93bf83e30de1dc75c/cairosvg-2.9.1.tar.gz", hash = "sha256:861bc28ad97ce4f537d50eb3d6ee97a7afcccec9c61ac25c4e7d073fe409aec7", size = 41256, upload-time = "2026-09-07T10:35:09.563Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/41/51/8041c2e70649e5b7f2a0aedbbbd0609ac099cfaa0cbde2014279c9c05756/cairosvg-2.9.1-py3-none-any.whl", hash = "sha256:f91c5628e834be024a0ed4544d76261cd84016a4c73bcdf26c386495825c05a1", size = 46165, upload-time = "2026-09-07T10:35:07.952Z" },
+]
+
+[[package]]
 name = "certifi"
 version = "2026.10.23"
 source = { registry = "https://pypi.org/simple" }
@@ -347,6 +375,19 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ac/f0/b75a10e9d0616b97a30de277b6dfe83f1879880854c7330337309530eb48/contourpy-1.4.0-cp312-cp312-win32.whl", hash = "sha256:5450f091ac1be0be3ad3a2a3b3f23b5e443e78c670ced4fd347d626f92a28fd2", size = 347345, upload-time = "2026-09-11T19:03:06.192Z" },
     { url = "https://files.pythonhosted.org/packages/50/a9/dab08786bb4d77ef9a046b3c1be923be4e73c5d07d91f5a54e8ea9b09e41/contourpy-1.4.0-cp312-cp312-win_amd64.whl", hash = "sha256:6e697d94e69f499ff6bebb899cae97a58d5d14f0e1fe9568b43a0248d2f9af8c", size = 234083, upload-time = "2026-09-11T19:03:08.122Z" },
     { url = "https://files.pythonhosted.org/packages/47/b9/3ba509755a970dbde5948e7142ac21f266be72f38017cc4087a05fdceee1/contourpy-1.4.0-cp312-cp312-win_arm64.whl", hash = "sha256:0c7a4c2716a4e98342221954416a836cca77c996c14ddbf22b5f01d5d93ca09c", size = 559521, upload-time = "2026-09-11T19:03:10.047Z" },
+]
+
+[[package]]
+name = "cssselect2"
+version = "0.10.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "tinycss2" },
+    { name = "webencodings" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/06/00/2456b6b664c7a770989cbe3c352aac4eb962c938486f03a2e1255ae963c6/cssselect2-0.10.1.tar.gz", hash = "sha256:83b0d820ef589dabaf693289b647c2f5b410f76d285f56deba911ffa75a7b9d1", size = 35653, upload-time = "2026-08-31T21:57:42.59Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bd/59/6b1daa3b94de8970e2a2787ba73616c2d0675d2f948ef4cad8bef7f21bc6/cssselect2-0.10.1-py3-none-any.whl", hash = "sha256:25cc4494d55985d6a6da359be48da6ce98c28dcbafa2314c383ace3fc32ec868", size = 15489, upload-time = "2026-08-31T21:57:41.162Z" },
 ]
 
 [[package]]
@@ -500,6 +541,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/81/e1/56027a71e31b02ddc53c7d65b01e68edf64dea2932122fe7746a516f75d5/dill-0.4.1.tar.gz", hash = "sha256:423092df4182177d4d8ba8290c8a5b640c66ab35ec7da59ccfa00f6fa3eea5fa", size = 187315, upload-time = "2026-01-19T02:36:56.85Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1e/77/dc8c558f7593132cf8fefec57c4f60c83b16941c574ac5f619abb3ae7933/dill-0.4.1-py3-none-any.whl", hash = "sha256:1e1ce33e978ae97fcfcff5638477032b801c46c7c65cf717f95fbc2248f79a9d", size = 120019, upload-time = "2026-01-19T02:36:55.663Z" },
+]
+
+[[package]]
+name = "einops"
+version = "0.8.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/2c/77/850bef8d72ffb9219f0b1aac23fbc1bf7d038ee6ea666f331fa273031aa2/einops-0.8.2.tar.gz", hash = "sha256:609da665570e5e265e27283aab09e7f279ade90c4f01bcfca111f3d3e13f2827", size = 56261, upload-time = "2026-01-26T04:13:17.638Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/09/f8d8f8f31e4483c10a906437b4ce31bdf3d6d417b73fe33f1a8b59e34228/einops-0.8.2-py3-none-any.whl", hash = "sha256:54058201ac7087911181bfec4af6091bb59380360f069276601256a76af08193", size = 65638, upload-time = "2026-01-26T04:13:18.546Z" },
 ]
 
 [[package]]
@@ -1148,6 +1198,7 @@ name = "minigen"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "einops" },
     { name = "jaxtyping" },
     { name = "matplotlib" },
     { name = "numpy" },
@@ -1159,6 +1210,10 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+artbench = [
+    { name = "pyarrow" },
+    { name = "transformers" },
+]
 conditioning = [
     { name = "safetensors" },
     { name = "transformers" },
@@ -1186,6 +1241,10 @@ notebook = [
     { name = "nbconvert" },
     { name = "nbformat" },
 ]
+svg = [
+    { name = "cairosvg" },
+    { name = "defusedxml" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -1196,9 +1255,12 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "accelerate", marker = "extra == 'generation'", specifier = ">=1,<2" },
+    { name = "cairosvg", marker = "extra == 'svg'", specifier = ">=2.8,<3" },
     { name = "datasets", marker = "extra == 'generation'", specifier = ">=3,<5" },
+    { name = "defusedxml", marker = "extra == 'svg'", specifier = ">=0.7,<1" },
     { name = "diffusers", marker = "extra == 'generation'", specifier = ">=0.33,<1" },
     { name = "diffusers", marker = "extra == 'latent'", specifier = ">=0.33,<1" },
+    { name = "einops", specifier = ">=0.8.2" },
     { name = "huggingface-hub", marker = "extra == 'generation'", specifier = ">=0.30,<2" },
     { name = "huggingface-hub", marker = "extra == 'latent'", specifier = ">=0.30,<2" },
     { name = "ipykernel", marker = "extra == 'notebook'", specifier = ">=6,<8" },
@@ -1212,6 +1274,7 @@ requires-dist = [
     { name = "opencv-python-headless", marker = "extra == 'latent'", specifier = ">=4.11,<5" },
     { name = "peft", marker = "extra == 'generation'", specifier = ">=0.15,<1" },
     { name = "pillow", specifier = ">=11,<13" },
+    { name = "pyarrow", marker = "extra == 'artbench'", specifier = ">=26,<27" },
     { name = "pypdf", marker = "extra == 'latent'", specifier = ">=5,<7" },
     { name = "pyyaml", specifier = ">=6,<7" },
     { name = "safetensors", marker = "extra == 'conditioning'", specifier = ">=0.5,<1" },
@@ -1220,10 +1283,11 @@ requires-dist = [
     { name = "torch", specifier = ">=2.7,<3" },
     { name = "torchvision", specifier = ">=0.22,<1" },
     { name = "tqdm", specifier = ">=4.67,<5" },
+    { name = "transformers", marker = "extra == 'artbench'", specifier = ">=4.51,<6" },
     { name = "transformers", marker = "extra == 'conditioning'", specifier = ">=4.51,<6" },
     { name = "transformers", marker = "extra == 'generation'", specifier = ">=4.51,<6" },
 ]
-provides-extras = ["conditioning", "latent", "generation", "notebook"]
+provides-extras = ["artbench", "svg", "conditioning", "latent", "generation", "notebook"]
 
 [package.metadata.requires-dev]
 dev = [

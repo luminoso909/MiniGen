@@ -17,9 +17,18 @@ dependencies = [
   "matplotlib>=3.10,<4",
   "tqdm>=4.67,<5",
   "jaxtyping>=0.3,<0.4",
+  "einops>=0.8.2",
 ]
 
 [project.optional-dependencies]
+artbench = [
+  "pyarrow>=26,<27",
+  "transformers>=4.51,<6",
+]
+svg = [
+  "CairoSVG>=2.8,<3",
+  "defusedxml>=0.7,<1",
+]
 conditioning = [
   "transformers>=4.51,<6",
   "safetensors>=0.5,<1",
@@ -61,6 +70,7 @@ addopts = "-ra"
 [tool.ruff]
 target-version = "py312"
 line-length = 100
+src = ["src", "docs/learning/src"]
 extend-exclude = [".cache", "data", "artifacts"]
 
 [tool.ruff.lint]
@@ -72,26 +82,35 @@ select = ["E", "F", "I", "UP", "B"]
 
 # jaxtyping 形状字符串不是前向类型引用；只豁免这些文件的 F722，保留 F821。
 "src/minigen/_typing.py" = ["F722"]
-"src/minigen/autoencoders/frozen.py" = ["F722"]
-"src/minigen/autoencoders/vae_core.py" = ["F722"]
-"src/minigen/evaluation/latent.py" = ["F722"]
-"src/minigen/models/dit_block.py" = ["F722"]
-"src/minigen/models/tiny_unet.py" = ["F722"]
-"src/minigen/models/tiny_vae.py" = ["F722"]
-"src/minigen/objectives/ddpm_scheduler.py" = ["F722"]
-"src/minigen/objectives/flow_objective.py" = ["F722"]
-"src/minigen/samplers/cfg.py" = ["F722"]
-"src/minigen/samplers/ddpm_loop.py" = ["F722"]
-"src/minigen/training/denoising.py" = ["F722"]
-"src/minigen/training/vae.py" = ["F722"]
+"docs/learning/src/minigen/autoencoders/frozen.py" = ["F722"]
+"docs/learning/src/minigen/autoencoders/vae_core.py" = ["F722"]
+"docs/learning/src/minigen/evaluation/latent.py" = ["F722"]
+"docs/learning/src/minigen/models/dit_block.py" = ["F722"]
+"docs/learning/src/minigen/models/tiny_unet.py" = ["F722"]
+"docs/learning/src/minigen/models/tiny_vae.py" = ["F722"]
+"docs/learning/src/minigen/objectives/ddpm_scheduler.py" = ["F722"]
+"docs/learning/src/minigen/objectives/flow_objective.py" = ["F722"]
+"docs/learning/src/minigen/samplers/cfg.py" = ["F722"]
+"docs/learning/src/minigen/samplers/ddpm_loop.py" = ["F722"]
+"docs/learning/src/minigen/training/denoising.py" = ["F722"]
+"docs/learning/src/minigen/training/vae.py" = ["F722"]
 "tests/test_week1_engineering.py" = ["F722"]
 "tests/test_week2.py" = ["F722"]
 "tests/test_week3_engineering.py" = ["F722"]
-"src/minigen/data/latent.py" = ["F722"]
-"src/minigen/training/latent.py" = ["F722"]
+"docs/learning/src/minigen/data/latent.py" = ["F722"]
+"docs/learning/src/minigen/training/latent.py" = ["F722"]
 "tests/test_week4_engineering.py" = ["F722"]
-"src/minigen/conditioning/text.py" = ["F722"]
-"src/minigen/conditioning/cross_attention.py" = ["F722"]
-"src/minigen/training/conditional.py" = ["F722"]
-"src/minigen/samplers/conditional.py" = ["F722"]
+"docs/learning/src/minigen/conditioning/text.py" = ["F722"]
+"docs/learning/src/minigen/conditioning/cross_attention.py" = ["F722"]
+"docs/learning/src/minigen/training/conditional.py" = ["F722"]
+"docs/learning/src/minigen/samplers/conditional.py" = ["F722"]
 "tests/test_stage3.py" = ["F722"]
+
+"src/minigen/autoencoders/sdxl.py" = ["F722"]
+"src/minigen/conditioning/clip.py" = ["F722"]
+"src/minigen/data/representation_cache.py" = ["F722"]
+"src/minigen/evaluation/reconstruction.py" = ["F722"]
+"tests/test_representation_cache.py" = ["F722"]
+"src/minigen/evaluation/reconstruction_metrics.py" = ["F722"]
+"src/minigen/evaluation/reconstruction_review.py" = ["F722"]
+"tests/test_clip_p2.py" = ["F722"]

@@ -1,0 +1,173 @@
+{
+  "status": "passed",
+  "device": "cpu",
+  "python": "3.12.14",
+  "torch": "2.14.1",
+  "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+  "clip_lock_sha256": "f3075c34e5cbb575fcfa75b46220d036ac89cd7310a650ace9d57b5130aeca88",
+  "encoder": {
+    "repo_id": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "files": {
+      "config.json": {
+        "sha256": "412ab5681034d6c7496d8bbcc1f4995a8efaf14b64ff0515cbf56680a1e63bc2",
+        "bytes": 943
+      },
+      "model.safetensors": {
+        "sha256": "73c3428fc48ba1fe924733f5bc81282980f2c7a128851745e75ab343e231e504",
+        "bytes": 252684896
+      },
+      "merges.txt": {
+        "sha256": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85",
+        "bytes": 524657
+      },
+      "vocab.json": {
+        "sha256": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363",
+        "bytes": 862328
+      },
+      "tokenizer.json": {
+        "sha256": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842",
+        "bytes": 2224041
+      },
+      "tokenizer_config.json": {
+        "sha256": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad",
+        "bytes": 592
+      },
+      "special_tokens_map.json": {
+        "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf",
+        "bytes": 389
+      }
+    },
+    "encoding": {
+      "version": "clip-text-single-v1",
+      "context_tokens": 77,
+      "max_content_tokens": 75,
+      "hidden_width": 512,
+      "features": "last_hidden_state",
+      "compute_dtype": "float32",
+      "mask": "true for BOS/content/EOS; false for right padding",
+      "bos_token_id": 49406,
+      "eos_token_id": 49407,
+      "pad_token_id": 49407
+    }
+  },
+  "length_audit": {
+    "total": 46298,
+    "split_counts": {
+      "train": 37042,
+      "validation": 4637,
+      "test": 4619
+    },
+    "content_tokens_min": 12,
+    "content_tokens_max": 75,
+    "content_tokens_histogram": {
+      "12": 191,
+      "13": 9,
+      "14": 14,
+      "15": 105,
+      "16": 161,
+      "17": 131,
+      "18": 141,
+      "19": 221,
+      "20": 254,
+      "21": 261,
+      "22": 354,
+      "23": 455,
+      "24": 564,
+      "25": 609,
+      "26": 620,
+      "27": 729,
+      "28": 711,
+      "29": 676,
+      "30": 698,
+      "31": 790,
+      "32": 796,
+      "33": 880,
+      "34": 963,
+      "35": 1038,
+      "36": 1144,
+      "37": 1138,
+      "38": 1194,
+      "39": 1220,
+      "40": 1237,
+      "41": 1165,
+      "42": 1079,
+      "43": 1123,
+      "44": 1029,
+      "45": 1013,
+      "46": 977,
+      "47": 950,
+      "48": 998,
+      "49": 921,
+      "50": 896,
+      "51": 826,
+      "52": 783,
+      "53": 801,
+      "54": 751,
+      "55": 847,
+      "56": 806,
+      "57": 797,
+      "58": 862,
+      "59": 858,
+      "60": 865,
+      "61": 847,
+      "62": 835,
+      "63": 809,
+      "64": 796,
+      "65": 798,
+      "66": 774,
+      "67": 765,
+      "68": 769,
+      "69": 661,
+      "70": 688,
+      "71": 609,
+      "72": 684,
+      "73": 539,
+      "74": 548,
+      "75": 525
+    },
+    "zero_tokens": 0,
+    "over_capacity": 0,
+    "embedded_special_tokens": 0,
+    "manifest_count_mismatches": 0
+  },
+  "probe_seed": 20261107,
+  "condition_probe": {
+    "same_image_id": "ab-00000",
+    "same_image_sha256": "166bf607fd90de9de67ad6f67715253bc7c34541bcbd824cece38b258cfcd197",
+    "caption_sample_ids": [
+      "ab-00000",
+      "ab-07820"
+    ],
+    "caption_content_tokens": [
+      12,
+      33
+    ],
+    "feature_shape": [
+      6,
+      77,
+      512
+    ],
+    "mask_valid_counts": [
+      14,
+      35,
+      2,
+      2,
+      3,
+      77
+    ],
+    "fp16_visible_values": 68096,
+    "fp16_abs_mean": 0.00012957231956534088,
+    "fp16_abs_max": 0.0038633346557617188,
+    "fp16_rmse": 0.0002197947324020788,
+    "valid_feature_abs_diff_mean": 0.7787745594978333,
+    "conditioned_output_abs_diff_mean": 0.36706942319869995,
+    "text_projection_gradient_norm": 2.0586025714874268,
+    "query_projection_gradient_norm": 0.01964077726006508,
+    "masked_padding_perturbation_max_output_diff": 0.0,
+    "clip_parameters": 63165952,
+    "clip_trainable_parameters": 0,
+    "clip_parameters_with_grad": 0
+  },
+  "seconds": 2.613
+}

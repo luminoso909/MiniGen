@@ -1,0 +1,720 @@
+{
+  "scope": "audit_only",
+  "revision": "df38e5ef633be067d397df7da19a9f009e69b3bd",
+  "repo_id": "kawwaaa/openclipart",
+  "card_reported_rows": 178604,
+  "full_shard_bytes": 22340611707,
+  "seed": 20261106,
+  "sample_requested": 400,
+  "sampled": 400,
+  "frame_rows": 1146,
+  "prefix_bytes": 97517568,
+  "shards": [
+    {
+      "path": "openclipart_00.jsonl.zst",
+      "frame_rows": 54,
+      "selected_rows": [
+        0,
+        4,
+        8,
+        10,
+        12,
+        14,
+        15,
+        21,
+        23,
+        25,
+        26,
+        27,
+        30,
+        32,
+        33,
+        36,
+        37,
+        42,
+        43,
+        44,
+        45,
+        47,
+        49,
+        50
+      ],
+      "prefix_sha256": "773b4659d34002f45b8c054629d86df875f8ed7c8f01683d9ab1b955f0f7342e"
+    },
+    {
+      "path": "openclipart_01.jsonl.zst",
+      "frame_rows": 38,
+      "selected_rows": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        10,
+        11,
+        13,
+        14,
+        17,
+        18,
+        19,
+        20,
+        22,
+        24,
+        25,
+        26,
+        27,
+        30,
+        31,
+        32,
+        33,
+        34,
+        37
+      ],
+      "prefix_sha256": "4e3811079d1a12065a0ed312ff48d05ed27601f29a3fdeda0e380fdb1f0dca6f"
+    },
+    {
+      "path": "openclipart_02.jsonl.zst",
+      "frame_rows": 44,
+      "selected_rows": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        22,
+        23,
+        25,
+        29,
+        30,
+        34,
+        39,
+        40,
+        42
+      ],
+      "prefix_sha256": "a8eecae3337dc63c011b788e68d7b34479496f5b6e496b9ee9b83defeb14bd33"
+    },
+    {
+      "path": "openclipart_03.jsonl.zst",
+      "frame_rows": 100,
+      "selected_rows": [
+        3,
+        12,
+        13,
+        24,
+        32,
+        36,
+        44,
+        45,
+        46,
+        47,
+        49,
+        51,
+        56,
+        57,
+        60,
+        64,
+        66,
+        67,
+        69,
+        78,
+        87,
+        90,
+        96,
+        98
+      ],
+      "prefix_sha256": "9a3ca70da97cd716b4f17fd60b5095b13ddf200451eb8697a36f3d8434ab8b4d"
+    },
+    {
+      "path": "openclipart_04.jsonl.zst",
+      "frame_rows": 58,
+      "selected_rows": [
+        2,
+        4,
+        9,
+        13,
+        15,
+        18,
+        20,
+        23,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        35,
+        37,
+        41,
+        44,
+        47,
+        49,
+        50,
+        53,
+        56,
+        57
+      ],
+      "prefix_sha256": "1a790eb38a03d84fc5f3eeb4599028b748c001723e4e17fba03f786f5e2d5286"
+    },
+    {
+      "path": "openclipart_05.jsonl.zst",
+      "frame_rows": 88,
+      "selected_rows": [
+        1,
+        2,
+        6,
+        10,
+        11,
+        15,
+        19,
+        21,
+        28,
+        29,
+        32,
+        40,
+        47,
+        53,
+        64,
+        65,
+        67,
+        68,
+        73,
+        74,
+        81,
+        83,
+        85,
+        86
+      ],
+      "prefix_sha256": "9f052a62d35958db2b1e15e818b1ee0a539e829ce2db0b1934c94048ccb03bfc"
+    },
+    {
+      "path": "openclipart_06.jsonl.zst",
+      "frame_rows": 42,
+      "selected_rows": [
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        22,
+        24,
+        26,
+        28,
+        29,
+        30,
+        31,
+        34,
+        35,
+        37,
+        38
+      ],
+      "prefix_sha256": "9938da70a3c0fb06eaf27de151ab9e6918ff4e6c1fcf08dea6bcf67b7d3f43e4"
+    },
+    {
+      "path": "openclipart_07.jsonl.zst",
+      "frame_rows": 104,
+      "selected_rows": [
+        7,
+        13,
+        14,
+        16,
+        20,
+        35,
+        36,
+        39,
+        40,
+        41,
+        43,
+        46,
+        47,
+        60,
+        68,
+        70,
+        79,
+        81,
+        83,
+        89,
+        93,
+        94,
+        97,
+        100
+      ],
+      "prefix_sha256": "115082260464ff1b8e3f6e01a720889291cd913fdd205a43ce31e7d080b20069"
+    },
+    {
+      "path": "openclipart_08.jsonl.zst",
+      "frame_rows": 68,
+      "selected_rows": [
+        0,
+        4,
+        5,
+        6,
+        8,
+        9,
+        14,
+        18,
+        19,
+        23,
+        24,
+        28,
+        31,
+        36,
+        40,
+        41,
+        47,
+        50,
+        53,
+        59,
+        62,
+        64,
+        65,
+        66
+      ],
+      "prefix_sha256": "bbc239e78bd9c0eeb4b36b849067551515a85e31db6c4eb7a11e3661972f7e73"
+    },
+    {
+      "path": "openclipart_09.jsonl.zst",
+      "frame_rows": 120,
+      "selected_rows": [
+        6,
+        13,
+        15,
+        17,
+        21,
+        29,
+        30,
+        31,
+        32,
+        42,
+        46,
+        49,
+        56,
+        60,
+        64,
+        77,
+        78,
+        85,
+        89,
+        90,
+        91,
+        99,
+        103,
+        116
+      ],
+      "prefix_sha256": "2dfd48b6087240d39b447cd800e64ad2523adc6e58409fc79a33ca11e3c3968b"
+    },
+    {
+      "path": "openclipart_10.jsonl.zst",
+      "frame_rows": 28,
+      "selected_rows": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "prefix_sha256": "dbfe44d2a86fa856864dd20ffde4389efd7ec566b2383a86d4b62887ac1a915f"
+    },
+    {
+      "path": "openclipart_11.jsonl.zst",
+      "frame_rows": 9,
+      "selected_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "prefix_sha256": "81a75b6cbb94006b2efd93af97e26982b3affbc10faee53347420027c1863771"
+    },
+    {
+      "path": "openclipart_12.jsonl.zst",
+      "frame_rows": 71,
+      "selected_rows": [
+        0,
+        3,
+        12,
+        16,
+        18,
+        19,
+        24,
+        26,
+        35,
+        37,
+        39,
+        42,
+        43,
+        44,
+        47,
+        49,
+        50,
+        51,
+        56,
+        58,
+        59,
+        61,
+        63,
+        65,
+        69
+      ],
+      "prefix_sha256": "448733dc2e8bae44e79f15675f469b9165e692db0639765e2267b9609c627cd1"
+    },
+    {
+      "path": "openclipart_13.jsonl.zst",
+      "frame_rows": 90,
+      "selected_rows": [
+        4,
+        11,
+        12,
+        13,
+        18,
+        20,
+        23,
+        26,
+        34,
+        37,
+        42,
+        43,
+        45,
+        46,
+        47,
+        58,
+        59,
+        64,
+        66,
+        70,
+        75,
+        77,
+        81,
+        89
+      ],
+      "prefix_sha256": "183f0caef67711af05f77043419da9e732c83a3bcde65f45220ad7ef60cc5663"
+    },
+    {
+      "path": "openclipart_14.jsonl.zst",
+      "frame_rows": 82,
+      "selected_rows": [
+        2,
+        4,
+        7,
+        10,
+        11,
+        12,
+        20,
+        22,
+        23,
+        24,
+        31,
+        32,
+        34,
+        39,
+        42,
+        47,
+        50,
+        52,
+        54,
+        59,
+        60,
+        62,
+        67,
+        74,
+        78
+      ],
+      "prefix_sha256": "e22e58765d3f839a0feca3c9664d442fce7aca0c211904ae5cbf50beb62d55f0"
+    },
+    {
+      "path": "openclipart_15.jsonl.zst",
+      "frame_rows": 115,
+      "selected_rows": [
+        3,
+        4,
+        14,
+        27,
+        33,
+        37,
+        39,
+        50,
+        52,
+        58,
+        59,
+        61,
+        63,
+        67,
+        69,
+        84,
+        86,
+        88,
+        94,
+        98,
+        100,
+        104,
+        109,
+        110
+      ],
+      "prefix_sha256": "bc81d623421c65c1e5c1e4655d69a9d354071f0c66acfa4a9e573b31dbc3ec91"
+    },
+    {
+      "path": "openclipart_16.jsonl.zst",
+      "frame_rows": 30,
+      "selected_rows": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "prefix_sha256": "6cc4f8a5f49ae50bd22305c93bc1e8d9454dc8dc46bca15677a19edea8e4855c"
+    },
+    {
+      "path": "openclipart_17.jsonl.zst",
+      "frame_rows": 5,
+      "selected_rows": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "prefix_sha256": "ab9f26d6665416b25cf3b948d869423ab214d9714302df09e80cb5753ad4e9c6"
+    }
+  ],
+  "render_attempted": 392,
+  "rendered": 231,
+  "failures": {
+    "too_complex": 62,
+    "unsafe_feature": 93,
+    "oversized_jsonl_row": 8,
+    "bad_geometry": 2,
+    "malformed_xml": 2,
+    "render_failed": 1,
+    "empty_render": 1
+  },
+  "renderers": [
+    "CairoSVG 2.9.1"
+  ],
+  "source_years": {
+    "2006": 3,
+    "2007": 5,
+    "2008": 8,
+    "2009": 9,
+    "2010": 24,
+    "2011": 25,
+    "2012": 18,
+    "2013": 20,
+    "2014": 20,
+    "2015": 50,
+    "2016": 54,
+    "2017": 44,
+    "2018": 25,
+    "2019": 12,
+    "2020": 24,
+    "2021": 16,
+    "2022": 10,
+    "2023": 15,
+    "2024": 8,
+    "2025": 2
+  },
+  "top_tags": [
+    [
+      "animal",
+      37
+    ],
+    [
+      "cartoon",
+      26
+    ],
+    [
+      "icon",
+      23
+    ],
+    [
+      "dog",
+      22
+    ],
+    [
+      "school",
+      18
+    ],
+    [
+      "bird",
+      17
+    ],
+    [
+      "cat",
+      17
+    ],
+    [
+      "plant",
+      17
+    ],
+    [
+      "silhouette",
+      16
+    ],
+    [
+      "kitchen",
+      16
+    ],
+    [
+      "flower",
+      15
+    ],
+    [
+      "Comic characters",
+      14
+    ],
+    [
+      "medicine",
+      14
+    ],
+    [
+      "Man",
+      13
+    ],
+    [
+      "man",
+      12
+    ],
+    [
+      "Semi-Realistic People",
+      12
+    ],
+    [
+      "sign",
+      12
+    ],
+    [
+      "pet",
+      12
+    ],
+    [
+      "Bible",
+      11
+    ],
+    [
+      "face",
+      11
+    ],
+    [
+      "Abstract",
+      11
+    ],
+    [
+      "girl",
+      11
+    ],
+    [
+      "vintage",
+      11
+    ],
+    [
+      "Black",
+      11
+    ],
+    [
+      "upload2openclipart",
+      11
+    ],
+    [
+      "African American",
+      11
+    ],
+    [
+      "Male",
+      11
+    ],
+    [
+      "People",
+      11
+    ],
+    [
+      "Human",
+      11
+    ],
+    [
+      "color",
+      10
+    ]
+  ],
+  "has_transparency": 226,
+  "has_svg_text": 8,
+  "has_style_review_tags": 7,
+  "landscape": 107,
+  "portrait": 95,
+  "group_trial": {
+    "same_asset_pairs": 0,
+    "same_artist_pairs": 753,
+    "exact_svg_pairs": 0,
+    "exact_png_pairs": 0,
+    "train": 185,
+    "validation": 23,
+    "test": 23,
+    "rows": 231,
+    "groups": 101,
+    "max_group_size": 25,
+    "dhash_equal_pairs": 1,
+    "dhash_near_pairs": 4,
+    "dhash_candidate_pairs": 5
+  },
+  "caption_pilot_unlabelled": 120,
+  "formal_manifest_frozen": false
+}

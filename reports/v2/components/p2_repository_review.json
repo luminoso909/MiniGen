@@ -1,0 +1,59 @@
+{
+  "checks": {
+    "pytest": {
+      "passed": 146,
+      "failed": 0
+    },
+    "ruff_active": "passed",
+    "ruff_format_active": "passed",
+    "annotation_issues_active": 0,
+    "annotation_issues_archived_dit": 37,
+    "ruff_global_issues": 16,
+    "ruff_global_files_needing_format": 10,
+    "uv_lock_offline": "passed",
+    "cpu_doctor": "passed",
+    "wheel_contains_no_learning_sources": true
+  },
+  "notebooks_unchanged_sha256": {
+    "docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb": "b9d21a00094821dbe62966269a119c23857290fa555e09bcdb912692141f9aad",
+    "docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb": "847b1616649db3921e27078a6e380be6ef97be7d74cf1a01854b01857bbc1313",
+    "docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb": "e3d16df5756fbcde34eec5018b16ebec57f2794e198e0563c97dcc160c7ef46d",
+    "docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb": "981544abeef7a930a0ba2c4d0eb5afa92d5cf754d01c07523a070bf2aa1a8db9",
+    "docs/learning/S3_文本条件CFG与可信评测.ipynb": "947a8db6c961d624bbeb0cdb03d7d5c200dccc56d3e8a69b29684ebb65ec0c60",
+    "docs/learning/S4_01_FlowMatching原理与ODE采样.ipynb": "187e6c98ee0259e8fb2d4f3c2e05267a779acd2f9b487dda63f5c9f71dd69633",
+    "docs/learning/S4_02_LatentFlow与PlainDiT训练闭环.ipynb": "5212feb5746c8dc8ec18f363b5ed1ea7b3ad7a6a57a69e445bd1b7af01bb797e",
+    "docs/learning/S5_01_JointAttention与2DRoPE.ipynb": "a462d7fdaea781c9a10276086a0f878f6b84fcdae36f6d3f9bff3787f7313189",
+    "docs/learning/S5_02_SingleStreamDiT架构与实现.ipynb": "400e014ad1f768b1c83af3c0f8dce30f967a4f8e701e4b78374e90405cc337b9",
+    "docs/learning/S6_01_HybridDiT双流单流架构.ipynb": "eee10dd90bc26344f11fdf68dd11fce70e02ecd2992361a9c112249810fb75e5"
+  },
+  "historical_modules_byte_identical": {
+    "_learning.py": true,
+    "autoencoders/vae_core.py": true,
+    "conditioning/cross_attention.py": true,
+    "conditioning/text.py": true,
+    "data/mnist.py": true,
+    "data/icons.py": false,
+    "evaluation/icons.py": true,
+    "evaluation/latent.py": true,
+    "evaluation/conditional.py": true,
+    "models/tiny_unet.py": true,
+    "models/tiny_vae.py": true,
+    "models/dit_block.py": true,
+    "objectives/ddpm_scheduler.py": true,
+    "objectives/flow_objective.py": true,
+    "samplers/cfg.py": true,
+    "samplers/conditional.py": true,
+    "samplers/ddpm_loop.py": true,
+    "training/latent.py": true,
+    "training/conditional.py": true,
+    "training/vae.py": true,
+    "training/denoising.py": true,
+    "data/latent.py": true,
+    "autoencoders/frozen.py": false
+  },
+  "review_scope": "P0/P1 frozen data dependencies, project source, archive migration and P2",
+  "compute": {
+    "cloud_cost_cny": 0,
+    "gpu_training_seconds": 0
+  }
+}

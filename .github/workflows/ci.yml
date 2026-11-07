@@ -10,7 +10,8 @@ jobs:
           enable-cache: true
       - run: uv sync --locked
       - run: uv run --locked python scripts/check_code_annotations.py
-      - run: uv run --locked ruff check .
-      - run: uv run --locked ruff format --check .
+      # Archived notebooks and personal learning code retain their original bytes.
+      - run: uv run --locked ruff check src scripts tests
+      - run: uv run --locked ruff format --check src scripts tests
       - run: uv run --locked pytest
       - run: uv run --locked minigen doctor --device cpu --json

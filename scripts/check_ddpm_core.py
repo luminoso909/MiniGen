@@ -4,8 +4,12 @@ import json
 import math
 
 import torch
+from _learning_overlay import enable_learning_imports
 
-from minigen.objectives.ddpm_scheduler import DDPMScheduler
+# 历史脚本先启用显式课件路径，再加载旧模块名。
+enable_learning_imports()
+
+from minigen.objectives.ddpm_scheduler import DDPMScheduler  # noqa: E402
 
 
 def check_core() -> dict[str, str | int | float]:

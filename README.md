@@ -1,154 +1,52 @@
-## **一、MiniGen 是什么**
+## **一、MiniGen v2.0**
 
-面向可控图标与插画生成的小型生成模型实验系统。通过亲手实现核心算法、可信的训练评测，以及一次现代模型领域适配，掌握生成模型研发的完整过程。
+MiniGen 在同一套 ArtBench Public Domain 256x256 数据的训练切分上，从随机初始化训练三个约 30M 可训练参数的文本条件生成主干。三者共享冻结的 SDXL VAE、CLIP-B/32 文本塔和 Flow Matching 速度目标，比较画质、提示词遵循与计算成本。
 
-| 路线 | 内容 | 当前状态 |
+| 主干 | 图文条件路径 | 顺序 |
 | --- | --- | --- |
-| A：自研实验 | DDPM → VAE → 条件 Latent DiT → Flow Matching | DDPM/VAE 个人数学核心已验证；S2 教学闭环已执行，S3 见文末；DiT/CFG/Flow 个人核心待做 |
-| B：现代适配 | Sana 图标领域 LoRA 与前后评测 | 尚未下载权重或执行微调 |
-| 开发基础 | uv 环境、CLI 诊断、项目结构、测试与文档 | 见 [初始化验证报告](reports/bootstrap.md) |
+| B0 PlainConditionalDiT | 图像自注意力读取图像 token，Cross-Attention 读取文本 token | 先验证数据、训练、采样和恢复，再正式训练 |
+| B1 SingleStreamDiT | 图文 token 拼接，共用 Transformer 块 | B0 稳定后接入相同训练接口 |
+| B2 HybridDiT | 前段保留图文双流，通过 Joint Attention 交互，后段合流 | B1 后接入相同训练接口 |
 
-完整路线见 [项目任务清单与学习路径](MiniGen项目任务清单与学习路径.md)。开始日期为 2026 年 10 月 26 日，第一里程碑为 11 月 30 日，最终里程碑为 12 月 15 日；个人投入每周 8–12 小时，云资源总预算 100–300 元。
+正式范围、阶段门槛和实验矩阵以 [MiniGen v2 重构规划](docs/MiniGen2重构规划.md) 为准。阶段状态见 [任务索引](MiniGen项目任务清单与学习路径.md)，阶段证据和下一项工作见 [当前交接](reports/v2/00_handoff.md)。
 
-### **1. 已实现与未实现**
+## **二、当前可用功能与验证**
 
-已提供环境诊断、必要基础测试、数据与 AI 工作流规范。`train`、`sample`、`evaluate`、`cache` 只保留命令位置，执行会明确报错，退出码为 2。
+| 功能 | 当前状态 |
+| --- | --- |
+| `minigen doctor` | 可用。支持 `--device` 和 `--json`，检查依赖与小张量前向、反向 |
+| `minigen train`、`sample`、`evaluate`、`cache` | 已注册为占位，执行退出码为 2 |
+| `minigen data`、`report` | 计划中的入口，尚未注册 |
+| 数据、冻结组件与训练工具 | ArtBench 46,298 张已接入，离线数据准备使用 `scripts/prepare_artbench.py`。256px VAE/CLIP 审计和配对缓存试点已运行；正式缓存待用户视觉审核。Flow 训练留待 P3 |
+| 个人学习核心 | DDPM、VAE 数学已验收。当前 DiT 的 L03 独立小案例通过。文本 Cross-Attention、CFG、Flow 仍待实现 |
 
-第一周入口：[DDPM 原理与 MNIST Notebook](docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb)、[学习导航](docs/learning/README.md)。Notebook 显式使用获授权的教学 Scheduler，调用真实 U-Net、训练和采样工程；项目 CLI 不会自动使用这份参考。实验结果与限制见 [第一周报告](reports/stage1/week1.md)。
-
-第二周入口：[VAE 原理与潜空间 Notebook](docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb)、[第二周报告](reports/stage1/week2.md)、[论文与阅读导航](docs/papers/README.md)。四组真实短训、数学和单进程随机顺序恢复已验证；个人核心与理解仍待验收。
-
-DDPM 个人核心已通过独立数值、分布、梯度与 CPU 训练/恢复/完整短采样链检查，见 [验收报告](reports/tasks/ddpm_review.md)。VAE 个人数学核心也已通过 [S1 验收](reports/stage1/s1_acceptance_2026-10-30.md)；DiT、CFG、Flow 仍明确待做。核心正确性与生成质量、个人理解分别验收，本轮没有重新训练 MNIST。
-
-```bash
-uv run --locked python scripts/check_ddpm_core.py
-```
-
-## **二、建立与使用环境**
-
-### **1. 基础安装与诊断**
-
-项目使用 Python 3.12.14，uv 创建本地 `.venv`。在项目根目录执行：
+项目使用 Python 3.12.14 和 uv。初始化或恢复依赖时使用 `uv sync --locked`。已有环境可以执行以下离线检查：
 
 ```bash
-uv sync --locked
-uv run --locked minigen doctor
-uv run --locked minigen doctor --json
-uv run --locked minigen doctor --device cpu --json
-uv run --locked minigen --help
+uv run --locked --offline --no-sync minigen --help
+uv run --locked --offline --no-sync minigen doctor --device cpu --json
+uv run --locked --offline --no-sync pytest -p no:cacheprovider
 ```
 
-`uv run` 自动使用项目环境，不必手动激活。uv 缓存由 `uv.toml` 放到 `.cache/uv`；不修改全局 Python、Git 或 Codex 配置。同步与运行方式依据 [uv 官方文档](https://docs.astral.sh/uv/guides/projects/)。
+P0 的 CPU 诊断和独立 L03 检查通过。旧 DiT 启动测试已修复。历史环境基线和最新验收分别见 [仓库审计](reports/v2/00_repository_audit.md) 与 [P2 工程交付](reports/v2/02_p2_delivery.md)。本机诊断覆盖 CPU，小张量结果与将来的单卡 CUDA 训练分别验收。
 
-`doctor` 检查真实包导入、CPU/MPS/CUDA 可用性和小张量前向反向计算。默认检查 CPU 和可用的加速设备；不可用设备标为 unavailable，显式请求不可用设备时退出码为 1。小张量通过不能保证后续模型的全部算子受支持。
+## **三、数据、实验与协作**
 
-### **2. 手动激活与可选依赖**
+- 正式数据采用 ArtBench Public Domain 256x256。三份固定 Parquet 共 46,298 张，按组分为训练、验证和测试，保留原生 256×256 RGB。使用清洗后的英文 Caption；图文语义噪声见实际审计。[P0/P1 交付](reports/v2/01_p0_p1_delivery.md) · [数据管理](docs/data.md) · [P0–P7 下载清单](docs/MiniGen2下载清单.md)
+- P2 已提供随机 200 张 ArtBench 的 VAE 重建与 CLIP 单段条件证据；审核重建后才构建正式缓存。P3 先做 B0 小样本验证与单卡成本试验，训练预算由你审批。
+- MiniGen-Bench 在正式训练前冻结提示词与对照协议，分别报告图像质量、文本遵循、质量与算力曲线。完整矩阵见 [重构规划第 7–8 章](docs/MiniGen2重构规划.md)。
+- 工程阶段用 P0–P7 编号，个人课程用 S4–S7 编号。课件从 S4-01 开始，按反馈逐课交付。来源明确的工程实现、课程参考与个人 TODO 分别验收。见 [学习目录](docs/MiniGen2学习目录.md)、[个人任务入口](learning/README.md) 和 [AI 工作流](docs/ai-workflow.md)。
 
-```bash
-source .venv/bin/activate
-python -m minigen doctor --device cpu
-deactivate
-```
+## **四、S1–S3 历史学习与实验**
 
-需要现代生成模型或 Notebook 时再执行对应命令：
+| 阶段 | 只读 Notebook | 实际证据 |
+| --- | --- | --- |
+| S1 第一周 | [DDPM 原理与 MNIST 实验](docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb) | [短训与采样](reports/stage1/week1.md) |
+| S1 第二周 | [VAE 原理与潜空间实验](docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb) | [教学实验](reports/stage1/week2.md)、[个人数学验收](reports/stage1/s1_acceptance_2026-10-30.md) |
+| S2 第三周 | [图标数据与潜空间 DiT 基础](docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb) | [几何数据、重建与固定监督拟合](reports/stage2/week3.md) |
+| S2 第四周 | [潜空间扩散训练与采样](docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb) | [训练与恢复](reports/stage2/week4.md)，8 张样本中 6 张解析失败 |
+| S3 | [文本条件、CFG 与可信评测](docs/learning/S3_文本条件CFG与可信评测.ipynb) | [两种子实验](reports/stage3/stage3.md)，正确条件成功 2/24、1/24，人工评测待验且正式测试封存 |
 
-```bash
-uv sync --locked --extra generation
-uv run --locked --extra generation python -c "import diffusers, transformers"
-uv sync --locked --extra notebook
-uv run --locked --extra notebook jupyter lab
-```
+旧 DDPM 对 Flow 的正式比较和 Sana/OpenMoji/LoRA 方案已归档。相关计划与预研分别见 [旧预登记](configs/experiments/s4_preregistered.yaml) 和 [Sana 预研](reports/research/s3_sana_feasibility.md)。
 
-两组都需要时使用 `uv sync --locked --extra generation --extra notebook`；后续 `uv run` 同样带所需 extra，避免精确同步移除未请求的可选包。锁文件包含可选依赖解析，不代表默认安装了它们。Notebook extra 不自动注册全局 kernel。
-
-### **3. 验证与环境恢复**
-
-```bash
-uv sync --locked
-uv run --locked ruff check .
-uv run --locked ruff format --check .
-uv run --locked pytest
-uv run --locked minigen doctor --device cpu --json
-```
-
-新电脑或重建项目时，先获得 uv 和指定 Python，再使用提交的 `uv.lock` 同步。不复制 `.venv` 到其他机器。云 GPU 的 PyTorch 构建、驱动与 CUDA 兼容性须在实际云环境检查，不能用本机 MPS 检查代替；CI 仅验证 CPU 行为。
-
-## **三、目录导航与数据管理**
-
-```text
-src/minigen/        模型、目标、采样、条件、数据、训练与评测
-configs/            数据来源登记和小型清单示例
-learning/           五项核心任务入口
-docs/learning/      知识笔记与带真实输出的 Notebook
-docs/papers/        核心论文、版本哈希与阅读任务
-tests/              当前真实行为与未实现边界检查
-docs/               数据规范与 Agent 工作流
-templates/          数据卡、质量报告、任务及交接模板
-reports/            验证、任务和研究记录
-data/               本地原始、处理后数据及实际清单，默认忽略
-artifacts/          缓存、权重、实验输出，默认忽略
-```
-
-数据采用图片文件加 JSONL 清单，以 YAML 登记来源。三层数据为 MNIST、准确标注的合成几何图标、OpenMoji 筛选集。SQLite 暂不引入，未来只能作为可重建索引。
-
-来源登记见 [sources.yaml](configs/datasets/sources.yaml)，详细规则见 [数据管理](docs/data.md)。清单示例为明确标记的虚构记录，不含真实图像，不可直接用于训练。MNIST 显式获取与文件校验已实现；14000 张合成图标、划分和质量检查已实现；OpenMoji 采集与正式 S3 评测仍待做。
-
-## **四、学习与 Agent 协作**
-
-你负责原理、五项核心算法、整体数据流与实验结论；Codex 负责环境、数据工程、训练工程、验证、文档及交接。入口见 [学习任务](learning/README.md)、[AI 工作流](docs/ai-workflow.md) 与 [项目指令](AGENTS.md)。
-
-你可以直接给 Codex 指令：“读取任务清单和当前交接记录，推进依赖满足的工程任务；核心实现留给我，准备清楚的输入输出、数学检查和学习任务。”
-
-目前单 Agent 工作。四类角色模板预留数据、工程、评测和审查并行空间；未来显式启用后再分配互不冲突的修改范围。本项目不包含模型 API 编排系统，也不需要额外 API Key。
-
-S1 的 DDPM/VAE 代码已验收，理解与材料收尾见 [S1 报告](reports/stage1/s1_acceptance_2026-10-30.md)。个人接手依次为 [L03](learning/L03_DiT核心任务.md) 与 [L04](learning/L04_文本条件与CFG核心任务.md)；VAE 复验命令为 `uv run --locked python scripts/check_vae_core.py`。
-
-## **五、Git 与来源说明**
-
-远程仓库为 [luminoso909/MiniGen](https://github.com/luminoso909/MiniGen)，当前为私有仓库。本地 `main` 跟踪 `origin/main`，提交更新后使用 `git push` 同步。`.gitignore` 排除数据、缓存、虚拟环境、权重与凭据；文本模板、小型配置和必要报告保留。
-
-主要算法参考 [官方 DiT](https://github.com/facebookresearch/DiT)，组件与微调参考 [Diffusers](https://github.com/huggingface/diffusers)。本次未复制两者的算法实现。数据、代码与权重的来源分别登记，不将第三方内容标为原创，也未擅自为整个项目指定开源许可证。
-
-## **六、S2 第三周：数据、潜空间与 DiT**
-
-交付入口：[第三周 Notebook](docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb)、[真实报告](reports/stage2/week3.md)、[L03 个人核心](learning/L03_DiT核心任务.md)。14000 张图标已生成，96 张冻结 VAE 重建通过预定属性门槛，256 张潜变量试点缓存完成；100 步 DiT 固定监督拟合只验证优化链路，没有反向生成。
-
-```bash
-uv sync --locked --extra notebook --extra latent
-uv run --locked --extra notebook --extra latent python scripts/prepare_week3_assets.py
-uv run --locked --extra notebook --extra latent python scripts/execute_learning.py docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb --html-output artifacts/runs/s2_week3/learning_preview.html
-uv run --locked python scripts/check_dit_core.py
-```
-
-资源准备会显式下载 DiT 论文与约 335 MB 的冻结 VAE 单组件，复核已有论文；Notebook 只读取本地模型。项目 CLI 的 train/sample/evaluate/cache 仍未实现。Python 文件的 Ruff 与格式检查已通过；第一周用户笔记仍有原有检查问题，Notebook 不属于本轮修改范围，详见 DDPM 验收报告。
-
-## **七、S2 第四周：潜空间扩散训练与采样**
-
-学习入口：[第四周 Notebook](docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb)、[实验预登记](configs/experiments/s2_week4.yaml)、[个人训练连接任务](learning/L03_第四周训练连接任务.md)。本周在无条件设置中连接冻结 VAE、完整训练/验证缓存、随机时间噪声目标、DiT、EMA、恢复与 1000 步采样。已完成 10000 张训练与 1000 张验证缓存、1000 步教学随机训练和完整采样；8 张中 6 张规则解析失败，生成质量未达标。真实证据见 [第四周报告](reports/stage2/week4.md)。
-
-教学 DiT 显式复用第三周唯一标记单元并记录源码哈希；噪声日程使用已验证的 src DDPM。个人 VAE 已验收，DiT 核心仍待你实现，教学闭环不会将其勾选完成。6 层/256 的主规格与 2 层/128 的短实验分别记录，重建、拟合与随机生成分开展示。
-
-```bash
-uv sync --locked --extra notebook --extra latent
-uv run --locked --extra notebook --extra latent python scripts/execute_learning.py docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb --html-output artifacts/runs/s2_week4/learning_preview.html
-```
-
-显式重跑会复用或生成缓存并执行有界本地教学训练；总计算预算为 30 分钟，时间不足时按实际部分交付，不使用收费资源。本轮不暂存、不提交、不推送，第二周作业与既有笔记改动保留。建议提交名称为 `feat(s2): 添加第四周潜空间扩散训练与采样实验`。
-
-## **八、S3：文本条件、CFG 与可信评测**
-
-入口：[S3 Notebook](docs/learning/S3_文本条件CFG与可信评测.ipynb)、[执行报告](reports/stage3/stage3.md)、[任务交接](reports/tasks/stage3.md)、[L04 核心任务](learning/L04_文本条件与CFG核心任务.md)。覆盖完整条件信息流、数学推导、核心教学代码、全量对照、评测与失败分析，并包括二维 Flow、S4 实验预登记、Sana 预研及三张研究卡。
-
-冻结 CLIP 与文本缓存已核验，两训练种子各 3000 步、DDIM 对照和完整 1000 步 DDPM 已执行。正确条件综合成功仅 2/24、1/24，区间含零，单属性干预失败；**生成质量和 S3 第一里程碑仍未通过**。个人 DiT/CFG/Flow 与人工评测仍待验收，三个测试划分保持封存。
-
-```bash
-uv sync --locked --extra notebook --extra latent --extra conditioning
-uv run --locked --extra notebook --extra latent --extra conditioning python scripts/prepare_stage3_assets.py
-uv run --locked --extra notebook --extra latent --extra conditioning python scripts/execute_learning.py docs/learning/S3_文本条件CFG与可信评测.ipynb --html-output artifacts/runs/s3_conditional_v3/learning_preview.html
-uv run --locked python scripts/check_conditioning_core.py
-uv run --locked python scripts/check_cfg_core.py
-```
-
-显式资源准备补齐论文和 CLIP 文本组件；Notebook 使用本地缓存与免费有界实验，未下载完整 Sana。Notebook 的 19 代码单元执行通过，完整 pytest 107 项通过。全局 Ruff/格式仍有用户 TinyVAE 与旧笔记的原有问题，保留未改。个人核心和教学代码来源分开，没有自动 fallback。新增六篇 PDF 与第一周等已有五篇的复核记录见 [论文导航](docs/papers/README.md)。
-
-显式资源准备支持新环境缺失组件的固定身份重建，已有哈希不重写；真实冷启动 7 文件复验通过。小文件优先使用已有系统 curl，否则使用 Python 下载。
+正式包位于 `src/minigen/`：`data/` 管数据与表示缓存，`autoencoders/` 和 `conditioning/` 管冻结编码器，`evaluation/` 管独立审计。旧课程实现已移至 [学习源码](docs/learning/src/README.md)；正式包不加载它们。测试位于 `tests/`。查看 [配置导航](configs/README.md)、[学习导航](docs/learning/README.md)、[论文导航](docs/papers/README.md) 与 [报告导航](reports/README.md)。实际数据和缓存分别放 `data/` 与 `artifacts/`，由 Git 忽略规则管理。

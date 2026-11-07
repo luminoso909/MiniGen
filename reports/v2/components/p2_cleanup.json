@@ -1,0 +1,58 @@
+{
+  "removed": [
+    {
+      "path": "artifacts/models/caption",
+      "files": 59,
+      "bytes": 2214611913
+    },
+    {
+      "path": "artifacts/venvs/caption_mlx",
+      "files": 32690,
+      "bytes": 1435171541
+    },
+    {
+      "path": "data/raw/MNIST",
+      "files": 9,
+      "bytes": 66550918
+    },
+    {
+      "path": "data/processed/synthetic_icons_week3_v1",
+      "files": 14002,
+      "bytes": 7251616
+    },
+    {
+      "path": "data/manifests/mnist_week1.json",
+      "files": 1,
+      "bytes": 142614
+    },
+    {
+      "path": "data/manifests/synthetic_icons_week3_v1.jsonl",
+      "files": 1,
+      "bytes": 17257185
+    },
+    {
+      "path": "artifacts/cache/s2_week3",
+      "files": 2,
+      "bytes": 1089472
+    },
+    {
+      "path": "artifacts/cache/s2_week4",
+      "files": 46,
+      "bytes": 48511749
+    }
+  ],
+  "archive": "reports/v2/archive/openclipart/qwen3_vl_2b_caption_mlx.json",
+  "retained": [
+    "data/raw/artbench_pd_256",
+    "data/processed/artbench_pd_256",
+    "artifacts/models/sdxl_vae",
+    "artifacts/models/clip_text",
+    "artifacts/models/eval",
+    "artifacts/runs",
+    "reports/stage1",
+    "reports/stage2",
+    "reports/stage3"
+  ],
+  "total_files": 46810,
+  "total_bytes": 3790587008
+}

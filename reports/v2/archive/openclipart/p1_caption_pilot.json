@@ -1,0 +1,122 @@
+{
+  "model": "Qwen/Qwen3-VL-2B-Instruct (local MLX conversion)",
+  "asset_lock": "reports/v2/archive/openclipart/qwen3_vl_2b_caption_mlx.json",
+  "queue_rows": 120,
+  "profiles": {
+    "default160": {
+      "scope": "caption_pilot_only",
+      "total_queue": 120,
+      "rows_recorded": 120,
+      "statuses": {
+        "draft": 54,
+        "invalid_schema": 32,
+        "invalid_json": 34
+      },
+      "strict_json_rows": 0,
+      "fenced_json_rows": 86,
+      "median_latency_seconds": 1.5073585,
+      "max_mlx_peak_bytes": 2214290745,
+      "human_reviewed": 0,
+      "caption_accuracy": null,
+      "hallucination_rate": null,
+      "formal_manifest_frozen": false,
+      "path": "artifacts/audits/openclipart_p1_04_caption_qwen3_vl_2b",
+      "max_new_tokens": 160,
+      "clip_limit_valid_drafts": 54,
+      "invalid_json_at_generation_cap": 34,
+      "captions_sha256": "f66d647f2db5b65a8c53d1cb38b73b30ca08bc3c7e30285be43a0c905ae72448"
+    },
+    "compact256": {
+      "scope": "caption_pilot_only",
+      "total_queue": 120,
+      "rows_recorded": 120,
+      "statuses": {
+        "invalid_schema": 102,
+        "draft": 12,
+        "invalid_json": 6
+      },
+      "strict_json_rows": 114,
+      "fenced_json_rows": 0,
+      "median_latency_seconds": 0.3543415,
+      "max_mlx_peak_bytes": 2219310524,
+      "human_reviewed": 0,
+      "caption_accuracy": null,
+      "hallucination_rate": null,
+      "formal_manifest_frozen": false,
+      "path": "artifacts/audits/openclipart_p1_04_caption_qwen3_vl_2b_compact",
+      "max_new_tokens": 256,
+      "clip_limit_valid_drafts": 12,
+      "invalid_json_at_generation_cap": 0,
+      "captions_sha256": "0870bc8669c5867b50d57190f532b2494d3649b77c91ef2513511e7685e6c359"
+    },
+    "default256": {
+      "scope": "caption_pilot_only",
+      "total_queue": 120,
+      "rows_recorded": 120,
+      "statuses": {
+        "draft": 77,
+        "invalid_schema": 34,
+        "invalid_json": 9
+      },
+      "strict_json_rows": 0,
+      "fenced_json_rows": 111,
+      "median_latency_seconds": 1.6935975,
+      "max_mlx_peak_bytes": 2214290745,
+      "human_reviewed": 0,
+      "caption_accuracy": null,
+      "hallucination_rate": null,
+      "formal_manifest_frozen": false,
+      "path": "artifacts/audits/openclipart_p1_04_caption_qwen3_vl_2b_default256",
+      "max_new_tokens": 256,
+      "clip_limit_valid_drafts": 77,
+      "invalid_json_at_generation_cap": 9,
+      "captions_sha256": "661428ea321a1ee6c188a7da68d23db0a00bfec85fcc2db741bef931baa804f4"
+    }
+  },
+  "selected_profile": "default256",
+  "selection_criteria": "validated structured drafts, tie broken by lower median latency",
+  "human_caption_accuracy": null,
+  "human_hallucination_rate": null,
+  "agent_spotcheck": {
+    "run": "default160",
+    "sampled_valid_drafts": 12,
+    "seed": 20261106,
+    "examples_with_visible_errors": [
+      "12-0051",
+      "15-0003",
+      "03-0013"
+    ]
+  },
+  "selected_profile_agent_spotcheck": {
+    "run": "default256",
+    "sampled_valid_drafts": 12,
+    "seed": 20261107,
+    "examples_with_visible_errors": {
+      "04-0009": "Red flag misidentified as a tuxedo; yellow bow tie added.",
+      "15-0100": "Central stem asserted for a flat flower silhouette.",
+      "06-0005": "White background described as black."
+    },
+    "contact_sheet": "artifacts/audits/openclipart_p1_04_caption_qwen3_vl_2b_default256/semantic_spotcheck_seed20261107.png"
+  },
+  "review_path": "artifacts/audits/openclipart_p1_05_caption_review",
+  "review": {
+    "schema_version": "minigen-v2.caption-provisional.v1",
+    "scope": "caption_pilot_review",
+    "training_eligible": false,
+    "formal_manifest_frozen": false,
+    "caption_queue_rows": 120,
+    "recorded_rows": 120,
+    "input_caption_sha256": "661428ea321a1ee6c188a7da68d23db0a00bfec85fcc2db741bef931baa804f4",
+    "provisional_rows": 77,
+    "rejected_rows": 43,
+    "rejected_reasons": {
+      "model_result_not_a_draft": 43
+    },
+    "verified_image_rows": 120,
+    "human_review_filled_rows": 0,
+    "formal_human_review_minimum": 200,
+    "minimum_additional_human_reviews": 200,
+    "formal_human_review_accepted": false,
+    "image_path_root": "../openclipart_p1_01/preview"
+  }
+}

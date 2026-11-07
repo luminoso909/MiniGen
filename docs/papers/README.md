@@ -56,8 +56,8 @@ DiT 阅读卡：问题是能否让 Transformer 成为可扩展的扩散主干；
 | 顺序与层次 | 读哪里 | 读完必须回答什么 | 第四周对应位置 |
 | --- | --- | --- | --- |
 | 1，DDPM 复习 | 第 2–3 节，式 (4)、(7)、(11)、(14)，算法 1/2；约 15–20 分钟 | 为什么每个 batch 可以重新抽时间和噪声？为什么代码索引 0 不是干净图像？为什么不能直接从原 DDPM 循环中删去一些步？ | `DDPMScheduler.add_noise/loss/step`、`train_latent_denoiser` 与 `sample_ddpm` |
-| 2，LDM 主读 | 图 3，第 3.1–3.2 节，式 (2)；约 30–45 分钟 | 冻结表示与生成主干分别负责什么？均值编码为何能缓存？训练和生成的缩放、解码规则为什么必须相同？ | `FrozenVAE.encode/decode`；`src/minigen/data/latent.py` 的身份、构建缓存和读取接口 |
-| 3，DiT 主读 | 第 3 节、图 3、附录 A；约 30–45 分钟 | 时间怎样作用于空间 token？为什么零输出头和零门控会形成分阶段的梯度？主干规模和训练成本怎样区分？ | 显式加载第三周 `dit_reference`，记录哈希；`src/minigen/training/latent.py` 连接随机监督训练，个人 L03 仍独立验收 |
+| 2，LDM 主读 | 图 3，第 3.1–3.2 节，式 (2)；约 30–45 分钟 | 冻结表示与生成主干分别负责什么？均值编码为何能缓存？训练和生成的缩放、解码规则为什么必须相同？ | `FrozenVAE.encode/decode`；`docs/learning/src/minigen/data/latent.py` 的身份、构建缓存和读取接口 |
+| 3，DiT 主读 | 第 3 节、图 3、附录 A；约 30–45 分钟 | 时间怎样作用于空间 token？为什么零输出头和零门控会形成分阶段的梯度？主干规模和训练成本怎样区分？ | 显式加载第三周 `dit_reference`，记录哈希；`docs/learning/src/minigen/training/latent.py` 连接随机监督训练，个人 L03 仍独立验收 |
 | 4，VAE 定点复习 | 第 2–3 节、附录 B/C；约 15–20 分钟 | 后验均值与后验采样差在哪里？冻结预训练空间 VAE 为什么不等于完成了个人 VAE 作业？ | 缓存编码模式、表示身份与 L02 学习边界 |
 | 5，DDIM 选读 | 第 4.1 节式 (12)、第 4.2 节、附录 C.1；第 5 节式 (16) 按需；约 20–30 分钟 | 采样子序列、噪声方差和更新式为何需要一起改变？确定性采样为何仍需要指定初始噪声？ | 本周采样原理与后续 S3/S4 的少步比较入口；阅读不表示实现已完成 |
 
@@ -89,3 +89,7 @@ DiT 阅读卡：问题是能否让 Transformer 成为可扩展的扩散主干；
 | 一页卡 | [MeanFlow v1](MeanFlow_Mean_Flows_for_One_step_Generative_Modeling_2505.13447v1.pdf) | 平均速度定义、与瞬时速度的关系、训练算法；为何 Euler 一步不等于 MeanFlow？ | 少步生成扩展入口，本期不训练 |
 
 复习顺序：DDPM 的噪声参数化 → LDM 第 3.3 节条件注入 → DiT 时间/门控 → CFG → DDIM 跨步更新 → Flow 二维。论文中的实验数字不写成本项目实测；Notebook 的两种子短训与高斯玩具结果各自保留范围。
+
+## **六、v2 阅读与源码入口**
+
+S4-01 优先读已有的 [Flow Matching 固定版](Flow_Matching_for_Generative_Modeling_2210.02747v2.pdf)，结合 [v2 学习目录](../MiniGen2学习目录.md) 中的 ODE、Euler/Heun 与 NFE 练习。后续 Plain、Single-Stream、Hybrid 和计算预算对照的候选论文及源码见 [v2 重构规划第 13 章](../MiniGen2重构规划.md)。这些入口随对应任务核验与锁定。

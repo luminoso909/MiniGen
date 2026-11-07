@@ -1,5 +1,3 @@
 ## **一、本地数据目录**
 
-原始文件放 raw/，清洗后的图像放 processed/，实际 JSONL 清单放 manifests/。内容默认不进入 Git。来源登记与小型示例在 configs/，质量规则见 ../docs/data.md。
-
-本次未下载或生成数据。空目录仅用于明确存储位置；不要把目录存在视为数据准备完成。
+ArtBench 的固定 Parquet 分片放 `raw/artbench_pd_256/<revision>/data/`。离线导入后，图像、版本化 JSONL 清单和审计包归 `processed/artbench_pd_256/v1/`。历史教学清单沿用 `manifests/`。实际数据由 Git 忽略，来源和质量记录另有小型文档。[数据规范](../docs/data.md) · [P1 审计](../reports/v2/data/artbench_audit.md)

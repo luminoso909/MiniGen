@@ -4,11 +4,15 @@ import json
 from collections.abc import Callable
 
 import torch
+from _learning_overlay import enable_learning_imports
 from torch import nn
 
-from minigen._learning import CoreImplementationRequired
-from minigen._typing import JsonDict, PatchifyFn, UnpatchifyFn
-from minigen.models.dit_block import DiTBlock, patchify, unpatchify
+# 历史脚本先启用显式课件路径，再加载旧模块名。
+enable_learning_imports()
+
+from minigen._learning import CoreImplementationRequired  # noqa: E402
+from minigen._typing import JsonDict, PatchifyFn, UnpatchifyFn  # noqa: E402
+from minigen.models.dit_block import DiTBlock, patchify, unpatchify  # noqa: E402
 
 
 def verify(

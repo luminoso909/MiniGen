@@ -1,0 +1,40 @@
+{
+  "mode": "pilot",
+  "verified_only": false,
+  "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+  "approval_sha256": null,
+  "output": "artifacts/cache/artbench_pd_256/v1_pilot",
+  "counts": {
+    "train": 16,
+    "validation": 16
+  },
+  "blank_text_shape": [
+    77,
+    512
+  ],
+  "blank_valid_tokens": 2,
+  "elapsed_seconds": 12.108,
+  "exact_blank_reencode": true,
+  "checks": {
+    "train": {
+      "rows": 16,
+      "ids_and_fp16_reencode_exact": true,
+      "latent_mean_abs_fp16_error": 0.00011008868023054674,
+      "latent_max_abs_fp16_error": 0.0009739398956298828,
+      "visible_text_mean_abs_fp16_error": 0.00012811431952286512,
+      "visible_text_max_abs_fp16_error": 0.007755279541015625
+    },
+    "validation": {
+      "rows": 16,
+      "ids_and_fp16_reencode_exact": true,
+      "latent_mean_abs_fp16_error": 0.0001124971968238242,
+      "latent_max_abs_fp16_error": 0.0009758472442626953,
+      "visible_text_mean_abs_fp16_error": 0.0001276389230042696,
+      "visible_text_max_abs_fp16_error": 0.00777435302734375
+    }
+  },
+  "index_sha256": "77be4ded54b0349b0fe96ae28400f38b72d3baea59a72633ef2211a296e703fb",
+  "payload_bytes": 2867693,
+  "full_train_validation_rows": 41679,
+  "projected_full_payload_bytes_excluding_headers": 3631028368
+}

@@ -1,7 +1,9 @@
-"""冻结模型专属适配器；加载显式进行，导入时不下载模型。"""
+"""冻结 SDXL VAE 及共享图像转换；加载只访问本地固定资产。"""
 
 import hashlib
 import json
+import math
+import re
 from pathlib import Path
 
 import numpy as np
@@ -11,6 +13,8 @@ from PIL import Image
 from torch import Tensor, nn
 
 from minigen._typing import JsonDict
+
+SDXL_FILES = {"config.json", "diffusion_pytorch_model.safetensors"}
 
 
 def hash_file(
@@ -74,8 +78,8 @@ class FrozenVAE:
         self.identity = identity
         self.device = device
         self.scale = float(model.config.scaling_factor)
-        if self.scale <= 0:
-            raise ValueError("Scaling factor must be positive")
+        if not math.isfinite(self.scale) or self.scale <= 0:
+            raise ValueError("Scaling factor must be finite and positive")
 
     @classmethod
     def load(
@@ -92,26 +96,53 @@ class FrozenVAE:
             device: 模型目标设备，默认 CPU。
 
         Raises:
-            ValueError: 模型文件哈希不符或组件约束错误；ImportError: 缺少 latent 可选依赖。
+            ValueError: 模型身份、文件、权重集合或配置不符；ImportError: 缺少 latent 可选依赖。
             OSError/模型加载错误原样透传。
 
         Results:
             FrozenVAE: 已冻结的 FP32 FrozenVAE 实例；local_files_only=True 禁止隐式下载。
         """
+        identity = json.loads(Path(lock_path).read_text(encoding="utf-8"))
+        root = Path(root).resolve()
+        relative = Path(identity["local_path"])
+        directory = (root / relative).resolve()
+        files = identity["files"]
+        if (
+            identity.get("repo_id") != "madebyollin/sdxl-vae-fp16-fix"
+            or not re.fullmatch(r"[0-9a-f]{40}", identity["revision"])
+            or relative.is_absolute()
+            or directory == root
+            or not directory.is_relative_to(root)
+            or files.keys() != SDXL_FILES
+        ):
+            raise ValueError("Expected a locked local SDXL VAE with two exact component files")
+        for name, info in files.items():
+            file = directory / name
+            if (
+                not file.resolve().is_relative_to(directory)
+                or file.stat().st_size != info["bytes"]
+                or hash_file(file) != info["sha256"]
+            ):
+                raise ValueError(f"SDXL VAE file identity mismatch: {name}")
+
         from diffusers import AutoencoderKL
 
-        identity = json.loads(Path(lock_path).read_text())
-        directory = Path(root) / identity["local_path"]
-        for name, info in identity["files"].items():
-            if hash_file(directory / name) != info["sha256"]:
-                raise ValueError(f"Model hash mismatch: {name}")
-        model = AutoencoderKL.from_pretrained(
+        model, load_info = AutoencoderKL.from_pretrained(
             directory,
             local_files_only=True,
             use_safetensors=True,
             torch_dtype=torch.float32,
             low_cpu_mem_usage=False,
+            output_loading_info=True,
         )
+        if any(load_info.values()):
+            raise ValueError(f"SDXL VAE weights did not strictly match the model: {load_info}")
+        if (
+            model.config.latent_channels != 4
+            or len(model.config.block_out_channels) != 4
+            or model.config.scaling_factor != identity["scaling_factor"]
+        ):
+            raise ValueError("SDXL VAE channels, compression or scaling do not match the lock")
         return cls(model, identity, device)
 
     @torch.no_grad()
@@ -129,7 +160,7 @@ class FrozenVAE:
 
         Results:
             Float[Tensor, "b c_z h_z w_z"]: 缩放后的 [b,c_z,h_z,w_z]。
-            本组件在 128 像素输入时为 [b,4,16,16]。
+            本组件在 256 像素输入时为 [b,4,32,32]。
         """
         if images.ndim != 4 or images.shape[1] != 3:
             raise ValueError("Expected [B,3,H,W] image batch")
@@ -197,94 +228,3 @@ def to_image(
     """
     pixels = ((tensor.detach().cpu().clamp(-1, 1) + 1) * 127.5).round().to(torch.uint8)
     return Image.fromarray(pixels.permute(1, 2, 0).numpy())
-
-
-def cache_identity(
-    adapter: FrozenVAE,
-    records: list[JsonDict],
-    manifest_hash: str,
-) -> JsonDict:
-    """汇集足以判定潜变量缓存能否复用的身份。
-
-    Args:
-        adapter: 冻结 VAE，提供权重身份和缩放。
-        records: 按缓存排列的样本，包含 ID 与图像哈希。
-        manifest_hash: 完整数据清单的 SHA-256，同时约束描述及数据版本。
-
-    Raises:
-        KeyError: 模型身份或样本记录缺少必要字段时透传。
-
-    Results:
-        JsonDict: JSON 身份，包含组件、缩放、后验策略、预处理、dtype 与有序样本哈希。
-    """
-    return {
-        "schema_version": 1,
-        "model_revision": adapter.identity["revision"],
-        "model_files": adapter.identity["files"],
-        "scale": adapter.scale,
-        "encoder_mode": "posterior_mean",
-        "preprocessing": "RGB/128/no-resize/[-1,1]",
-        "dtype": "float32",
-        "manifest_sha256": manifest_hash,
-        "samples": [{"id": r["sample_id"], "sha256": r["sha256"]} for r in records],
-    }
-
-
-def load_cache(
-    path: str | Path,
-    expected: JsonDict,
-) -> Float[Tensor, "b c h w"]:
-    """验证缓存身份和文件哈希后，以禁用 pickle 的方式加载数组。
-
-    Args:
-        path: 本地 .npy 路径，旁边需存在同名 .json 元数据。
-        expected: 调用方本次期待的完整缓存身份，需逐项完全一致。
-
-    Raises:
-        ValueError: 身份、载荷哈希、形状或 dtype 不符。
-        OSError/JSONDecodeError: 文件或元数据读取失败。
-
-    Results:
-        Float[Tensor, "b c h w"]: CPU FP32 [b,c,h,w] 张量，次序与身份中的样本表一致。
-    """
-    path = Path(path)
-    meta = json.loads(path.with_suffix(".json").read_text())
-    if meta["identity"] != expected:
-        raise ValueError("Incompatible latent cache identity")
-    if hash_file(path) != meta["payload_sha256"]:
-        raise ValueError("Latent payload hash mismatch")
-    array = np.load(path, allow_pickle=False)
-    if list(array.shape) != meta["shape"] or str(array.dtype) != "float32":
-        raise ValueError("Invalid latent shape/dtype")
-    return torch.from_numpy(array)
-
-
-def write_cache(
-    path: str | Path,
-    latents: Float[Tensor, "b c h w"],
-    identity: JsonDict,
-) -> None:
-    """先保存 CPU FP32 潜变量，再以临时文件替换元数据。
-
-    Args:
-        path: 目标 .npy 文件，父目录会创建。
-        latents: [b,c,h,w]，保存时 detach、转 CPU FP32。
-        identity: 本次数据和编码约定的 JSON 身份。
-
-    Raises:
-        OSError/TypeError: 文件写入或身份无法 JSON 序列化时透传；张量迁移错误透传。
-
-    副作用:
-        创建父目录并替换目标数组及 JSON 身份文件。
-    """
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    array = latents.detach().cpu().to(torch.float32).numpy()
-    temporary = path.with_suffix(".partial")
-    with temporary.open("wb") as handle:
-        np.save(handle, array, allow_pickle=False)
-    temporary.replace(path)
-    meta = {"identity": identity, "payload_sha256": hash_file(path), "shape": list(array.shape)}
-    temp_meta = path.with_suffix(".json.partial")
-    temp_meta.write_text(json.dumps(meta, indent=2))
-    temp_meta.replace(path.with_suffix(".json"))

@@ -1,0 +1,17 @@
+repo_id: alfredplpl/artbench-pd-256x256
+revision: '4056b70025f0e3f916fb271c7a792633ba637484'
+version: v1
+expected_rows: 46298
+image_size: 256
+seed: 20261107
+review_count: 240
+files:
+- path: data/train-00000-of-00003-4c3fdb0c6fcc316c.parquet
+  bytes: 494834582
+  sha256: 8128b828cb3167897f7246faf6cbe9d10b11a9124dc56473f8de525cc8ea21f7
+- path: data/train-00001-of-00003-6973a91b2d9436c5.parquet
+  bytes: 512643393
+  sha256: f5d3739fd42e834226d15e60c1182e7bdad76051d3132efc85b36cfc79eea91c
+- path: data/train-00002-of-00003-f7e639b628f31f3c.parquet
+  bytes: 509903123
+  sha256: e7bf3fb712dcfd543ea28ffe932f4d4ba0d617f2effa8ac80f9529178023cb21

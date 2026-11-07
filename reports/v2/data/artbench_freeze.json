@@ -1,0 +1,92 @@
+{
+  "audit_sample_seed": 20261107,
+  "audit_sample_size": 240,
+  "audit_sample_split": "train",
+  "automated_checks_passed": true,
+  "caption_actions": {
+    "fit_sentence_budget": 4974,
+    "remove_artist_credit": 1646,
+    "remove_creation_date": 10,
+    "remove_history": 2997,
+    "remove_image_opening": 45633,
+    "remove_work_title": 490
+  },
+  "caption_over_budget": 0,
+  "caption_raw_over_limit": 6838,
+  "caption_statuses": {
+    "ok": 41324,
+    "over_limit": 4974
+  },
+  "caption_tokens": {
+    "max": 75,
+    "p50": 46
+  },
+  "caption_unresolved": 0,
+  "dataset_version": "v1",
+  "decode_failures": 0,
+  "exact_pixel_duplicate_rows": 15,
+  "groups": 46280,
+  "groups_with_multiple_rows": 18,
+  "human_reviewed": 0,
+  "identity": {
+    "caption_policy": "artbench-caption-v1",
+    "config_sha256": "2800b75de6cd57516fdb875a038489b1f5f19b2aca94ec6e329a8ff96f8aa30c",
+    "schema_version": "minigen.artbench.v1",
+    "token_lock_sha256": "f3075c34e5cbb575fcfa75b46220d036ac89cd7310a650ace9d57b5130aeca88"
+  },
+  "image_size": 256,
+  "largest_group": 2,
+  "manifest_rows": 46298,
+  "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+  "near_group_merges": 3,
+  "near_method": "64-bit dHash Hamming <= 3 and 4x4 RGB mean absolute difference <= 12",
+  "near_ungrouped_candidates_checked": 19,
+  "nearly_uniform_images": 0,
+  "raw_shards": [
+    {
+      "bytes": 494834582,
+      "path": "data/train-00000-of-00003-4c3fdb0c6fcc316c.parquet",
+      "sha256": "8128b828cb3167897f7246faf6cbe9d10b11a9124dc56473f8de525cc8ea21f7"
+    },
+    {
+      "bytes": 512643393,
+      "path": "data/train-00001-of-00003-6973a91b2d9436c5.parquet",
+      "sha256": "f5d3739fd42e834226d15e60c1182e7bdad76051d3132efc85b36cfc79eea91c"
+    },
+    {
+      "bytes": 509903123,
+      "path": "data/train-00002-of-00003-f7e639b628f31f3c.parquet",
+      "sha256": "e7bf3fb712dcfd543ea28ffe932f4d4ba0d617f2effa8ac80f9529178023cb21"
+    }
+  ],
+  "same_url_duplicate_rows": 15,
+  "source_fields": [
+    "image",
+    "caption",
+    "caption_jp",
+    "artist",
+    "url"
+  ],
+  "source_formats": {
+    "JPEG": 46298
+  },
+  "source_id": "alfredplpl/artbench-pd-256x256",
+  "source_modes": {
+    "RGB": 46298
+  },
+  "source_revision": "4056b70025f0e3f916fb271c7a792633ba637484",
+  "source_rows": 46298,
+  "split_counts": {
+    "test": 4619,
+    "train": 37042,
+    "validation": 4637
+  },
+  "split_seed": 20261107,
+  "verification": {
+    "fresh_rebuild_identical_manifest_summary_and_review": true,
+    "manifest_and_image_sha256_verified_rows": 46298,
+    "cross_split_exact_conflicts": 0,
+    "html_local_image_links_verified": 240,
+    "visual_evidence": "reports/v2/data/artbench_visual.json"
+  }
+}

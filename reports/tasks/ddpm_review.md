@@ -4,7 +4,7 @@
 
 状态：**核心代码已验证**；S1-03 的个人推导与理解仍待验收，因此该阶段任务整体保留进行中。S1-04 本次只有 CPU 小模型工程冒烟，没有重新训练 MNIST，不能据此登记个人模型生成质量。其余 VAE、DiT、CFG、Flow 核心仍待用户完成。
 
-源码：[ddpm_scheduler.py](../../src/minigen/objectives/ddpm_scheduler.py)。独立验收：[check_ddpm_core.py](../../scripts/check_ddpm_core.py)。回归测试：[test_ddpm_core.py](../../tests/test_ddpm_core.py)。结构化证据：[ddpm_core_results.json](../stage1/ddpm_core_results.json)。
+源码：[ddpm_scheduler.py](../../docs/learning/src/minigen/objectives/ddpm_scheduler.py)。独立验收：[check_ddpm_core.py](../../scripts/check_ddpm_core.py)。回归测试：[test_ddpm_core.py](../../tests/test_ddpm_core.py)。结构化证据：[ddpm_core_results.json](../stage1/ddpm_core_results.json)。
 
 ### **1. 数学审查结论**
 

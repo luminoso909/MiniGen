@@ -1,11 +1,14 @@
-## **一、文档导航**
+## **一、MiniGen v2 文档导航**
 
-- [数据管理](data.md)：选择、采集、清单、划分和质量。
-- [AI 工作流](ai-workflow.md)：Agent 分工、任务执行和未来并行。
-- [学习笔记](learning/README.md)：DDPM、VAE 原理、核心教学代码和真实 MNIST 实验。
-- [论文与阅读](papers/README.md)：两周必读与桥梁论文、固定版本与本地 PDF。
-- [项目总路线](../MiniGen项目任务清单与学习路径.md)：阶段任务、实验设计和预算。
-
-## **二、S2 第三周**
-
-[潜空间 DiT 学习 Notebook](learning/S2_第3周_图标数据与潜空间DiT基础.ipynb)、[数据卡](data_cards/synthetic_icons_week3.md)、[实验报告](../reports/stage2/week3.md)、[DiT 论文与阅读任务](papers/README.md)。
+| 入口 | 内容 |
+| --- | --- |
+| [重构规划](MiniGen2重构规划.md) | 正式范围、P0–P7 门槛和实验矩阵 |
+| [任务索引](../MiniGen项目任务清单与学习路径.md) | 当前进度与可展开的 v1 历史清单 |
+| [当前交接](../reports/v2/00_handoff.md) | P2 组件验收、缓存与下一步 |
+| [数据与权重下载清单](MiniGen2下载清单.md) | P0–P7 所需数据、模型角色、本机状态及固定来源 |
+| [全量资源待办](../待办清单.md) | 已验证的资产、视觉审核与正式缓存待办 |
+| [数据管理](data.md) | ArtBench 审计、Caption 清洗、划分与冻结组件 |
+| [AI 工作流](ai-workflow.md) | 阶段、授权、实现来源和交接规范 |
+| [学习目录](MiniGen2学习目录.md) | S4–S7 课程及个人练习 |
+| [历史学习笔记](learning/README.md) | 五份只读 Notebook 与实验报告 |
+| [论文与阅读](papers/README.md) | 固定论文、历史阅读与 v2 参考入口 |

@@ -3,9 +3,13 @@
 import json
 
 import torch
+from _learning_overlay import enable_learning_imports
 
-from minigen._learning import CoreImplementationRequired
-from minigen.samplers.cfg import classifier_free_guidance
+# 历史脚本先启用显式课件路径，再加载旧模块名。
+enable_learning_imports()
+
+from minigen._learning import CoreImplementationRequired  # noqa: E402
+from minigen.samplers.cfg import classifier_free_guidance  # noqa: E402
 
 
 def main() -> int:

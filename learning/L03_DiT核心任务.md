@@ -1,6 +1,6 @@
 ## **一、L03：把空间潜变量变成可调制的 Transformer**
 
-任务对应 S2-04。先读 [第三周 Notebook](../docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb) 第八至十章，再合上参考实现 `src/minigen/models/dit_block.py`。Agent 不替写主体；教学参考只存在于 Notebook。
+任务对应 S2-04。先读 [第三周 Notebook](../docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb) 第八至十章，再合上参考实现 `docs/learning/src/minigen/models/dit_block.py`。Agent 不替写主体；教学参考只存在于 Notebook。
 
 ### **1. 实现顺序与输入输出**
 

@@ -1,6 +1,7 @@
 {
   "repo_id": "madebyollin/sdxl-vae-fp16-fix",
   "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+  "scaling_factor": 0.13025,
   "files": {
     "config.json": {
       "sha256": "f18b16fa4381c90ab44a3d7abd2e90afd05a2c31b8ca69998bc93c6453aeb7b7",

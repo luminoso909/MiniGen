@@ -1,0 +1,121 @@
+{
+  "removed": [
+    {
+      "path": "data/raw/openclipart_v2",
+      "files": 39,
+      "logical_bytes": 1698890305
+    },
+    {
+      "path": "artifacts/cache/huggingface_p1",
+      "files": 4,
+      "logical_bytes": 8851
+    },
+    {
+      "path": "artifacts/downloads/p1",
+      "files": 34,
+      "logical_bytes": 46950850
+    },
+    {
+      "path": "scripts/audit_openclipart.py",
+      "files": 1,
+      "logical_bytes": 4311
+    },
+    {
+      "path": "scripts/audit_openclipart_full_shard.py",
+      "files": 1,
+      "logical_bytes": 9423
+    },
+    {
+      "path": "scripts/prepare_openclipart_caption_review.py",
+      "files": 1,
+      "logical_bytes": 14731
+    },
+    {
+      "path": "scripts/run_openclipart_caption_pilot.py",
+      "files": 1,
+      "logical_bytes": 23649
+    },
+    {
+      "path": "configs/datasets/openclipart_v2.yaml",
+      "files": 1,
+      "logical_bytes": 2704
+    },
+    {
+      "path": "src/minigen/data/openclipart.py",
+      "files": 1,
+      "logical_bytes": 10808
+    },
+    {
+      "path": "src/minigen/data/openclipart_groups.py",
+      "files": 1,
+      "logical_bytes": 8313
+    },
+    {
+      "path": "src/minigen/data/openclipart_preview.py",
+      "files": 1,
+      "logical_bytes": 12607
+    },
+    {
+      "path": "tests/test_openclipart_data.py",
+      "files": 1,
+      "logical_bytes": 7326
+    },
+    {
+      "path": "tests/test_openclipart_groups.py",
+      "files": 1,
+      "logical_bytes": 3725
+    },
+    {
+      "path": "artifacts/audits/openclipart_p1_01",
+      "files": 280,
+      "logical_bytes": 105255257
+    },
+    {
+      "path": "artifacts/audits/openclipart_p1_04_caption_qwen3_vl_2b",
+      "files": 126,
+      "logical_bytes": 421916
+    },
+    {
+      "path": "artifacts/audits/openclipart_p1_04_caption_qwen3_vl_2b_compact",
+      "files": 124,
+      "logical_bytes": 171557
+    },
+    {
+      "path": "artifacts/audits/openclipart_p1_04_caption_qwen3_vl_2b_default256",
+      "files": 128,
+      "logical_bytes": 594418
+    },
+    {
+      "path": "artifacts/audits/openclipart_p1_05_caption_review",
+      "files": 6,
+      "logical_bytes": 304814
+    },
+    {
+      "path": "artifacts/audits/openclipart_p1_05_caption_review_baseline",
+      "files": 6,
+      "logical_bytes": 266251
+    },
+    {
+      "path": "artifacts/audits/openclipart_p1_shard14_v1",
+      "files": 181,
+      "logical_bytes": 5270362
+    },
+    {
+      "path": "scripts/__pycache__/run_openclipart_caption_pilot.cpython-312.pyc",
+      "files": 1,
+      "logical_bytes": 30564
+    },
+    {
+      "path": "tests/__pycache__/test_openclipart_svg.cpython-312-pytest-9.1.1.pyc",
+      "files": 1,
+      "logical_bytes": 18718
+    }
+  ],
+  "historical_archive": "reports/v2/archive/openclipart",
+  "preserved_reusable_assets": [
+    "src/minigen/data/svg_render.py",
+    "artifacts/models/caption/",
+    "artifacts/venvs/caption_mlx/",
+    "configs/models/qwen3_vl_2b_caption_mlx.json"
+  ]
+}
