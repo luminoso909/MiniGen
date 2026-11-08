@@ -1,6 +1,6 @@
 ## **一、MiniGen v2 学习入口**
 
-学习课程 S4–S7 与工程阶段 P0–P7 分开。先完成 Flow Matching 与 ODE，再学习 Plain、Joint Attention/2D RoPE、Single-Stream、Hybrid 和研究评测。课程内容与对应工程进度见 [v2 学习目录](../MiniGen2学习目录.md)。用户启动学习回合后先交付 S4-01，后续按学习反馈逐课推进。课程参考、个人 TODO、工程集成与正式实验分别验收。
+学习课程 S4–S8 与工程阶段 P0–P7 分开。先完成 Flow Matching 与 ODE，再学习 Plain、Joint Attention/2D RoPE、Single-Stream、Hybrid 和研究评测。课程内容与对应工程进度见 [v2 学习目录](../MiniGen2学习目录.md)。用户启动学习回合后先交付 S4-01，后续按学习反馈逐课推进。课程参考、个人 TODO、工程集成与正式实验分别验收。
 
 ## **二、S1–S3 只读笔记**
 
@@ -17,3 +17,19 @@
 相关论文见 [固定版本导航](../papers/README.md)。个人复验与任务从 [learning/](../../learning/README.md) 进入。
 
 独立运行旧课程代码或 Notebook 前，参照 [学习源码与显式加载方式](src/README.md)。
+
+## **三、S4–S8 完整课程导航**
+
+| 课程 | 笔记 | 重点 |
+| --- | --- | --- |
+| S4-01 | [Flow Matching 原理与 ODE 采样](S4_01_FlowMatching原理与ODE采样.ipynb) | 条件速度、Euler/Heun、NFE、数值验证 |
+| S4-02 | [Latent Flow 与 Plain DiT 训练闭环](S4_02_LatentFlow与PlainDiT训练闭环.ipynb) | 表示、目标、参考训练、恢复和采样 |
+| S5-01 | [Joint Attention 与 2D RoPE](S5_01_JointAttention与2DRoPE.ipynb) | 图文交互、坐标与位置旋转 |
+| S5-02 | [Single-Stream DiT 架构与实现](S5_02_SingleStreamDiT架构与实现.ipynb) | Qwen 官方架构、mask 与条件缓存边界 |
+| S6-01 | [Hybrid DiT 双流单流架构](S6_01_HybridDiT双流单流架构.ipynb) | Hunyuan 官方架构、独立分支到共享计算 |
+| S7-01 / 02 | [训练工程与可信评测实操](S7_01-02_训练工程与可信评测实操.ipynb) | 真实训练准备、精度/累积、EMA/恢复、性能预算、公平评测 |
+| S8-01 | [Chimera 混合注意力选修](S8_01_Chimera混合注意力选修.ipynb) | KDA/MLA、NoPE、容量与 scaling、研究证据和迁移判断 |
+
+S7 两个主题合为一篇，以实操协议和工程参考衔接正式训练；S8 为最后一章，以数学、独立机制测试与研究判断结课。课程交付、个人 TODO、理解验收、生产工程和正式训练分别记录。S8 不改变 Chimera 工程扩展仍需另行授权的范围。
+
+预览与可重建的学习输出存于 `artifacts/learning/<课程>/`，专用学习数据与正式 ArtBench 数据／缓存隔离；S8 仅使用内存中的固定种子张量。汇总检查范围和限制见 [S4–S8 审核记录](S4-S8_审核记录.md)。
