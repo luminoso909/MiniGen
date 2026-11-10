@@ -1,0 +1,1126 @@
+{
+  "scope": "Bash syntax; Python heredoc AST; real argparse intercepted immediately after parsing. No training, GPU, model loads or downloads.",
+  "manual_sha256": "ffd092048eb4d40b823cbd41b917cc7bea66615a9961ae144b8e98cb7638da93",
+  "shell_blocks": 46,
+  "python_heredocs": 7,
+  "cli_commands_parsed": 50,
+  "commands": [
+    {
+      "block": 5,
+      "argv": [
+        "minigen",
+        "doctor",
+        "--device",
+        "cuda",
+        "--json"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 5,
+      "argv": [
+        "python",
+        "scripts/check_code_annotations.py"
+      ],
+      "readonly_entry_executed": true
+    },
+    {
+      "block": 5,
+      "argv": [
+        "minigen",
+        "bench",
+        "--help"
+      ],
+      "help_passed": true
+    },
+    {
+      "block": 7,
+      "argv": [
+        "python",
+        "scripts/prepare_stage3_assets.py",
+        "--text-only"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 8,
+      "argv": [
+        "python",
+        "scripts/prepare_artbench.py",
+        "--output-dir",
+        "artifacts/cloud/artbench_rebuilt_candidate"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 9,
+      "argv": [
+        "python",
+        "scripts/prepare_eval_assets.py",
+        "--models",
+        "inception",
+        "clip"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 9,
+      "argv": [
+        "python",
+        "scripts/prepare_eval_assets.py",
+        "--models",
+        "inception",
+        "clip",
+        "--verify-only"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 10,
+      "argv": [
+        "python",
+        "scripts/prepare_eval_assets.py",
+        "--models",
+        "vqa"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 10,
+      "argv": [
+        "python",
+        "scripts/prepare_eval_assets.py",
+        "--models",
+        "vqa",
+        "--verify-only"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 12,
+      "argv": [
+        "python",
+        "scripts/check_eval_backends.py",
+        "--benchmark",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--output",
+        "artifacts/cloud/acceptance/eval_cpu_cuda_fp32.json",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 13,
+      "argv": [
+        "minigen",
+        "cache",
+        "--output",
+        "artifacts/cache/artbench_pd_256/v1_formal",
+        "--approval",
+        "reports/v2/components/vae_user_approval.json",
+        "--evidence",
+        "reports/v2/components/vae_reconstruction_200_summary.json",
+        "--local-acceptance",
+        "reports/v2/components/artbench_local_fp32_20.json",
+        "--verify-only"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 13,
+      "argv": [
+        "minigen",
+        "bench",
+        "prepare",
+        "--output",
+        "reports/v2/benchmark/artbench_v1"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 15,
+      "argv": [
+        "python",
+        "scripts/check_flow_device.py",
+        "--config",
+        "configs/training/p4_b0_resume.json",
+        "--checkpoint",
+        "artifacts/runs/p4_b0_local/last.pt",
+        "--device",
+        "cuda",
+        "--output",
+        "artifacts/cloud/acceptance/b0_cpu_cuda_fp32.json"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 16,
+      "argv": [
+        "python",
+        "scripts/profile_training.py",
+        "--config",
+        "configs/training/p4_b0_cuda_pilot.json",
+        "--output",
+        "artifacts/runs/cloud_b0_pilot01",
+        "--warmup",
+        "50",
+        "--measure",
+        "50",
+        "--precision",
+        "bf16",
+        "--hourly-cny",
+        "1.0"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 18,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/resume_b0_continuous.json",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 18,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/resume_b0_part1.json",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 18,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/resume_b0_part2.json",
+        "--resume",
+        "artifacts/runs/cloud_b0_resume_split/last.pt",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 20,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/quality_single.json",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 20,
+      "argv": [
+        "python",
+        "scripts/diagnose_flow_quality.py",
+        "--config",
+        "artifacts/cloud/configs/quality_single.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_quality_single/last.pt",
+        "--output",
+        "artifacts/evaluations/cloud_quality_single",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 21,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/quality_sixteen.json",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 21,
+      "argv": [
+        "python",
+        "scripts/diagnose_flow_quality.py",
+        "--config",
+        "artifacts/cloud/configs/quality_sixteen.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_quality_sixteen/last.pt",
+        "--output",
+        "artifacts/evaluations/cloud_quality_sixteen",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 21,
+      "argv": [
+        "minigen",
+        "sample",
+        "--config",
+        "artifacts/cloud/configs/quality_sixteen.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_quality_sixteen/last.pt",
+        "--output",
+        "artifacts/evaluations/cloud_condition_correct",
+        "--device",
+        "cuda",
+        "--split",
+        "train",
+        "--condition-mode",
+        "correct",
+        "--count",
+        "16",
+        "--seed",
+        "1234",
+        "--steps",
+        "40",
+        "--guidance",
+        "1"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 22,
+      "argv": [
+        "python",
+        "scripts/profile_training.py",
+        "--config",
+        "configs/training/p4_b1_cuda_pilot.json",
+        "--output",
+        "artifacts/runs/cloud_b1_pilot01",
+        "--warmup",
+        "50",
+        "--measure",
+        "50",
+        "--precision",
+        "bf16",
+        "--hourly-cny",
+        "1.0"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 22,
+      "argv": [
+        "python",
+        "scripts/profile_training.py",
+        "--config",
+        "configs/training/p4_b2_cuda_pilot.json",
+        "--output",
+        "artifacts/runs/cloud_b2_pilot01",
+        "--warmup",
+        "50",
+        "--measure",
+        "50",
+        "--precision",
+        "bf16",
+        "--hourly-cny",
+        "1.0"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 23,
+      "argv": [
+        "python",
+        "scripts/check_flow_device.py",
+        "--config",
+        "configs/training/p4_b0_resume.json",
+        "--checkpoint",
+        "artifacts/runs/p4_b0_local/last.pt",
+        "--device",
+        "cuda",
+        "--output",
+        "artifacts/cloud/acceptance/b0_cpu_cuda_fp32.json"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 24,
+      "argv": [
+        "python",
+        "scripts/prepare_cloud_run.py",
+        "--architecture",
+        "b0",
+        "--pilot",
+        "artifacts/runs/cloud_b0_pilot01/pilot.json",
+        "--output",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--run-dir",
+        "artifacts/runs/cloud_b0_formal_s0",
+        "--steps",
+        "1000",
+        "--max-seconds",
+        "3600",
+        "--hourly-cny",
+        "1.0",
+        "--budget-cny",
+        "100"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 26,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 27,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/b1_formal.json",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 27,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/b2_formal.json",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 28,
+      "argv": [
+        "python",
+        "scripts/plot_flow_run.py",
+        "--run",
+        "artifacts/runs/cloud_b0_formal_s0",
+        "--output",
+        "artifacts/evaluations/cloud_b0_loss.png"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 29,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--resume",
+        "artifacts/runs/cloud_b0_formal_s0/last.pt",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 30,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/b1_formal.json",
+        "--resume",
+        "artifacts/runs/cloud_b1_formal_s0/last.pt",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 30,
+      "argv": [
+        "minigen",
+        "train",
+        "--config",
+        "artifacts/cloud/configs/b2_formal.json",
+        "--resume",
+        "artifacts/runs/cloud_b2_formal_s0/last.pt",
+        "--device",
+        "cuda"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 31,
+      "argv": [
+        "minigen",
+        "sample",
+        "--config",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_b0_formal_s0/last.pt",
+        "--output",
+        "artifacts/evaluations/cloud_b0_preview",
+        "--device",
+        "cuda",
+        "--split",
+        "validation",
+        "--count",
+        "8",
+        "--seed",
+        "1234",
+        "--steps",
+        "40",
+        "--method",
+        "euler",
+        "--guidance",
+        "1"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 31,
+      "argv": [
+        "minigen",
+        "evaluate",
+        "--config",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_b0_formal_s0/last.pt",
+        "--output",
+        "artifacts/evaluations/cloud_b0_flow_mse.json",
+        "--device",
+        "cuda",
+        "--count",
+        "256"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 32,
+      "argv": [
+        "minigen",
+        "bench",
+        "profile",
+        "--config",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_b0_formal_s0/last.pt",
+        "--benchmark",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--output",
+        "artifacts/evaluations/cloud_b0_profile.json",
+        "--device",
+        "cuda",
+        "--count",
+        "4",
+        "--warmup",
+        "2",
+        "--repeats",
+        "5",
+        "--matrix",
+        "configs/benchmark/sampling_matrix.json"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 33,
+      "argv": [
+        "minigen",
+        "bench",
+        "generate",
+        "--config",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_b0_formal_s0/last.pt",
+        "--benchmark",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--output",
+        "artifacts/evaluations/cloud_validation/euler-40-1",
+        "--split",
+        "validation",
+        "--device",
+        "cuda",
+        "--batch-size",
+        "4",
+        "--method",
+        "euler",
+        "--solver-nfe",
+        "40",
+        "--guidance",
+        "1",
+        "--scope",
+        "real_local",
+        "--max-seconds",
+        "1800"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 33,
+      "argv": [
+        "minigen",
+        "bench",
+        "score",
+        "--generation",
+        "artifacts/evaluations/cloud_validation/euler-40-1/samples.json",
+        "--output",
+        "artifacts/evaluations/cloud_validation/euler-40-1/score.json",
+        "--metrics",
+        "clipscore",
+        "lpips",
+        "--device",
+        "cuda",
+        "--scope",
+        "real_local"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 34,
+      "argv": [
+        "minigen",
+        "bench",
+        "generate",
+        "--config",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_b0_formal_s0/last.pt",
+        "--benchmark",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--output",
+        "artifacts/evaluations/formal/b0_distribution",
+        "--split",
+        "distribution",
+        "--device",
+        "cuda",
+        "--batch-size",
+        "4",
+        "--method",
+        "euler",
+        "--solver-nfe",
+        "40",
+        "--guidance",
+        "1",
+        "--scope",
+        "formal",
+        "--approval",
+        "artifacts/cloud/benchmark_approval.json",
+        "--max-seconds",
+        "1800"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 34,
+      "argv": [
+        "minigen",
+        "bench",
+        "generate",
+        "--config",
+        "artifacts/cloud/configs/b0_formal.json",
+        "--checkpoint",
+        "artifacts/runs/cloud_b0_formal_s0/last.pt",
+        "--benchmark",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--output",
+        "artifacts/evaluations/formal/b0_prompts",
+        "--split",
+        "test",
+        "--device",
+        "cuda",
+        "--batch-size",
+        "4",
+        "--method",
+        "euler",
+        "--solver-nfe",
+        "40",
+        "--guidance",
+        "1",
+        "--scope",
+        "formal",
+        "--approval",
+        "artifacts/cloud/benchmark_approval.json",
+        "--max-seconds",
+        "1800"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 35,
+      "argv": [
+        "minigen",
+        "bench",
+        "score",
+        "--generation",
+        "artifacts/evaluations/formal/b0_distribution/samples.json",
+        "--reference",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--output",
+        "artifacts/evaluations/formal/b0_distribution/score.json",
+        "--metrics",
+        "kid",
+        "cmmd",
+        "clipscore",
+        "--device",
+        "cuda",
+        "--batch-size",
+        "4",
+        "--scope",
+        "formal"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 35,
+      "argv": [
+        "minigen",
+        "bench",
+        "score",
+        "--generation",
+        "artifacts/evaluations/formal/b0_prompts/samples.json",
+        "--reference",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--output",
+        "artifacts/evaluations/formal/b0_prompts/score.json",
+        "--metrics",
+        "clipscore",
+        "vqa",
+        "lpips",
+        "--vqa-backend",
+        "blip",
+        "--device",
+        "cuda",
+        "--batch-size",
+        "4",
+        "--scope",
+        "formal"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 36,
+      "argv": [
+        "minigen",
+        "bench",
+        "review",
+        "calibrate",
+        "--benchmark",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--output",
+        "artifacts/evaluations/cloud_calibration_100",
+        "--count",
+        "100"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 37,
+      "argv": [
+        "minigen",
+        "bench",
+        "review",
+        "calibrate",
+        "--benchmark",
+        "reports/v2/benchmark/artbench_v1/benchmark.json",
+        "--annotations",
+        "artifacts/cloud/calibration_annotations.json",
+        "--output",
+        "artifacts/evaluations/cloud_calibration_annotated",
+        "--count",
+        "100"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 37,
+      "argv": [
+        "minigen",
+        "bench",
+        "score",
+        "--generation",
+        "artifacts/evaluations/cloud_calibration_annotated/samples.json",
+        "--output",
+        "artifacts/evaluations/cloud_calibration_annotated/vqa_score.json",
+        "--metrics",
+        "vqa",
+        "--vqa-backend",
+        "blip",
+        "--device",
+        "cuda",
+        "--batch-size",
+        "4",
+        "--scope",
+        "real_local"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 38,
+      "argv": [
+        "minigen",
+        "bench",
+        "review",
+        "import",
+        "--package",
+        "artifacts/evaluations/cloud_calibration_annotated/review",
+        "--answers",
+        "artifacts/evaluations/cloud_calibration_annotated/user_answers.json",
+        "--output",
+        "artifacts/evaluations/cloud_calibration_annotated/human_result.json"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 38,
+      "argv": [
+        "minigen",
+        "bench",
+        "review",
+        "compare",
+        "--human",
+        "artifacts/evaluations/cloud_calibration_annotated/human_result.json",
+        "--automatic",
+        "artifacts/evaluations/cloud_calibration_annotated/vqa_score.json",
+        "--output",
+        "artifacts/evaluations/cloud_calibration_annotated/agreement.json"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 39,
+      "argv": [
+        "minigen",
+        "bench",
+        "review",
+        "export",
+        "--generations",
+        "artifacts/evaluations/formal/b0_prompts/samples.json",
+        "artifacts/evaluations/formal/b1_prompts/samples.json",
+        "artifacts/evaluations/formal/b2_prompts/samples.json",
+        "--output",
+        "artifacts/evaluations/cloud_blind_review",
+        "--seed",
+        "20261110"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 40,
+      "argv": [
+        "minigen",
+        "bench",
+        "review",
+        "import",
+        "--package",
+        "artifacts/evaluations/cloud_blind_review",
+        "--answers",
+        "artifacts/evaluations/cloud_blind_review/user_answers.json",
+        "--output",
+        "artifacts/evaluations/cloud_blind_review/human_result.json"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 41,
+      "argv": [
+        "minigen",
+        "bench",
+        "report",
+        "--scores",
+        "artifacts/evaluations/formal/b0_distribution/score.json",
+        "artifacts/evaluations/formal/b1_distribution/score.json",
+        "artifacts/evaluations/formal/b2_distribution/score.json",
+        "artifacts/evaluations/formal/b0_prompts/score.json",
+        "artifacts/evaluations/formal/b1_prompts/score.json",
+        "artifacts/evaluations/formal/b2_prompts/score.json",
+        "--training",
+        "artifacts/runs/cloud_b0_formal_s0/result.json",
+        "artifacts/runs/cloud_b1_formal_s0/result.json",
+        "artifacts/runs/cloud_b2_formal_s0/result.json",
+        "--profiles",
+        "artifacts/evaluations/cloud_b0_profile.json",
+        "--output",
+        "artifacts/evaluations/cloud_final"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 42,
+      "argv": [
+        "python",
+        "scripts/export_checkpoint_receipt.py",
+        "--checkpoint",
+        "artifacts/runs/cloud_b0_formal_s0/step_000100.pt",
+        "--output",
+        "artifacts/evaluations/formal/b0_step000100_training.json",
+        "--flops-inspection",
+        "reports/v2/p4/model_specs.json"
+      ],
+      "parsed": true
+    },
+    {
+      "block": 43,
+      "argv": [
+        "minigen",
+        "bench",
+        "report",
+        "--scores",
+        "artifacts/evaluations/formal/b0_distribution/score.json",
+        "artifacts/evaluations/formal/b1_distribution/score.json",
+        "artifacts/evaluations/formal/b2_distribution/score.json",
+        "--training",
+        "artifacts/runs/cloud_b0_formal_s0/result.json",
+        "artifacts/runs/cloud_b1_formal_s0/result.json",
+        "artifacts/runs/cloud_b2_formal_s0/result.json",
+        "--comparison-mode",
+        "gpu_hours",
+        "--target",
+        "1.0",
+        "--tolerance",
+        "0.1",
+        "--output",
+        "artifacts/evaluations/cloud_budget_comparison"
+      ],
+      "parsed": true
+    }
+  ],
+  "errors": [],
+  "cuda_execution": "not_run",
+  "linux_installation": "not_run",
+  "official_install_sources_read": [
+    "https://docs.astral.sh/uv/getting-started/installation/",
+    "https://docs.astral.sh/uv/guides/integration/pytorch/",
+    "https://pytorch.org/get-started/locally/"
+  ],
+  "commands_checked": 52,
+  "help_checks": 1,
+  "readonly_entries_executed": 1,
+  "config_examples_executed": 4,
+  "config_files_parsed": [
+    {
+      "name": "quality_single.json",
+      "architecture": "b0",
+      "device": "cuda",
+      "precision": "fp32",
+      "max_steps": 1000,
+      "schedule_steps": 1000,
+      "run_dir": "artifacts/runs/cloud_quality_single",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "quality_sixteen.json",
+      "architecture": "b0",
+      "device": "cuda",
+      "precision": "fp32",
+      "max_steps": 1000,
+      "schedule_steps": 1000,
+      "run_dir": "artifacts/runs/cloud_quality_sixteen",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b0_continuous.json",
+      "architecture": "b0",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 8,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b0_resume_continuous",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b0_part1.json",
+      "architecture": "b0",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 4,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b0_resume_split",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b0_part2.json",
+      "architecture": "b0",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 8,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b0_resume_split",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b1_continuous.json",
+      "architecture": "b1",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 8,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b1_resume_continuous",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b1_part1.json",
+      "architecture": "b1",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 4,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b1_resume_split",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b1_part2.json",
+      "architecture": "b1",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 8,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b1_resume_split",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b2_continuous.json",
+      "architecture": "b2",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 8,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b2_resume_continuous",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b2_part1.json",
+      "architecture": "b2",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 4,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b2_resume_split",
+      "parsed": true,
+      "training_executed": false
+    },
+    {
+      "name": "resume_b2_part2.json",
+      "architecture": "b2",
+      "device": "cuda",
+      "precision": "bf16",
+      "max_steps": 8,
+      "schedule_steps": 20,
+      "run_dir": "artifacts/runs/cloud_b2_resume_split",
+      "parsed": true,
+      "training_executed": false
+    }
+  ],
+  "architecture_specific_resume_cli_parsed": [
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b0_continuous.json",
+      "--device",
+      "cuda"
+    ],
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b0_part1.json",
+      "--device",
+      "cuda"
+    ],
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b0_part2.json",
+      "--device",
+      "cuda",
+      "--resume",
+      "artifacts/runs/cloud_b0_resume_split/last.pt"
+    ],
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b1_continuous.json",
+      "--device",
+      "cuda"
+    ],
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b1_part1.json",
+      "--device",
+      "cuda"
+    ],
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b1_part2.json",
+      "--device",
+      "cuda",
+      "--resume",
+      "artifacts/runs/cloud_b1_resume_split/last.pt"
+    ],
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b2_continuous.json",
+      "--device",
+      "cuda"
+    ],
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b2_part1.json",
+      "--device",
+      "cuda"
+    ],
+    [
+      "train",
+      "--config",
+      "artifacts/cloud/configs/resume_b2_part2.json",
+      "--device",
+      "cuda",
+      "--resume",
+      "artifacts/runs/cloud_b2_resume_split/last.pt"
+    ]
+  ],
+  "resume_architecture_isolation": {
+    "config_files": 9,
+    "independent_run_dirs": 6,
+    "independent_comparison_receipts": [
+      "artifacts/cloud/acceptance/b0_cuda_resume_comparison.json",
+      "artifacts/cloud/acceptance/b1_cuda_resume_comparison.json",
+      "artifacts/cloud/acceptance/b2_cuda_resume_comparison.json"
+    ],
+    "checked": true
+  },
+  "cloud_config_guard_test": {
+    "command": "uv run --locked --offline --no-sync pytest -q tests/test_p5_tools.py::test_cloud_config_requires_actual_matching_pilot_and_budget -p no:cacheprovider",
+    "passed": 1,
+    "scope": "Synthetic Pilot contract fixture only; not real CUDA evidence"
+  },
+  "hf_download_help_verified": true
+}

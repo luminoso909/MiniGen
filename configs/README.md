@@ -37,3 +37,8 @@ P4 三组本地配置使用相同 4 张训练图、有效 batch 4、FP32 和固�
 - `scripts/prepare_cloud_run.py`：依据对应真实 CUDA Pilot 生成全数据正式配置，不把 P4 的 12 步 smoke 配置冒充正式配方。
 
 真实命令与参数修改、暂停恢复、正式门槛见 [云端手册](../docs/cloud/MiniGen_云端训练与评测完整操作手册.md)。
+
+
+## **四、云端前候选预登记**
+
+[precloud_preregistration.json](experiments/precloud_preregistration.json) 是数据、组件、模型和评测身份以及待测超参数的机器可读登记，**不是 train 可执行配置**，不自动批准长训。说明见 [正式实验预登记](../reports/v2/final/MiniGen_正式实验预登记.md)。待真实 CUDA Pilot 和用户批准后，才用 `scripts/prepare_cloud_run.py` 生成正式三模型配置。

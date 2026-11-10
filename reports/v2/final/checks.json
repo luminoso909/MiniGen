@@ -1,0 +1,105 @@
+{
+  "schema": "minigen.precloud-final-checks.v1",
+  "baseline_commit": "77b750685f850f1b6789995fc3dd5a1a74857b87",
+  "prior_full_pytest": {
+    "passed": 217,
+    "rerun": false,
+    "evidence": "reports/v2/experiments/p5/checks.json"
+  },
+  "current_collected_tests": 221,
+  "targeted_pytest": [
+    {
+      "files": [
+        "tests/test_p3_cli.py",
+        "tests/test_flow_training.py"
+      ],
+      "passed": 12,
+      "seconds": 4.54
+    },
+    {
+      "files": [
+        "tests/test_vqa.py",
+        "tests/test_calibration_vqa.py",
+        "tests/test_bench_scoring.py"
+      ],
+      "passed": 14,
+      "seconds": 3.64,
+      "log": "artifacts/runs/precloud_final/vqa_tests_final.txt",
+      "additional_prior_iteration": {
+        "passed": 14,
+        "seconds": 3.95
+      }
+    },
+    {
+      "test": "tests/test_p5_tools.py::test_cloud_config_requires_actual_matching_pilot_and_budget",
+      "passed": 1,
+      "scope": "synthetic pilot fixture"
+    }
+  ],
+  "targeted_total": 27,
+  "ruff": "changed Python files passed",
+  "format": "2 files already formatted",
+  "annotations": {
+    "files": 112,
+    "functions": 564,
+    "classes": 71,
+    "issues": [],
+    "scope": "类型/条件式文档结构；异常与副作用仍需人工核对"
+  },
+  "doc_relative_links_checked": 311,
+  "document_errors": [],
+  "protected_files": 655,
+  "protected_changes": [],
+  "frozen_benchmark_and_asset_locks_unchanged": true,
+  "manual": {
+    "manual_sha256": "ffd092048eb4d40b823cbd41b917cc7bea66615a9961ae144b8e98cb7638da93",
+    "shell_blocks": 46,
+    "python_heredocs": 7,
+    "cli_commands_parsed": 50,
+    "resume_architecture_isolation": {
+      "config_files": 9,
+      "independent_run_dirs": 6,
+      "independent_comparison_receipts": [
+        "artifacts/cloud/acceptance/b0_cuda_resume_comparison.json",
+        "artifacts/cloud/acceptance/b1_cuda_resume_comparison.json",
+        "artifacts/cloud/acceptance/b2_cuda_resume_comparison.json"
+      ],
+      "checked": true
+    },
+    "architecture_specific_resume_cli_parsed": 9,
+    "config_files_parsed": 11,
+    "cuda_executed": false
+  },
+  "report_replay": {
+    "output": "artifacts/runs/precloud_final/report_replay",
+    "records": 3,
+    "status": "completed",
+    "source": "existing P5 real-local scores, no regeneration or rescoring"
+  },
+  "ignore_rules_verified": [
+    ".venv/bin/python",
+    ".cache/test",
+    "data/processed/artbench_pd_256/v1/manifest.jsonl",
+    "artifacts/cache/artbench_pd_256/v1_formal/index.json",
+    "artifacts/models/eval_clip/pytorch_model.bin",
+    "artifacts/runs/cloud_b0/last.pt",
+    "artifacts/evaluations/formal/image.png",
+    ".env",
+    "test.safetensors"
+  ],
+  "remote": {
+    "origin": "https://github.com/luminoso909/MiniGen.git",
+    "main": "54345ca92dd05c8a393b7e4b4614b1053567fc14",
+    "baseline_ahead_count": 10,
+    "queried_with": "git ls-remote origin refs/heads/main",
+    "pushed": false
+  },
+  "delivery_runtime_source_sha256": "a27dc33a3c6e1946907be183467e2ac340afb67e4c1bfb8d2b9a303d1d5aac36",
+  "cuda_executed": false,
+  "large_model_downloads": false,
+  "formal_training_executed": false,
+  "new_formal_size_training_executed": false,
+  "paid_gpu_api_cost_cny": 0,
+  "benchmark_approval": "pending",
+  "formal_recipe_approved": false
+}

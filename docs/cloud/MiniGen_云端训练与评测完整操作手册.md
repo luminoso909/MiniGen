@@ -1,6 +1,6 @@
 ## **一、先明确执行顺序和验收边界**
 
-本手册依据 P5 新增的真实终端接口编写。**CUDA 命令已实现，但本轮未在 CUDA 上执行；读到命令不表示该项已经验收通过。** 本轮停在用户审核 Benchmark 与本手册的入口。后续由用户决定租机、费用和运行时长，然后按本手册逐项操作。
+本手册在 `77b7506` 基础上完成云端前最终命令审查；运行时固定本轮最终交付提交。配套审核材料为 [Benchmark 最终审核包](../../reports/v2/benchmark/MiniGen_Benchmark_最终审核包.md)、[实验预登记](../../reports/v2/final/MiniGen_正式实验预登记.md) 和 [执行前检查清单](MiniGen_云端执行前检查清单.md)。本手册依据 P5 新增的真实终端接口编写。**CUDA 命令已实现，但本轮未在 CUDA 上执行；读到命令不表示该项已经验收通过。** 本轮停在用户审核 Benchmark 与本手册的入口。后续由用户决定租机、费用和运行时长，然后按本手册逐项操作。
 
 正式规格固定为 ArtBench Public Domain 46,298 张、256×256 RGB、冻结 SDXL VAE 与 CLIP-B/32 文本塔、Flow Matching、B0/B1/B2 约 30M。训练 37,042 张，验证 4,637 张，测试 4,619 张；正式缓存只编码训练和验证。P3 的 16 图可辨质量门槛尚未通过，不能因为 Pilot 的损失有限就直接开始长训。
 
@@ -16,7 +16,7 @@
 | 7 | 正式生成、指标、VQA 校准与盲评 | 协议审批、全量任务、缺失与失败明确记录 | 不把不完整成绩包装成正式完整结果 |
 | 8 | 同步结果、核对备份、释放实例 | 模型与回执离机，独立哈希校验通过 | 不先删除唯一副本 |
 
-所有路径默认相对于仓库根目录。以下 `bash` 命令在云服务器执行；标明 **Mac** 的段落在 Mac 执行。每次重新连接后先进入同一仓库并设置环境。所有 `cloud_*` 目录都是新实验目录，已有目录不得覆盖。
+所有路径默认相对于仓库根目录。以下 `bash` 命令在云服务器执行；标明 **Mac** 的段落在 Mac 执行。每次重新连接后先进入同一仓库并设置环境。所有 `cloud_*` 目录都是新实验目录，已有目录不得覆盖。命令使用 Bash 语法，Linux 请在 `bash` 中执行；Mac 只执行标注为 Mac 的段落。含 `YOUR_*`、示例快照编号或人工审核 JSON 的代码块是配置模板，填写并核对后才可执行；命令不会代替批准。数值输入段使用交互读取，不能把中文占位文字当成有效参数。
 
 ## **二、租机、SSH、持久化磁盘与代码**
 
@@ -63,7 +63,9 @@ git push origin HEAD
 
 ```bash
 export MINIGEN_ROOT=/workspace/MiniGen
-export MINIGEN_COMMIT=填入本轮完整提交哈希
+read -r -p "本轮已批准的完整 Git 提交哈希: " MINIGEN_COMMIT
+export MINIGEN_COMMIT
+[[ "$MINIGEN_COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo "必须填写 40 位提交哈希" >&2; exit 2; }
 git clone https://github.com/luminoso909/MiniGen.git "$MINIGEN_ROOT"
 cd "$MINIGEN_ROOT"
 git checkout --detach "$MINIGEN_COMMIT"
@@ -94,7 +96,7 @@ uv sync --locked --extra latent --extra conditioning --extra artbench --extra ev
 uv run --locked --no-sync python -c 'import sys,torch; print(sys.version); print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available())'
 ```
 
-uv 按当前 Linux 平台安装锁定包，Mac wheel 不能迁移使用。若 Linux wheel 不可获得、`torch.version.cuda` 为 `None` 或 CUDA 不可用，停止并核查安装输出、GPU 驱动和 [PyTorch 官方安装选择器](https://pytorch.org/get-started/locally/)。不要随手 `pip install -U torch` 后仍宣称使用原锁；需要变更 CUDA wheel 来源时，先记录新环境、重新解析兼容依赖并重跑本章检查。
+当前锁记录 PyTorch 2.14.1；本轮未在 Linux 安装此锁，不能据 Mac 安装成功承诺目标云镜像一定可解析。uv 按当前 Linux 平台选择锁定 wheel，Mac wheel 不能迁移使用。uv 的 [PyTorch 集成说明](https://docs.astral.sh/uv/guides/integration/pytorch/) 区分平台和 CPU/CUDA wheel 索引；选择器网页版本示例不能替代本仓库的精确锁。若 Linux wheel 不可获得、`torch.version.cuda` 为 `None` 或 CUDA 不可用，停止并核查安装输出、GPU 驱动和 [PyTorch 官方安装选择器](https://pytorch.org/get-started/locally/)。不要随手 `pip install -U torch` 后仍宣称使用原锁；需要变更 CUDA wheel 来源时，先记录新环境、重新解析兼容依赖并重跑本章检查。
 
 ### **2. 环境和基础代码检查**
 
@@ -288,7 +290,8 @@ uv run --locked --no-sync python scripts/check_flow_device.py \
 用户填写真实时价，以下不提供假定报价：
 
 ```bash
-export MINIGEN_GPU_HOURLY=填入每小时人民币价格
+read -r -p "当前 GPU 实际人民币/小时: " MINIGEN_GPU_HOURLY
+export MINIGEN_GPU_HOURLY
 uv run --locked --no-sync python scripts/profile_training.py \
   --config configs/training/p4_b0_cuda_pilot.json \
   --output artifacts/runs/cloud_b0_pilot01 \
@@ -298,18 +301,24 @@ uv run --locked --no-sync python scripts/profile_training.py \
 
 验收：`pilot.json` status=measured，确实完成 50 步预热和 50 步计时；loss/梯度有限、训练结果 device=cuda、检查点可加载；记录 GPU 型号、精度、吞吐、step seconds、CUDA 峰值 allocated/reserved。成本只是优化步估算，保存、评测、下载、磁盘及重试另计。
 
-产物：`artifacts/runs/cloud_b0_pilot01/{pilot.json,run.json,metrics.jsonl,result.json,last.pt}`。OOM 时复制 Pilot 配置到 `artifacts/cloud/configs/`，减少 batch、增加累积并使用新输出目录重跑；不能拿旧时延为新配置估价。BF16/FP16 数值异常时保留 `failure.json`，先用 FP32 同数据对照，不能直接推进正式训练。
+产物：`artifacts/runs/cloud_b0_pilot01/{pilot.json,run.json,metrics.jsonl,result.json,last.pt}`。OOM 时复制 Pilot 配置到 `artifacts/cloud/configs/`，减少 batch、增加累积并使用新输出目录重跑；不能拿旧时延为新配置估价。FP16 非有限梯度当前采用 fail-fast，不承诺 GradScaler 自动降 scale 后继续；这类失败不能忽略。BF16/FP16 数值异常时保留 `failure.json`，先用 FP32 同数据对照，不能直接推进正式训练。当前 AMP Pilot 检查有限 loss/梯度、真实更新、保存与资源，不包含 FP32↔AMP 的逐张量等价断言；BF16 舍入使逐位等价也不是合理标准。FP32 跨设备对照、AMP 有限训练和同精度恢复是三个独立回执；未做的精度对照如实留为未执行，不能合称“所有精度数值通过”。
 
 ### **3. 独立验证恢复，固定学习率日程**
 
-先用独立短实验做 **连续 8 步** 与 **4+4 步恢复**，不要在已完成的 Pilot 里改日程。以下只生成三份小配置：
+先用独立短实验做 **连续 8 步** 与 **4+4 步恢复**，不要在已完成的 Pilot 里改日程。本节首次输入 `b0`；第六章复验时分别输入 `b1`、`b2`。选择值会同时进入模型来源、配置名、运行目录、Checkpoint 和比较回执，三架构互不覆盖。每次选择后依次执行本节全部三个代码块；只生成所选架构三份配置，不改另一架构。
 
 ```bash
+read -r -p "恢复验收架构（首次 b0，后续 b1 或 b2）: " MINIGEN_RESUME_MODEL
+case "$MINIGEN_RESUME_MODEL" in b0|b1|b2) ;; *) echo "必须输入 b0、b1 或 b2" >&2; exit 2 ;; esac
+export MINIGEN_RESUME_MODEL
 uv run --locked --no-sync python - <<'PY'
 import json
+import os
 from pathlib import Path
 
-base = json.loads(Path("configs/training/p4_b0_cuda_pilot.json").read_text())
+architecture = os.environ["MINIGEN_RESUME_MODEL"]
+assert architecture in {"b0", "b1", "b2"}
+base = json.loads(Path(f"configs/training/p4_{architecture}_cuda_pilot.json").read_text())
 base["training"].update(batch_size=2, grad_accum=1, precision="bf16",
                         max_seconds=300, schedule_steps=20, warmup_steps=2,
                         checkpoint_every=4, checkpoint_steps=[4, 8], validation_every=100)
@@ -319,16 +328,21 @@ folder.mkdir(parents=True, exist_ok=True)
 for name, steps, run in (("continuous", 8, "continuous"), ("part1", 4, "split"),
                           ("part2", 8, "split")):
     item = json.loads(json.dumps(base))
-    item["training"].update(max_steps=steps, output_dir=f"artifacts/runs/cloud_resume_{run}")
-    path = folder / f"resume_{name}.json"
+    item["training"].update(max_steps=steps, output_dir=f"artifacts/runs/cloud_{architecture}_resume_{run}")
+    path = folder / f"resume_{architecture}_{name}.json"
     if path.exists():
         raise FileExistsError(path)
     path.write_text(json.dumps(item, indent=2) + "\n")
 PY
-uv run --locked --no-sync minigen train --config artifacts/cloud/configs/resume_continuous.json --device cuda
-uv run --locked --no-sync minigen train --config artifacts/cloud/configs/resume_part1.json --device cuda
-uv run --locked --no-sync minigen train --config artifacts/cloud/configs/resume_part2.json \
-  --resume artifacts/runs/cloud_resume_split/last.pt --device cuda
+```
+
+执行所选架构，第一、二条创建两个独立运行，第三条只继续该架构的 split 运行：
+
+```bash
+uv run --locked --no-sync minigen train --config "artifacts/cloud/configs/resume_${MINIGEN_RESUME_MODEL}_continuous.json" --device cuda
+uv run --locked --no-sync minigen train --config "artifacts/cloud/configs/resume_${MINIGEN_RESUME_MODEL}_part1.json" --device cuda
+uv run --locked --no-sync minigen train --config "artifacts/cloud/configs/resume_${MINIGEN_RESUME_MODEL}_part2.json" \
+  --resume "artifacts/runs/cloud_${MINIGEN_RESUME_MODEL}_resume_split/last.pt" --device cuda
 ```
 
 实际对照并保存回执：
@@ -336,14 +350,20 @@ uv run --locked --no-sync minigen train --config artifacts/cloud/configs/resume_
 ```bash
 uv run --locked --no-sync python - <<'PY'
 import json
+import os
 from pathlib import Path
 import torch
 from minigen.training.checkpoint import load_checkpoint
 
-left = load_checkpoint(Path("artifacts/runs/cloud_resume_continuous/last.pt"))
-right = load_checkpoint(Path("artifacts/runs/cloud_resume_split/last.pt"))
+architecture = os.environ["MINIGEN_RESUME_MODEL"]
+assert architecture in {"b0", "b1", "b2"}
+output = Path(f"artifacts/cloud/acceptance/{architecture}_cuda_resume_comparison.json")
+if output.exists():
+    raise FileExistsError(output)
+left = load_checkpoint(Path(f"artifacts/runs/cloud_{architecture}_resume_continuous/last.pt"))
+right = load_checkpoint(Path(f"artifacts/runs/cloud_{architecture}_resume_split/last.pt"))
 assert left["step"] == right["step"] == 8
-report = {"step": 8, "device": "cuda", "model": {}, "ema": {}}
+report = {"architecture": architecture, "step": 8, "device": "cuda", "model": {}, "ema": {}}
 for section in ("model", "ema"):
     errors = {key: float((value - right[section][key]).abs().max())
               for key, value in left[section].items() if value.is_floating_point()}
@@ -351,7 +371,8 @@ for section in ("model", "ema"):
                        "bitwise_equal": all(torch.equal(v, right[section][k])
                                             for k, v in left[section].items())}
 report["schedule_equal"] = left["scheduler"] == right["scheduler"]
-Path("artifacts/cloud/acceptance/cuda_resume_comparison.json").write_text(json.dumps(report, indent=2))
+output.parent.mkdir(parents=True, exist_ok=True)
+output.write_text(json.dumps(report, indent=2))
 print(json.dumps(report, indent=2))
 PY
 ```
@@ -385,7 +406,7 @@ uv run --locked --no-sync python scripts/diagnose_flow_quality.py \
   --output artifacts/evaluations/cloud_quality_single --device cuda
 ```
 
-先看单图的 `reference.png`、online/EMA、Euler40/Heun20、Euler200 与 CFG3 对照；oracle 端点误差是积分检查，不是学习成功。单图通过后才运行：
+诊断脚本默认只抽最多 4 张；16 图最终质量验收以紧随其后的三组 `sample --count 16 --split train` 全量对照为依据，不能将 4 图缩略检查代替 16 图验收。先看单图的 `reference.png`、online/EMA、Euler40/Heun20、Euler200 与 CFG3 对照；oracle 端点误差是积分检查，不是学习成功。单图通过后才运行：
 
 ```bash
 uv run --locked --no-sync minigen train --config artifacts/cloud/configs/quality_sixteen.json --device cuda
@@ -398,7 +419,7 @@ for mode in correct blank shuffled; do
     --config artifacts/cloud/configs/quality_sixteen.json \
     --checkpoint artifacts/runs/cloud_quality_sixteen/last.pt \
     --output "artifacts/evaluations/cloud_condition_$mode" --device cuda \
-    --condition-mode "$mode" --count 8 --seed 1234 --steps 40 --guidance 1
+    --split train --condition-mode "$mode" --count 16 --seed 1234 --steps 40 --guidance 1
  done
 ```
 
@@ -419,6 +440,17 @@ uv run --locked --no-sync python scripts/profile_training.py \
   --warmup 50 --measure 50 --precision bf16 --hourly-cny "$MINIGEN_GPU_HOURLY"
 ```
 
+B1/B2 FP32 复验命令如下。随后完整重跑第五章第 3 节三个代码块：第一次提示输入架构时填写 `b1`，核对 `b1_cuda_resume_comparison.json` 后，再重跑同三块并输入 `b2`。无需手工改任何路径；每架构的配置为 `resume_b*_*.json`、运行在 `cloud_b*_resume_*`、回执为 `b*_cuda_resume_comparison.json`。已完成架构不重复新建；若中断，仅恢复它的既有 split Checkpoint，连续基线和比较回执保留。
+
+```bash
+for model in b1 b2; do
+  uv run --locked --no-sync python scripts/check_flow_device.py \
+    --config "configs/training/p4_${model}_resume.json" \
+    --checkpoint "artifacts/runs/p4_${model}_local/last.pt" \
+    --device cuda --output "artifacts/cloud/acceptance/${model}_cpu_cuda_fp32.json"
+done
+```
+
 B1/B2 复验使用对应 `p4_b1_resume.json`/`p4_b2_resume.json` 和 checkpoint；不能把 B0 的数值通过复制给另两个模型。其训练、采样和恢复接口一致，差异在模型构造配置。
 
 正式运行前记录：Git 提交、三份模型 JSON、真实参数量、数据/组件哈希、精度、有效 batch、学习率与日程、AdamW、条件丢弃、EMA、训练种子、统一更新步数、检查点间隔、验证指标、费用上限。相同参数量不表示相同 FLOPs；等步数、等 GPU 时间和估算 FLOPs 对照分别报告。
@@ -428,9 +460,10 @@ B1/B2 复验使用对应 `p4_b1_resume.json`/`p4_b2_resume.json` 和 checkpoint�
 目的：将已实测可运行的配方转换为全训练集配置。前置：对应真实 CUDA `pilot.json` 与相邻 `run.json` 身份匹配；用户根据 Pilot 填写步数、时限和预算，不能用本地 12 步配置当正式方案。
 
 ```bash
-export MINIGEN_STEPS=填入三模型共同更新步数
-export MINIGEN_SECONDS=填入每次允许的秒数
-export MINIGEN_BUDGET=填入每模型训练预算人民币
+read -r -p "已批准的三模型共同 optimizer 更新步数: " MINIGEN_STEPS
+read -r -p "每次调用允许的秒数: " MINIGEN_SECONDS
+read -r -p "每模型训练预算人民币: " MINIGEN_BUDGET
+export MINIGEN_STEPS MINIGEN_SECONDS MINIGEN_BUDGET
 mkdir -p artifacts/cloud/configs
 for model in b0 b1 b2; do
   uv run --locked --no-sync python scripts/prepare_cloud_run.py \
@@ -499,6 +532,17 @@ CUDA_VISIBLE_DEVICES=0 uv run --locked --no-sync minigen train \
 
 保持同一源码、模型/数据/配置身份、学习率日程和随机流。`max_steps` 是恢复后总目标，不是再加若干步；只延长停止上限不应更改固定 `schedule_steps`。迁移机器导致设备/算子变化时，不宣称逐位精确恢复。身份冲突时保留原文件，读取报错定位；不能删除校验代码或修改 checkpoint 内的哈希。
 
+B1/B2 中断恢复分别使用下面真实命令；仅在相应 run 未完成且检查点身份一致时执行，不对正在训练的目录启动第二个进程。
+
+```bash
+CUDA_VISIBLE_DEVICES=0 uv run --locked --no-sync minigen train \
+  --config artifacts/cloud/configs/b1_formal.json \
+  --resume artifacts/runs/cloud_b1_formal_s0/last.pt --device cuda
+CUDA_VISIBLE_DEVICES=0 uv run --locked --no-sync minigen train \
+  --config artifacts/cloud/configs/b2_formal.json \
+  --resume artifacts/runs/cloud_b2_formal_s0/last.pt --device cuda
+```
+
 独立采样和固定配对 MSE：
 
 ```bash
@@ -511,7 +555,7 @@ uv run --locked --no-sync minigen evaluate --config artifacts/cloud/configs/b0_f
   --output artifacts/evaluations/cloud_b0_flow_mse.json --device cuda --count 256
 ```
 
-`evaluate` 仍然只计算固定配对 Flow MSE，不是图像质量指标。图像质量使用下一章 `bench`。
+B1/B2 使用相同命令、将路径中的 `b0` 一致替换为 `b1`/`b2`，保留相同 seed、validation split 和采样设置。每次快照预览应使用包含 step 的新输出目录；`sample` 不支持断点续图，失败后检查保留的产物并新建目录重跑。`evaluate` 仍然只计算固定配对 Flow MSE，不是图像质量指标。图像质量使用下一章 `bench`。
 
 ## **七、先在验证集选择采样配置，再运行正式 Benchmark**
 
@@ -534,7 +578,7 @@ uv run --locked --no-sync minigen evaluate --config artifacts/cloud/configs/b0_f
 
 ### **2. 验证集单变量扫描与性能测量**
 
-目的：用独立 validation prompts 选择设置，主测试不参与选择。前置：固定同一 checkpoint/设备/精度/batch/初噪。`bench profile` 测时而不保存完整质量图，质量对照须另执行 generate+score。
+目的：用独立 validation prompts 选择设置，主测试不参与选择。前置：固定同一 checkpoint/设备/精度/batch/初噪。当前 sample/bench 采样使用 FP32，训练的 BF16 配置不会自动让采样变成 BF16；profile 回执也按实际 FP32 解读，不宣称测了 BF16 推理。`bench profile` 测时而不保存完整质量图，质量对照须另执行 generate+score。
 
 ```bash
 uv run --locked --no-sync minigen bench profile \
@@ -750,7 +794,8 @@ uv run --locked --no-sync python scripts/export_checkpoint_receipt.py \
 预算比较使用实际已存在的检查点，下面演示以一个已冻结的目标 GPU hours 进行比较：
 
 ```bash
-export MINIGEN_TARGET_GPU_HOURS=填入预先确定的目标小时数
+read -r -p "事先批准的比较目标 GPU hours: " MINIGEN_TARGET_GPU_HOURS
+export MINIGEN_TARGET_GPU_HOURS
 uv run --locked --no-sync minigen bench report \
   --scores artifacts/evaluations/formal/b0_distribution/score.json \
            artifacts/evaluations/formal/b1_distribution/score.json \
@@ -850,8 +895,30 @@ DDP 尚未实现。`CUDA_VISIBLE_DEVICES=0` 只选择单卡，增大可见 GPU �
 | SSH 掉线 | tmux 中进程是否仍运行 | 重连后 attach；不要重复启动同一实验 |
 | 磁盘满 | 快照数量、特征缓存、临时文件 | 先备份校验再清理；不删除唯一 last.pt |
 
-## **十二、执行记录与最后的停止点**
+## **十二、GPU 任务逐项验收与中断恢复索引**
+
+下表是各章真实命令的执行契约。**全部 CUDA 任务目前均待真实设备验收**；本机命令解析和历史 MPS 证据不能替代此表的结果。遇到相同输出目录已存在时，先辨认是恢复同一任务还是新实验，不删除目录规避身份检查。
+
+| GPU 任务与命令位置 | 前置条件 | 参数配置 | 验收标准 | 结果路径 | 中断恢复 |
+| --- | --- | --- | --- | --- | --- |
+| 环境 doctor（第三章） | 固定提交、Linux uv 锁、已分配 GPU | `--device cuda`，固定依赖 | CUDA 前反向及依赖检查成功 | `artifacts/cloud/environment/` | 修环境后重跑，并另存失败诊断 |
+| 评测器 CPU/CUDA 特征（第四章） | 固定权重、两张验证图 | FP32、最大误差 5e-4 | 每项 selected_device/device_passed 可追溯 | `acceptance/eval_cpu_cuda_fp32.json` | 保存旧回执，新文件复验；失败组件显式 CPU |
+| 三模型 FP32 对照（第五、六章） | 对应 P4 checkpoint、缓存通过 | atol/rtol 2e-4 | 前向、每参数梯度均通过 | `acceptance/b*_cpu_cuda_fp32.json` | 不放宽阈值；修复后独立新回执 |
+| AMP/性能 Pilot（第五、六章） | FP32 通过、GPU 支持选择精度 | 50 warmup+50 measured；实际 batch/accum | 有限更新、完成全部步数、实测显存/吞吐 | `runs/cloud_b*_pilot01/` | Pilot 无续跑入口；保留失败目录，新目录重测 |
+| 同轨迹恢复（第五章） | 同设备/源码/日程/配置 | 连续 8 与 4+4，独立输出 | step/LR/模型/EMA/状态检查，保留真实差值 | `runs/cloud_b*_resume_*/`、`acceptance/b*_cuda_resume_comparison.json` | 从已发布 last.pt 恢复，不把重启当续跑 |
+| 单图、16 图质量（第五章） | 数值与恢复通过 | 原固定索引、1000 步上限、600 秒 | 单图可辨；全 16 图主体与条件对照达标 | `runs/cloud_quality_*/`、`evaluations/cloud_condition_*/` | 训练 resume；诊断/普通采样用新目录，质量未过停止长训 |
+| 三模型正式训练（第六章） | 用户批准质量、预算、预登记 | 实测 Pilot 生成三份正式 JSON | 完整目标步数、有限日志、快照与验收齐全 | `runs/cloud_b*_formal_s0/` | 相同配方 `train --resume last.pt`；保持 schedule_steps |
+| 验证采样与 profile（第七章） | 固定 checkpoint；仅 validation | 共同单变量矩阵、FP32、固定预热 | 实际 NFE、分支调用、同步计时齐全；质量独立判断 | `evaluations/cloud_validation/`、`cloud_b0_profile.json` | generate 同身份 `--resume --retry-failed`；profile 新文件重测 |
+| 正式生成（第七章） | Benchmark 批准、采样选择锁定 | 2000 分布图、160×2 Prompt 图 | 全任务身份、缺图与失败记录完整 | `evaluations/formal/b*_{distribution,prompts}/` | 原命令 `--resume`；失败重试加 `--retry-failed` |
+| KID/CMMD/CLIPScore/LPIPS（第七章） | 图像校验、评测权重已核验 | 正式口径、配对顺序/分母固定 | complete、coverage、metric status 全部核查 | 各生成目录的 `score.json` | 原命令 `--resume`，不得抛弃失败样本 |
+| BLIP 与真实校准（第八章） | 真实 BLIP 权重，人工事实与 100+100 样本 | 确定解码、独立人审 verdict | 真推理回执、逐类分母/错误/未知、真实人工回答 | `evaluations/cloud_calibration_annotated/` | score resume；人审导出进度并导回原 package |
+
+HTML 人审、报告汇总和 checkpoint 资源导出可在 CPU 执行，不需要租用 GPU；执行命令仍须保持同一版本与身份。
+
+## **十三、执行记录与最后的停止点**
 
 每个云端任务登记：开始/结束时间、精确命令、提交、配置/数据/组件/Benchmark 身份、GPU 型号、精度、成功/失败、实际产物、实测资源和实际账单。保持 P3-05 质量、P3-06 CUDA、P4 正式实验、P5 真实 VQA/人工校准这些验收分别记录。
 
 本轮交付手册不代表已经运行上述云端命令，也不自动批准正式长训。**下一步由用户审核 Benchmark 与手册，然后亲自执行单卡 CUDA Pilot；P6/P7、额外规模、额外种子、多卡和研究结论不在本轮范围。** 分任务勾选使用 [云端任务清单](云端任务清单.md)，每个对号必须对应真实回执。
+
+官方安装入口于本轮只读核对：uv 独立安装器、uv PyTorch 平台/索引说明、PyTorch 安装选择器；这只确认安装方法，不是 Linux 依赖安装或 NVIDIA 驱动兼容性实测。最终命令解析证据见 [手册复核回执](../../reports/v2/benchmark/final_manual_checks.json)。

@@ -1,0 +1,312 @@
+{
+  "schema": "minigen.precloud-preregistration.v1",
+  "status": "candidate_pending_user_review_and_cuda_pilot",
+  "not_an_executable_training_config": true,
+  "baseline_commit": "77b750685f850f1b6789995fc3dd5a1a74857b87",
+  "delivery_commit_rule": "Use the commit containing this file; record git rev-parse HEAD before cloud execution.",
+  "approved": false,
+  "reviewer": null,
+  "reviewed_at": null,
+  "formal_training_approved": false,
+  "frozen_inputs": {
+    "files_sha256": {
+      "uv.lock": "960013f563cf069643afd2fb8eb13b01b55fe33eeb410e6ac0bbaf274058a55c",
+      "configs/datasets/artbench_pd_256.yaml": "2800b75de6cd57516fdb875a038489b1f5f19b2aca94ec6e329a8ff96f8aa30c",
+      "configs/models/sdxl_vae.json": "a50db26012b0f1523f97cd2c4008393807092f9a2c207fb32d9b9e71e14617d1",
+      "configs/models/clip_text.json": "f3075c34e5cbb575fcfa75b46220d036ac89cd7310a650ace9d57b5130aeca88",
+      "configs/models/evaluation.json": "1b253bbb9b6287e832a892ee83f20df24a4c841361d4a68fbd99eb92df291af8",
+      "configs/benchmark/sampling_matrix.json": "e0966b9c2d9bce0c273ff02e19be336b10e6b23514f16192a0a0b0096c1120fb",
+      "reports/v2/data/artbench_freeze.json": "ebeb5748a79455c8bc625d0397571f8271907d6fb574349a53c4c239b4196eaf",
+      "reports/v2/components/artbench_cache_formal.json": "4c717c4ba5a672246ebb9c3b2cbd3b08e2a0b336e2b28830e009941a230fe9ab"
+    },
+    "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+    "cache_index_sha256": "d065449f4d17c8f307325b8842cd687b611b52065ada43988c28cfe26a960d00",
+    "cache_path": "artifacts/cache/artbench_pd_256/v1_formal",
+    "splits": {
+      "train": 37042,
+      "validation": 4637,
+      "test": 4619
+    },
+    "resolution": [
+      256,
+      256
+    ],
+    "storage": {
+      "latents": {
+        "shape": [
+          4,
+          32,
+          32
+        ],
+        "dtype": "<f2"
+      },
+      "text": {
+        "shape": [
+          77,
+          512
+        ],
+        "dtype": "<f2"
+      },
+      "mask": {
+        "shape": [
+          77
+        ],
+        "dtype": "|b1"
+      }
+    },
+    "payload_sha256": {
+      "blank_mask.npy": "b221f6fdb2fdfcc0771aa8e409d36e28f61e5b6b2bba87f38dce1eb4c05136f7",
+      "blank_text.npy": "fb88376e2263a9ca2d9d4d750690fe1b03e7c997f1b21a4f54ee0e653c9317bb",
+      "train_latents.npy": "de998afa2783f662b344c7d9338c2157f780ed7c6196da53cc807319fefcd06c",
+      "train_mask.npy": "82857e8a26320323d01ff9de0ae040677eb0c8b0ca62ebe696b3a1d0bc1ea824",
+      "train_text.npy": "945a1600bf3614f2932fec5d0328859c4ae99fe87e9870017434a6900b653eb0",
+      "validation_latents.npy": "52d24e0cc6b5363ae60c227b3d188d2d6c8bbdbb5c1d9367fc17f8010c92ab50",
+      "validation_mask.npy": "6617f8708f289dc4a619e71618d1a869fc610e676f84895262ee026b30dc12b0",
+      "validation_text.npy": "cac0efcde295fe2b674a0eca0d28963d33afaeb3e8a8b9ecb838cfbb0fa26278"
+    }
+  },
+  "models": [
+    {
+      "config_file": "configs/models/b0_30m.json",
+      "config_sha256": "59b90c077b64cbf8a1e29f0bb92c6ca4b5d95e21271a0da01c5679efa51caff4",
+      "specification": {
+        "architecture": "b0",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "depth": 8,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4
+      },
+      "trainable_parameters": 30359824,
+      "dominant_forward_flops": 9925558272,
+      "scope": "一次前向的 Linear 与 SDPA QK/PV 密集矩阵乘法，乘加计 2 FLOPs。不含 bias、Norm、激活、softmax、RoPE、VAE/CLIP、反向、优化器或 CFG 额外分支。不是完整硬件 FLOPs/吞吐，不代表同参数即同计算预算。"
+    },
+    {
+      "config_file": "configs/models/b1_30m.json",
+      "config_sha256": "7009ea154fdc7e2e08cc9a72e0d86901c03e8599b10d2a6e72814165602a4af6",
+      "specification": {
+        "architecture": "b1",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "depth": 11
+      },
+      "trainable_parameters": 30061456,
+      "dominant_forward_flops": 14893945344,
+      "scope": "一次前向的 Linear 与 SDPA QK/PV 密集矩阵乘法，乘加计 2 FLOPs。不含 bias、Norm、激活、softmax、RoPE、VAE/CLIP、反向、优化器或 CFG 额外分支。不是完整硬件 FLOPs/吞吐，不代表同参数即同计算预算。"
+    },
+    {
+      "config_file": "configs/models/b2_30m.json",
+      "config_sha256": "ddc43bf044cb2c56e6a43a3972052d75d4fc05d69b5996eb8685e9a9af80df09",
+      "specification": {
+        "architecture": "b2",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "double_depth": 3,
+        "single_depth": 5
+      },
+      "trainable_parameters": 30061456,
+      "dominant_forward_flops": 10847563776,
+      "scope": "一次前向的 Linear 与 SDPA QK/PV 密集矩阵乘法，乘加计 2 FLOPs。不含 bias、Norm、激活、softmax、RoPE、VAE/CLIP、反向、优化器或 CFG 额外分支。不是完整硬件 FLOPs/吞吐，不代表同参数即同计算预算。"
+    }
+  ],
+  "training": {
+    "objective": "flow_velocity",
+    "path": "z_t=(1-t)*epsilon+t*z",
+    "target": "z-epsilon",
+    "time_distribution": "uniform[0,1)",
+    "noise_distribution": "standard_normal",
+    "seed": 0,
+    "extra_seeds": [],
+    "optimizer": "AdamW",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "condition_dropout": 0.1,
+    "attention_backend": "sdpa",
+    "effective_batch_target": 64,
+    "micro_batch_candidates": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "grad_accum_rule": "64 // batch_size; common effective batch across architectures; actual tail batch counts reported",
+    "learning_rate_candidates": [
+      0.0001,
+      0.0002
+    ],
+    "learning_rate_selected": null,
+    "ema_candidates": [
+      0.99,
+      0.999
+    ],
+    "ema_selected": null,
+    "precision_preference": [
+      "bf16",
+      "fp32"
+    ],
+    "precision_selected": null,
+    "max_steps": null,
+    "max_seconds": null,
+    "schedule": "linear_warmup_then_cosine",
+    "warmup_rule": "min(500, steps-1, max(1, steps//20))",
+    "min_lr_ratio": 0.1,
+    "checkpoint_interval_rule": "max(1, steps//20), plus last.pt",
+    "validation_limit": 256,
+    "train_limit": null,
+    "train_indices": null,
+    "validation_indices": null
+  },
+  "sampling": {
+    "diagnostic_default": {
+      "method": "euler",
+      "solver_nfe": 40,
+      "guidance": 1.0,
+      "weights": "ema",
+      "precision": "fp32"
+    },
+    "validation_matrix": "configs/benchmark/sampling_matrix.json",
+    "selected_configuration": null,
+    "selection_rule": "validation only, human content quality and calibrated condition adherence first; lowest measured compute among adequate candidates; no test-driven selection"
+  },
+  "benchmark": {
+    "path": "reports/v2/benchmark/artbench_v1",
+    "candidate_sha256": "ff18ef2f5538538cf54411d4d4934e135bdd712c53d62247512825aaea4c62e5",
+    "human_approval": "pending",
+    "formal_prompt_counts": {
+      "id": 80,
+      "composition_stress": 40,
+      "paraphrase": 40
+    },
+    "ood_verified": false,
+    "validation_prompt_count": 80,
+    "test_seeds": [
+      20261110,
+      20261111
+    ],
+    "validation_seeds": [
+      20261112,
+      20261113
+    ],
+    "distribution_reference_records": 2000,
+    "unique_distribution_files": 1999,
+    "blocking_review": "reports/v2/benchmark/MiniGen_Benchmark_最终审核包.md"
+  },
+  "metrics": {
+    "kid": {
+      "features": "torch-fidelity Inception 2048",
+      "polynomial_degree": 3,
+      "estimator": "unbiased MMD",
+      "subsets": 100,
+      "subset_size": 1000,
+      "negative_values_allowed": true
+    },
+    "cmmd": {
+      "features": "unit-normalized CLIP ViT-L/14@336 image projection",
+      "kernel": "rbf",
+      "sigma": 10,
+      "estimator": "biased MMD",
+      "scale": 1000
+    },
+    "clipscore": {
+      "variant": "L/14@336 no prefix",
+      "formula": "2.5*max(cosine,0)"
+    },
+    "lpips": {
+      "backbone": "alex",
+      "purpose": "paired-seed diversity; disclose valid pair coverage"
+    },
+    "vqa": {
+      "adapter": "Salesforce/blip-vqa-base",
+      "real_model_executed": false,
+      "calibrated": false
+    },
+    "human": {
+      "approved_answers_available": false,
+      "target_calibration": {
+        "real": 100,
+        "generated_or_degraded": 100
+      }
+    }
+  },
+  "comparison": {
+    "same_steps": "exact_existing_checkpoint",
+    "same_budget": "closest_existing_checkpoint_at_or_below_target",
+    "maximum_relative_gap": 0.1,
+    "interpolation": false,
+    "primary_claim": "one seed per architecture, descriptive comparison; no statistical significance claim"
+  },
+  "budget": {
+    "gpu_model": null,
+    "cuda_runtime": null,
+    "driver": null,
+    "precision": null,
+    "step_seconds": null,
+    "peak_memory_bytes": null,
+    "hourly_cny": null,
+    "target_steps": null,
+    "target_gpu_hours": null,
+    "training_budget_cny": null,
+    "evaluation_budget_cny": null,
+    "storage_transfer_cny": null,
+    "actual_cost_cny": null,
+    "estimate_rule": "pilot mean step seconds * approved steps * price / 3600, plus 25% reserve and separately budget evaluation/storage/transfer"
+  },
+  "outputs": {
+    "configs": "artifacts/cloud/configs/",
+    "runs": "artifacts/runs/cloud/",
+    "evaluations": "artifacts/evaluations/cloud/",
+    "receipts": "reports/v2/experiments/",
+    "formal_results": "reports/v2/final/"
+  },
+  "gates": {
+    "benchmark_semantics_resolved_and_user_approved": false,
+    "manual_and_pilot_budget_user_approved": false,
+    "cuda_fp32_passed": false,
+    "cuda_amp_passed": false,
+    "cuda_resume_passed": false,
+    "b0_sixteen_image_quality_passed": false,
+    "b0_condition_use_passed": false,
+    "formal_recipe_and_budget_user_approved": false
+  },
+  "ddp_implemented": false,
+  "p6_authorized": false,
+  "delivery_runtime_source_sha256": "a27dc33a3c6e1946907be183467e2ac340afb67e4c1bfb8d2b9a303d1d5aac36",
+  "evaluation_implementation_sha256": {
+    "src/minigen/evaluation/__init__.py": "b9a72681c1470de593aa1c365efd3f6035e3a036789598149b442cfbaa7ada7a",
+    "src/minigen/evaluation/assets.py": "be892496dd4fa8d2bd1048aac2a9d37926054521f3c94e88c5f5a87c4b709e5a",
+    "src/minigen/evaluation/benchmark.py": "5692c34150e4d335bffa29413c98d03a1134bc71d4689f86ec1ec19762b7f811",
+    "src/minigen/evaluation/features.py": "63334efcdfcf46d76cb908edd580752787c58d8a0c070ca13843f5fce8940ad8",
+    "src/minigen/evaluation/generation.py": "513a28a9cd885e6f55f3b4727448f00b69885a155caa07bfd7b1e2ebbbee668a",
+    "src/minigen/evaluation/local_components.py": "aaf57ef11c7957610e0a00b5c053230a117ab92b909bfd9d485c9b7875cdabc6",
+    "src/minigen/evaluation/metrics.py": "d61746e4afebc6d879fd0546eb8f53f45798ba79b34c1f6d6530652d3731b3d9",
+    "src/minigen/evaluation/profiling.py": "5cffee4ebbb76d5264a63f77fb2e8f86350a44c077c557f184ce7bc2659199b5",
+    "src/minigen/evaluation/reconstruction.py": "6fb4aa5ce16a4ae03ad28c26d5dacddb44f0f6a3e539aad78ccd26ff1f26a624",
+    "src/minigen/evaluation/reconstruction_metrics.py": "978924261f2dce8ca8130b4498876116eec804081504580f4ae233fe1219b450",
+    "src/minigen/evaluation/reconstruction_review.py": "2cf1b3840b436cb36dcbacfb030a98dd5b1581443c487f6247608437be0e5dd5",
+    "src/minigen/evaluation/reporting.py": "18699603f453e4f58f60a22996502a5e460e99a17bf6416804bb3ccfb5a3df80",
+    "src/minigen/evaluation/review.py": "60ebb3b289f387b3d4b97764763881cc7d54ebf4df478b1b60069098aa178115",
+    "src/minigen/evaluation/scoring.py": "b9a74f3c20be08e135cc05e23c65c62f604b9a02cd074de304027c117b06ebe7",
+    "src/minigen/evaluation/vqa.py": "f42fa332c3aaf55615a48cd5301297050ad93a22a084c68baf3ccf264ffd4585"
+  }
+}

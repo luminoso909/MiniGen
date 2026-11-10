@@ -1,0 +1,3491 @@
+{
+  "reviewed_source_commit": "77b750685f850f1b6789995fc3dd5a1a74857b87",
+  "benchmark_content_sha256": "ff18ef2f5538538cf54411d4d4934e135bdd712c53d62247512825aaea4c62e5",
+  "benchmark_file_sha256": "8574e2a05ae797780ccdf427e7aef1fe16932f7771ff5544fdb35041a96b8cc4",
+  "approval_status": "pending",
+  "checks": {
+    "content_lock": "passed",
+    "bound_assets": "passed",
+    "split_counts": {
+      "id": 80,
+      "validation": 80,
+      "composition_stress": 40,
+      "paraphrase": 40
+    },
+    "source_split_counts": {
+      "train": 37042,
+      "validation": 4637,
+      "test": 4619
+    },
+    "total_prompt_questions": 600,
+    "main_prompt_question_counts": {
+      "object": 200,
+      "count": 80,
+      "color": 20,
+      "binding": 60,
+      "relation": 60
+    },
+    "main_seed_question_counts": {
+      "object": 400,
+      "count": 160,
+      "color": 40,
+      "binding": 120,
+      "relation": 120
+    },
+    "duplicate_exact_prompt_count": 0,
+    "duplicate_normalized_prompt_count": 0,
+    "exact_prompt_to_source_caption_matches": {
+      "train": [],
+      "validation": [],
+      "test": []
+    },
+    "split_isolation": [
+      {
+        "splits": [
+          "train",
+          "validation"
+        ],
+        "group_intersection": 0,
+        "file_hash_intersection": 0
+      },
+      {
+        "splits": [
+          "train",
+          "test"
+        ],
+        "group_intersection": 0,
+        "file_hash_intersection": 0
+      },
+      {
+        "splits": [
+          "validation",
+          "test"
+        ],
+        "group_intersection": 0,
+        "file_hash_intersection": 0
+      }
+    ],
+    "references": 2000,
+    "unique_reference_ids": 2000,
+    "unique_reference_hashes": 1999,
+    "unique_reference_caption_strings": 1987,
+    "validation_references": 16,
+    "calibration_references": 100,
+    "smoke_calibration_shared_ids": [
+      "ab-04140",
+      "ab-06191",
+      "ab-10060",
+      "ab-15954",
+      "ab-16108",
+      "ab-21763",
+      "ab-22002",
+      "ab-23915",
+      "ab-26815",
+      "ab-27518",
+      "ab-29081",
+      "ab-33028",
+      "ab-36685",
+      "ab-37966",
+      "ab-45078",
+      "ab-46265"
+    ],
+    "paraphrase_pairs": [
+      {
+        "prompt_id": "paraphrase-id-00-0",
+        "paired_prompt_id": "id-00-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-00-1",
+        "paired_prompt_id": "id-00-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-01-0",
+        "paired_prompt_id": "id-01-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-01-1",
+        "paired_prompt_id": "id-01-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-02-0",
+        "paired_prompt_id": "id-02-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-02-1",
+        "paired_prompt_id": "id-02-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-03-0",
+        "paired_prompt_id": "id-03-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-03-1",
+        "paired_prompt_id": "id-03-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-04-0",
+        "paired_prompt_id": "id-04-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-04-1",
+        "paired_prompt_id": "id-04-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-05-0",
+        "paired_prompt_id": "id-05-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-05-1",
+        "paired_prompt_id": "id-05-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-06-0",
+        "paired_prompt_id": "id-06-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-06-1",
+        "paired_prompt_id": "id-06-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-07-0",
+        "paired_prompt_id": "id-07-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-07-1",
+        "paired_prompt_id": "id-07-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-08-0",
+        "paired_prompt_id": "id-08-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-08-1",
+        "paired_prompt_id": "id-08-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-09-0",
+        "paired_prompt_id": "id-09-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-09-1",
+        "paired_prompt_id": "id-09-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-10-0",
+        "paired_prompt_id": "id-10-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-10-1",
+        "paired_prompt_id": "id-10-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-11-0",
+        "paired_prompt_id": "id-11-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-11-1",
+        "paired_prompt_id": "id-11-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-12-0",
+        "paired_prompt_id": "id-12-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-12-1",
+        "paired_prompt_id": "id-12-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-13-0",
+        "paired_prompt_id": "id-13-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-13-1",
+        "paired_prompt_id": "id-13-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-14-0",
+        "paired_prompt_id": "id-14-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-14-1",
+        "paired_prompt_id": "id-14-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-15-0",
+        "paired_prompt_id": "id-15-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-15-1",
+        "paired_prompt_id": "id-15-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-16-0",
+        "paired_prompt_id": "id-16-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-16-1",
+        "paired_prompt_id": "id-16-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-17-0",
+        "paired_prompt_id": "id-17-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-17-1",
+        "paired_prompt_id": "id-17-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-18-0",
+        "paired_prompt_id": "id-18-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-18-1",
+        "paired_prompt_id": "id-18-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-19-0",
+        "paired_prompt_id": "id-19-0",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      },
+      {
+        "prompt_id": "paraphrase-id-19-1",
+        "paired_prompt_id": "id-19-1",
+        "exact_payload_preserved": true,
+        "requirements_equal": true,
+        "seeds_equal": true
+      }
+    ],
+    "reference_duplicate_hash_groups": [
+      {
+        "sha256": "e5c59655e44b85fe7fa5ca54b5e15c1948b3d64fd13d7dc3506b19a89e26b6ad",
+        "sample_ids": [
+          "ab-28721",
+          "ab-46291"
+        ]
+      }
+    ],
+    "unique_reference_groups": 1999,
+    "known_artist_values": 818,
+    "references_without_artist": 0
+  },
+  "issue_counts": {
+    "scene_clause_not_scored": 160,
+    "explicit_count_not_scored": 120,
+    "duplicate_color_binding_question": 40,
+    "empty_right_space_not_scored": 40,
+    "image_left_definition_needs_rubric": 40,
+    "countable_instance_definition_needs_rubric": 12,
+    "same_color_pair_cannot_test_color_swap": 6,
+    "above_in_image_vs_physical_relation_needs_rubric": 20
+  },
+  "prompt_review": [
+    {
+      "prompt_id": "id-00-0",
+      "split": "id",
+      "caption": "A painting showing one woman wearing a dress in a garden.",
+      "paired_prompt_id": null,
+      "family_id": "id-woman",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-00-1",
+      "split": "id",
+      "caption": "A painting showing two women wearing a dress in a garden.",
+      "paired_prompt_id": null,
+      "family_id": "id-woman",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-00-2",
+      "split": "id",
+      "caption": "A painting showing one woman wearing a dress in a garden. The woman's dress is blue.",
+      "paired_prompt_id": null,
+      "family_id": "id-woman",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-00-3",
+      "split": "id",
+      "caption": "A painting showing one woman on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-woman",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-01-0",
+      "split": "id",
+      "caption": "A painting showing one man wearing a coat in a room.",
+      "paired_prompt_id": null,
+      "family_id": "id-man",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-01-1",
+      "split": "id",
+      "caption": "A painting showing two men wearing a coat in a room.",
+      "paired_prompt_id": null,
+      "family_id": "id-man",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-01-2",
+      "split": "id",
+      "caption": "A painting showing one man wearing a coat in a room. The man's coat is brown.",
+      "paired_prompt_id": null,
+      "family_id": "id-man",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-01-3",
+      "split": "id",
+      "caption": "A painting showing one man on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-man",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-02-0",
+      "split": "id",
+      "caption": "A painting showing one dog resting beside a country path.",
+      "paired_prompt_id": null,
+      "family_id": "id-dog",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-02-1",
+      "split": "id",
+      "caption": "A painting showing two dogs resting beside a country path.",
+      "paired_prompt_id": null,
+      "family_id": "id-dog",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-02-2",
+      "split": "id",
+      "caption": "A painting showing one dog resting beside a country path. The dog is black.",
+      "paired_prompt_id": null,
+      "family_id": "id-dog",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-02-3",
+      "split": "id",
+      "caption": "A painting showing one dog on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-dog",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-03-0",
+      "split": "id",
+      "caption": "A painting showing one horse standing in a meadow.",
+      "paired_prompt_id": null,
+      "family_id": "id-horse",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-03-1",
+      "split": "id",
+      "caption": "A painting showing two horses standing in a meadow.",
+      "paired_prompt_id": null,
+      "family_id": "id-horse",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-03-2",
+      "split": "id",
+      "caption": "A painting showing one horse standing in a meadow. The horse is brown.",
+      "paired_prompt_id": null,
+      "family_id": "id-horse",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-03-3",
+      "split": "id",
+      "caption": "A painting showing one horse on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-horse",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-04-0",
+      "split": "id",
+      "caption": "A painting showing one bird sitting on a branch.",
+      "paired_prompt_id": null,
+      "family_id": "id-bird",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-04-1",
+      "split": "id",
+      "caption": "A painting showing two birds sitting on a branch.",
+      "paired_prompt_id": null,
+      "family_id": "id-bird",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-04-2",
+      "split": "id",
+      "caption": "A painting showing one bird sitting on a branch. The bird is white.",
+      "paired_prompt_id": null,
+      "family_id": "id-bird",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-04-3",
+      "split": "id",
+      "caption": "A painting showing one bird on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-bird",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-05-0",
+      "split": "id",
+      "caption": "A painting showing one tree beside a river in a landscape.",
+      "paired_prompt_id": null,
+      "family_id": "id-tree",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-05-1",
+      "split": "id",
+      "caption": "A painting showing two trees beside a river in a landscape.",
+      "paired_prompt_id": null,
+      "family_id": "id-tree",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-05-2",
+      "split": "id",
+      "caption": "A painting showing one tree beside a river in a landscape. The tree is green.",
+      "paired_prompt_id": null,
+      "family_id": "id-tree",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-05-3",
+      "split": "id",
+      "caption": "A painting showing one tree on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-tree",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-06-0",
+      "split": "id",
+      "caption": "A painting showing one flower in a still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-flower",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-06-1",
+      "split": "id",
+      "caption": "A painting showing two flowers in a still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-flower",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-06-2",
+      "split": "id",
+      "caption": "A painting showing one flower in a still life. The flower is red.",
+      "paired_prompt_id": null,
+      "family_id": "id-flower",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-06-3",
+      "split": "id",
+      "caption": "A painting showing one flower on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-flower",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-07-0",
+      "split": "id",
+      "caption": "A painting showing one boat floating on calm water.",
+      "paired_prompt_id": null,
+      "family_id": "id-boat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-07-1",
+      "split": "id",
+      "caption": "A painting showing two boats floating on calm water.",
+      "paired_prompt_id": null,
+      "family_id": "id-boat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-07-2",
+      "split": "id",
+      "caption": "A painting showing one boat floating on calm water. The boat is blue.",
+      "paired_prompt_id": null,
+      "family_id": "id-boat",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-07-3",
+      "split": "id",
+      "caption": "A painting showing one boat on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-boat",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-08-0",
+      "split": "id",
+      "caption": "A painting showing one house in a rural landscape.",
+      "paired_prompt_id": null,
+      "family_id": "id-house",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-08-1",
+      "split": "id",
+      "caption": "A painting showing two houses in a rural landscape.",
+      "paired_prompt_id": null,
+      "family_id": "id-house",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-08-2",
+      "split": "id",
+      "caption": "A painting showing one house in a rural landscape. The house is white.",
+      "paired_prompt_id": null,
+      "family_id": "id-house",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-08-3",
+      "split": "id",
+      "caption": "A painting showing one house on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-house",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-09-0",
+      "split": "id",
+      "caption": "A painting showing one church in a village landscape.",
+      "paired_prompt_id": null,
+      "family_id": "id-church",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-09-1",
+      "split": "id",
+      "caption": "A painting showing two churches in a village landscape.",
+      "paired_prompt_id": null,
+      "family_id": "id-church",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-09-2",
+      "split": "id",
+      "caption": "A painting showing one church in a village landscape. The church is white.",
+      "paired_prompt_id": null,
+      "family_id": "id-church",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-09-3",
+      "split": "id",
+      "caption": "A painting showing one church on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-church",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-10-0",
+      "split": "id",
+      "caption": "A painting showing one bridge crossing a river.",
+      "paired_prompt_id": null,
+      "family_id": "id-bridge",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-10-1",
+      "split": "id",
+      "caption": "A painting showing two bridges crossing a river.",
+      "paired_prompt_id": null,
+      "family_id": "id-bridge",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-10-2",
+      "split": "id",
+      "caption": "A painting showing one bridge crossing a river. The bridge is brown.",
+      "paired_prompt_id": null,
+      "family_id": "id-bridge",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-10-3",
+      "split": "id",
+      "caption": "A painting showing one bridge on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-bridge",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-11-0",
+      "split": "id",
+      "caption": "A painting showing one vase in a painted still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-vase",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-11-1",
+      "split": "id",
+      "caption": "A painting showing two vases in a painted still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-vase",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-11-2",
+      "split": "id",
+      "caption": "A painting showing one vase in a painted still life. The vase is blue.",
+      "paired_prompt_id": null,
+      "family_id": "id-vase",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-11-3",
+      "split": "id",
+      "caption": "A painting showing one vase on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-vase",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-12-0",
+      "split": "id",
+      "caption": "A painting showing one table inside a quiet room.",
+      "paired_prompt_id": null,
+      "family_id": "id-table",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-12-1",
+      "split": "id",
+      "caption": "A painting showing two tables inside a quiet room.",
+      "paired_prompt_id": null,
+      "family_id": "id-table",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-12-2",
+      "split": "id",
+      "caption": "A painting showing one table inside a quiet room. The table is brown.",
+      "paired_prompt_id": null,
+      "family_id": "id-table",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-12-3",
+      "split": "id",
+      "caption": "A painting showing one table on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-table",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-13-0",
+      "split": "id",
+      "caption": "A painting showing one chair inside a painted interior.",
+      "paired_prompt_id": null,
+      "family_id": "id-chair",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-13-1",
+      "split": "id",
+      "caption": "A painting showing two chairs inside a painted interior.",
+      "paired_prompt_id": null,
+      "family_id": "id-chair",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-13-2",
+      "split": "id",
+      "caption": "A painting showing one chair inside a painted interior. The chair is red.",
+      "paired_prompt_id": null,
+      "family_id": "id-chair",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-13-3",
+      "split": "id",
+      "caption": "A painting showing one chair on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-chair",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-14-0",
+      "split": "id",
+      "caption": "A painting showing one window on the wall of an interior.",
+      "paired_prompt_id": null,
+      "family_id": "id-window",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-14-1",
+      "split": "id",
+      "caption": "A painting showing two windows on the wall of an interior.",
+      "paired_prompt_id": null,
+      "family_id": "id-window",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-14-2",
+      "split": "id",
+      "caption": "A painting showing one window on the wall of an interior. The window frame is white.",
+      "paired_prompt_id": null,
+      "family_id": "id-window",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-14-3",
+      "split": "id",
+      "caption": "A painting showing one window on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-window",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-15-0",
+      "split": "id",
+      "caption": "A painting showing one book in a still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-book",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-15-1",
+      "split": "id",
+      "caption": "A painting showing two books in a still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-book",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-15-2",
+      "split": "id",
+      "caption": "A painting showing one book in a still life. The book cover is red.",
+      "paired_prompt_id": null,
+      "family_id": "id-book",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-15-3",
+      "split": "id",
+      "caption": "A painting showing one book on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-book",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-16-0",
+      "split": "id",
+      "caption": "A painting showing one bowl in a still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-bowl",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-16-1",
+      "split": "id",
+      "caption": "A painting showing two bowls in a still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-bowl",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-16-2",
+      "split": "id",
+      "caption": "A painting showing one bowl in a still life. The bowl is white.",
+      "paired_prompt_id": null,
+      "family_id": "id-bowl",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-16-3",
+      "split": "id",
+      "caption": "A painting showing one bowl on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-bowl",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-17-0",
+      "split": "id",
+      "caption": "A painting showing one apple in a painted still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-apple",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-17-1",
+      "split": "id",
+      "caption": "A painting showing two apples in a painted still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-apple",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-17-2",
+      "split": "id",
+      "caption": "A painting showing one apple in a painted still life. The apple is red.",
+      "paired_prompt_id": null,
+      "family_id": "id-apple",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-17-3",
+      "split": "id",
+      "caption": "A painting showing one apple on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-apple",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-18-0",
+      "split": "id",
+      "caption": "A painting showing one bottle in a still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-bottle",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-18-1",
+      "split": "id",
+      "caption": "A painting showing two bottles in a still life.",
+      "paired_prompt_id": null,
+      "family_id": "id-bottle",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-18-2",
+      "split": "id",
+      "caption": "A painting showing one bottle in a still life. The bottle is green.",
+      "paired_prompt_id": null,
+      "family_id": "id-bottle",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-18-3",
+      "split": "id",
+      "caption": "A painting showing one bottle on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-bottle",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-19-0",
+      "split": "id",
+      "caption": "A painting showing one tower rising above a city landscape.",
+      "paired_prompt_id": null,
+      "family_id": "id-tower",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-19-1",
+      "split": "id",
+      "caption": "A painting showing two towers rising above a city landscape.",
+      "paired_prompt_id": null,
+      "family_id": "id-tower",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-19-2",
+      "split": "id",
+      "caption": "A painting showing one tower rising above a city landscape. The tower is brown.",
+      "paired_prompt_id": null,
+      "family_id": "id-tower",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "id-19-3",
+      "split": "id",
+      "caption": "A painting showing one tower on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "id-tower",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-00-0",
+      "split": "validation",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard.",
+      "paired_prompt_id": null,
+      "family_id": "validation-girl",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-00-1",
+      "split": "validation",
+      "caption": "A painting showing two girls wearing a skirt in a courtyard.",
+      "paired_prompt_id": null,
+      "family_id": "validation-girl",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-00-2",
+      "split": "validation",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard. The girl's skirt is red.",
+      "paired_prompt_id": null,
+      "family_id": "validation-girl",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-00-3",
+      "split": "validation",
+      "caption": "A painting showing one girl on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-girl",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-01-0",
+      "split": "validation",
+      "caption": "A painting showing one boy wearing a shirt in a courtyard.",
+      "paired_prompt_id": null,
+      "family_id": "validation-boy",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-01-1",
+      "split": "validation",
+      "caption": "A painting showing two boys wearing a shirt in a courtyard.",
+      "paired_prompt_id": null,
+      "family_id": "validation-boy",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-01-2",
+      "split": "validation",
+      "caption": "A painting showing one boy wearing a shirt in a courtyard. The boy's shirt is blue.",
+      "paired_prompt_id": null,
+      "family_id": "validation-boy",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-01-3",
+      "split": "validation",
+      "caption": "A painting showing one boy on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-boy",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-02-0",
+      "split": "validation",
+      "caption": "A painting showing one cat sitting on a doorstep.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-02-1",
+      "split": "validation",
+      "caption": "A painting showing two cats sitting on a doorstep.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-02-2",
+      "split": "validation",
+      "caption": "A painting showing one cat sitting on a doorstep. The cat is black.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cat",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-02-3",
+      "split": "validation",
+      "caption": "A painting showing one cat on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cat",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-03-0",
+      "split": "validation",
+      "caption": "A painting showing one cow standing beside a fence.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cow",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-03-1",
+      "split": "validation",
+      "caption": "A painting showing two cows standing beside a fence.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cow",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-03-2",
+      "split": "validation",
+      "caption": "A painting showing one cow standing beside a fence. The cow is brown.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cow",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-03-3",
+      "split": "validation",
+      "caption": "A painting showing one cow on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cow",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-04-0",
+      "split": "validation",
+      "caption": "A painting showing one sheep standing on a hillside.",
+      "paired_prompt_id": null,
+      "family_id": "validation-sheep",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-04-1",
+      "split": "validation",
+      "caption": "A painting showing two sheep standing on a hillside.",
+      "paired_prompt_id": null,
+      "family_id": "validation-sheep",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-04-2",
+      "split": "validation",
+      "caption": "A painting showing one sheep standing on a hillside. The sheep is white.",
+      "paired_prompt_id": null,
+      "family_id": "validation-sheep",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-04-3",
+      "split": "validation",
+      "caption": "A painting showing one sheep on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-sheep",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-05-0",
+      "split": "validation",
+      "caption": "A painting showing one goat standing among rocks.",
+      "paired_prompt_id": null,
+      "family_id": "validation-goat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-05-1",
+      "split": "validation",
+      "caption": "A painting showing two goats standing among rocks.",
+      "paired_prompt_id": null,
+      "family_id": "validation-goat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-05-2",
+      "split": "validation",
+      "caption": "A painting showing one goat standing among rocks. The goat is white.",
+      "paired_prompt_id": null,
+      "family_id": "validation-goat",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-05-3",
+      "split": "validation",
+      "caption": "A painting showing one goat on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-goat",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-06-0",
+      "split": "validation",
+      "caption": "A painting showing one rose in a floral still life.",
+      "paired_prompt_id": null,
+      "family_id": "validation-rose",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-06-1",
+      "split": "validation",
+      "caption": "A painting showing two roses in a floral still life.",
+      "paired_prompt_id": null,
+      "family_id": "validation-rose",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-06-2",
+      "split": "validation",
+      "caption": "A painting showing one rose in a floral still life. The rose is pink.",
+      "paired_prompt_id": null,
+      "family_id": "validation-rose",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-06-3",
+      "split": "validation",
+      "caption": "A painting showing one rose on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-rose",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-07-0",
+      "split": "validation",
+      "caption": "A painting showing one mountain behind a broad valley.",
+      "paired_prompt_id": null,
+      "family_id": "validation-mountain",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-07-1",
+      "split": "validation",
+      "caption": "A painting showing two mountains behind a broad valley.",
+      "paired_prompt_id": null,
+      "family_id": "validation-mountain",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-07-2",
+      "split": "validation",
+      "caption": "A painting showing one mountain behind a broad valley. The mountain is blue.",
+      "paired_prompt_id": null,
+      "family_id": "validation-mountain",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-07-3",
+      "split": "validation",
+      "caption": "A painting showing one mountain on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-mountain",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-08-0",
+      "split": "validation",
+      "caption": "A painting showing one ship sailing across the sea.",
+      "paired_prompt_id": null,
+      "family_id": "validation-ship",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-08-1",
+      "split": "validation",
+      "caption": "A painting showing two ships sailing across the sea.",
+      "paired_prompt_id": null,
+      "family_id": "validation-ship",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-08-2",
+      "split": "validation",
+      "caption": "A painting showing one ship sailing across the sea. The ship is black.",
+      "paired_prompt_id": null,
+      "family_id": "validation-ship",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-08-3",
+      "split": "validation",
+      "caption": "A painting showing one ship on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-ship",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-09-0",
+      "split": "validation",
+      "caption": "A painting showing one castle above a wooded valley.",
+      "paired_prompt_id": null,
+      "family_id": "validation-castle",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-09-1",
+      "split": "validation",
+      "caption": "A painting showing two castles above a wooded valley.",
+      "paired_prompt_id": null,
+      "family_id": "validation-castle",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-09-2",
+      "split": "validation",
+      "caption": "A painting showing one castle above a wooded valley. The castle is gray.",
+      "paired_prompt_id": null,
+      "family_id": "validation-castle",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-09-3",
+      "split": "validation",
+      "caption": "A painting showing one castle on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-castle",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-10-0",
+      "split": "validation",
+      "caption": "A painting showing one cloud above a painted seascape.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cloud",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-10-1",
+      "split": "validation",
+      "caption": "A painting showing two clouds above a painted seascape.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cloud",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-10-2",
+      "split": "validation",
+      "caption": "A painting showing one cloud above a painted seascape. The cloud is white.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cloud",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-10-3",
+      "split": "validation",
+      "caption": "A painting showing one cloud on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cloud",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-11-0",
+      "split": "validation",
+      "caption": "A painting showing one pear in an arrangement of fruit.",
+      "paired_prompt_id": null,
+      "family_id": "validation-pear",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-11-1",
+      "split": "validation",
+      "caption": "A painting showing two pears in an arrangement of fruit.",
+      "paired_prompt_id": null,
+      "family_id": "validation-pear",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-11-2",
+      "split": "validation",
+      "caption": "A painting showing one pear in an arrangement of fruit. The pear is yellow.",
+      "paired_prompt_id": null,
+      "family_id": "validation-pear",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-11-3",
+      "split": "validation",
+      "caption": "A painting showing one pear on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-pear",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-12-0",
+      "split": "validation",
+      "caption": "A painting showing one hat in a simple still life.",
+      "paired_prompt_id": null,
+      "family_id": "validation-hat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-12-1",
+      "split": "validation",
+      "caption": "A painting showing two hats in a simple still life.",
+      "paired_prompt_id": null,
+      "family_id": "validation-hat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-12-2",
+      "split": "validation",
+      "caption": "A painting showing one hat in a simple still life. The hat is black.",
+      "paired_prompt_id": null,
+      "family_id": "validation-hat",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-12-3",
+      "split": "validation",
+      "caption": "A painting showing one hat on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-hat",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-13-0",
+      "split": "validation",
+      "caption": "A painting showing one cup on a kitchen shelf.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cup",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-13-1",
+      "split": "validation",
+      "caption": "A painting showing two cups on a kitchen shelf.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cup",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-13-2",
+      "split": "validation",
+      "caption": "A painting showing one cup on a kitchen shelf. The cup is blue.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cup",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-13-3",
+      "split": "validation",
+      "caption": "A painting showing one cup on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-cup",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-14-0",
+      "split": "validation",
+      "caption": "A painting showing one plate on a kitchen shelf.",
+      "paired_prompt_id": null,
+      "family_id": "validation-plate",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-14-1",
+      "split": "validation",
+      "caption": "A painting showing two plates on a kitchen shelf.",
+      "paired_prompt_id": null,
+      "family_id": "validation-plate",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-14-2",
+      "split": "validation",
+      "caption": "A painting showing one plate on a kitchen shelf. The plate is white.",
+      "paired_prompt_id": null,
+      "family_id": "validation-plate",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-14-3",
+      "split": "validation",
+      "caption": "A painting showing one plate on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-plate",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-15-0",
+      "split": "validation",
+      "caption": "A painting showing one basket on a stone floor.",
+      "paired_prompt_id": null,
+      "family_id": "validation-basket",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-15-1",
+      "split": "validation",
+      "caption": "A painting showing two baskets on a stone floor.",
+      "paired_prompt_id": null,
+      "family_id": "validation-basket",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-15-2",
+      "split": "validation",
+      "caption": "A painting showing one basket on a stone floor. The basket is brown.",
+      "paired_prompt_id": null,
+      "family_id": "validation-basket",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-15-3",
+      "split": "validation",
+      "caption": "A painting showing one basket on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-basket",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-16-0",
+      "split": "validation",
+      "caption": "A painting showing one fence beside a pasture.",
+      "paired_prompt_id": null,
+      "family_id": "validation-fence",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-16-1",
+      "split": "validation",
+      "caption": "A painting showing two fences beside a pasture.",
+      "paired_prompt_id": null,
+      "family_id": "validation-fence",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-16-2",
+      "split": "validation",
+      "caption": "A painting showing one fence beside a pasture. The fence is white.",
+      "paired_prompt_id": null,
+      "family_id": "validation-fence",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-16-3",
+      "split": "validation",
+      "caption": "A painting showing one fence on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-fence",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric",
+        "countable_instance_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-17-0",
+      "split": "validation",
+      "caption": "A painting showing one door on a building facade.",
+      "paired_prompt_id": null,
+      "family_id": "validation-door",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-17-1",
+      "split": "validation",
+      "caption": "A painting showing two doors on a building facade.",
+      "paired_prompt_id": null,
+      "family_id": "validation-door",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-17-2",
+      "split": "validation",
+      "caption": "A painting showing one door on a building facade. The door is green.",
+      "paired_prompt_id": null,
+      "family_id": "validation-door",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-17-3",
+      "split": "validation",
+      "caption": "A painting showing one door on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-door",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-18-0",
+      "split": "validation",
+      "caption": "A painting showing one rock beside the coast.",
+      "paired_prompt_id": null,
+      "family_id": "validation-rock",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-18-1",
+      "split": "validation",
+      "caption": "A painting showing two rocks beside the coast.",
+      "paired_prompt_id": null,
+      "family_id": "validation-rock",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-18-2",
+      "split": "validation",
+      "caption": "A painting showing one rock beside the coast. The rock is gray.",
+      "paired_prompt_id": null,
+      "family_id": "validation-rock",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-18-3",
+      "split": "validation",
+      "caption": "A painting showing one rock on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-rock",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-19-0",
+      "split": "validation",
+      "caption": "A painting showing one lamp inside a domestic interior.",
+      "paired_prompt_id": null,
+      "family_id": "validation-lamp",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-19-1",
+      "split": "validation",
+      "caption": "A painting showing two lamps inside a domestic interior.",
+      "paired_prompt_id": null,
+      "family_id": "validation-lamp",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-19-2",
+      "split": "validation",
+      "caption": "A painting showing one lamp inside a domestic interior. The lamp is yellow.",
+      "paired_prompt_id": null,
+      "family_id": "validation-lamp",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "scene_clause_not_scored",
+        "duplicate_color_binding_question"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "validation-19-3",
+      "split": "validation",
+      "caption": "A painting showing one lamp on the left side of the composition, with empty space on the right.",
+      "paired_prompt_id": null,
+      "family_id": "validation-lamp",
+      "question_count": 2,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "empty_right_space_not_scored",
+        "image_left_definition_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-00-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one woman to the left of one boat.",
+      "paired_prompt_id": null,
+      "family_id": "composition-woman-boat",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-00-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one woman above one boat. The woman's dress is blue, and the boat is blue.",
+      "paired_prompt_id": null,
+      "family_id": "composition-woman-boat",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "same_color_pair_cannot_test_color_swap",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-01-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one man to the left of one house.",
+      "paired_prompt_id": null,
+      "family_id": "composition-man-house",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-01-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one man above one house. The man's coat is brown, and the house is white.",
+      "paired_prompt_id": null,
+      "family_id": "composition-man-house",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-02-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one dog to the left of one church.",
+      "paired_prompt_id": null,
+      "family_id": "composition-dog-church",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-02-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one dog above one church. The dog is black, and the church is white.",
+      "paired_prompt_id": null,
+      "family_id": "composition-dog-church",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-03-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one horse to the left of one bridge.",
+      "paired_prompt_id": null,
+      "family_id": "composition-horse-bridge",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-03-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one horse above one bridge. The horse is brown, and the bridge is brown.",
+      "paired_prompt_id": null,
+      "family_id": "composition-horse-bridge",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "same_color_pair_cannot_test_color_swap",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-04-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one bird to the left of one vase.",
+      "paired_prompt_id": null,
+      "family_id": "composition-bird-vase",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-04-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one bird above one vase. The bird is white, and the vase is blue.",
+      "paired_prompt_id": null,
+      "family_id": "composition-bird-vase",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-05-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one tree to the left of one table.",
+      "paired_prompt_id": null,
+      "family_id": "composition-tree-table",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-05-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one tree above one table. The tree is green, and the table is brown.",
+      "paired_prompt_id": null,
+      "family_id": "composition-tree-table",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-06-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one flower to the left of one chair.",
+      "paired_prompt_id": null,
+      "family_id": "composition-flower-chair",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-06-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one flower above one chair. The flower is red, and the chair is red.",
+      "paired_prompt_id": null,
+      "family_id": "composition-flower-chair",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "same_color_pair_cannot_test_color_swap",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-07-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one boat to the left of one window.",
+      "paired_prompt_id": null,
+      "family_id": "composition-boat-window",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-07-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one boat above one window. The boat is blue, and the window frame is white.",
+      "paired_prompt_id": null,
+      "family_id": "composition-boat-window",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-08-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one house to the left of one book.",
+      "paired_prompt_id": null,
+      "family_id": "composition-house-book",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-08-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one house above one book. The house is white, and the book cover is red.",
+      "paired_prompt_id": null,
+      "family_id": "composition-house-book",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-09-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one church to the left of one bowl.",
+      "paired_prompt_id": null,
+      "family_id": "composition-church-bowl",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-09-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one church above one bowl. The church is white, and the bowl is white.",
+      "paired_prompt_id": null,
+      "family_id": "composition-church-bowl",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "same_color_pair_cannot_test_color_swap",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-10-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one bridge to the left of one apple.",
+      "paired_prompt_id": null,
+      "family_id": "composition-bridge-apple",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-10-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one bridge above one apple. The bridge is brown, and the apple is red.",
+      "paired_prompt_id": null,
+      "family_id": "composition-bridge-apple",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-11-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one vase to the left of one bottle.",
+      "paired_prompt_id": null,
+      "family_id": "composition-vase-bottle",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-11-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one vase above one bottle. The vase is blue, and the bottle is green.",
+      "paired_prompt_id": null,
+      "family_id": "composition-vase-bottle",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-12-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one table to the left of one tower.",
+      "paired_prompt_id": null,
+      "family_id": "composition-table-tower",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-12-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one table above one tower. The table is brown, and the tower is brown.",
+      "paired_prompt_id": null,
+      "family_id": "composition-table-tower",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "same_color_pair_cannot_test_color_swap",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-13-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one chair to the left of one woman.",
+      "paired_prompt_id": null,
+      "family_id": "composition-chair-woman",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-13-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one chair above one woman. The chair is red, and the woman's dress is blue.",
+      "paired_prompt_id": null,
+      "family_id": "composition-chair-woman",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-14-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one window to the left of one man.",
+      "paired_prompt_id": null,
+      "family_id": "composition-window-man",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-14-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one window above one man. The window frame is white, and the man's coat is brown.",
+      "paired_prompt_id": null,
+      "family_id": "composition-window-man",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-15-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one book to the left of one dog.",
+      "paired_prompt_id": null,
+      "family_id": "composition-book-dog",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-15-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one book above one dog. The book cover is red, and the dog is black.",
+      "paired_prompt_id": null,
+      "family_id": "composition-book-dog",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-16-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one bowl to the left of one horse.",
+      "paired_prompt_id": null,
+      "family_id": "composition-bowl-horse",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-16-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one bowl above one horse. The bowl is white, and the horse is brown.",
+      "paired_prompt_id": null,
+      "family_id": "composition-bowl-horse",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-17-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one apple to the left of one bird.",
+      "paired_prompt_id": null,
+      "family_id": "composition-apple-bird",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-17-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one apple above one bird. The apple is red, and the bird is white.",
+      "paired_prompt_id": null,
+      "family_id": "composition-apple-bird",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-18-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one bottle to the left of one tree.",
+      "paired_prompt_id": null,
+      "family_id": "composition-bottle-tree",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-18-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one bottle above one tree. The bottle is green, and the tree is green.",
+      "paired_prompt_id": null,
+      "family_id": "composition-bottle-tree",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "same_color_pair_cannot_test_color_swap",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-19-0",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one tower to the left of one flower.",
+      "paired_prompt_id": null,
+      "family_id": "composition-tower-flower",
+      "question_count": 3,
+      "review_flags": [
+        "explicit_count_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "composition-19-1",
+      "split": "composition_stress",
+      "caption": "An artistic painting showing one tower above one flower. The tower is brown, and the flower is red.",
+      "paired_prompt_id": null,
+      "family_id": "composition-tower-flower",
+      "question_count": 5,
+      "review_flags": [
+        "explicit_count_not_scored",
+        "above_in_image_vs_physical_relation_needs_rubric"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-00-0",
+      "split": "paraphrase",
+      "caption": "Depict one woman wearing a dress in a garden as a painted artwork.",
+      "paired_prompt_id": "id-00-0",
+      "family_id": "id-woman",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-00-1",
+      "split": "paraphrase",
+      "caption": "Depict two women wearing a dress in a garden as a painted artwork.",
+      "paired_prompt_id": "id-00-1",
+      "family_id": "id-woman",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-01-0",
+      "split": "paraphrase",
+      "caption": "Depict one man wearing a coat in a room as a painted artwork.",
+      "paired_prompt_id": "id-01-0",
+      "family_id": "id-man",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-01-1",
+      "split": "paraphrase",
+      "caption": "Depict two men wearing a coat in a room as a painted artwork.",
+      "paired_prompt_id": "id-01-1",
+      "family_id": "id-man",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-02-0",
+      "split": "paraphrase",
+      "caption": "Depict one dog resting beside a country path as a painted artwork.",
+      "paired_prompt_id": "id-02-0",
+      "family_id": "id-dog",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-02-1",
+      "split": "paraphrase",
+      "caption": "Depict two dogs resting beside a country path as a painted artwork.",
+      "paired_prompt_id": "id-02-1",
+      "family_id": "id-dog",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-03-0",
+      "split": "paraphrase",
+      "caption": "Depict one horse standing in a meadow as a painted artwork.",
+      "paired_prompt_id": "id-03-0",
+      "family_id": "id-horse",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-03-1",
+      "split": "paraphrase",
+      "caption": "Depict two horses standing in a meadow as a painted artwork.",
+      "paired_prompt_id": "id-03-1",
+      "family_id": "id-horse",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-04-0",
+      "split": "paraphrase",
+      "caption": "Depict one bird sitting on a branch as a painted artwork.",
+      "paired_prompt_id": "id-04-0",
+      "family_id": "id-bird",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-04-1",
+      "split": "paraphrase",
+      "caption": "Depict two birds sitting on a branch as a painted artwork.",
+      "paired_prompt_id": "id-04-1",
+      "family_id": "id-bird",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-05-0",
+      "split": "paraphrase",
+      "caption": "Depict one tree beside a river in a landscape as a painted artwork.",
+      "paired_prompt_id": "id-05-0",
+      "family_id": "id-tree",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-05-1",
+      "split": "paraphrase",
+      "caption": "Depict two trees beside a river in a landscape as a painted artwork.",
+      "paired_prompt_id": "id-05-1",
+      "family_id": "id-tree",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-06-0",
+      "split": "paraphrase",
+      "caption": "Depict one flower in a still life as a painted artwork.",
+      "paired_prompt_id": "id-06-0",
+      "family_id": "id-flower",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-06-1",
+      "split": "paraphrase",
+      "caption": "Depict two flowers in a still life as a painted artwork.",
+      "paired_prompt_id": "id-06-1",
+      "family_id": "id-flower",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-07-0",
+      "split": "paraphrase",
+      "caption": "Depict one boat floating on calm water as a painted artwork.",
+      "paired_prompt_id": "id-07-0",
+      "family_id": "id-boat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-07-1",
+      "split": "paraphrase",
+      "caption": "Depict two boats floating on calm water as a painted artwork.",
+      "paired_prompt_id": "id-07-1",
+      "family_id": "id-boat",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-08-0",
+      "split": "paraphrase",
+      "caption": "Depict one house in a rural landscape as a painted artwork.",
+      "paired_prompt_id": "id-08-0",
+      "family_id": "id-house",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-08-1",
+      "split": "paraphrase",
+      "caption": "Depict two houses in a rural landscape as a painted artwork.",
+      "paired_prompt_id": "id-08-1",
+      "family_id": "id-house",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-09-0",
+      "split": "paraphrase",
+      "caption": "Depict one church in a village landscape as a painted artwork.",
+      "paired_prompt_id": "id-09-0",
+      "family_id": "id-church",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-09-1",
+      "split": "paraphrase",
+      "caption": "Depict two churches in a village landscape as a painted artwork.",
+      "paired_prompt_id": "id-09-1",
+      "family_id": "id-church",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-10-0",
+      "split": "paraphrase",
+      "caption": "Depict one bridge crossing a river as a painted artwork.",
+      "paired_prompt_id": "id-10-0",
+      "family_id": "id-bridge",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-10-1",
+      "split": "paraphrase",
+      "caption": "Depict two bridges crossing a river as a painted artwork.",
+      "paired_prompt_id": "id-10-1",
+      "family_id": "id-bridge",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-11-0",
+      "split": "paraphrase",
+      "caption": "Depict one vase in a painted still life as a painted artwork.",
+      "paired_prompt_id": "id-11-0",
+      "family_id": "id-vase",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-11-1",
+      "split": "paraphrase",
+      "caption": "Depict two vases in a painted still life as a painted artwork.",
+      "paired_prompt_id": "id-11-1",
+      "family_id": "id-vase",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-12-0",
+      "split": "paraphrase",
+      "caption": "Depict one table inside a quiet room as a painted artwork.",
+      "paired_prompt_id": "id-12-0",
+      "family_id": "id-table",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-12-1",
+      "split": "paraphrase",
+      "caption": "Depict two tables inside a quiet room as a painted artwork.",
+      "paired_prompt_id": "id-12-1",
+      "family_id": "id-table",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-13-0",
+      "split": "paraphrase",
+      "caption": "Depict one chair inside a painted interior as a painted artwork.",
+      "paired_prompt_id": "id-13-0",
+      "family_id": "id-chair",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-13-1",
+      "split": "paraphrase",
+      "caption": "Depict two chairs inside a painted interior as a painted artwork.",
+      "paired_prompt_id": "id-13-1",
+      "family_id": "id-chair",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-14-0",
+      "split": "paraphrase",
+      "caption": "Depict one window on the wall of an interior as a painted artwork.",
+      "paired_prompt_id": "id-14-0",
+      "family_id": "id-window",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-14-1",
+      "split": "paraphrase",
+      "caption": "Depict two windows on the wall of an interior as a painted artwork.",
+      "paired_prompt_id": "id-14-1",
+      "family_id": "id-window",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-15-0",
+      "split": "paraphrase",
+      "caption": "Depict one book in a still life as a painted artwork.",
+      "paired_prompt_id": "id-15-0",
+      "family_id": "id-book",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-15-1",
+      "split": "paraphrase",
+      "caption": "Depict two books in a still life as a painted artwork.",
+      "paired_prompt_id": "id-15-1",
+      "family_id": "id-book",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-16-0",
+      "split": "paraphrase",
+      "caption": "Depict one bowl in a still life as a painted artwork.",
+      "paired_prompt_id": "id-16-0",
+      "family_id": "id-bowl",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-16-1",
+      "split": "paraphrase",
+      "caption": "Depict two bowls in a still life as a painted artwork.",
+      "paired_prompt_id": "id-16-1",
+      "family_id": "id-bowl",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-17-0",
+      "split": "paraphrase",
+      "caption": "Depict one apple in a painted still life as a painted artwork.",
+      "paired_prompt_id": "id-17-0",
+      "family_id": "id-apple",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-17-1",
+      "split": "paraphrase",
+      "caption": "Depict two apples in a painted still life as a painted artwork.",
+      "paired_prompt_id": "id-17-1",
+      "family_id": "id-apple",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-18-0",
+      "split": "paraphrase",
+      "caption": "Depict one bottle in a still life as a painted artwork.",
+      "paired_prompt_id": "id-18-0",
+      "family_id": "id-bottle",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-18-1",
+      "split": "paraphrase",
+      "caption": "Depict two bottles in a still life as a painted artwork.",
+      "paired_prompt_id": "id-18-1",
+      "family_id": "id-bottle",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-19-0",
+      "split": "paraphrase",
+      "caption": "Depict one tower rising above a city landscape as a painted artwork.",
+      "paired_prompt_id": "id-19-0",
+      "family_id": "id-tower",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    },
+    {
+      "prompt_id": "paraphrase-id-19-1",
+      "split": "paraphrase",
+      "caption": "Depict two towers rising above a city landscape as a painted artwork.",
+      "paired_prompt_id": "id-19-1",
+      "family_id": "id-tower",
+      "question_count": 2,
+      "review_flags": [
+        "scene_clause_not_scored"
+      ],
+      "review_status": "agent_review_completed_user_pending"
+    }
+  ],
+  "human_approval_created": false,
+  "large_model_inference": false,
+  "test_images_read": false,
+  "notes": [
+    "This pass reads manifests and candidate definitions only; existing image hash verification from P5 is reused.",
+    "Semantic flags are agent review findings, not visual dataset truth or user approval."
+  ],
+  "post_audit_local_fix": {
+    "file": "src/minigen/evaluation/vqa.py",
+    "change": "count and object questions use instances of category; no plural or a/an inference",
+    "requirements_or_denominators_changed": false,
+    "real_blip_executed": false,
+    "targeted_tests_passed": 14
+  }
+}

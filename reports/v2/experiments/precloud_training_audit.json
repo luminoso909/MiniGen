@@ -1,0 +1,170 @@
+{
+  "scope": "precloud_static_source_and_parameter_audit",
+  "models": {
+    "b0": {
+      "parameters": 30359824,
+      "config": {
+        "architecture": "b0",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "depth": 8,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4
+      }
+    },
+    "b1": {
+      "parameters": 30061456,
+      "config": {
+        "architecture": "b1",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "depth": 11
+      }
+    },
+    "b2": {
+      "parameters": 30061456,
+      "config": {
+        "architecture": "b2",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "double_depth": 3,
+        "single_depth": 5
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "src/minigen/models/__init__.py",
+      "sha256": "738567955eb0cb18f3ffa44214a8670cf2456b3186f12d440a5c8f8be6434beb",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/models/attention.py",
+      "sha256": "0bb8fc94a07992ea8a0a105757885ca526c0925e09c27715102dba0a1054d561",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/models/hybrid_dit.py",
+      "sha256": "bcb0dd0c76538c5bf254a7cca5c432fb6d2f2beed16549aa99af319bdc0a83b2",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/models/joint.py",
+      "sha256": "3f7150912d95c6a37a29cf3be0f80c0d8bb7a702e30e53e0ef4ebb984000f6e6",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/models/plain_dit.py",
+      "sha256": "14fb555b33bf39138bdfb08017f9ef72e6298aa6284f74007202151c7800c954",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/models/single_dit.py",
+      "sha256": "003727ee11f8f79ba3b1e6489fc2336ea5f624efab444d0dd2c9f56070a829bd",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/training/__init__.py",
+      "sha256": "413f397ef483e642e379216113386ec325f3b7cecb8061c9889a54dcc27612b4",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/training/checkpoint.py",
+      "sha256": "f5ac55658d950bc15e7ded7e8160b94ce8f240452f8eec20863ba1629eb6ddf6",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/training/config.py",
+      "sha256": "37eb7892daf3acc863838b0e675b8318c6a2400c55e8a02d98de77ab9ace1223",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/training/engine.py",
+      "sha256": "3e2e80940aecc52cacb67c6445dec4c125e27b7b14d102c2541cae74631afa80",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/training/runtime.py",
+      "sha256": "9d7157090809242e979897258726a4d2b08bb666f96957c31c74315fe15755f4",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/objectives/__init__.py",
+      "sha256": "74300b931f1e43ea2ef3556be6c7adce2838aceba59b589ff4f5cd4b26c60376",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/objectives/flow.py",
+      "sha256": "b15b5f40daa006f4fc65fb55b8855393286f8612786843636627166a17bedc63",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/samplers/__init__.py",
+      "sha256": "fc94209b3acd12df53f3a6cafb7a12a619a1632088c795d997ee9b1226dd6b05",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/samplers/flow.py",
+      "sha256": "bee8a624afafc5d0e7312db6c9b6630e038851346e6bb045245fda1f534bbe52",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/contracts.py",
+      "sha256": "b27964dbd2a7d4b1aaf20aac306a10b567559d94af3f1ded240960785b31fefe",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/commands.py",
+      "sha256": "192c6d0c65cc20210a6775cff078c0718f8199a9de4ca0f546382b2128cfb13b",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/data/stateful.py",
+      "sha256": "fb317dd477b3b32be99a662da81e7d6fdbd7deab2995cd7409b1d62f631cc98b",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/data/representation_cache.py",
+      "sha256": "a1c99ccfab4c79b77cad6adc4ac4a78a05c46bb6297a049bbe9ba2f9bdd427f2",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/autoencoders/sdxl.py",
+      "sha256": "993c342fcf18a17f1374a909952c89585e6c4c68b4bc11166d06339b1df5f3cc",
+      "unchanged_from_77b7506": true
+    },
+    {
+      "path": "src/minigen/conditioning/clip.py",
+      "sha256": "f2b9b67fa7883ac195fdc56af3daa2af5dd7e652de1626c9973856005bb50d77",
+      "unchanged_from_77b7506": true
+    }
+  ],
+  "source_all_unchanged": true,
+  "cuda_executed": false,
+  "training": "only tiny CPU fixtures via targeted pytest; reused formal-size MPS evidence",
+  "targeted_test_log": "artifacts/runs/precloud_audit/training_targeted_tests.txt",
+  "targeted_pytest": {
+    "passed": 12,
+    "failed": 0,
+    "seconds": 4.54,
+    "command": "uv run --locked --offline --no-sync pytest -q -p no:cacheprovider tests/test_p3_cli.py tests/test_flow_training.py",
+    "real_frozen_components_used": false
+  },
+  "confirmed_blocking_code_defects": [],
+  "known_quality_gate": "P3-05 single-image recognizable; fixed 16 images not passed"
+}

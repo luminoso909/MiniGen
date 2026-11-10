@@ -12,6 +12,8 @@ MiniGen 在同一套 ArtBench Public Domain 256x256 数据的训练切分上，�
 
 ## **二、当前可用功能与验证**
 
+云端前最终审查已完成：见 [工程摘要](reports/v2/final/P3_P4_P5工程最终验收摘要.md)、[Benchmark 最终审核包](reports/v2/benchmark/MiniGen_Benchmark_最终审核包.md)、[实验预登记](reports/v2/final/MiniGen_正式实验预登记.md) 和 [执行前清单](docs/cloud/MiniGen_云端执行前检查清单.md)。代码可交付用户进行单卡 Pilot；Benchmark 评分覆盖问题、16 图质量、CUDA 和正式预算仍待解决，不代表已经批准长训。
+
 | 功能 | 当前状态 |
 | --- | --- |
 | `minigen doctor` | 可用。支持 `--device` 和 `--json`，检查依赖与小张量前向、反向 |

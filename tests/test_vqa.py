@@ -12,6 +12,28 @@ from torch import Tensor
 from minigen.evaluation.vqa import BlipVQA, MockVQA, evaluate_vqa, make_questions, normalize_answer
 
 
+@pytest.mark.parametrize("subject", ["woman", "child", "sheep", "horses"])
+def test_count_question_preserves_category_and_answer(
+    subject: str,
+) -> None:
+    """数量问句兼容单复数类别，对象问句避免错误冠词，要求及答案不变。
+
+    Args:
+        subject: 普通单数、不规则单数、单复数同形或旧夹具复数类别。
+
+    Raises:
+        AssertionError: 问句仍需猜测复数，或修改了要求及预期答案。
+    """
+    requirement = {"kind": "count", "subject": subject, "expected": "2"}
+    question = make_questions([requirement], "count-contract")[0]
+    assert question["question"] == f"How many instances of {subject} are visible in this painting?"
+    assert question["question_id"] == "count-contract:q00"
+    assert {key: question[key] for key in requirement} == requirement
+    presence = make_questions([{"kind": "object", "subject": "apple", "expected": "yes"}], "p")
+    assert presence[0]["question"] == "Are any instances of apple visible in this painting?"
+    assert presence[0]["expected"] == "yes"
+
+
 def test_questions_unknowns_and_failed_denominators() -> None:
     """未知答复和生成失败保留分母，mock 不允许产出正式结果。
 

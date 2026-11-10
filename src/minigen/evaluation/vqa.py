@@ -52,9 +52,11 @@ def make_questions(
         if not subject.strip() or not expected.strip():
             raise ValueError("Question subject and expected answer must be nonempty")
         if kind == "object":
-            question = f"Is there a {subject} in this painting?"
+            # 类别前不直接拼接 a/an，避免 apple 等类别产生错误冠词。
+            question = f"Are any instances of {subject} visible in this painting?"
         elif kind == "count":
-            question = f"How many {subject} are visible in this painting?"
+            # subject 是类别名，可能为 woman/sheep 等；不猜测英语复数或改写任务身份。
+            question = f"How many instances of {subject} are visible in this painting?"
         elif kind in {"color", "binding"}:
             question = f"What color is the {subject} in this painting?"
         elif kind == "relation":

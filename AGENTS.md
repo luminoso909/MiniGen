@@ -24,6 +24,8 @@ P2 离线入口、用户审批和数值验收见 [P2 交付](reports/v2/02_p2_de
 
 训练、采样和诊断产物保留 `run_id`、配方、数据与源码身份及 `flow_velocity` 输出语义。恢复严格检查完整源码哈希；旧 P3 v1 Checkpoint 的显式读取兼容不表示跨源码精确恢复。失败回执与最后有效 Checkpoint 分开，不能把旧成功结果当作最新尝试成功。MPS 当前分配量不是峰值显存，固定配对 Flow MSE 不是图像质量分数；P5 按这些边界读取产物。正式 Benchmark 需要与内容哈希一致的真实审核回执；本地调试仅用验证集。独立评测权重只显式下载，评分命令离线。真实本地、模拟、正式结果不混表；未知 CUDA 成本、真实 BLIP 与人工校准不得伪造。
 
+云端前最终状态见 [工程摘要](reports/v2/final/P3_P4_P5工程最终验收摘要.md)。Benchmark 存在题义和评分覆盖差异，候选保持待审；正式定稿须用户决定修订或限定范围，不以内容锁代替批准。[预登记](reports/v2/final/MiniGen_正式实验预登记.md) 的硬件、预算与正式日程仍为空。后续用户只批准 Pilot 时，不启动正式训练或 Test；保留 16 图质量门槛及实际 CUDA/真实 VQA/人评的独立验收。
+
 ## **二、数据、实验与证据**
 
 使用本地 Parquet、图片文件、JSONL 清单与 YAML 来源登记。ArtBench 准备入口为 `uv run --locked --extra artbench python scripts/prepare_artbench.py`。实际数据放 `data/`，缓存、权重和大型输出放 `artifacts/`，均由 Git 忽略。提交来源、配置、格式示例和必要报告，不提交凭据、真实权重或未经确认可分享的素材。

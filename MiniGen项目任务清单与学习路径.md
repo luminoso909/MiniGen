@@ -19,6 +19,8 @@
 
 ### **2. 个人学习与既有证据**
 
+本轮云端前最终交接见 [最终摘要](reports/v2/final/P3_P4_P5工程最终验收摘要.md)。[Benchmark 审核包](reports/v2/benchmark/MiniGen_Benchmark_最终审核包.md) 与 [预登记](reports/v2/final/MiniGen_正式实验预登记.md) 保持待用户批准；未把 P3-05/P3-06、P4 正式训练或 P5 正式评测勾选完成。
+
 S4-01 从线性 Flow、Euler/Heun 与 NFE 开始，再按 [课程顺序](docs/MiniGen2学习目录.md) 进入 Plain、Joint Attention/2D RoPE、Single-Stream、Hybrid 和实验评测。首份课件由用户启动学习回合后交付。
 
 - S1 的 DDPM/VAE 个人数学核心已验收，教学结果和理解收尾分别记录。见 [S1 验收](reports/stage1/s1_acceptance_2026-10-30.md)。

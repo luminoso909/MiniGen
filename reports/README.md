@@ -29,3 +29,8 @@
 - 阶段交接与历史学习任务见 [tasks](tasks/README.md)。
 
 [最新 P5 本地交付](v2/05_p5_delivery.md) · [云端交接](v2/05_p5_handoff.md) · [当前交接](v2/00_handoff.md)
+
+
+## **三、正式云端实验前最终交接**
+
+[工程最终摘要](v2/final/P3_P4_P5工程最终验收摘要.md) · [Benchmark 最终审核包](v2/benchmark/MiniGen_Benchmark_最终审核包.md) · [正式实验预登记](v2/final/MiniGen_正式实验预登记.md) · [Git 迁移说明](v2/final/Git提交与云端迁移说明.md)。这些是工程审查与待批准候选，不是正式实验结果。
