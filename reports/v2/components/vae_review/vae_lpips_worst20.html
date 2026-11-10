@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LPIPS 最差 20 张 · MiniGen P2</title><style>*{box-sizing:border-box}
+:root{color-scheme:light;--paper:#f4f4ed;--card:#fffef8;--ink:#172725;--muted:#526663;--border:#cbd3cb;--accent:#135b50;--alert:#874223}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+header,main,footer{width:min(1180px,calc(100% - 32px));margin-inline:auto}
+header{padding-block:28px 16px} h1{line-height:1.22;font-size:clamp(1.65rem,4vw,2.8rem);margin:.25rem 0 .8rem}
+h2{margin:0;font-size:1.05rem} p{margin:.55rem 0}
+a{color:var(--accent)} a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #247869;outline-offset:2px}
+.kicker{font-size:.84rem;letter-spacing:.1em;color:var(--muted);font-weight:700}
+nav{display:flex;flex-wrap:wrap;gap:.45rem 1rem;margin-top:1rem}
+nav a[aria-current="page"]{font-weight:bold;color:var(--ink)}
+.controls{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px;margin-bottom:15px}
+.form{display:flex;gap:12px;align-items:end;flex-wrap:wrap}
+label{display:grid;gap:4px;font-size:.85rem;font-weight:700}
+input,select,button{font:inherit} input,select{max-width:100%;padding:.45rem;background:white;border:1px solid var(--border);border-radius:6px;color:inherit}
+button{background:#fff;border:1px solid var(--border);border-radius:6px;color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--accent);color:var(--accent)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:12px}
+.cards.detail{grid-template-columns:1fr}
+.card{scroll-margin:1rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;min-width:0}
+.card.flagged{border-left:4px solid var(--alert)} .card[hidden]{display:none}
+.card-top{display:flex;gap:8px;justify-content:space-between;align-items:start;flex-wrap:wrap}
+.stats,.tags,.description,.crop-coord{font-size:.88rem;color:var(--muted)}
+.stats{font-variant-numeric:tabular-nums} .badge{display:inline-block;background:#f2dfd1;color:#71391c;font-weight:650;border-radius:4px;padding:1px 5px;font-size:.78rem;margin-right:5px}
+.photo-set{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.detail .photo-set{grid-template-columns:repeat(4,minmax(0,1fr))}
+figure{margin:0;min-width:0} figcaption{text-align:center;color:var(--muted);font-size:.8rem}
+.open-image{display:block;border:0;padding:0;width:100%;background:#eaece5;overflow:hidden;aspect-ratio:1}
+.open-image img{display:block;width:100%;height:auto}
+.open-image.crop img{image-rendering:pixelated}
+.action{padding:.18rem .45rem;font-size:.84rem;white-space:nowrap} .row-links{display:flex;gap:.8rem;font-size:.82rem;margin-top:.45rem;flex-wrap:wrap}
+footer{padding:18px 0 32px;color:var(--muted);font-size:.88rem}
+dialog{width:min(1070px,calc(100vw - 24px));max-height:90vh;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--ink)}
+dialog::backdrop{background:#142422c9}.viewer-bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+#viewer-title{margin-right:auto}.zoom{padding:.2rem .45rem}.zoom[aria-pressed="true"]{background:var(--accent);color:white}
+.viewer-images{overflow:auto;max-height:70vh;display:flex;gap:10px;align-items:start}
+.viewer-images figure{flex:0 0 auto}.viewer-images img{display:block;width:calc(var(--zoom,1) * 256px);height:auto;image-rendering:pixelated}
+.viewer-images img[data-detail]{width:calc(var(--zoom,1) * 192px)}
+@media(max-width:620px){.detail .photo-set{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:8px}.controls{padding:9px}}
+</style></head><body>
+<header id="top"><p class="kicker">MINIGEN / P2 / 冻结 SDXL VAE</p><h1>LPIPS 最差 20 张</h1><p>严格从随机 200 张中按 LPIPS 从高到低排序；诊断队列不参与。每条含全图、同坐标局部和三个分数。尾部排序不等于人工质量分级。</p><nav aria-label="审核材料"><a href="vae_200_contact_sheet.html">随机 200 张</a><a href="vae_9_outliers.html">9 张细节诊断</a><a href="vae_lpips_worst20.html" aria-current="page">LPIPS 最差 20</a><a href="vae_metrics_distribution.png">指标分布</a><a href="vae_metrics.csv">下载 CSV</a><a href="vae_review_report.md">验收报告</a></nav></header>
+<main>
+<noscript><p>禁用 JavaScript 时仍可浏览与打开原图，排序、筛选和弹窗放大需要 JavaScript。</p></noscript>
+<section class="cards detail" aria-label="LPIPS 最差 20 张"><article class="card flagged" id="ab-31066" data-order="0" data-lpips="0.21464630961418152" data-psnr="24.60626792907715" data-ssim="0.48582106828689575" data-flag="yes" data-tail="yes" data-search="ab-31066 unknown|people_words">
+<div class="card-top"><h2><span class="description">第 01 项 · </span>ab-31066</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 24.606 dB · SSIM 0.4858 · LPIPS 0.2146</p>
+<p class="tags"><span class="badge">高 LPIPS</span><span class="badge">LPIPS 尾部 20</span>unknown · people_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-31066 原图"><img src="assets/original/ab-31066.jpg" alt="ab-31066 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-31066 重建"><img src="assets/reconstruction/ab-31066.png" alt="ab-31066 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-31066 局部原图"><img src="assets/crop/ab-31066_original.png" alt="ab-31066 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-31066 局部重建"><img src="assets/crop/ab-31066_reconstruction.png" alt="ab-31066 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(128, 96, 192, 160)</p>
+<div class="row-links"><a href="assets/original/ab-31066.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-31066.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card flagged" id="ab-07868" data-order="1" data-lpips="0.1706698089838028" data-psnr="19.840351104736328" data-ssim="0.4462670087814331" data-flag="yes" data-tail="yes" data-search="ab-07868 unknown|vegetation_words|water_words">
+<div class="card-top"><h2><span class="description">第 02 项 · </span>ab-07868</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 19.840 dB · SSIM 0.4463 · LPIPS 0.1707</p>
+<p class="tags"><span class="badge">低 SSIM</span><span class="badge">高 LPIPS</span><span class="badge">LPIPS 尾部 20</span>unknown · vegetation_words · water_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-07868 原图"><img src="assets/original/ab-07868.jpg" alt="ab-07868 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-07868 重建"><img src="assets/reconstruction/ab-07868.png" alt="ab-07868 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-07868 局部原图"><img src="assets/crop/ab-07868_original.png" alt="ab-07868 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-07868 局部重建"><img src="assets/crop/ab-07868_reconstruction.png" alt="ab-07868 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(64, 160, 128, 224)</p>
+<div class="row-links"><a href="assets/original/ab-07868.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-07868.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card flagged" id="ab-27489" data-order="2" data-lpips="0.15715724229812622" data-psnr="23.96479606628418" data-ssim="0.5867802500724792" data-flag="yes" data-tail="yes" data-search="ab-27489 unknown|vegetation_words">
+<div class="card-top"><h2><span class="description">第 03 项 · </span>ab-27489</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 23.965 dB · SSIM 0.5868 · LPIPS 0.1572</p>
+<p class="tags"><span class="badge">高 LPIPS</span><span class="badge">LPIPS 尾部 20</span>unknown · vegetation_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-27489 原图"><img src="assets/original/ab-27489.jpg" alt="ab-27489 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-27489 重建"><img src="assets/reconstruction/ab-27489.png" alt="ab-27489 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-27489 局部原图"><img src="assets/crop/ab-27489_original.png" alt="ab-27489 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-27489 局部重建"><img src="assets/crop/ab-27489_reconstruction.png" alt="ab-27489 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(64, 160, 128, 224)</p>
+<div class="row-links"><a href="assets/original/ab-27489.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-27489.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-19167" data-order="3" data-lpips="0.15254619717597961" data-psnr="22.616641998291016" data-ssim="0.5497527122497559" data-flag="no" data-tail="yes" data-search="ab-19167 unknown|people_words">
+<div class="card-top"><h2><span class="description">第 04 项 · </span>ab-19167</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 22.617 dB · SSIM 0.5498 · LPIPS 0.1525</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-19167 原图"><img src="assets/original/ab-19167.jpg" alt="ab-19167 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-19167 重建"><img src="assets/reconstruction/ab-19167.png" alt="ab-19167 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-19167 局部原图"><img src="assets/crop/ab-19167_original.png" alt="ab-19167 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-19167 局部重建"><img src="assets/crop/ab-19167_reconstruction.png" alt="ab-19167 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(160, 160, 224, 224)</p>
+<div class="row-links"><a href="assets/original/ab-19167.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-19167.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-19483" data-order="4" data-lpips="0.14756590127944946" data-psnr="25.72917938232422" data-ssim="0.6169254779815674" data-flag="no" data-tail="yes" data-search="ab-19483 unknown|vegetation_words">
+<div class="card-top"><h2><span class="description">第 05 项 · </span>ab-19483</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 25.729 dB · SSIM 0.6169 · LPIPS 0.1476</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · vegetation_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-19483 原图"><img src="assets/original/ab-19483.jpg" alt="ab-19483 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-19483 重建"><img src="assets/reconstruction/ab-19483.png" alt="ab-19483 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-19483 局部原图"><img src="assets/crop/ab-19483_original.png" alt="ab-19483 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-19483 局部重建"><img src="assets/crop/ab-19483_reconstruction.png" alt="ab-19483 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(192, 0, 256, 64)</p>
+<div class="row-links"><a href="assets/original/ab-19483.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-19483.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-20758" data-order="5" data-lpips="0.147077277302742" data-psnr="21.408000946044922" data-ssim="0.514189600944519" data-flag="no" data-tail="yes" data-search="ab-20758 unknown|people_words">
+<div class="card-top"><h2><span class="description">第 06 项 · </span>ab-20758</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 21.408 dB · SSIM 0.5142 · LPIPS 0.1471</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-20758 原图"><img src="assets/original/ab-20758.jpg" alt="ab-20758 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-20758 重建"><img src="assets/reconstruction/ab-20758.png" alt="ab-20758 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-20758 局部原图"><img src="assets/crop/ab-20758_original.png" alt="ab-20758 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-20758 局部重建"><img src="assets/crop/ab-20758_reconstruction.png" alt="ab-20758 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(96, 64, 160, 128)</p>
+<div class="row-links"><a href="assets/original/ab-20758.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-20758.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card flagged" id="ab-05817" data-order="6" data-lpips="0.14607322216033936" data-psnr="22.404468536376953" data-ssim="0.4482763409614563" data-flag="yes" data-tail="yes" data-search="ab-05817 unknown|people_words|vegetation_words|animal_words">
+<div class="card-top"><h2><span class="description">第 07 项 · </span>ab-05817</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 22.404 dB · SSIM 0.4483 · LPIPS 0.1461</p>
+<p class="tags"><span class="badge">低 SSIM</span><span class="badge">LPIPS 尾部 20</span>unknown · people_words · vegetation_words · animal_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-05817 原图"><img src="assets/original/ab-05817.jpg" alt="ab-05817 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-05817 重建"><img src="assets/reconstruction/ab-05817.png" alt="ab-05817 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-05817 局部原图"><img src="assets/crop/ab-05817_original.png" alt="ab-05817 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-05817 局部重建"><img src="assets/crop/ab-05817_reconstruction.png" alt="ab-05817 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(160, 192, 224, 256)</p>
+<div class="row-links"><a href="assets/original/ab-05817.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-05817.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-29446" data-order="7" data-lpips="0.1417827606201172" data-psnr="19.377981185913086" data-ssim="0.5406007170677185" data-flag="no" data-tail="yes" data-search="ab-29446 unknown|people_words|vegetation_words|architecture_words">
+<div class="card-top"><h2><span class="description">第 08 项 · </span>ab-29446</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 19.378 dB · SSIM 0.5406 · LPIPS 0.1418</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words · vegetation_words · architecture_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-29446 原图"><img src="assets/original/ab-29446.jpg" alt="ab-29446 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-29446 重建"><img src="assets/reconstruction/ab-29446.png" alt="ab-29446 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-29446 局部原图"><img src="assets/crop/ab-29446_original.png" alt="ab-29446 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-29446 局部重建"><img src="assets/crop/ab-29446_reconstruction.png" alt="ab-29446 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(0, 160, 64, 224)</p>
+<div class="row-links"><a href="assets/original/ab-29446.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-29446.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-44150" data-order="8" data-lpips="0.14170026779174805" data-psnr="26.459854125976562" data-ssim="0.5944223403930664" data-flag="no" data-tail="yes" data-search="ab-44150 unknown|vegetation_words">
+<div class="card-top"><h2><span class="description">第 09 项 · </span>ab-44150</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 26.460 dB · SSIM 0.5944 · LPIPS 0.1417</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · vegetation_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-44150 原图"><img src="assets/original/ab-44150.jpg" alt="ab-44150 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-44150 重建"><img src="assets/reconstruction/ab-44150.png" alt="ab-44150 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-44150 局部原图"><img src="assets/crop/ab-44150_original.png" alt="ab-44150 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-44150 局部重建"><img src="assets/crop/ab-44150_reconstruction.png" alt="ab-44150 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(0, 0, 64, 64)</p>
+<div class="row-links"><a href="assets/original/ab-44150.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-44150.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-25935" data-order="9" data-lpips="0.14136174321174622" data-psnr="23.238361358642578" data-ssim="0.598970890045166" data-flag="no" data-tail="yes" data-search="ab-25935 unknown|people_words|architecture_words">
+<div class="card-top"><h2><span class="description">第 10 项 · </span>ab-25935</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 23.238 dB · SSIM 0.5990 · LPIPS 0.1414</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words · architecture_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-25935 原图"><img src="assets/original/ab-25935.jpg" alt="ab-25935 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-25935 重建"><img src="assets/reconstruction/ab-25935.png" alt="ab-25935 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-25935 局部原图"><img src="assets/crop/ab-25935_original.png" alt="ab-25935 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-25935 局部重建"><img src="assets/crop/ab-25935_reconstruction.png" alt="ab-25935 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(96, 160, 160, 224)</p>
+<div class="row-links"><a href="assets/original/ab-25935.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-25935.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-03892" data-order="10" data-lpips="0.140813410282135" data-psnr="22.96285629272461" data-ssim="0.5530065298080444" data-flag="no" data-tail="yes" data-search="ab-03892 unknown|vegetation_words">
+<div class="card-top"><h2><span class="description">第 11 项 · </span>ab-03892</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 22.963 dB · SSIM 0.5530 · LPIPS 0.1408</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · vegetation_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-03892 原图"><img src="assets/original/ab-03892.jpg" alt="ab-03892 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-03892 重建"><img src="assets/reconstruction/ab-03892.png" alt="ab-03892 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-03892 局部原图"><img src="assets/crop/ab-03892_original.png" alt="ab-03892 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-03892 局部重建"><img src="assets/crop/ab-03892_reconstruction.png" alt="ab-03892 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(192, 64, 256, 128)</p>
+<div class="row-links"><a href="assets/original/ab-03892.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-03892.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-40685" data-order="11" data-lpips="0.13986721634864807" data-psnr="25.849945068359375" data-ssim="0.5770589113235474" data-flag="no" data-tail="yes" data-search="ab-40685 unknown|water_words|architecture_words">
+<div class="card-top"><h2><span class="description">第 12 项 · </span>ab-40685</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 25.850 dB · SSIM 0.5771 · LPIPS 0.1399</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · water_words · architecture_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-40685 原图"><img src="assets/original/ab-40685.jpg" alt="ab-40685 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-40685 重建"><img src="assets/reconstruction/ab-40685.png" alt="ab-40685 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-40685 局部原图"><img src="assets/crop/ab-40685_original.png" alt="ab-40685 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-40685 局部重建"><img src="assets/crop/ab-40685_reconstruction.png" alt="ab-40685 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(160, 128, 224, 192)</p>
+<div class="row-links"><a href="assets/original/ab-40685.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-40685.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-34514" data-order="12" data-lpips="0.13755002617835999" data-psnr="24.458560943603516" data-ssim="0.6412146091461182" data-flag="no" data-tail="yes" data-search="ab-34514 cityscape|people_words|architecture_words|animal_words">
+<div class="card-top"><h2><span class="description">第 13 项 · </span>ab-34514</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 24.459 dB · SSIM 0.6412 · LPIPS 0.1376</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>cityscape · people_words · architecture_words · animal_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-34514 原图"><img src="assets/original/ab-34514.jpg" alt="ab-34514 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-34514 重建"><img src="assets/reconstruction/ab-34514.png" alt="ab-34514 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-34514 局部原图"><img src="assets/crop/ab-34514_original.png" alt="ab-34514 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-34514 局部重建"><img src="assets/crop/ab-34514_reconstruction.png" alt="ab-34514 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(64, 96, 128, 160)</p>
+<div class="row-links"><a href="assets/original/ab-34514.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-34514.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-28443" data-order="13" data-lpips="0.13454073667526245" data-psnr="19.78509521484375" data-ssim="0.543087363243103" data-flag="no" data-tail="yes" data-search="ab-28443 unknown|people_words|vegetation_words|architecture_words|animal_words">
+<div class="card-top"><h2><span class="description">第 14 项 · </span>ab-28443</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 19.785 dB · SSIM 0.5431 · LPIPS 0.1345</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words · vegetation_words · architecture_words · animal_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-28443 原图"><img src="assets/original/ab-28443.jpg" alt="ab-28443 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-28443 重建"><img src="assets/reconstruction/ab-28443.png" alt="ab-28443 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-28443 局部原图"><img src="assets/crop/ab-28443_original.png" alt="ab-28443 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-28443 局部重建"><img src="assets/crop/ab-28443_reconstruction.png" alt="ab-28443 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(64, 192, 128, 256)</p>
+<div class="row-links"><a href="assets/original/ab-28443.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-28443.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-23266" data-order="14" data-lpips="0.13253286480903625" data-psnr="22.20074462890625" data-ssim="0.559517502784729" data-flag="no" data-tail="yes" data-search="ab-23266 unknown|people_words|vegetation_words|architecture_words">
+<div class="card-top"><h2><span class="description">第 15 项 · </span>ab-23266</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 22.201 dB · SSIM 0.5595 · LPIPS 0.1325</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words · vegetation_words · architecture_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-23266 原图"><img src="assets/original/ab-23266.jpg" alt="ab-23266 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-23266 重建"><img src="assets/reconstruction/ab-23266.png" alt="ab-23266 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-23266 局部原图"><img src="assets/crop/ab-23266_original.png" alt="ab-23266 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-23266 局部重建"><img src="assets/crop/ab-23266_reconstruction.png" alt="ab-23266 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(128, 128, 192, 192)</p>
+<div class="row-links"><a href="assets/original/ab-23266.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-23266.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-05275" data-order="15" data-lpips="0.1267699897289276" data-psnr="24.01983642578125" data-ssim="0.5904343128204346" data-flag="no" data-tail="yes" data-search="ab-05275 unknown|people_words|vegetation_words">
+<div class="card-top"><h2><span class="description">第 16 项 · </span>ab-05275</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 24.020 dB · SSIM 0.5904 · LPIPS 0.1268</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words · vegetation_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-05275 原图"><img src="assets/original/ab-05275.jpg" alt="ab-05275 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-05275 重建"><img src="assets/reconstruction/ab-05275.png" alt="ab-05275 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-05275 局部原图"><img src="assets/crop/ab-05275_original.png" alt="ab-05275 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-05275 局部重建"><img src="assets/crop/ab-05275_reconstruction.png" alt="ab-05275 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(160, 0, 224, 64)</p>
+<div class="row-links"><a href="assets/original/ab-05275.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-05275.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-22426" data-order="16" data-lpips="0.12531296908855438" data-psnr="24.410282135009766" data-ssim="0.624678909778595" data-flag="no" data-tail="yes" data-search="ab-22426 unknown|people_words|vegetation_words">
+<div class="card-top"><h2><span class="description">第 17 项 · </span>ab-22426</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 24.410 dB · SSIM 0.6247 · LPIPS 0.1253</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words · vegetation_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-22426 原图"><img src="assets/original/ab-22426.jpg" alt="ab-22426 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-22426 重建"><img src="assets/reconstruction/ab-22426.png" alt="ab-22426 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-22426 局部原图"><img src="assets/crop/ab-22426_original.png" alt="ab-22426 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-22426 局部重建"><img src="assets/crop/ab-22426_reconstruction.png" alt="ab-22426 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(32, 192, 96, 256)</p>
+<div class="row-links"><a href="assets/original/ab-22426.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-22426.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-34332" data-order="17" data-lpips="0.12470351904630661" data-psnr="24.67477035522461" data-ssim="0.5794632434844971" data-flag="no" data-tail="yes" data-search="ab-34332 unknown|vegetation_words|water_words|architecture_words">
+<div class="card-top"><h2><span class="description">第 18 项 · </span>ab-34332</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 24.675 dB · SSIM 0.5795 · LPIPS 0.1247</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · vegetation_words · water_words · architecture_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-34332 原图"><img src="assets/original/ab-34332.jpg" alt="ab-34332 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-34332 重建"><img src="assets/reconstruction/ab-34332.png" alt="ab-34332 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-34332 局部原图"><img src="assets/crop/ab-34332_original.png" alt="ab-34332 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-34332 局部重建"><img src="assets/crop/ab-34332_reconstruction.png" alt="ab-34332 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(192, 128, 256, 192)</p>
+<div class="row-links"><a href="assets/original/ab-34332.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-34332.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-13165" data-order="18" data-lpips="0.12322648614645004" data-psnr="26.181428909301758" data-ssim="0.6701618432998657" data-flag="no" data-tail="yes" data-search="ab-13165 unknown|people_words|vegetation_words">
+<div class="card-top"><h2><span class="description">第 19 项 · </span>ab-13165</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 26.181 dB · SSIM 0.6702 · LPIPS 0.1232</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words · vegetation_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-13165 原图"><img src="assets/original/ab-13165.jpg" alt="ab-13165 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-13165 重建"><img src="assets/reconstruction/ab-13165.png" alt="ab-13165 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-13165 局部原图"><img src="assets/crop/ab-13165_original.png" alt="ab-13165 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-13165 局部重建"><img src="assets/crop/ab-13165_reconstruction.png" alt="ab-13165 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(160, 64, 224, 128)</p>
+<div class="row-links"><a href="assets/original/ab-13165.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-13165.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article>
+<article class="card " id="ab-37833" data-order="19" data-lpips="0.12221519649028778" data-psnr="23.82673454284668" data-ssim="0.641323447227478" data-flag="no" data-tail="yes" data-search="ab-37833 unknown|people_words|vegetation_words|architecture_words">
+<div class="card-top"><h2><span class="description">第 20 项 · </span>ab-37833</h2><button class="action" type="button" data-view="pair">并排放大</button></div>
+<p class="stats">PSNR 23.827 dB · SSIM 0.6413 · LPIPS 0.1222</p>
+<p class="tags"><span class="badge">LPIPS 尾部 20</span>unknown · people_words · vegetation_words · architecture_words</p>
+<div class="photo-set"><figure><button class="open-image " type="button" data-view="original" aria-label="放大 ab-37833 原图"><img src="assets/original/ab-37833.jpg" alt="ab-37833 原图" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>原图</figcaption></figure><figure><button class="open-image " type="button" data-view="reconstruction" aria-label="放大 ab-37833 重建"><img src="assets/reconstruction/ab-37833.png" alt="ab-37833 重建" width="256" height="256" loading="lazy" decoding="async"></button><figcaption>重建</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-original" aria-label="放大 ab-37833 局部原图"><img src="assets/crop/ab-37833_original.png" alt="ab-37833 局部原图" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部原图</figcaption></figure><figure><button class="open-image crop" type="button" data-view="crop-reconstruction" aria-label="放大 ab-37833 局部重建"><img src="assets/crop/ab-37833_reconstruction.png" alt="ab-37833 局部重建" width="64" height="64" loading="lazy" decoding="async"></button><figcaption>局部重建</figcaption></figure></div><p class="crop-coord">误差窗口 (x₁, y₁, x₂, y₂)：(96, 128, 160, 192)</p>
+<div class="row-links"><a href="assets/original/ab-37833.jpg" target="_blank" rel="noopener">打开原图文件</a><a href="assets/reconstruction/ab-37833.png" target="_blank" rel="noopener">打开重建文件</a></div>
+</article></section></main>
+<footer>图像原生 256×256。放大仅扩展显示像素，不增加图像信息；表内指标在浮点像素域计算。<a href="#top">返回顶部</a></footer>
+<dialog id="viewer" aria-labelledby="viewer-title"><div class="viewer-bar">
+<strong id="viewer-title">查看图像</strong>
+<button class="zoom" type="button" data-zoom="1">1×</button><button class="zoom" type="button" data-zoom="2">2×</button>
+<button class="zoom" type="button" data-zoom="4">4×</button>
+<form method="dialog"><button class="action" autofocus>关闭 (Esc)</button></form></div><div class="viewer-images"></div></dialog><script>'use strict';
+const list = document.querySelector('.cards');
+const controls = document.querySelector('#controls');
+if (controls) {
+  const cards = Array.from(list.children);
+  const sort = document.querySelector('#sort');
+  const filter = document.querySelector('#filter');
+  const search = document.querySelector('#search');
+  const count = document.querySelector('#count');
+  const update = () => {
+    const key = sort.value;
+    const ordered = cards.slice().sort((a,b) => (key === 'lpips' ? -1 : 1) *
+      (Number(a.dataset[key])-Number(b.dataset[key])) || Number(a.dataset.order)-Number(b.dataset.order));
+    let shown = 0;
+    for (const card of ordered) {
+      const matchesFlag = filter.value === 'all' || (filter.value === 'flagged' && card.dataset.flag === 'yes') ||
+        (filter.value === 'tail' && card.dataset.tail === 'yes');
+      const query = search.value.trim().toLowerCase();
+      card.hidden = !matchesFlag || !card.dataset.search.toLowerCase().includes(query);
+      if (!card.hidden) shown++;
+      list.append(card);
+    }
+    count.textContent = '显示 ' + shown + ' / ' + cards.length + ' 张';
+  };
+  sort.addEventListener('change',update);
+  filter.addEventListener('change',update);
+  search.addEventListener('input',update);
+  update();
+}
+const dialog = document.querySelector('#viewer');
+const zone = document.querySelector('.viewer-images');
+const zoomButtons = [...dialog.querySelectorAll('[data-zoom]')];
+const setZoom = (zoom) => {
+  zone.style.setProperty('--zoom', zoom);
+  for (const button of zoomButtons) button.setAttribute('aria-pressed',String(button.dataset.zoom===zoom));
+};
+for (const button of zoomButtons) button.addEventListener('click',()=>setZoom(button.dataset.zoom));
+let trigger = null;
+dialog.addEventListener('close',()=>{if(trigger) trigger.focus();});
+list.addEventListener('click', event => {
+  const button = event.target.closest('[data-view]');
+  if (!button) return;
+  trigger = button;
+  const card = button.closest('.card');
+  const selection = button.dataset.view;
+  const types = selection === 'pair' ? ['original','reconstruction'] : [selection];
+  const viewNames = {'original':'原图','reconstruction':'重建','crop-original':'局部原图','crop-reconstruction':'局部重建'};
+  const figures = types.map(type => {
+    const thumb = card.querySelector('button[data-view="'+type+'"] img');
+    const figure = document.createElement('figure');
+    const img = document.createElement('img');
+    img.src = thumb.getAttribute('src');
+    img.alt = thumb.alt;
+    if (type.startsWith('crop-')) img.dataset.detail = 'yes';
+    const cap = document.createElement('figcaption');
+    cap.textContent = viewNames[type];
+    figure.append(img,cap);
+    return figure;
+  });
+  document.querySelector('#viewer-title').textContent = card.id + ' · ' + (selection==='pair' ? '原图 / 重建' : viewNames[selection]);
+  zone.replaceChildren(...figures);
+  setZoom('1');
+  zone.scrollLeft = 0; zone.scrollTop = 0;
+  dialog.showModal();
+});
+</script></body></html>

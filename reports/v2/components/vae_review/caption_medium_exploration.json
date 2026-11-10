@@ -1,0 +1,396 @@
+{
+  "n": 200,
+  "grouped_using": "case insensitive exact term/phrase match on final frozen training caption; not image or metadata labels, not significance-tested",
+  "regex": {
+    "text_terms": "\\b(?:text|lettering|inscriptions?|written|writing|words?|calligraphy)\\b",
+    "drawing_terms": "\\b(?:line drawings?|ink drawings?|pen[ -]and[ -]ink drawings?|black(?:[ -]and[ -]|-)white drawings?|pencil drawings?|sketch(?:es)?)\\b",
+    "print_terms": "\\b(?:woodblock prints?|woodcuts?|engravings?|etchings?|lithographs?|linocuts?|screen[ -]?prints?)\\b",
+    "explicit_oil": "\\b(?:oil paintings?|painted in oil|oil on (?:canvas|panel|board|paper))\\b"
+  },
+  "groups": {
+    "text_terms": {
+      "matched": {
+        "n": 30,
+        "median": {
+          "psnr_db": 24.13491153717041,
+          "ssim": 0.7453107833862305,
+          "lpips_alex_v01": 0.07267119735479355
+        }
+      },
+      "unmatched": {
+        "n": 170,
+        "median": {
+          "psnr_db": 26.751493453979492,
+          "ssim": 0.7639210224151611,
+          "lpips_alex_v01": 0.07533159106969833
+        }
+      },
+      "hits": {
+        "ab-36155": [
+          "text"
+        ],
+        "ab-25547": [
+          "text",
+          "written"
+        ],
+        "ab-23599": [
+          "text",
+          "written"
+        ],
+        "ab-42405": [
+          "text",
+          "written"
+        ],
+        "ab-42244": [
+          "text"
+        ],
+        "ab-43246": [
+          "writing"
+        ],
+        "ab-39602": [
+          "text"
+        ],
+        "ab-21375": [
+          "text"
+        ],
+        "ab-00788": [
+          "text"
+        ],
+        "ab-35329": [
+          "text"
+        ],
+        "ab-25738": [
+          "text"
+        ],
+        "ab-25184": [
+          "text"
+        ],
+        "ab-42369": [
+          "text",
+          "written"
+        ],
+        "ab-24371": [
+          "text",
+          "written"
+        ],
+        "ab-11717": [
+          "text"
+        ],
+        "ab-17296": [
+          "words",
+          "written",
+          "lettering",
+          "text"
+        ],
+        "ab-26470": [
+          "text",
+          "written"
+        ],
+        "ab-31570": [
+          "text",
+          "written"
+        ],
+        "ab-31980": [
+          "text"
+        ],
+        "ab-28443": [
+          "text"
+        ],
+        "ab-25761": [
+          "text",
+          "written"
+        ],
+        "ab-00889": [
+          "text"
+        ],
+        "ab-18582": [
+          "written"
+        ],
+        "ab-24636": [
+          "text",
+          "written"
+        ],
+        "ab-33400": [
+          "text"
+        ],
+        "ab-37961": [
+          "text"
+        ],
+        "ab-37997": [
+          "writing",
+          "text",
+          "written"
+        ],
+        "ab-37963": [
+          "text"
+        ],
+        "ab-06797": [
+          "text",
+          "written"
+        ],
+        "ab-44656": [
+          "text"
+        ]
+      }
+    },
+    "drawing_terms": {
+      "matched": {
+        "n": 8,
+        "median": {
+          "psnr_db": 23.552800178527832,
+          "ssim": 0.7651737332344055,
+          "lpips_alex_v01": 0.06822217255830765
+        }
+      },
+      "unmatched": {
+        "n": 192,
+        "median": {
+          "psnr_db": 26.595861434936523,
+          "ssim": 0.7547042071819305,
+          "lpips_alex_v01": 0.07523824274539948
+        }
+      },
+      "hits": {
+        "ab-36155": [
+          "sketch"
+        ],
+        "ab-10555": [
+          "black and white drawing"
+        ],
+        "ab-31066": [
+          "black and white drawing"
+        ],
+        "ab-28916": [
+          "black and white drawing"
+        ],
+        "ab-32612": [
+          "black and white drawing",
+          "sketch"
+        ],
+        "ab-31910": [
+          "black and white drawing"
+        ],
+        "ab-37961": [
+          "black and white drawing"
+        ],
+        "ab-44656": [
+          "black and white drawing"
+        ]
+      }
+    },
+    "print_terms": {
+      "matched": {
+        "n": 21,
+        "median": {
+          "psnr_db": 24.130659103393555,
+          "ssim": 0.7334440350532532,
+          "lpips_alex_v01": 0.07264191657304764
+        }
+      },
+      "unmatched": {
+        "n": 179,
+        "median": {
+          "psnr_db": 26.791040420532227,
+          "ssim": 0.7587923407554626,
+          "lpips_alex_v01": 0.07522112131118774
+        }
+      },
+      "hits": {
+        "ab-25478": [
+          "woodblock print"
+        ],
+        "ab-42468": [
+          "woodblock print"
+        ],
+        "ab-42244": [
+          "woodblock print"
+        ],
+        "ab-43246": [
+          "woodblock print"
+        ],
+        "ab-18108": [
+          "woodblock print"
+        ],
+        "ab-18947": [
+          "woodblock print"
+        ],
+        "ab-00788": [
+          "engraving"
+        ],
+        "ab-24792": [
+          "woodblock print"
+        ],
+        "ab-25151": [
+          "woodblock print"
+        ],
+        "ab-43336": [
+          "woodblock print"
+        ],
+        "ab-42369": [
+          "woodblock print"
+        ],
+        "ab-24371": [
+          "woodblock prints"
+        ],
+        "ab-24357": [
+          "woodblock print"
+        ],
+        "ab-43009": [
+          "woodblock print"
+        ],
+        "ab-26470": [
+          "woodblock print"
+        ],
+        "ab-24310": [
+          "woodblock print"
+        ],
+        "ab-31980": [
+          "woodblock print"
+        ],
+        "ab-41956": [
+          "woodblock print"
+        ],
+        "ab-28443": [
+          "engraving"
+        ],
+        "ab-38885": [
+          "woodblock print"
+        ],
+        "ab-24636": [
+          "woodblock print"
+        ]
+      }
+    },
+    "explicit_oil": {
+      "matched": {
+        "n": 1,
+        "median": {
+          "psnr_db": 22.692523956298828,
+          "ssim": 0.6568651795387268,
+          "lpips_alex_v01": 0.10573545098304749
+        }
+      },
+      "unmatched": {
+        "n": 199,
+        "median": {
+          "psnr_db": 26.5706729888916,
+          "ssim": 0.7559912800788879,
+          "lpips_alex_v01": 0.07449300587177277
+        }
+      },
+      "hits": {
+        "ab-31165": [
+          "oil on canvas"
+        ]
+      }
+    },
+    "drawing_or_print_terms": {
+      "matched": {
+        "n": 29,
+        "median": {
+          "psnr_db": 24.130659103393555,
+          "ssim": 0.73503178358078,
+          "lpips_alex_v01": 0.07125894725322723
+        }
+      },
+      "unmatched": {
+        "n": 171,
+        "median": {
+          "psnr_db": 26.881004333496094,
+          "ssim": 0.7587923407554626,
+          "lpips_alex_v01": 0.07540781795978546
+        }
+      },
+      "hits": {
+        "ab-36155": [
+          "sketch"
+        ],
+        "ab-10555": [
+          "black and white drawing"
+        ],
+        "ab-31066": [
+          "black and white drawing"
+        ],
+        "ab-28916": [
+          "black and white drawing"
+        ],
+        "ab-32612": [
+          "black and white drawing",
+          "sketch"
+        ],
+        "ab-31910": [
+          "black and white drawing"
+        ],
+        "ab-37961": [
+          "black and white drawing"
+        ],
+        "ab-44656": [
+          "black and white drawing"
+        ],
+        "ab-25478": [
+          "woodblock print"
+        ],
+        "ab-42468": [
+          "woodblock print"
+        ],
+        "ab-42244": [
+          "woodblock print"
+        ],
+        "ab-43246": [
+          "woodblock print"
+        ],
+        "ab-18108": [
+          "woodblock print"
+        ],
+        "ab-18947": [
+          "woodblock print"
+        ],
+        "ab-00788": [
+          "engraving"
+        ],
+        "ab-24792": [
+          "woodblock print"
+        ],
+        "ab-25151": [
+          "woodblock print"
+        ],
+        "ab-43336": [
+          "woodblock print"
+        ],
+        "ab-42369": [
+          "woodblock print"
+        ],
+        "ab-24371": [
+          "woodblock prints"
+        ],
+        "ab-24357": [
+          "woodblock print"
+        ],
+        "ab-43009": [
+          "woodblock print"
+        ],
+        "ab-26470": [
+          "woodblock print"
+        ],
+        "ab-24310": [
+          "woodblock print"
+        ],
+        "ab-31980": [
+          "woodblock print"
+        ],
+        "ab-41956": [
+          "woodblock print"
+        ],
+        "ab-28443": [
+          "engraving"
+        ],
+        "ab-38885": [
+          "woodblock print"
+        ],
+        "ab-24636": [
+          "woodblock print"
+        ]
+      }
+    }
+  }
+}

@@ -165,7 +165,7 @@
     "requested": 96,
     "completed": 96,
     "stop_reason": "complete",
-    "seconds": 6.289969916921109,
+    "seconds": 7.056237334152684,
     "original": {
       "images": 96,
       "count_accuracy": 1.0,
@@ -1279,7 +1279,7 @@
     "requested": 256,
     "completed": 256,
     "stop_reason": "complete",
-    "seconds": 5.126033290987834,
+    "seconds": 5.480387374991551,
     "status": "pilot_frozen",
     "batch_single_max_abs": 0.0,
     "incompatible_fields_rejected": [
@@ -1318,7 +1318,7 @@
     "steps": 100,
     "requested_steps": 100,
     "stop_reason": "max_steps",
-    "seconds": 0.7166084590135142,
+    "seconds": 1.15040637482889,
     "history": [
       {
         "step": 1,
@@ -1829,7 +1829,7 @@
   },
   "preflight_seconds": 64.06435287499335,
   "prior_notebook_seconds": 38.96448295901064,
-  "notebook_experiment_seconds": 14.726768749998882,
+  "notebook_experiment_seconds": 6123.73425400001,
   "learner_core_verified": false,
   "learner_understanding_verified": false,
   "full_latent_cache_complete": false,

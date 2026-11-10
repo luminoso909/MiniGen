@@ -1,0 +1,105 @@
+{
+  "data": {
+    "name": "ArtBench Public Domain 256x256",
+    "source_revision": "4056b70025f0e3f916fb271c7a792633ba637484",
+    "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+    "random": 200,
+    "diagnostic": 9,
+    "sample_manifest_sha256": "5aae96b990392c92b0c9a73e7c788b990a82a6f5cf3eb025750a9a4011c1da41",
+    "train_population": 37042,
+    "test_used": false
+  },
+  "run": {
+    "device": "cpu",
+    "torch": "2.14.1",
+    "dtype": "torch.float32",
+    "posterior": "mean",
+    "seed": 20261107,
+    "cpu_threads": 5,
+    "batch_size": 4,
+    "scale": 0.13025,
+    "latent_shape": [
+      4,
+      32,
+      32
+    ],
+    "first_batch_inverse_scale_max_abs_error": 9.5367431640625e-07,
+    "decoded_sha256": "c2359203d9d90da4621cb1346787250973ee7b9fbcf7373429bc675436098c5f",
+    "raw_decode_min": -1.2201355695724487,
+    "raw_decode_max": 1.19923734664917
+  },
+  "metric_protocol": {
+    "pixel_domain": "float32 RGB [0,1]; reconstructed pixels clipped before scaling; no uint8 quantization",
+    "psnr": "data_range=1; MSE over RGB and all pixels; dB",
+    "ssim": "per-channel 11x11 Gaussian sigma=1.5 valid window; K1=0.01, K2=0.03; RGB and window mean",
+    "lpips": "v0.1 AlexNet nonspatial; CPU FP32; five ReLU layers with pinned backbone and linear calibration",
+    "crop": "maximum local mean absolute RGB error; size=64, stride=32; 124px nearest display",
+    "elapsed_seconds": 5.948
+  },
+  "model_lock": {
+    "repo_id": "madebyollin/sdxl-vae-fp16-fix",
+    "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+    "files": {
+      "config.json": {
+        "sha256": "f18b16fa4381c90ab44a3d7abd2e90afd05a2c31b8ca69998bc93c6453aeb7b7",
+        "bytes": 631
+      },
+      "diffusion_pytorch_model.safetensors": {
+        "sha256": "1b909373b28f2137098b0fd9dbc6f97f8410854f31f84ddc9fa04b077b0ace2c",
+        "bytes": 334643238
+      }
+    },
+    "scaling_factor": 0.13025,
+    "safetensors_storage_tensors_by_dtype": {
+      "F32": 248
+    }
+  },
+  "evidence_sha256": {
+    "metrics.json": "11e32faad90ae3e19962506a59d23a4216411b6f544ced2fcd2b7343ba87c682",
+    "reconstruction.json": "868ee76840cbad685b911157364c397d37be4f05febbf0d22793ba3f2a6b68c3",
+    "vae_reconstruction_200_summary.json": "538daaa55ba83e2af19efff0b72b233bd392791834345b06a51a12be40932533",
+    "configs/models/sdxl_vae.json": "a50db26012b0f1523f97cd2c4008393807092f9a2c207fb32d9b9e71e14617d1"
+  },
+  "independent_packaging_checks": {
+    "number_original_and_display_png_exact_against_original_audit_panels": 209,
+    "metrics_source_fp32_clip_verified_by_psnr_recalculation_max_abs_difference_db": 3.814697265625e-06,
+    "raw_outside_display_range_values": 158434,
+    "raw_total_rgb_values": 41091072,
+    "raw_outside_display_range_fraction": 0.003855679404032097,
+    "display_quantization_only_rgb_rmse_0_to_1": 0.001129854603287002,
+    "primary_sample_ids_exactly_reproduced": true,
+    "whole_reconstruction_rerun": false,
+    "human_acceptance": false
+  },
+  "p2_code_commit": "6931c85fceb1fc709161d42595a85581c0741911",
+  "interactive_qa": {
+    "browser": "local headless Google Chrome",
+    "local_file_mode": true,
+    "tests": [
+      "200 cards",
+      "PSNR/SSIM/LPIPS sort directions and worst IDs",
+      "4 Tukey candidates",
+      "20 LPIPS tail items",
+      "ID search",
+      "paired modal",
+      "4x actual zoom width",
+      "close modal"
+    ],
+    "passed": true
+  },
+  "pack_validation": {
+    "html_card_counts": [
+      200,
+      9,
+      20
+    ],
+    "csv_row_counts": [
+      200,
+      9
+    ],
+    "verified_originals": 209,
+    "verified_reconstructions": 209,
+    "verified_crops": 58,
+    "all_local_asset_links_and_anchors_valid": true
+  }
+}
