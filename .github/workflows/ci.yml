@@ -8,7 +8,8 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
-      - run: uv sync --locked
+      # Evaluation unit tests use library reference formulas, never download model weights.
+      - run: uv sync --locked --extra evaluation
       - run: uv run --locked python scripts/check_code_annotations.py
       # Archived notebooks and personal learning code retain their original bytes.
       - run: uv run --locked ruff check src scripts tests

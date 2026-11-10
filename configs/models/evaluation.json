@@ -1,0 +1,106 @@
+{
+  "schema": "minigen.eval-assets.v1",
+  "models": {
+    "clip": {
+      "repo_id": "openai/clip-vit-large-patch14-336",
+      "revision": "ce19dc912ca5cd21c8a653c79e251e808ccabcd1",
+      "local_path": "artifacts/models/eval/clip/ce19dc912ca5cd21c8a653c79e251e808ccabcd1",
+      "files": {
+        "config.json": {
+          "url": "https://huggingface.co/openai/clip-vit-large-patch14-336/resolve/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/config.json",
+          "sha256": "51b1c14aabcdf639c4a0370eeda1010b773bbe1df78319c7d0f5882c22ac0ac0",
+          "bytes": 4757
+        },
+        "merges.txt": {
+          "url": "https://huggingface.co/openai/clip-vit-large-patch14-336/resolve/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/merges.txt",
+          "sha256": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85",
+          "bytes": 524657
+        },
+        "preprocessor_config.json": {
+          "url": "https://huggingface.co/openai/clip-vit-large-patch14-336/resolve/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/preprocessor_config.json",
+          "sha256": "d253881f65322dc546df59cf925a408e5538b8ecb5a1b496cdd36af9992686d4",
+          "bytes": 316
+        },
+        "pytorch_model.bin": {
+          "url": "https://huggingface.co/openai/clip-vit-large-patch14-336/resolve/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/pytorch_model.bin",
+          "sha256": "c6032c2e0caae3dc2d4fba35535fa6307dbb49df59c7e182b1bc4b3329b81801",
+          "bytes": 1711974081
+        },
+        "special_tokens_map.json": {
+          "url": "https://huggingface.co/openai/clip-vit-large-patch14-336/resolve/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/special_tokens_map.json",
+          "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf",
+          "bytes": 389
+        },
+        "tokenizer.json": {
+          "url": "https://huggingface.co/openai/clip-vit-large-patch14-336/resolve/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/tokenizer.json",
+          "sha256": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842",
+          "bytes": 2224041
+        },
+        "tokenizer_config.json": {
+          "url": "https://huggingface.co/openai/clip-vit-large-patch14-336/resolve/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/tokenizer_config.json",
+          "sha256": "83cef1a5979147985887a84eda9cb13bae5f3f5413c74c92360f310a35361755",
+          "bytes": 844
+        },
+        "vocab.json": {
+          "url": "https://huggingface.co/openai/clip-vit-large-patch14-336/resolve/ce19dc912ca5cd21c8a653c79e251e808ccabcd1/vocab.json",
+          "sha256": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363",
+          "bytes": 862328
+        }
+      }
+    },
+    "vqa": {
+      "repo_id": "Salesforce/blip-vqa-base",
+      "revision": "787b3d35d57e49572baabd22884b3d5a05acf072",
+      "local_path": "artifacts/models/eval/vqa/787b3d35d57e49572baabd22884b3d5a05acf072",
+      "files": {
+        "config.json": {
+          "url": "https://huggingface.co/Salesforce/blip-vqa-base/resolve/787b3d35d57e49572baabd22884b3d5a05acf072/config.json",
+          "sha256": "689a09e2a9980b7fcad329271c032254fde23b1ee7a90c67b003e1867dc9c098",
+          "bytes": 4559
+        },
+        "model.safetensors": {
+          "url": "https://huggingface.co/Salesforce/blip-vqa-base/resolve/787b3d35d57e49572baabd22884b3d5a05acf072/model.safetensors",
+          "sha256": "33786eed34def0c95fa948128cb4386be9b9219aa2c2e25f1c9c744692121bb7",
+          "bytes": 1538800584
+        },
+        "preprocessor_config.json": {
+          "url": "https://huggingface.co/Salesforce/blip-vqa-base/resolve/787b3d35d57e49572baabd22884b3d5a05acf072/preprocessor_config.json",
+          "sha256": "0aa66e2e9ac3ea3b5cd4388c35072e22db4e1cc1f96c7872bed07749c712ade1",
+          "bytes": 445
+        },
+        "special_tokens_map.json": {
+          "url": "https://huggingface.co/Salesforce/blip-vqa-base/resolve/787b3d35d57e49572baabd22884b3d5a05acf072/special_tokens_map.json",
+          "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+          "bytes": 125
+        },
+        "tokenizer.json": {
+          "url": "https://huggingface.co/Salesforce/blip-vqa-base/resolve/787b3d35d57e49572baabd22884b3d5a05acf072/tokenizer.json",
+          "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+          "bytes": 711396
+        },
+        "tokenizer_config.json": {
+          "url": "https://huggingface.co/Salesforce/blip-vqa-base/resolve/787b3d35d57e49572baabd22884b3d5a05acf072/tokenizer_config.json",
+          "sha256": "48d1c9120fe61c9741286050189b030e936f23797a65fd0a179078661e1c43bb",
+          "bytes": 592
+        },
+        "vocab.txt": {
+          "url": "https://huggingface.co/Salesforce/blip-vqa-base/resolve/787b3d35d57e49572baabd22884b3d5a05acf072/vocab.txt",
+          "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+          "bytes": 231508
+        }
+      }
+    },
+    "inception": {
+      "repo_id": "toshas/torch-fidelity",
+      "revision": "v0.2.0-tf2015",
+      "local_path": "artifacts/models/eval/inception/tf2015",
+      "files": {
+        "weights-inception-2015-12-05-6726825d.pth": {
+          "url": "https://github.com/toshas/torch-fidelity/releases/download/v0.2.0/weights-inception-2015-12-05-6726825d.pth",
+          "sha256": "6726825d0af5f729cebd5821db510b11b1cfad8faad88a03f1befd49fb9129b2",
+          "bytes": 95628359
+        }
+      }
+    }
+  }
+}

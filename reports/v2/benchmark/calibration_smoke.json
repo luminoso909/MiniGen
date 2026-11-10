@@ -1,0 +1,11 @@
+{
+  "real_images": 8,
+  "degraded_images": 8,
+  "status": "pending_human_review",
+  "review": {
+    "package_id": "fa4dc0613df1a6f27c164cda3c154d7c436a13af115ac2d4fc27a84a348c509d",
+    "count": 16,
+    "html": "artifacts/evaluations/p5/calibration/review/review.html",
+    "status": "pending_human_review"
+  }
+}

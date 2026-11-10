@@ -1,0 +1,17 @@
+{
+  "schema": "minigen.p5-experiment-intent.v1",
+  "status": "candidate_pending_user_review_and_cuda_pilot",
+  "architectures": [
+    {"architecture": "b0", "scale": "30m", "seed": 0, "ablation": null, "model": "configs/models/b0_30m.json"},
+    {"architecture": "b1", "scale": "30m", "seed": 0, "ablation": null, "model": "configs/models/b1_30m.json"},
+    {"architecture": "b2", "scale": "30m", "seed": 0, "ablation": null, "model": "configs/models/b2_30m.json"}
+  ],
+  "training_budget": {"target_steps": null, "target_gpu_hours": null, "target_training_flops": null, "actual_cost_cny": null},
+  "comparison": {"same_steps": "exact_existing_checkpoint", "same_budget": "closest_existing_checkpoint_at_or_below_target", "maximum_relative_gap": 0.1, "interpolation": false},
+  "sampling_matrix": "configs/benchmark/sampling_matrix.json",
+  "selection_split": "validation",
+  "final_sampling_selection": null,
+  "formal_training_approved": false,
+  "extension_axes_reserved_only": ["seed", "scale", "ablation"],
+  "p6_authorized": false
+}

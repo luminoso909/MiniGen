@@ -1,0 +1,412 @@
+{
+  "schema": "minigen.bench-generation.v1",
+  "scope": "real_local",
+  "identity": {
+    "objective": "flow_velocity",
+    "objective_source": "explicit",
+    "run_id": "778d80885053549af23f330e86006e79d08a99b5c6c3e670a8a4258378a9bee3",
+    "source_sha256": "a418ae380eb41f493c8638277dfea06078570f4d8835a5061252ecc60cff2e6f",
+    "architecture": "b0",
+    "model_config": {
+      "architecture": "b0",
+      "hidden_size": 384,
+      "num_heads": 6,
+      "depth": 8,
+      "patch_size": 2,
+      "latent_size": 32,
+      "in_channels": 4,
+      "text_dim": 512,
+      "mlp_ratio": 4
+    },
+    "trainable_parameters": 30359824,
+    "checkpoint_step": 12,
+    "checkpoint_sha256": "e0a660ab370bc098ca0172f876c7473ad63d1b0b1371a801ee05cc707b465808",
+    "data_identity": {
+      "cache_index_sha256": "d065449f4d17c8f307325b8842cd687b611b52065ada43988c28cfe26a960d00",
+      "source": {
+        "schema": "minigen.artbench.representation.v1",
+        "kind": "formal",
+        "pilot_rows_per_split": null,
+        "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+        "freeze_sha256": "ebeb5748a79455c8bc625d0397571f8271907d6fb574349a53c4c239b4196eaf",
+        "dataset_version": "v1",
+        "caption_policy": "artbench-caption-v1",
+        "caption_field": "caption",
+        "image_preprocessing": "RGB/256x256/no-resize/[-1,1]",
+        "vae": {
+          "lock_sha256": "a50db26012b0f1523f97cd2c4008393807092f9a2c207fb32d9b9e71e14617d1",
+          "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+          "files": {
+            "config.json": {
+              "sha256": "f18b16fa4381c90ab44a3d7abd2e90afd05a2c31b8ca69998bc93c6453aeb7b7",
+              "bytes": 631
+            },
+            "diffusion_pytorch_model.safetensors": {
+              "sha256": "1b909373b28f2137098b0fd9dbc6f97f8410854f31f84ddc9fa04b077b0ace2c",
+              "bytes": 334643238
+            }
+          },
+          "scaling_factor": 0.13025,
+          "inference": "fp32/posterior_mean"
+        },
+        "clip": {
+          "lock_sha256": "f3075c34e5cbb575fcfa75b46220d036ac89cd7310a650ace9d57b5130aeca88",
+          "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+          "files": {
+            "config.json": {
+              "sha256": "412ab5681034d6c7496d8bbcc1f4995a8efaf14b64ff0515cbf56680a1e63bc2",
+              "bytes": 943
+            },
+            "model.safetensors": {
+              "sha256": "73c3428fc48ba1fe924733f5bc81282980f2c7a128851745e75ab343e231e504",
+              "bytes": 252684896
+            },
+            "merges.txt": {
+              "sha256": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85",
+              "bytes": 524657
+            },
+            "vocab.json": {
+              "sha256": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363",
+              "bytes": 862328
+            },
+            "tokenizer.json": {
+              "sha256": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842",
+              "bytes": 2224041
+            },
+            "tokenizer_config.json": {
+              "sha256": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad",
+              "bytes": 592
+            },
+            "special_tokens_map.json": {
+              "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf",
+              "bytes": 389
+            }
+          },
+          "encoding": {
+            "version": "clip-text-single-v1",
+            "context_tokens": 77,
+            "max_content_tokens": 75,
+            "hidden_width": 512,
+            "features": "last_hidden_state",
+            "compute_dtype": "float32",
+            "mask": "true for BOS/content/EOS; false for right padding",
+            "bos_token_id": 49406,
+            "eos_token_id": 49407,
+            "pad_token_id": 49407
+          },
+          "blank": "empty caption"
+        },
+        "storage": {
+          "latents": {
+            "shape": [
+              4,
+              32,
+              32
+            ],
+            "dtype": "<f2"
+          },
+          "text": {
+            "shape": [
+              77,
+              512
+            ],
+            "dtype": "<f2"
+          },
+          "mask": {
+            "shape": [
+              77
+            ],
+            "dtype": "|b1"
+          }
+        }
+      },
+      "subsets": {
+        "train": {
+          "count": 4,
+          "ordered_ids_sha256": "ad2730553a6f252bdec8e01bd279bd749c49f2123041df11e839d82701d0afcc"
+        },
+        "validation": {
+          "count": 4,
+          "ordered_ids_sha256": "6fe5d7f7baaf9824cc6c22fb56786e26785781da404f28b5a50e2042661c661a"
+        }
+      }
+    },
+    "benchmark_sha256": "8574e2a05ae797780ccdf427e7aef1fe16932f7771ff5544fdb35041a96b8cc4",
+    "benchmark_content_sha256": "ff18ef2f5538538cf54411d4d4934e135bdd712c53d62247512825aaea4c62e5",
+    "approval_verified": false,
+    "approval_sha256": null,
+    "scope": "real_local",
+    "split": "validation",
+    "method": "euler",
+    "solver_nfe": 10,
+    "guidance": 1.0,
+    "weights": "ema",
+    "attention_backend": "sdpa",
+    "device": "mps:0",
+    "precision": "fp32",
+    "generator_version": "minigen-bench-generator-v1",
+    "evaluation_source_sha256": "a5854eb0dc913dcff1cee83e2491a11e781a26ddf9de790b1a2b548655987654"
+  },
+  "output": "/Users/lucius/projects/personal/MiniGen/artifacts/evaluations/p5/smoke/b0",
+  "tasks_hash": "d33fc4df02729b51c56162c7005ede5cd17d6309a32de584bb335667d60414a4",
+  "records": [
+    {
+      "prompt_id": "validation-00-0",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "1"
+        }
+      ],
+      "task_id": "ef823bc60899b509d86ae1df",
+      "sample_id": "ef823bc60899b509d86ae1df",
+      "status": "completed",
+      "image_path": "ef823bc60899b509d86ae1df.png",
+      "sha256": "f82b0848c3335fd9828cc16af2ba0a29029b7e166480397fa996ccca3b5f0bca",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-0",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "1"
+        }
+      ],
+      "task_id": "a7f840f4dc632c5e1103c72c",
+      "sample_id": "a7f840f4dc632c5e1103c72c",
+      "status": "completed",
+      "image_path": "a7f840f4dc632c5e1103c72c.png",
+      "sha256": "f99780128daa00b83689f5ed9d6536475f099642c3a63c31a55be564f2604208",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-1",
+      "caption": "A painting showing two girls wearing a skirt in a courtyard.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "2"
+        }
+      ],
+      "task_id": "af899c20457083b4bf123bb0",
+      "sample_id": "af899c20457083b4bf123bb0",
+      "status": "completed",
+      "image_path": "af899c20457083b4bf123bb0.png",
+      "sha256": "bd3eb1da9ae9a37c7a9b0817c2d12912b5f5ae5addd79097dfe018662e08d701",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-1",
+      "caption": "A painting showing two girls wearing a skirt in a courtyard.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "2"
+        }
+      ],
+      "task_id": "850853cb9af21a384c952774",
+      "sample_id": "850853cb9af21a384c952774",
+      "status": "completed",
+      "image_path": "850853cb9af21a384c952774.png",
+      "sha256": "c7bdb1ad0d679a21d599ca0238911e94cc81815f61e54620c9caa0cfc67742eb",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-2",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard. The girl's skirt is red.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "color",
+          "subject": "girl's skirt",
+          "expected": "red"
+        },
+        {
+          "kind": "binding",
+          "subject": "girl's skirt",
+          "expected": "red"
+        }
+      ],
+      "task_id": "465385ed2c501cb00008818e",
+      "sample_id": "465385ed2c501cb00008818e",
+      "status": "completed",
+      "image_path": "465385ed2c501cb00008818e.png",
+      "sha256": "2821adee464874473f6258f27372275c70a85a486b7af56963533765c4479d21",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-2",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard. The girl's skirt is red.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "color",
+          "subject": "girl's skirt",
+          "expected": "red"
+        },
+        {
+          "kind": "binding",
+          "subject": "girl's skirt",
+          "expected": "red"
+        }
+      ],
+      "task_id": "a52e49114f4d0712997e47e6",
+      "sample_id": "a52e49114f4d0712997e47e6",
+      "status": "completed",
+      "image_path": "a52e49114f4d0712997e47e6.png",
+      "sha256": "bb3fadea9e3b7c2b9bd303be5bd1b3e16783b9ec38b4dac1fdc4b7bf126102c3",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-3",
+      "caption": "A painting showing one girl on the left side of the composition, with empty space on the right.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "relation",
+          "subject": "girl",
+          "expected": "left",
+          "object": "image center"
+        }
+      ],
+      "task_id": "c077b8aa0aaa76b1c986b356",
+      "sample_id": "c077b8aa0aaa76b1c986b356",
+      "status": "completed",
+      "image_path": "c077b8aa0aaa76b1c986b356.png",
+      "sha256": "b2dc3ddeb6130c0f42a677898a1360b7c9f03b1ddb2d775808479394a9b0c1a1",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-3",
+      "caption": "A painting showing one girl on the left side of the composition, with empty space on the right.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "relation",
+          "subject": "girl",
+          "expected": "left",
+          "object": "image center"
+        }
+      ],
+      "task_id": "fe5f37f4515b9f383a567eda",
+      "sample_id": "fe5f37f4515b9f383a567eda",
+      "status": "completed",
+      "image_path": "fe5f37f4515b9f383a567eda.png",
+      "sha256": "facb6f2b8e26ec9eeb8c0210fd42cebedf2c248bfc5466eb8fc841b4e8c5fc2b",
+      "error": null
+    }
+  ],
+  "batches": [
+    {
+      "denoise_seconds": 0.17915754098794423,
+      "pipeline_seconds": 0.980798375006998,
+      "solver_nfe": 10,
+      "model_evaluations": 10,
+      "images": 2,
+      "timing_scope": "pipeline includes encoding/noise/decode/CPU transfer; excludes loading and disk writes",
+      "task_ids": [
+        "ef823bc60899b509d86ae1df",
+        "a7f840f4dc632c5e1103c72c"
+      ],
+      "batch_size": 2
+    },
+    {
+      "denoise_seconds": 0.14101708302041516,
+      "pipeline_seconds": 0.4701951250026468,
+      "solver_nfe": 10,
+      "model_evaluations": 10,
+      "images": 2,
+      "timing_scope": "pipeline includes encoding/noise/decode/CPU transfer; excludes loading and disk writes",
+      "task_ids": [
+        "af899c20457083b4bf123bb0",
+        "850853cb9af21a384c952774"
+      ],
+      "batch_size": 2
+    },
+    {
+      "denoise_seconds": 0.14836070901947096,
+      "pipeline_seconds": 0.4781347500102129,
+      "solver_nfe": 10,
+      "model_evaluations": 10,
+      "images": 2,
+      "timing_scope": "pipeline includes encoding/noise/decode/CPU transfer; excludes loading and disk writes",
+      "task_ids": [
+        "465385ed2c501cb00008818e",
+        "a52e49114f4d0712997e47e6"
+      ],
+      "batch_size": 2
+    },
+    {
+      "denoise_seconds": 0.14045391700346954,
+      "pipeline_seconds": 0.47466945901396684,
+      "solver_nfe": 10,
+      "model_evaluations": 10,
+      "images": 2,
+      "timing_scope": "pipeline includes encoding/noise/decode/CPU transfer; excludes loading and disk writes",
+      "task_ids": [
+        "c077b8aa0aaa76b1c986b356",
+        "fe5f37f4515b9f383a567eda"
+      ],
+      "batch_size": 2
+    }
+  ],
+  "expected_samples": 8,
+  "stop_reason": "completed",
+  "completed_samples": 8,
+  "failed_samples": 0,
+  "pending_samples": 0,
+  "complete": true,
+  "status": "completed",
+  "last_attempt_seconds": 2.4453161249984987
+}

@@ -1,0 +1,549 @@
+{
+  "schema": "minigen.bench-scores.v1",
+  "scope": "real_local",
+  "identity": {
+    "generation_sha256": "fb2017ca3df605c99237c4ab986be43d45907f5145007ee0b648caed745b37c3",
+    "asset_lock_sha256": "1b253bbb9b6287e832a892ee83f20df24a4c841361d4a68fbd99eb92df291af8",
+    "reference_sha256": null,
+    "metrics": [
+      "vqa"
+    ],
+    "scope": "real_local",
+    "device": "cpu",
+    "batch_size": 4,
+    "vqa_backend": "mock",
+    "kid_subset_size": 4,
+    "kid_subsets": 10,
+    "implementation": "minigen-bench-score-v1",
+    "source_sha256": {
+      "__init__.py": "b9a72681c1470de593aa1c365efd3f6035e3a036789598149b442cfbaa7ada7a",
+      "assets.py": "be892496dd4fa8d2bd1048aac2a9d37926054521f3c94e88c5f5a87c4b709e5a",
+      "benchmark.py": "5692c34150e4d335bffa29413c98d03a1134bc71d4689f86ec1ec19762b7f811",
+      "features.py": "63334efcdfcf46d76cb908edd580752787c58d8a0c070ca13843f5fce8940ad8",
+      "generation.py": "513a28a9cd885e6f55f3b4727448f00b69885a155caa07bfd7b1e2ebbbee668a",
+      "local_components.py": "aaf57ef11c7957610e0a00b5c053230a117ab92b909bfd9d485c9b7875cdabc6",
+      "metrics.py": "d61746e4afebc6d879fd0546eb8f53f45798ba79b34c1f6d6530652d3731b3d9",
+      "profiling.py": "5cffee4ebbb76d5264a63f77fb2e8f86350a44c077c557f184ce7bc2659199b5",
+      "reconstruction.py": "6fb4aa5ce16a4ae03ad28c26d5dacddb44f0f6a3e539aad78ccd26ff1f26a624",
+      "reconstruction_metrics.py": "978924261f2dce8ca8130b4498876116eec804081504580f4ae233fe1219b450",
+      "reconstruction_review.py": "2cf1b3840b436cb36dcbacfb030a98dd5b1581443c487f6247608437be0e5dd5",
+      "reporting.py": "18699603f453e4f58f60a22996502a5e460e99a17bf6416804bb3ccfb5a3df80",
+      "review.py": "60ebb3b289f387b3d4b97764763881cc7d54ebf4df478b1b60069098aa178115",
+      "scoring.py": "e5028d5969caea004f85bd3d703a7e84a61ce415f3591127c53fccb6e38745d8",
+      "vqa.py": "a695f6e1690df91d111a9b9ec596e78d1e0cbb38c961c9799c519abe605a0c29"
+    }
+  },
+  "generation_path": "/Users/lucius/projects/personal/MiniGen/artifacts/evaluations/p5/smoke/b0/samples.json",
+  "generation_sha256": "fb2017ca3df605c99237c4ab986be43d45907f5145007ee0b648caed745b37c3",
+  "architecture": "b0",
+  "sampling": {
+    "method": "euler",
+    "solver_nfe": 10,
+    "model_evaluations": 10,
+    "guidance": 1.0,
+    "device": "mps:0",
+    "precision": "fp32",
+    "attention_backend": "sdpa"
+  },
+  "run_id": "778d80885053549af23f330e86006e79d08a99b5c6c3e670a8a4258378a9bee3",
+  "checkpoint_step": 12,
+  "checkpoint_sha256": "e0a660ab370bc098ca0172f876c7473ad63d1b0b1371a801ee05cc707b465808",
+  "benchmark_sha256": "8574e2a05ae797780ccdf427e7aef1fe16932f7771ff5544fdb35041a96b8cc4",
+  "metrics": {
+    "vqa": {
+      "status": "completed",
+      "scope": "simulated",
+      "calibrated": false,
+      "overall_applicable_samples": 8,
+      "expected_samples": 8,
+      "generation_failures": 0,
+      "all_requirements_correct": 0,
+      "categories": {
+        "binding": {
+          "correct": 0,
+          "wrong": 0,
+          "indeterminate": 2,
+          "error": 0,
+          "applicable": 2,
+          "conservative_success_rate": 0.0,
+          "judgment_coverage": 0.0
+        },
+        "color": {
+          "correct": 0,
+          "wrong": 0,
+          "indeterminate": 2,
+          "error": 0,
+          "applicable": 2,
+          "conservative_success_rate": 0.0,
+          "judgment_coverage": 0.0
+        },
+        "count": {
+          "correct": 0,
+          "wrong": 0,
+          "indeterminate": 4,
+          "error": 0,
+          "applicable": 4,
+          "conservative_success_rate": 0.0,
+          "judgment_coverage": 0.0
+        },
+        "object": {
+          "correct": 0,
+          "wrong": 0,
+          "indeterminate": 8,
+          "error": 0,
+          "applicable": 8,
+          "conservative_success_rate": 0.0,
+          "judgment_coverage": 0.0
+        },
+        "relation": {
+          "correct": 0,
+          "wrong": 0,
+          "indeterminate": 2,
+          "error": 0,
+          "applicable": 2,
+          "conservative_success_rate": 0.0,
+          "judgment_coverage": 0.0
+        }
+      },
+      "questions": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes",
+          "question_id": "validation-00-0:q00",
+          "question": "Is there a girl in this painting?",
+          "sample_id": "ef823bc60899b509d86ae1df",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "1",
+          "question_id": "validation-00-0:q01",
+          "question": "How many girl are visible in this painting?",
+          "sample_id": "ef823bc60899b509d86ae1df",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes",
+          "question_id": "validation-00-0:q00",
+          "question": "Is there a girl in this painting?",
+          "sample_id": "a7f840f4dc632c5e1103c72c",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "1",
+          "question_id": "validation-00-0:q01",
+          "question": "How many girl are visible in this painting?",
+          "sample_id": "a7f840f4dc632c5e1103c72c",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes",
+          "question_id": "validation-00-1:q00",
+          "question": "Is there a girl in this painting?",
+          "sample_id": "af899c20457083b4bf123bb0",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "2",
+          "question_id": "validation-00-1:q01",
+          "question": "How many girl are visible in this painting?",
+          "sample_id": "af899c20457083b4bf123bb0",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes",
+          "question_id": "validation-00-1:q00",
+          "question": "Is there a girl in this painting?",
+          "sample_id": "850853cb9af21a384c952774",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "2",
+          "question_id": "validation-00-1:q01",
+          "question": "How many girl are visible in this painting?",
+          "sample_id": "850853cb9af21a384c952774",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes",
+          "question_id": "validation-00-2:q00",
+          "question": "Is there a girl in this painting?",
+          "sample_id": "465385ed2c501cb00008818e",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "color",
+          "subject": "girl's skirt",
+          "expected": "red",
+          "question_id": "validation-00-2:q01",
+          "question": "What color is the girl's skirt in this painting?",
+          "sample_id": "465385ed2c501cb00008818e",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "binding",
+          "subject": "girl's skirt",
+          "expected": "red",
+          "question_id": "validation-00-2:q02",
+          "question": "What color is the girl's skirt in this painting?",
+          "sample_id": "465385ed2c501cb00008818e",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes",
+          "question_id": "validation-00-2:q00",
+          "question": "Is there a girl in this painting?",
+          "sample_id": "a52e49114f4d0712997e47e6",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "color",
+          "subject": "girl's skirt",
+          "expected": "red",
+          "question_id": "validation-00-2:q01",
+          "question": "What color is the girl's skirt in this painting?",
+          "sample_id": "a52e49114f4d0712997e47e6",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "binding",
+          "subject": "girl's skirt",
+          "expected": "red",
+          "question_id": "validation-00-2:q02",
+          "question": "What color is the girl's skirt in this painting?",
+          "sample_id": "a52e49114f4d0712997e47e6",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes",
+          "question_id": "validation-00-3:q00",
+          "question": "Is there a girl in this painting?",
+          "sample_id": "c077b8aa0aaa76b1c986b356",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "relation",
+          "subject": "girl",
+          "expected": "left",
+          "object": "image center",
+          "question_id": "validation-00-3:q01",
+          "question": "Where is the girl relative to the image center: left, right, above, or below?",
+          "sample_id": "c077b8aa0aaa76b1c986b356",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes",
+          "question_id": "validation-00-3:q00",
+          "question": "Is there a girl in this painting?",
+          "sample_id": "fe5f37f4515b9f383a567eda",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        },
+        {
+          "kind": "relation",
+          "subject": "girl",
+          "expected": "left",
+          "object": "image center",
+          "question_id": "validation-00-3:q01",
+          "question": "Where is the girl relative to the image center: left, right, above, or below?",
+          "sample_id": "fe5f37f4515b9f383a567eda",
+          "raw_answer": "unknown",
+          "normalized_answer": null,
+          "status": "indeterminate",
+          "error": null
+        }
+      ],
+      "interpretation": "自动问题判断；未经绘画域人工校准，不作为正式视觉真值",
+      "value": 0.0,
+      "coverage": {
+        "expected": 8,
+        "valid": 8
+      },
+      "complete": true,
+      "error": null
+    }
+  },
+  "records": [
+    {
+      "prompt_id": "validation-00-0",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "1"
+        }
+      ],
+      "task_id": "ef823bc60899b509d86ae1df",
+      "sample_id": "ef823bc60899b509d86ae1df",
+      "status": "completed",
+      "image_path": "ef823bc60899b509d86ae1df.png",
+      "sha256": "f82b0848c3335fd9828cc16af2ba0a29029b7e166480397fa996ccca3b5f0bca",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-0",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "1"
+        }
+      ],
+      "task_id": "a7f840f4dc632c5e1103c72c",
+      "sample_id": "a7f840f4dc632c5e1103c72c",
+      "status": "completed",
+      "image_path": "a7f840f4dc632c5e1103c72c.png",
+      "sha256": "f99780128daa00b83689f5ed9d6536475f099642c3a63c31a55be564f2604208",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-1",
+      "caption": "A painting showing two girls wearing a skirt in a courtyard.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "2"
+        }
+      ],
+      "task_id": "af899c20457083b4bf123bb0",
+      "sample_id": "af899c20457083b4bf123bb0",
+      "status": "completed",
+      "image_path": "af899c20457083b4bf123bb0.png",
+      "sha256": "bd3eb1da9ae9a37c7a9b0817c2d12912b5f5ae5addd79097dfe018662e08d701",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-1",
+      "caption": "A painting showing two girls wearing a skirt in a courtyard.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "2"
+        }
+      ],
+      "task_id": "850853cb9af21a384c952774",
+      "sample_id": "850853cb9af21a384c952774",
+      "status": "completed",
+      "image_path": "850853cb9af21a384c952774.png",
+      "sha256": "c7bdb1ad0d679a21d599ca0238911e94cc81815f61e54620c9caa0cfc67742eb",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-2",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard. The girl's skirt is red.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "color",
+          "subject": "girl's skirt",
+          "expected": "red"
+        },
+        {
+          "kind": "binding",
+          "subject": "girl's skirt",
+          "expected": "red"
+        }
+      ],
+      "task_id": "465385ed2c501cb00008818e",
+      "sample_id": "465385ed2c501cb00008818e",
+      "status": "completed",
+      "image_path": "465385ed2c501cb00008818e.png",
+      "sha256": "2821adee464874473f6258f27372275c70a85a486b7af56963533765c4479d21",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-2",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard. The girl's skirt is red.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "color",
+          "subject": "girl's skirt",
+          "expected": "red"
+        },
+        {
+          "kind": "binding",
+          "subject": "girl's skirt",
+          "expected": "red"
+        }
+      ],
+      "task_id": "a52e49114f4d0712997e47e6",
+      "sample_id": "a52e49114f4d0712997e47e6",
+      "status": "completed",
+      "image_path": "a52e49114f4d0712997e47e6.png",
+      "sha256": "bb3fadea9e3b7c2b9bd303be5bd1b3e16783b9ec38b4dac1fdc4b7bf126102c3",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-3",
+      "caption": "A painting showing one girl on the left side of the composition, with empty space on the right.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "relation",
+          "subject": "girl",
+          "expected": "left",
+          "object": "image center"
+        }
+      ],
+      "task_id": "c077b8aa0aaa76b1c986b356",
+      "sample_id": "c077b8aa0aaa76b1c986b356",
+      "status": "completed",
+      "image_path": "c077b8aa0aaa76b1c986b356.png",
+      "sha256": "b2dc3ddeb6130c0f42a677898a1360b7c9f03b1ddb2d775808479394a9b0c1a1",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-3",
+      "caption": "A painting showing one girl on the left side of the composition, with empty space on the right.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "relation",
+          "subject": "girl",
+          "expected": "left",
+          "object": "image center"
+        }
+      ],
+      "task_id": "fe5f37f4515b9f383a567eda",
+      "sample_id": "fe5f37f4515b9f383a567eda",
+      "status": "completed",
+      "image_path": "fe5f37f4515b9f383a567eda.png",
+      "sha256": "facb6f2b8e26ec9eeb8c0210fd42cebedf2c248bfc5466eb8fc841b4e8c5fc2b",
+      "error": null
+    }
+  ],
+  "reference_records": [],
+  "coverage": {
+    "attempted": 8,
+    "expected": 8,
+    "valid": 8,
+    "failed": 0,
+    "pending": 0,
+    "reference_valid": 0,
+    "reference_expected": 0
+  },
+  "exploratory": true,
+  "complete": true,
+  "status": "completed"
+}

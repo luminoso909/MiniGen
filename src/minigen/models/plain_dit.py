@@ -8,11 +8,11 @@ import math
 from dataclasses import dataclass
 
 import torch
-import torch.nn.functional as F
 from jaxtyping import Bool, Float
 from torch import Tensor, nn
 
 from minigen.contracts import Condition
+from minigen.models.attention import attention
 
 
 @dataclass(frozen=True)
@@ -188,6 +188,7 @@ class Attention(nn.Module):
         super().__init__()
         if heads <= 0 or width <= 0 or width % heads:
             raise ValueError("Attention width must be divisible by positive heads")
+        self.attention_backend = "sdpa"
         self.heads = heads
         self.q = nn.Linear(width, width)
         self.kv = nn.Linear(width, 2 * width)
@@ -214,7 +215,7 @@ class Attention(nn.Module):
         kv = self.kv(context).reshape(b, context.shape[1], 2, self.heads, d // self.heads)
         k, v = kv.permute(2, 0, 3, 1, 4).unbind(0)
         visible = None if mask is None else mask[:, None, None, :]
-        values = F.scaled_dot_product_attention(q, k, v, attn_mask=visible, dropout_p=0.0)
+        values = attention(q, k, v, visible, self.attention_backend)
         return self.out(values.transpose(1, 2).reshape(b, n, d))
 
 

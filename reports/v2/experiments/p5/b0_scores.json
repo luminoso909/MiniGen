@@ -1,0 +1,603 @@
+{
+  "schema": "minigen.bench-scores.v1",
+  "scope": "real_local",
+  "identity": {
+    "generation_sha256": "fb2017ca3df605c99237c4ab986be43d45907f5145007ee0b648caed745b37c3",
+    "asset_lock_sha256": "1b253bbb9b6287e832a892ee83f20df24a4c841361d4a68fbd99eb92df291af8",
+    "reference_sha256": "8574e2a05ae797780ccdf427e7aef1fe16932f7771ff5544fdb35041a96b8cc4",
+    "metrics": [
+      "kid",
+      "cmmd",
+      "clipscore",
+      "lpips"
+    ],
+    "scope": "real_local",
+    "device": "mps",
+    "batch_size": 4,
+    "vqa_backend": "blip",
+    "kid_subset_size": 4,
+    "kid_subsets": 10,
+    "implementation": "minigen-bench-score-v1",
+    "source_sha256": {
+      "__init__.py": "b9a72681c1470de593aa1c365efd3f6035e3a036789598149b442cfbaa7ada7a",
+      "assets.py": "be892496dd4fa8d2bd1048aac2a9d37926054521f3c94e88c5f5a87c4b709e5a",
+      "benchmark.py": "5692c34150e4d335bffa29413c98d03a1134bc71d4689f86ec1ec19762b7f811",
+      "features.py": "63334efcdfcf46d76cb908edd580752787c58d8a0c070ca13843f5fce8940ad8",
+      "generation.py": "513a28a9cd885e6f55f3b4727448f00b69885a155caa07bfd7b1e2ebbbee668a",
+      "local_components.py": "aaf57ef11c7957610e0a00b5c053230a117ab92b909bfd9d485c9b7875cdabc6",
+      "metrics.py": "d61746e4afebc6d879fd0546eb8f53f45798ba79b34c1f6d6530652d3731b3d9",
+      "profiling.py": "5cffee4ebbb76d5264a63f77fb2e8f86350a44c077c557f184ce7bc2659199b5",
+      "reconstruction.py": "6fb4aa5ce16a4ae03ad28c26d5dacddb44f0f6a3e539aad78ccd26ff1f26a624",
+      "reconstruction_metrics.py": "978924261f2dce8ca8130b4498876116eec804081504580f4ae233fe1219b450",
+      "reconstruction_review.py": "2cf1b3840b436cb36dcbacfb030a98dd5b1581443c487f6247608437be0e5dd5",
+      "reporting.py": "18699603f453e4f58f60a22996502a5e460e99a17bf6416804bb3ccfb5a3df80",
+      "review.py": "60ebb3b289f387b3d4b97764763881cc7d54ebf4df478b1b60069098aa178115",
+      "scoring.py": "b9a74f3c20be08e135cc05e23c65c62f604b9a02cd074de304027c117b06ebe7",
+      "vqa.py": "a695f6e1690df91d111a9b9ec596e78d1e0cbb38c961c9799c519abe605a0c29"
+    }
+  },
+  "generation_path": "/Users/lucius/projects/personal/MiniGen/artifacts/evaluations/p5/smoke/b0/samples.json",
+  "generation_sha256": "fb2017ca3df605c99237c4ab986be43d45907f5145007ee0b648caed745b37c3",
+  "architecture": "b0",
+  "sampling": {
+    "method": "euler",
+    "solver_nfe": 10,
+    "model_evaluations": 10,
+    "guidance": 1.0,
+    "device": "mps:0",
+    "precision": "fp32",
+    "attention_backend": "sdpa"
+  },
+  "run_id": "778d80885053549af23f330e86006e79d08a99b5c6c3e670a8a4258378a9bee3",
+  "checkpoint_step": 12,
+  "checkpoint_sha256": "e0a660ab370bc098ca0172f876c7473ad63d1b0b1371a801ee05cc707b465808",
+  "benchmark_sha256": "8574e2a05ae797780ccdf427e7aef1fe16932f7771ff5544fdb35041a96b8cc4",
+  "metrics": {
+    "kid": {
+      "status": "completed",
+      "scope": "real_local",
+      "mean": 0.622305976673527,
+      "std": 0.03512275787828401,
+      "estimates": [
+        0.6174033550280726,
+        0.6272445978347707,
+        0.6242146276962219,
+        0.7031733158903992,
+        0.6580489785132966,
+        0.6291201053321069,
+        0.6025284548849186,
+        0.5792846186100835,
+        0.5805092821026547,
+        0.6015324308427448
+      ],
+      "subsets": 10,
+      "subset_size": 4,
+      "seed": 20261110,
+      "reference_count": 16,
+      "generated_count": 8,
+      "kernel": "(x.y/d+1)^3;unbiased",
+      "value": 0.622305976673527,
+      "coverage": {
+        "expected": 8,
+        "valid": 8
+      },
+      "complete": true,
+      "error": null
+    },
+    "cmmd": {
+      "status": "completed",
+      "scope": "real_local",
+      "value": 6.411014407979865,
+      "sigma": 10,
+      "scale": 1000,
+      "estimator": "biased",
+      "unit_normalized": true,
+      "coverage": {
+        "expected": 8,
+        "valid": 8
+      },
+      "complete": true,
+      "error": null
+    },
+    "clipscore": {
+      "status": "completed",
+      "scope": "real_local",
+      "mean": 0.31593800670754635,
+      "per_sample": [
+        0.3118094271415092,
+        0.31800783571293145,
+        0.3016948030717418,
+        0.3048393287563051,
+        0.2789102321481856,
+        0.2841464607959812,
+        0.367558938359513,
+        0.36053702767420315
+      ],
+      "cosine": [
+        0.12472377085660369,
+        0.12720313428517258,
+        0.12067792122869672,
+        0.12193573150252204,
+        0.11156409285927424,
+        0.11365858431839249,
+        0.1470235753438052,
+        0.14421481106968126
+      ],
+      "variant": "CLIPScore-L14-336-no-prefix",
+      "scale": 2.5,
+      "value": 0.31593800670754635,
+      "text_lengths": [
+        {
+          "tokens_before_truncation": 14,
+          "truncated": false
+        },
+        {
+          "tokens_before_truncation": 14,
+          "truncated": false
+        },
+        {
+          "tokens_before_truncation": 14,
+          "truncated": false
+        },
+        {
+          "tokens_before_truncation": 14,
+          "truncated": false
+        },
+        {
+          "tokens_before_truncation": 21,
+          "truncated": false
+        },
+        {
+          "tokens_before_truncation": 21,
+          "truncated": false
+        },
+        {
+          "tokens_before_truncation": 22,
+          "truncated": false
+        },
+        {
+          "tokens_before_truncation": 22,
+          "truncated": false
+        }
+      ],
+      "sample_ids": [
+        "ef823bc60899b509d86ae1df",
+        "a7f840f4dc632c5e1103c72c",
+        "af899c20457083b4bf123bb0",
+        "850853cb9af21a384c952774",
+        "465385ed2c501cb00008818e",
+        "a52e49114f4d0712997e47e6",
+        "c077b8aa0aaa76b1c986b356",
+        "fe5f37f4515b9f383a567eda"
+      ],
+      "coverage": {
+        "expected": 8,
+        "valid": 8
+      },
+      "complete": true,
+      "error": null
+    },
+    "lpips": {
+      "status": "completed",
+      "scope": "real_local",
+      "value": 0.45356378704309464,
+      "mean": 0.45356378704309464,
+      "pairs": [
+        {
+          "prompt_id": "validation-00-0",
+          "seeds": [
+            20261112,
+            20261113
+          ],
+          "distance": 0.45356622338294983
+        },
+        {
+          "prompt_id": "validation-00-1",
+          "seeds": [
+            20261112,
+            20261113
+          ],
+          "distance": 0.45356500148773193
+        },
+        {
+          "prompt_id": "validation-00-2",
+          "seeds": [
+            20261112,
+            20261113
+          ],
+          "distance": 0.4535630941390991
+        },
+        {
+          "prompt_id": "validation-00-3",
+          "seeds": [
+            20261112,
+            20261113
+          ],
+          "distance": 0.45356082916259766
+        }
+      ],
+      "paired_prompts": 4,
+      "valid_prompt_count": 4,
+      "conditioning_verified": false,
+      "interpretation": "双种子差异，不作为独立质量或遵循得分",
+      "coverage": {
+        "expected": 8,
+        "valid": 8
+      },
+      "complete": true,
+      "error": null
+    }
+  },
+  "records": [
+    {
+      "prompt_id": "validation-00-0",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "1"
+        }
+      ],
+      "task_id": "ef823bc60899b509d86ae1df",
+      "sample_id": "ef823bc60899b509d86ae1df",
+      "status": "completed",
+      "image_path": "ef823bc60899b509d86ae1df.png",
+      "sha256": "f82b0848c3335fd9828cc16af2ba0a29029b7e166480397fa996ccca3b5f0bca",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-0",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "1"
+        }
+      ],
+      "task_id": "a7f840f4dc632c5e1103c72c",
+      "sample_id": "a7f840f4dc632c5e1103c72c",
+      "status": "completed",
+      "image_path": "a7f840f4dc632c5e1103c72c.png",
+      "sha256": "f99780128daa00b83689f5ed9d6536475f099642c3a63c31a55be564f2604208",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-1",
+      "caption": "A painting showing two girls wearing a skirt in a courtyard.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "2"
+        }
+      ],
+      "task_id": "af899c20457083b4bf123bb0",
+      "sample_id": "af899c20457083b4bf123bb0",
+      "status": "completed",
+      "image_path": "af899c20457083b4bf123bb0.png",
+      "sha256": "bd3eb1da9ae9a37c7a9b0817c2d12912b5f5ae5addd79097dfe018662e08d701",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-1",
+      "caption": "A painting showing two girls wearing a skirt in a courtyard.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "count",
+          "subject": "girl",
+          "expected": "2"
+        }
+      ],
+      "task_id": "850853cb9af21a384c952774",
+      "sample_id": "850853cb9af21a384c952774",
+      "status": "completed",
+      "image_path": "850853cb9af21a384c952774.png",
+      "sha256": "c7bdb1ad0d679a21d599ca0238911e94cc81815f61e54620c9caa0cfc67742eb",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-2",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard. The girl's skirt is red.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "color",
+          "subject": "girl's skirt",
+          "expected": "red"
+        },
+        {
+          "kind": "binding",
+          "subject": "girl's skirt",
+          "expected": "red"
+        }
+      ],
+      "task_id": "465385ed2c501cb00008818e",
+      "sample_id": "465385ed2c501cb00008818e",
+      "status": "completed",
+      "image_path": "465385ed2c501cb00008818e.png",
+      "sha256": "2821adee464874473f6258f27372275c70a85a486b7af56963533765c4479d21",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-2",
+      "caption": "A painting showing one girl wearing a skirt in a courtyard. The girl's skirt is red.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "color",
+          "subject": "girl's skirt",
+          "expected": "red"
+        },
+        {
+          "kind": "binding",
+          "subject": "girl's skirt",
+          "expected": "red"
+        }
+      ],
+      "task_id": "a52e49114f4d0712997e47e6",
+      "sample_id": "a52e49114f4d0712997e47e6",
+      "status": "completed",
+      "image_path": "a52e49114f4d0712997e47e6.png",
+      "sha256": "bb3fadea9e3b7c2b9bd303be5bd1b3e16783b9ec38b4dac1fdc4b7bf126102c3",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-3",
+      "caption": "A painting showing one girl on the left side of the composition, with empty space on the right.",
+      "seed": 20261112,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "relation",
+          "subject": "girl",
+          "expected": "left",
+          "object": "image center"
+        }
+      ],
+      "task_id": "c077b8aa0aaa76b1c986b356",
+      "sample_id": "c077b8aa0aaa76b1c986b356",
+      "status": "completed",
+      "image_path": "c077b8aa0aaa76b1c986b356.png",
+      "sha256": "b2dc3ddeb6130c0f42a677898a1360b7c9f03b1ddb2d775808479394a9b0c1a1",
+      "error": null
+    },
+    {
+      "prompt_id": "validation-00-3",
+      "caption": "A painting showing one girl on the left side of the composition, with empty space on the right.",
+      "seed": 20261113,
+      "requirements": [
+        {
+          "kind": "object",
+          "subject": "girl",
+          "expected": "yes"
+        },
+        {
+          "kind": "relation",
+          "subject": "girl",
+          "expected": "left",
+          "object": "image center"
+        }
+      ],
+      "task_id": "fe5f37f4515b9f383a567eda",
+      "sample_id": "fe5f37f4515b9f383a567eda",
+      "status": "completed",
+      "image_path": "fe5f37f4515b9f383a567eda.png",
+      "sha256": "facb6f2b8e26ec9eeb8c0210fd42cebedf2c248bfc5466eb8fc841b4e8c5fc2b",
+      "error": null
+    }
+  ],
+  "reference_records": [
+    {
+      "sample_id": "ab-06191",
+      "image_path": "images/006/ab-06191.jpg",
+      "sha256": "51c96d70a1b0897da49ea146ac0ec33e273942c135d6eae2e6405374904d83ef",
+      "group_id": "2c89c14be6ebb766934fa6a66132903281ac4b59cf4d6b4350cd53fd00982074",
+      "caption": "A woman standing in a garden, surrounded by plants and trees, with a house in the background and a clear blue sky above. She is holding something in her hands, and there is a watermark on the image.",
+      "split": "validation",
+      "artist": "carl-larsson",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-27518",
+      "image_path": "images/027/ab-27518.jpg",
+      "sha256": "440db57c80665e2f233810013fe4ec0b020f7c7899068671d4f9c63c5df28a88",
+      "group_id": "b2fa9860d2bdf40f7d23981e2fd92a0f79bba5b653facaf2386968aa6407acf2",
+      "caption": "Three stained glass windows in a dark room. The windows are intricately designed with vibrant colors and intricate patterns, creating a beautiful and captivating scene.",
+      "split": "validation",
+      "artist": "louis-comfort-tiffany",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-37966",
+      "image_path": "images/037/ab-37966.jpg",
+      "sha256": "80cef2471e2e76cd6f27e2df18143d0714b4d4a4284fbd02028cf6fb8d20a463",
+      "group_id": "e86511ab9aa43c59b1909ad3fa449208fc1b34dff9558826090b524be89c46f9",
+      "caption": "A painting of a woman in a yellow dress standing next to a dog, with a few other people in the background. At the bottom of the image, there is text which reads \"Schönheit - La Beauté Admirée\".",
+      "split": "validation",
+      "artist": "sergey-solomko",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-26815",
+      "image_path": "images/026/ab-26815.jpg",
+      "sha256": "e4d2d9b4e6136382052f95a64dafd1ad43f84a8c5f87ba2304b91d89b8719220",
+      "group_id": "88a1374f010c1ba4b9b079944fb665aadadc75ae200ca305668f468b66314f6a",
+      "caption": "A painting of a man in a red coat and hat, with a white and blue sky in the background. The man is wearing a red and black dress, and the painting is of a grenadier.",
+      "split": "validation",
+      "artist": "leo-schnug",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-45078",
+      "image_path": "images/045/ab-45078.jpg",
+      "sha256": "22f979edc10087a33b5f955c291c7043516e5070190fd01188c1f52b6939d51a",
+      "group_id": "e8e15de5ac7c808c2ae20912fa96cf5e8e1fb32aa45fb577d63236ba6b608913",
+      "caption": "A painting of white water lilies in a pond, surrounded by lush green leaves and a backdrop of rolling hills and a bright blue sky.",
+      "split": "validation",
+      "artist": "wilhelm-kotarbinski",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-22002",
+      "image_path": "images/022/ab-22002.jpg",
+      "sha256": "d16e09a995e2c657b566b47a05ed1960be3373f5a9c0d2ec7cf35945c9f080bc",
+      "group_id": "38129a9a8439f0496dd180b69ef36be6c15c57070bb10ac023add83f5e30b9d1",
+      "caption": "A black and white drawing of a man and woman standing next to each other, with the man holding a stick. In the background, there is a sky with clouds and an animal, and at the bottom of the image there is text which reads \"Arthur Rackham - The Return of the King\".",
+      "split": "validation",
+      "artist": "john-bauer",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-04140",
+      "image_path": "images/004/ab-04140.jpg",
+      "sha256": "e73e3bbce0357f4b7bb92b260fd914d97276423d9242eca56d1ccd1d98c1adad",
+      "group_id": "f475c4a556ffc48f469bf9911dccf7e56d88a7eddf2fb82c8545462ae4122aa5",
+      "caption": "A painting of a river in a field with trees, grass, and mountains in the background. The sky is visible at the top of the painting, and the river is surrounded by lush greenery.",
+      "split": "validation",
+      "artist": "arthur-streeton",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-16108",
+      "image_path": "images/016/ab-16108.jpg",
+      "sha256": "62701ed98d09f698946c0be9adf5b0836d55a705d5652b3ba1d1a32869ab8760",
+      "group_id": "c254d6da09028c2fddf199d951470f2beb8b5f755e94df40124cc4d439173ce4",
+      "caption": "A painting of a group of people sitting around a table in a room, with some of them holding musical instruments. There is a dog in the foreground, and in the background there are pillars and a building.",
+      "split": "validation",
+      "artist": "heinrich-schonfeld",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-10060",
+      "image_path": "images/010/ab-10060.jpg",
+      "sha256": "6190a0e8ecf1d8c47fd3b02389bd6bd64418cafb220966bf23fce424a5cff570",
+      "group_id": "79f431a3d9fb360e9775945eb420c3c182a27c0241974de69d8d7728fec538d2",
+      "caption": "A poster featuring a woman holding a bouquet of field flowers, with the words \"Field Flowers: The Most Artistic and Beautiful of Holiday Gift Books\" written across the top. The woman is wearing a white dress with a blue shawl draped over her shoulders, and her hair is pulled back in a bun.",
+      "split": "validation",
+      "artist": "ethel-reed",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-33028",
+      "image_path": "images/033/ab-33028.jpg",
+      "sha256": "8abc659817c1016e033dc8912d832f23a4612faf2dca2d209d1888113ceb5d85",
+      "group_id": "3b6c199a93144844ac77a2faba7f877694d7af63e4cd5acc2cbab638811e7cde",
+      "caption": "A painting of a man standing on a wooden bridge over a river, with an animal standing beside him. The river is surrounded by lush green grass and trees, and in the background, majestic mountains are covered in snow and a clear blue sky.",
+      "split": "validation",
+      "artist": "pasquale-celommi",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-15954",
+      "image_path": "images/015/ab-15954.jpg",
+      "sha256": "4877685ed72c83790f282b8e9add28b7092855e00bd248906e268488f11e5deb",
+      "group_id": "c08e0613a4a7c2a8db0aad64a61ed6b661cf2e10b55d5e6fdf2d76326b622053",
+      "caption": "A Japanese woodblock print of a pagoda in the middle of a forest, surrounded by trees, people, a bridge, and a river. The painting is by Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido.",
+      "split": "validation",
+      "artist": "hasegawa-sadanobu-i",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-21763",
+      "image_path": "images/021/ab-21763.jpg",
+      "sha256": "e80909df80d48f5dd894e0dea4d6e52b4eeeefddd7b7fa7cf418112f3d501093",
+      "group_id": "849dbf5239c78a8e684589f81669c97f69985c3f475e20c7de4a9bcf75a58036",
+      "caption": "A painting of a country road with people walking down it, surrounded by houses, trees, and a sky with clouds in the background.",
+      "split": "validation",
+      "artist": "johan-hendrik-weissenbruch",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-46265",
+      "image_path": "images/046/ab-46265.jpg",
+      "sha256": "e02bbcd654ab3ef1c321f206fd95995617011a222d11db18aca963a188964678",
+      "group_id": "8f4de77496f236c180312d415f3c80353a38a3dca4030136c8ad60b8425dd25a",
+      "caption": "A painting of turkeys in the snow near a window, surrounded by trees and a house in the background.",
+      "split": "validation",
+      "artist": "zinaida-serebriakova",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-29081",
+      "image_path": "images/029/ab-29081.jpg",
+      "sha256": "21a8f3d7730c8b6ce1238f94a8d9724bfeb3d775c5e01c557856ccf9ac6e574e",
+      "group_id": "addc46401a4b193287348728abb5a461d38d397c34995b7292cc7e70419168b3",
+      "caption": "A black and white drawing of a man and woman sitting on a bench. The man is wearing a long coat and a hat, while the woman is wearing an apron and a dress. They are both looking off into the distance, with the man's arm around the woman's shoulder. The background is blurred, giving the image a dreamy, ethereal feel.",
+      "split": "validation",
+      "artist": "matej-sternen",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-23915",
+      "image_path": "images/023/ab-23915.jpg",
+      "sha256": "57c6c6de8290e09c8711047f756016854ecd01a554be2cb47601a94a90bd7cc2",
+      "group_id": "0c401d02f8272c17555ef4afb4dacb61dbe45d5396069c2e7f85255d6b7466e4",
+      "caption": "A painting of a Native American man with tattoos on his chest, set against a white background. At the bottom of the image, there is text which reads \"The Art of the American Indian\".",
+      "split": "validation",
+      "artist": "karl-bodmer",
+      "status": "completed"
+    },
+    {
+      "sample_id": "ab-36685",
+      "image_path": "images/036/ab-36685.jpg",
+      "sha256": "a22873a460833ed7f601456e9c36d51d20f237dbd08ee4a39a2dd1deb62bc98e",
+      "group_id": "8acbe3ef5f7dae8fe817a1cdbe767b5fa6192d728e211ec2563696e381b59407",
+      "caption": "A black and white drawing of a volcano erupting, with smoke billowing out of the top of the mountain and clouds in the sky. At the bottom of the image, there is text written on the paper.",
+      "split": "validation",
+      "artist": "roderic-oconor",
+      "status": "completed"
+    }
+  ],
+  "coverage": {
+    "attempted": 8,
+    "expected": 8,
+    "valid": 8,
+    "failed": 0,
+    "pending": 0,
+    "reference_valid": 16,
+    "reference_expected": 16
+  },
+  "exploratory": true,
+  "complete": true,
+  "status": "completed"
+}

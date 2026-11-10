@@ -26,6 +26,14 @@ def main(
         输出命令结果；训练、采样和缓存按参数创建本地文件。
     """
     values = sys.argv[1:] if argv is None else argv
+    if values and values[0] == "bench":
+        from minigen.bench_command import main as bench_main
+
+        try:
+            return bench_main(values[1:])
+        except (OSError, ValueError, RuntimeError, KeyError, ImportError, TypeError) as error:
+            print(f"minigen bench: {error}", file=sys.stderr)
+            return 2
     if values and values[0] == "cache":
         from minigen.cache_command import main as cache_main
 
@@ -38,6 +46,7 @@ def main(
     parser = argparse.ArgumentParser(prog="minigen", description="MiniGen 开发与实验工具")
     parser.add_argument("--version", action="version", version=f"minigen {__version__}")
     commands = parser.add_subparsers(dest="command", required=True)
+    commands.add_parser("bench", help="MiniGen-Bench 生成、评分、盲审与报告")
     doctor = commands.add_parser("doctor", help="检查依赖、设备和张量前向/反向")
     doctor.add_argument("--json", action="store_true", help="输出机器可读 JSON")
     doctor.add_argument("--device", choices=("auto", "cpu", "mps", "cuda"), default="auto")

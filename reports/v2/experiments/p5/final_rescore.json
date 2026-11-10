@@ -1,0 +1,25 @@
+{
+  "scope": "real_local",
+  "reason": "final VQA failure completeness fix changes scoring implementation identity; image bytes unchanged",
+  "elapsed_seconds": 7.786351540999021,
+  "records": [
+    {
+      "architecture": "b0",
+      "complete": true,
+      "seconds": 4.09220808398095,
+      "output": "artifacts/evaluations/p5/smoke/b0/scores_final.json"
+    },
+    {
+      "architecture": "b1",
+      "complete": true,
+      "seconds": 1.9195776669948827,
+      "output": "artifacts/evaluations/p5/smoke/b1/scores_final.json"
+    },
+    {
+      "architecture": "b2",
+      "complete": true,
+      "seconds": 1.7744769580021966,
+      "output": "artifacts/evaluations/p5/smoke/b2/scores_final.json"
+    }
+  ]
+}

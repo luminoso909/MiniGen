@@ -12,6 +12,8 @@
 | [P4 工程交付](v2/04_p4_delivery.md) | 三架构主体、统一训练/采样/恢复与 180 项测试；正式训练未执行 |
 | [P4 本地实验](v2/p4/local_experiments.md) | 三个约 30M 模型 MPS 8+4 步、采样与诊断的配置、曲线及限制 |
 | [云端就绪清单](v2/p4/cloud_readiness.md) | 已实现接口、待 CUDA/AMP 验收、预算与正式运行前置条件 |
+| [P5 工程交付](v2/05_p5_delivery.md) | 独立指标、Benchmark 候选、真实小样本、人工审核工具与完整云端手册 |
+| [P5 本地实验](v2/experiments/p5_local.md) | 真实生成和评分、数值对照、性能与失败边界 |
 | [P5 本地工程交接](v2/05_local_handoff.md) | 下一阶段评测实现任务、可复用产物契约及停止边界 |
 | [当前交接](v2/00_handoff.md) | 阶段证据与下一项工作 |
 | [OpenClipart 历史记录](v2/archive/openclipart/p0_p1_delivery_openclipart.md) | 已下线的数据试跑摘要 |
@@ -26,4 +28,4 @@
 - S3 见 [文本条件与评测](stage3/stage3.md)、[CLIP 恢复证据](stage3/resource_recovery.json) 与 [研究卡](research/README.md)。
 - 阶段交接与历史学习任务见 [tasks](tasks/README.md)。
 
-[最新 P4 本地交付](v2/04_p4_delivery.md) · [P5 工程入口](v2/05_local_handoff.md) · [当前交接](v2/00_handoff.md)
+[最新 P5 本地交付](v2/05_p5_delivery.md) · [云端交接](v2/05_p5_handoff.md) · [当前交接](v2/00_handoff.md)

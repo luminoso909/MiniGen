@@ -18,11 +18,11 @@ B0 PlainConditionalDiT、B1 SingleStreamDiT、B2 HybridDiT 从随机初始化训
 
 ### **3. 当前可执行检查**
 
-`minigen doctor` 是现有功能入口。`train`、`sample`、`evaluate`、`cache` 已提供真实入口，B0/B1/B2 共用训练、采样和恢复；`evaluate` 仅为固定配对 Flow MSE，不是 P5 图像质量评测；`data` 和 `report` 尚未注册。环境同步用 `uv sync --locked`。已有环境的基础核查用 `uv run --locked --offline --no-sync minigen doctor --device cpu --json` 与 `uv run --locked --offline --no-sync pytest -p no:cacheprovider`。设备、测试与检查基线见 P0 审计，最新本地验收见 P4 交付。
+`minigen doctor` 是现有功能入口。`train`、`sample`、`evaluate`、`cache` 已提供真实入口，B0/B1/B2 共用训练、采样和恢复；`evaluate` 仅为固定配对 Flow MSE，不是图像质量评测；`bench prepare/generate/score/review/profile/report` 是独立评测入口，顶层 `data` 和 `report` 尚未注册。环境同步用 `uv sync --locked`。已有环境的基础核查用 `uv run --locked --offline --no-sync minigen doctor --device cpu --json` 与 `uv run --locked --offline --no-sync pytest -p no:cacheprovider`。设备、测试与检查基线见 P0 审计，完整新测试需 `evaluation` 可选依赖；最新本地验收见 [P5 交付](reports/v2/05_p5_delivery.md)。
 
-P2 离线入口、用户审批和数值验收见 [P2 交付](reports/v2/02_p2_delivery.md)。正式缓存禁止复用试点，身份须绑定用户视觉审核、本机数值验收和组件锁；只编码 train/validation，逐批写入、可恢复，验证完整后才供训练读取，本轮不重建。P3-01～04 本地通过；[P3 收尾](reports/v2/03_p3_closeout.md) 的单图可辨，但 16 图有限对照仍未通过 P3-05，P3-06 CUDA 待验。[P4 交付](reports/v2/04_p4_delivery.md) 已完成 P4-03/05 本地主体工程、三模型 MPS 8+4 步闭环和完整 180 项测试；P4-01/02/04/06/07 正式实验未完成。当前停在 [P5 本地工程入口](reports/v2/05_local_handoff.md)，等待下一轮指令，不因冒烟通过而批准长训或质量对照。用户最新顺序为先完成 P3–P5 主体代码及本地小案例，再单独编写基于真实入口的云端操作手册，云端正式运行另行批准。工程 Flow 实现不代替个人 TODO。项目源码在 `src/minigen/`；旧学习模块在 `docs/learning/src/`，只由 Notebook 执行工具、个人验收脚本和历史测试显式加载。
+P2 离线入口、用户审批和数值验收见 [P2 交付](reports/v2/02_p2_delivery.md)。正式缓存禁止复用试点，身份须绑定用户视觉审核、本机数值验收和组件锁；只编码 train/validation，逐批写入、可恢复，验证完整后才供训练读取，本轮不重建。P3-01～04 本地通过；[P3 收尾](reports/v2/03_p3_closeout.md) 的单图可辨，但 16 图有限对照仍未通过 P3-05，P3-06 CUDA 待验。[P4 交付](reports/v2/04_p4_delivery.md) 已完成 P4-03/05 本地主体工程、三模型 MPS 8+4 步闭环和完整 180 项测试；P4-01/02/04/06/07 正式实验未完成。当前停在用户审核 [Benchmark](reports/v2/benchmark/README.md) 与 [云端手册](docs/cloud/MiniGen_云端训练与评测完整操作手册.md) 的入口，不因冒烟通过而批准长训或质量对照。用户最新顺序为先完成 P3–P5 主体代码及本地小案例，再单独编写基于真实入口的云端操作手册，云端正式运行另行批准。工程 Flow 实现不代替个人 TODO。项目源码在 `src/minigen/`；旧学习模块在 `docs/learning/src/`，只由 Notebook 执行工具、个人验收脚本和历史测试显式加载。
 
-训练、采样和诊断产物保留 `run_id`、配方、数据与源码身份及 `flow_velocity` 输出语义。恢复严格检查完整源码哈希；旧 P3 v1 Checkpoint 的显式读取兼容不表示跨源码精确恢复。失败回执与最后有效 Checkpoint 分开，不能把旧成功结果当作最新尝试成功。MPS 当前分配量不是峰值显存，固定配对 Flow MSE 不是图像质量分数；未来 P5 须按这些边界读取产物。
+训练、采样和诊断产物保留 `run_id`、配方、数据与源码身份及 `flow_velocity` 输出语义。恢复严格检查完整源码哈希；旧 P3 v1 Checkpoint 的显式读取兼容不表示跨源码精确恢复。失败回执与最后有效 Checkpoint 分开，不能把旧成功结果当作最新尝试成功。MPS 当前分配量不是峰值显存，固定配对 Flow MSE 不是图像质量分数；P5 按这些边界读取产物。正式 Benchmark 需要与内容哈希一致的真实审核回执；本地调试仅用验证集。独立评测权重只显式下载，评分命令离线。真实本地、模拟、正式结果不混表；未知 CUDA 成本、真实 BLIP 与人工校准不得伪造。
 
 ## **二、数据、实验与证据**
 

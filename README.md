@@ -15,9 +15,10 @@ MiniGen 在同一套 ArtBench Public Domain 256x256 数据的训练切分上，�
 | 功能 | 当前状态 |
 | --- | --- |
 | `minigen doctor` | 可用。支持 `--device` 和 `--json`，检查依赖与小张量前向、反向 |
-| `minigen train`、`sample`、`evaluate`、`cache` | 已可用：B0/B1/B2 统一 Flow 训练/恢复、Euler/Heun 采样、固定配对 MSE 诊断、正式缓存构建/回读；P5 图像质量评测尚未实现 |
-| `minigen data`、`report` | 计划中的入口，尚未注册 |
-| 数据、冻结组件与训练工具 | ArtBench 46,298 张已接入，离线数据准备使用 `scripts/prepare_artbench.py`。冻结 VAE、CLIP 和 train/validation 正式缓存已完成 [P2 验收](reports/v2/02_p2_delivery.md)。P3 诊断与 P4 本地主体工程已交付，停在 P5 本地工程入口；16 图生成质量及 CUDA 仍待验收 |
+| `minigen train`、`sample`、`evaluate`、`cache` | 已可用：B0/B1/B2 统一 Flow 训练/恢复、Euler/Heun 采样、固定配对 MSE 诊断、正式缓存构建/回读；图像质量由独立 `bench` 入口负责 |
+| `minigen bench` | 已实现 prepare/generate/score/review/profile/report；本地工程与正式成绩分别记录 |
+| `minigen data`、顶层 `report` | 未注册；报告入口为 `minigen bench report` |
+| 数据、冻结组件与训练工具 | ArtBench 46,298 张已接入，离线数据准备使用 `scripts/prepare_artbench.py`。冻结 VAE、CLIP 和 train/validation 正式缓存已完成 [P2 验收](reports/v2/02_p2_delivery.md)。P3 诊断与 P4 本地主体工程已交付，P5 本地评测已接入；16 图生成质量及 CUDA 仍待验收 |
 | 个人学习核心 | DDPM、VAE 数学已验收。当前 DiT 的 L03 独立小案例通过。文本 Cross-Attention、CFG、Flow 仍待实现 |
 
 项目使用 Python 3.12.14 和 uv。初始化或恢复依赖时使用 `uv sync --locked`。已有环境可以执行以下离线检查：
@@ -28,7 +29,7 @@ uv run --locked --offline --no-sync minigen doctor --device cpu --json
 uv run --locked --offline --no-sync pytest -p no:cacheprovider
 ```
 
-P0 的 CPU 诊断和独立 L03 检查通过。旧 DiT 启动测试已修复。历史环境基线和最新验收分别见 [仓库审计](reports/v2/00_repository_audit.md)、[P2 工程交付](reports/v2/02_p2_delivery.md) 与 [P4 工程交付](reports/v2/04_p4_delivery.md)。当前完整 pytest 180 通过；三个约 30M 模型均完成 MPS 8 步训练、恢复至 12 步、采样和 Flow MSE 诊断。CPU/MPS 本地验收与将来的 CUDA/AMP 分开记录。
+P0 的 CPU 诊断和独立 L03 检查通过。旧 DiT 启动测试已修复。历史环境基线和最新验收分别见 [仓库审计](reports/v2/00_repository_audit.md)、[P2 工程交付](reports/v2/02_p2_delivery.md) 与 [P4 工程交付](reports/v2/04_p4_delivery.md)。P4 基线完整 pytest 为 180 通过，本轮结果见 [P5 交付](reports/v2/05_p5_delivery.md)；三个约 30M 模型均完成 MPS 8 步训练、恢复至 12 步、采样和 Flow MSE 诊断。CPU/MPS 本地验收与将来的 CUDA/AMP 分开记录。
 
 B0 单图 1000 步诊断已产生可辨主体；固定 16 图、学习率 `2e-4` 的有限对照仍未通过可辨生成门槛，P3-05 保持未完成。三模型的 8+4 步运行只证明工程闭环，不能据此比较生成质量。P4-03/05 本地工程完成，其余正式训练与架构对照仍待执行。[P3 质量诊断](reports/v2/03_p3_closeout.md) · [三模型本地实验](reports/v2/p4/local_experiments.md)。
 
@@ -40,7 +41,19 @@ uv run --locked --offline --no-sync minigen train --config configs/training/p4_b
 uv run --locked --offline --no-sync minigen sample --config configs/training/p4_b1_local.json --checkpoint artifacts/runs/p4_b1_local/last.pt --output artifacts/runs/example_samples --device mps --count 4 --steps 8
 ```
 
-三模型的本地配置、恢复配置与 CUDA Pilot 配置见 [配置导航](configs/README.md)，本轮真实命令见 [本地实验](reports/v2/p4/local_experiments.md)。恢复严格校验源码与数据身份；旧 P3 权重可显式读取，不等于可以跨源码版本精确续训。使用 CPU 可显式改 `--device cpu`；CUDA/AMP 尚未实机验收，多卡尚未实现。当前停止在 [P5 本地工程交接](reports/v2/05_local_handoff.md)，不自动运行 P5 或云端训练。
+三模型的本地配置、恢复配置与 CUDA Pilot 配置见 [配置导航](configs/README.md)，本轮真实命令见 [本地实验](reports/v2/p4/local_experiments.md)。恢复严格校验源码与数据身份；旧 P3 权重可显式读取，不等于可以跨源码版本精确续训。使用 CPU 可显式改 `--device cpu`；CUDA/AMP 尚未实机验收，多卡尚未实现。当前停止在用户审核 [Benchmark](reports/v2/benchmark/README.md) 和 [完整云端手册](docs/cloud/MiniGen_云端训练与评测完整操作手册.md) 的入口，后续由用户亲自执行 CUDA Pilot。
+
+### **1. P5 独立评测**
+
+首次准备评测 Python 依赖使用 `uv sync --locked --extra evaluation`；若还需本机生成，增加 `--extra latent --extra conditioning`。这不会下载模型权重；权重显式下载与版本核验见手册。基础环境运行完整新测试前也需要 `evaluation` 组。
+
+```bash
+uv run --locked --offline --no-sync minigen bench --help
+uv run --locked --offline --no-sync python scripts/prepare_eval_assets.py --models inception clip --verify-only
+uv run --locked --offline --no-sync minigen bench prepare --output reports/v2/benchmark/artbench_v1
+```
+
+评测使用独立 Inception 与完整 CLIP L/14@336；生成条件仍是 CLIP-B/32 文本塔。本地三个短跑检查点只能验证工程；VQA Mock 不计成绩，真实 BLIP 与绘画域人工校准待云端。真实图片与完整画廊在 `artifacts/evaluations/p5/smoke/`，小型回执见 [P5 实验报告](reports/v2/experiments/p5_local.md)。同一 Benchmark 的题目冻结不等于人工批准。
 
 ## **三、数据、实验与协作**
 

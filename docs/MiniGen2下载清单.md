@@ -11,8 +11,8 @@ MiniGen v2 的正式外部数据为 ArtBench Public Domain 256x256，全量 46,2
 | P2，P5 复用 | LPIPS 特征网络和线性校准权重 | 200 张重建感知距离，以及预登记后的多样性统计 | **指标必需**。推荐 AlexNet 与 LPIPS v0.1 | AlexNet 与 LPIPS v0.1 Alex 校准已下载，CPU 小样通过 |
 | P3 → P4 | ArtBench 冻结清单、256px 潜变量和文本特征缓存 | 三主干训练、验证与恢复 | **本地生成** | 依赖 P1/P2 验收 |
 | P3 → P4，P5–P7 复用 | B0、B1、B2 的 Checkpoint 和 EMA | 训练恢复、采样、正式评测、部署 | **本项目训练生成** | v2 正式权重待训练 |
-| P5 | ArtBench 冻结测试集、MiniGen-Bench 提示词、固定噪声种子与人工标签 | 分布质量、ID/组合外/改写评测及盲审 | **复用 P1 数据并自建评测集** | 需在正式训练前冻结提示词和协议 |
-| P5 | Inception V3 特征权重、图文 CLIP 与 VQA 权重 | KID、CMMD、CLIPScore、语义遵循评分 | **正式指标所需**，按冻结协议取所选权重，见第三节 | 尚未冻结评测资产 |
+| P5 | ArtBench 冻结测试集、MiniGen-Bench 提示词、固定噪声种子与人工标签 | 分布质量、ID/组合外/改写评测及盲审 | **复用 P1 数据并自建评测集** | 候选题目和协议已锁定，人工批准待审 |
+| P5 | Inception V3 特征权重、图文 CLIP 与 VQA 权重 | KID、CMMD、CLIPScore、语义遵循评分 | **正式指标所需**，按冻结协议取所选权重，见第三节 | 资产锁已建立；Inception/完整 CLIP 已实测，VQA 大权重未下载 |
 | P6 | 额外种子与 10M/50M 或 Chimera 候选的 Checkpoint | 后续可选实验 | 默认复用原数据和冻结组件，自行训练 Checkpoint | 依主结果与批准决定 |
 | P7 | 已验收的自训 Checkpoint 和两个冻结推理组件 | 发布复现与推理演示 | 复用 P2、P4 资产 | 干净机器按同一锁定身份恢复 |
 
@@ -53,11 +53,22 @@ P2 的 200 张重建检查与单段 CLIP 验收已在 ArtBench 上实际运行�
 
 ## **三、P5 评测资源**
 
-| 指标 | 实际需要的权重 | 准备方式 |
-| --- | --- | --- |
-| KID | torch-fidelity 的 Inception V3 参考权重 `weights-inception-2015-12-05-6726825d.pth` | 预登记特征层、后端、权重哈希与版本，显式传入本地文件。该实现使用 TensorFlow 转换权重。见 [torch-fidelity 特征提取源码](https://github.com/toshas/torch-fidelity/blob/master/torch_fidelity/feature_extractor_inceptionv3.py) 与 [发布文件](https://github.com/toshas/torch-fidelity/releases/tag/v0.2.0) |
-| CMMD | OpenAI CLIP ViT-L/14@336 的图像塔与投影 | 优先用参考实现对应的 `ViT-L-14-336px.pt`，或经等价性核对的转换权重。锁定特征归一化、预处理和核参数。见 [CMMD 参考实现](https://github.com/google-research/google-research/blob/master/cmmd/embedding.py) 与 [参考权重映射](https://github.com/google-research/scenic/blob/main/scenic/projects/baselines/clip/model.py) |
-| CLIPScore | 带图像塔、文本塔和两侧投影的完整 CLIP，以及其预处理器和 tokenizer | 可在预登记时选完整 ViT-L/14@336 与 CMMD 共享权重，明确写出 CLIPScore 的模型变体。若选 B/32，则按固定版本另取完整 B/32。P1/P2 现有文本塔没有图像塔及投影。见 [CLIPScore 方法](https://arxiv.org/abs/2104.08718v3) 与 [完整 B/32 文件](https://huggingface.co/openai/clip-vit-base-patch32/tree/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268) |
-| VQA 属性与关系 | 一套通过 ArtBench 绘画域人工校准的 VQA 模型。独立候选 `Salesforce/blip-vqa-base` | 候选 Safetensors 约 1.54 GB，另含配置、图像预处理和 tokenizer。经标注误差与盲审校准后才锁定。评测结果须与独立人工标注对照。见 [候选模型卡](https://huggingface.co/Salesforce/blip-vqa-base) 与 [权重文件](https://huggingface.co/Salesforce/blip-vqa-base/tree/main) |
+2026-11-10 按 [资产锁](../configs/models/evaluation.json) 显式准备；普通评分仅离线读取，生成条件 CLIP 文本塔不能代替评测完整 CLIP。
 
-建议 P5 评测权重统一放在 `artifacts/models/eval/` 下按模型和版本隔离。正式分布参考图来自冻结的 ArtBench 测试切分，ID、组合外及改写提示词由项目生成并版本化。历史 MNIST、几何图标、OpenMoji/Sana 与 LoRA 资产按原用途归档。
+| 指标 | 固定权重 | 本轮实际状态 |
+| --- | --- | --- |
+| KID | torch-fidelity Inception V3 `weights-inception-2015-12-05-6726825d.pth`，2048 维 | 已下载、全哈希通过、CPU/MPS FP32 特征及真实小样本指标通过 |
+| CMMD / CLIPScore | `openai/clip-vit-large-patch14-336`，revision `ce19dc912ca5cd21c8a653c79e251e808ccabcd1`；完整 `pytorch_model.bin` 及 tokenizer/预处理配置 | 已下载，主权重 1,711,974,081 字节；本轮 PyTorch 转换后端不宣称与其他后端逐位等价 |
+| LPIPS | 已有 AlexNet 与 LPIPS Alex v0.1 校准资产 | 复用 P2 文件，未重复下载；双种子辅助差异已计算 |
+| VQA | `Salesforce/blip-vqa-base`，revision `787b3d35d57e49572baabd22884b3d5a05acf072` | 仅小型配置/tokenizer 已准备；1,538,800,584 字节 Safetensors **未下载**，真实 BLIP 推理待云端；接口与模拟测试不等于真实推理 |
+
+路径按 `artifacts/models/eval/<模型>/<revision>/` 隔离；准确 URL、SHA-256 与字节数以资产锁为准。未来显式执行：
+
+```bash
+uv sync --locked --extra evaluation
+uv run --locked --no-sync python scripts/prepare_eval_assets.py --models inception clip --verify-only
+# 仅在用户准备真实 VQA 时下载；本轮没有执行此命令。
+uv run --locked --no-sync python scripts/prepare_eval_assets.py --models vqa
+```
+
+KID 固定三次核与无偏 MMD，正式 100×1000 子集；CMMD 固定单位图像投影、带宽 10、biased MMD×1000；CLIPScore 固定 L/14@336、无前缀及系数 2.5。真实参考集、题目与人工批准分开记录，见 [Benchmark](../reports/v2/benchmark/README.md)。下载完成不表示绘画域评分器已通过人工校准，VQA 100+100 真实校准仍待执行。[torch-fidelity](https://github.com/toshas/torch-fidelity/blob/master/torch_fidelity/metric_kid.py) · [CMMD](https://github.com/google-research/google-research/tree/master/cmmd) · [CLIPScore](https://github.com/jmhessel/clipscore/blob/main/clipscore.py)

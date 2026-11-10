@@ -33,7 +33,12 @@ from minigen.training.checkpoint import (
     save_checkpoint,
 )
 from minigen.training.config import TrainConfig, build_model, learning_rate_for_step
-from minigen.training.runtime import autocast_context, resolve_device, synchronize
+from minigen.training.runtime import (
+    autocast_context,
+    hardware_description,
+    resolve_device,
+    synchronize,
+)
 
 
 def _json_write(
@@ -314,6 +319,7 @@ def _train(
         directory / "run.json",
         {
             "schema": "minigen.run.v1",
+            "hardware": hardware_description(device),
             "run_id": identity_digest,
             "attempt_id": attempt_id,
             "started_at": started_at,
@@ -450,6 +456,7 @@ def _train(
         )
         result: JsonDict = {
             "schema": "minigen.training-result.v1",
+            "hardware": hardware_description(device),
             "run_id": identity_digest,
             "attempt_id": attempt_id,
             "started_at": started_at,
@@ -572,6 +579,7 @@ def _save(
     """
     payload: Checkpoint = {
         "schema": CHECKPOINT_SCHEMA,
+        "hardware": hardware_description(device),
         "objective": config.objective,
         "model": model.state_dict(),
         "ema": ema.state_dict(),

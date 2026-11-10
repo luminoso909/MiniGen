@@ -5,11 +5,11 @@ from dataclasses import dataclass
 from typing import NamedTuple
 
 import torch
-import torch.nn.functional as F
 from jaxtyping import Bool, Float
 from torch import Tensor, nn
 
 from minigen.contracts import Condition
+from minigen.models.attention import attention
 from minigen.models.plain_dit import patchify, sincos, unpatchify
 
 
@@ -147,6 +147,7 @@ def joint_attention(
     mask: Bool[Tensor, "b n"],
     cosine: Float[Tensor, "n d_r"],
     sine: Float[Tensor, "n d_r"],
+    backend: str = "sdpa",
 ) -> Float[Tensor, "b n d"]:
     """执行非因果图文联合注意力，所有有效 query 可读取全部有效 key。
 
@@ -155,15 +156,14 @@ def joint_attention(
         mask: [b,n]，True 为有效 key；图片位置总是有效。
         cosine: 联合 token 的旋转余弦，文本为恒等。
         sine: 联合 token 的旋转正弦，文本为恒等。
+        backend: sdpa 或 naive，仅控制主干计算路径。
 
     Results:
         Float[Tensor, "b n d"]: 合并各头后的联合特征。
     """
     q, k, v = qkv.unbind(0)
     q, k = apply_rotary(q, cosine, sine), apply_rotary(k, cosine, sine)
-    attended = F.scaled_dot_product_attention(
-        q, k, v, attn_mask=mask[:, None, None, :], dropout_p=0.0
-    )
+    attended = attention(q, k, v, mask[:, None, None, :], backend)
     b, _, n, _ = q.shape
     return attended.transpose(1, 2).reshape(b, n, -1)
 
@@ -189,6 +189,7 @@ class StreamBranch(nn.Module):
         """
         super().__init__()
         d = config.hidden_size
+        self.attention_backend = "sdpa"
         self.heads = config.num_heads
         self.norms = nn.ModuleList(
             nn.LayerNorm(d, elementwise_affine=False, eps=1e-6) for _ in range(2)
@@ -274,7 +275,7 @@ class SingleBlock(StreamBranch):
             Float[Tensor, "b n d"]: 更新后的联合流，padding 为零。
         """
         qkv, modulation = self.prepare(x, time)
-        attended = joint_attention(qkv, mask, cosine, sine)
+        attended = joint_attention(qkv, mask, cosine, sine, self.attention_backend)
         return self.finish(x, attended, modulation).masked_fill(~mask[..., None], 0)
 
 
@@ -298,6 +299,7 @@ class DoubleBlock(nn.Module):
             初始化图文两套参数并消耗 Torch 随机状态。
         """
         super().__init__()
+        self.attention_backend = "sdpa"
         self.image_branch = StreamBranch(config)
         self.text_branch = StreamBranch(config)
 
@@ -325,7 +327,9 @@ class DoubleBlock(nn.Module):
         """
         qi, mi = self.image_branch.prepare(image, time)
         qt, mt = self.text_branch.prepare(text, time)
-        attended = joint_attention(torch.cat((qt, qi), dim=3), mask, cosine, sine)
+        attended = joint_attention(
+            torch.cat((qt, qi), dim=3), mask, cosine, sine, self.attention_backend
+        )
         n_t = text.shape[1]
         image = self.image_branch.finish(image, attended[:, n_t:], mi)
         text = self.text_branch.finish(text, attended[:, :n_t], mt)

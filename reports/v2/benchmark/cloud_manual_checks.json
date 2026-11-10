@@ -1,0 +1,7 @@
+{
+  "scope": "syntax and real argparse parsing only; no GPU, download or training executed",
+  "shell_blocks": 43,
+  "python_heredocs": 7,
+  "cli_commands_parsed": 49,
+  "errors": []
+}

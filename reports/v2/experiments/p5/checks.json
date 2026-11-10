@@ -1,0 +1,92 @@
+{
+  "scope": "local_engineering_acceptance",
+  "pytest": {
+    "baseline": 180,
+    "passed": 217,
+    "failed": 0,
+    "log": "artifacts/runs/p5_baseline/pytest_final.txt"
+  },
+  "ruff": "All checks passed!",
+  "format": "104 files already formatted",
+  "annotations": {
+    "files": 112,
+    "functions": 563,
+    "classes": 71,
+    "issues": [],
+    "scope": "类型/条件式文档结构；异常与副作用仍需人工核对"
+  },
+  "protected_files": 698,
+  "protected_hash_changes": 0,
+  "doctor": {
+    "python": "3.12.14",
+    "packages": {
+      "minigen": {
+        "version": "0.1.0",
+        "status": "passed"
+      },
+      "torch": {
+        "version": "2.14.1",
+        "status": "passed"
+      },
+      "torchvision": {
+        "version": "0.29.1",
+        "status": "passed"
+      },
+      "numpy": {
+        "version": "2.5.4",
+        "status": "passed"
+      },
+      "pillow": {
+        "version": "12.3.0",
+        "status": "passed"
+      },
+      "pyyaml": {
+        "version": "6.0.3",
+        "status": "passed"
+      },
+      "matplotlib": {
+        "version": "3.11.2",
+        "status": "passed"
+      },
+      "tqdm": {
+        "version": "4.70.1",
+        "status": "passed"
+      }
+    },
+    "devices": {
+      "cpu": {
+        "status": "passed",
+        "loss": 28021.77734375,
+        "shape": [
+          3,
+          4
+        ]
+      },
+      "mps": {
+        "status": "unavailable"
+      },
+      "cuda": {
+        "status": "unavailable"
+      }
+    },
+    "ok": true
+  },
+  "uv_lock_check": "passed --offline",
+  "installed_dependencies_check": "passed",
+  "wheel": {
+    "built": true,
+    "review_html_included": true,
+    "no_assets_included": true
+  },
+  "cuda_executed": false,
+  "formal_training_executed": false,
+  "real_vqa_executed": false,
+  "human_review_received": false,
+  "paid_gpu_api_cost_cny": 0,
+  "evaluation_versions": {
+    "torch-fidelity": "0.3.0",
+    "transformers": "5.20.2",
+    "pillow": "12.3.0",
+    "numpy": "2.5.4"
+  }
+}

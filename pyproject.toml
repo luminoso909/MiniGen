@@ -21,6 +21,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+evaluation = [
+  "torch-fidelity>=0.3,<0.4",
+  "transformers>=4.51,<6",
+  "safetensors>=0.5,<1",
+  "huggingface-hub>=0.30,<2",
+]
 artbench = [
   "pyarrow>=26,<27",
   "transformers>=4.51,<6",
@@ -130,3 +136,13 @@ select = ["E", "F", "I", "UP", "B"]
 "tests/test_joint_dit.py" = ["F722"]
 "scripts/inspect_flow_models.py" = ["F722"]
 "tests/test_model_inspection.py" = ["F722"]
+
+# P5 的张量形状仅豁免形状字符串解析，未定义名称检查保留。
+"src/minigen/evaluation/metrics.py" = ["F722"]
+"src/minigen/evaluation/features.py" = ["F722"]
+"src/minigen/evaluation/generation.py" = ["F722"]
+"src/minigen/models/attention.py" = ["F722"]
+"tests/test_bench_generation.py" = ["F722"]
+"tests/test_bench_metrics.py" = ["F722"]
+"tests/test_vqa.py" = ["F722"]
+"tests/test_bench_scoring.py" = ["F722"]

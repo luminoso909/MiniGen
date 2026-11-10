@@ -1,18 +1,16 @@
 ## **一、当前交接**
 
-ArtBench Public Domain 256x256 冻结版 `v1` 含 46,298 张，train 37,042、validation 4,637、test 4,619。P2 已完成 SDXL VAE 随机 200 张重建与 9 张诊断、CLIP 单段条件验收、256px 配对缓存试点。用户批准保留当前冻结 VAE；细密线条、文字和小物体的高频损失记为局限，不据此剔除样本。[用户批准](components/vae_user_approval.json) · [含 LPIPS 最差 20 张的审核证据](components/vae_review_evidence.json)
+**停在用户审核 Benchmark 与云端手册、准备亲自执行 CUDA Pilot 的入口。** 2026-11-10，P5 本地主体工程与真实小样本验收已交付，完整 pytest 217 项、Ruff/格式/注释、CPU doctor、评测器 CPU/MPS 数值对照通过。未执行 CUDA、正式训练、真实 BLIP 或人工校准。[P5 阶段报告](05_p5_delivery.md) · [云端入口交接](05_p5_handoff.md) · [完整手册](../../docs/cloud/MiniGen_云端训练与评测完整操作手册.md)
 
-**P2 已验收。** 固定 20 张的本机 CPU FP32 对照通过；VAE 和 CLIP 均使用 MPS FP32 构建正式缓存。train 37,042 行、validation 4,637 行全部通过独立回读；test 的 4,619 张保持封存。本地缓存位于 `artifacts/cache/artbench_pd_256/v1_formal`，缓存数组未入 Git。[P2 工程验收](02_p2_delivery.md) · [正式缓存回执](components/artbench_cache_formal.json) · [本机固定 20 张回执](components/artbench_local_fp32_20.json) · [P0/P1 交付](01_p0_p1_delivery.md)
+ArtBench Public Domain 256x256 冻结 v1 全量 46,298 张：train 37,042、validation 4,637、test 4,619。P2 的用户 VAE 审批、固定 20 张 CPU/MPS 检查、两套正式缓存独立回读继续有效，本轮没有重建。VAE 高频线条/文字/小物体损失是已知局限，不据此删样本。[P2 验收](02_p2_delivery.md) · [正式缓存](components/artbench_cache_formal.json)
 
-**停在 P5 本地工程入口，等待用户下一轮指令。** 2026-11-10，P3 收尾与 P4 三主干主体工程已交付。B0 30,359,824 参数，B1/B2 均 30,061,456 参数；共用 Flow/CFG/Euler/Heun、训练/采样/恢复入口。180 项完整测试和三模型 CPU/MPS FP32 前向/梯度对照通过，三个正式规格均完成 8→12 步 MPS 续训、4 图采样与固定验证。[P4 工程交付](04_p4_delivery.md) · [本地实验与曲线](p4/local_experiments.md)
+B0 为 30,359,824 参数，B1/B2 各 30,061,456；共享 Flow 和冻结组件。本轮复用 P4 step=12 检查点，生成 3×8 张验证图并实际计算 KID、CMMD、CLIPScore、LPIPS；24 张仍是不可辨噪声纹理，只证明评测工程闭环。P3-05 原固定 16 图质量未通过，单图记忆不是替代验收，P3-06 CUDA 待验。[本地实验](experiments/p5_local.md) · [P3 收尾](03_p3_closeout.md) · [P4 历史交付](04_p4_delivery.md)
 
-**P3-05 质量仍未通过。** 原 1000 步失败结果不变；新增单图 1000 步实验能够生成可辨人物，但原固定 16 图的 LR=2e-4、1000 步对照仍不可辨。在线/EMA、Euler/Heun、增加 NFE 与 CFG 诊断未确认数值实现错误，也未修复多图生成质量。单图记忆不代替原质量门槛。[P3 原交付](03_p3_delivery.md) · [本轮收尾诊断](03_p3_closeout.md)
+候选 Benchmark 已冻结 2,000 Test 参考索引、80 ID/40 组合压力/40 配对改写、80 验证题；固定种子、组和文件隔离及资产协议哈希都有记录。**内容冻结不等于用户批准**。无可信绘画类别真值、不宣称真实 OOD；Test 只索引和完整性核查，未用于本轮指标或调参。[候选与审核重点](benchmark/README.md)
 
-已执行：B1 双向单流和 B2 双流→单流、2D RoPE、padding 与梯度独立验证；三架构 CPU 精确恢复小案例、MPS 真实续训和统一产物身份；参数和主导矩阵计算量计数。P4-03/05 本地工程勾选，P4-01/02/04/06 的正式训练与 P4-07 正式比较仍未完成。失败：B0 16 图生成质量。未执行：CUDA/AMP/正式长训、DDP、P5 指标。三模型烟测图均为噪声纹理，不能用于架构优劣判断。
+已执行：独立离线评测资产、真实 24 图评分、固定 2 图数值对照、九组 MPS 性能、人评/校准工具、8+8 待审材料、真实生成重入及报告。真实 BLIP 只实现适配器；大权重未下载。本轮收费 GPU/API 费用 0 元。保护回合前 698 个文件哈希，用户现有笔记和问答改动未纳入本次提交。
 
-收费 GPU/API 实际费用 **0 元**。本轮保留旧 P0～P3 证据和用户已有课件/问答改动；未重建 P2 缓存。新 `minigen.flow-training.v2` 目标身份显式固定，旧 Flow v1 只读兼容；跨源码版本的精确续训仍拒绝。源文件和配置版本应随检查点保存。
-
-**唯一下一任务**：用户授权后的 P5-01 Benchmark 本地实现与协议冻结，再开展 P5 评分器/矩阵小案例；本轮没有开始。正式质量和预算门槛单独保留，不能因 P4 工程完成自动上云。Caption 噪声继续记录（P1 的 240 对中有 71 条明确事实错误），本轮不改冻结数据。[P5 交接](05_local_handoff.md) · [云端就绪清单](p4/cloud_readiness.md) · [重构规划](../../docs/MiniGen2重构规划.md) · [待办清单](../../待办清单.md)
+**唯一下一任务**：用户先审阅候选题目和手册，再按 [依赖清单](../../docs/cloud/云端任务清单.md) 自行上云短跑；质量、CUDA/AMP、预算及正式批准分别过关后才训练。当前没有授权启动 P6/P7 或自动长训。P4 正式训练和 P5 正式架构比较继续未完成。[待办](../../待办清单.md)
 
 ## **二、P0 历史交接**
 

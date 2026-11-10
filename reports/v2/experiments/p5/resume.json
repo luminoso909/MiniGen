@@ -1,0 +1,13 @@
+{
+  "scope": "real_local",
+  "architecture": "b2",
+  "resume_batch_size": 1,
+  "initial_batch_size": 2,
+  "completed": 8,
+  "total_rendered_batches_after_resume": 4,
+  "new_rendered_batches": 0,
+  "image_hashes_unchanged": true,
+  "source_log": "artifacts/runs/p5_baseline/real_resume.log",
+  "score_receipt": "artifacts/evaluations/p5/smoke/b2/scores_after_resume.json",
+  "note": "重入仅更新尝试回执元数据；新清单SHA对应新评分回执，未覆盖原评分"
+}

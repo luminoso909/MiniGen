@@ -1,6 +1,10 @@
 """显式选择单设备运行时，准备 CUDA AMP 并保留本机 FP32 路径。"""
 
+import platform
+import subprocess
+import sys
 from contextlib import AbstractContextManager, nullcontext
+from functools import cache
 
 import torch
 from jaxtyping import UInt8
@@ -95,3 +99,33 @@ def device_rng(
     if device.type == "mps":
         return torch.mps.get_rng_state().cpu()
     return None
+
+
+@cache
+def hardware_description(
+    device: torch.device,
+) -> str:
+    """记录实际处理器标识，无法读取型号时保留操作系统与架构。
+
+    Args:
+        device: 本次实际运行设备。
+
+    Results:
+        str: CUDA 型号、Mac 芯片标识或可获得的 CPU 型号。
+    """
+    if device.type == "cuda":
+        return torch.cuda.get_device_name(device)
+    fallback = f"{platform.system()} {platform.machine()} {platform.processor()}".strip()
+    if sys.platform == "darwin":
+        try:
+            chip = subprocess.run(
+                ["sysctl", "-n", "machdep.cpu.brand_string"],
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=2,
+            ).stdout.strip()
+            return f"{fallback}; {chip}" if chip else fallback
+        except (OSError, subprocess.SubprocessError):
+            return fallback
+    return fallback
