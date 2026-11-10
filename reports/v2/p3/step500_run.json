@@ -1,0 +1,1214 @@
+{
+  "contract": {
+    "data": {
+      "cache_index_sha256": "d065449f4d17c8f307325b8842cd687b611b52065ada43988c28cfe26a960d00",
+      "source": {
+        "caption_field": "caption",
+        "caption_policy": "artbench-caption-v1",
+        "clip": {
+          "blank": "empty caption",
+          "encoding": {
+            "bos_token_id": 49406,
+            "compute_dtype": "float32",
+            "context_tokens": 77,
+            "eos_token_id": 49407,
+            "features": "last_hidden_state",
+            "hidden_width": 512,
+            "mask": "true for BOS/content/EOS; false for right padding",
+            "max_content_tokens": 75,
+            "pad_token_id": 49407,
+            "version": "clip-text-single-v1"
+          },
+          "files": {
+            "config.json": {
+              "bytes": 943,
+              "sha256": "412ab5681034d6c7496d8bbcc1f4995a8efaf14b64ff0515cbf56680a1e63bc2"
+            },
+            "merges.txt": {
+              "bytes": 524657,
+              "sha256": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85"
+            },
+            "model.safetensors": {
+              "bytes": 252684896,
+              "sha256": "73c3428fc48ba1fe924733f5bc81282980f2c7a128851745e75ab343e231e504"
+            },
+            "special_tokens_map.json": {
+              "bytes": 389,
+              "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf"
+            },
+            "tokenizer.json": {
+              "bytes": 2224041,
+              "sha256": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842"
+            },
+            "tokenizer_config.json": {
+              "bytes": 592,
+              "sha256": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad"
+            },
+            "vocab.json": {
+              "bytes": 862328,
+              "sha256": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363"
+            }
+          },
+          "lock_sha256": "f3075c34e5cbb575fcfa75b46220d036ac89cd7310a650ace9d57b5130aeca88",
+          "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+        },
+        "dataset_version": "v1",
+        "freeze_sha256": "ebeb5748a79455c8bc625d0397571f8271907d6fb574349a53c4c239b4196eaf",
+        "image_preprocessing": "RGB/256x256/no-resize/[-1,1]",
+        "kind": "formal",
+        "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+        "pilot_rows_per_split": null,
+        "schema": "minigen.artbench.representation.v1",
+        "storage": {
+          "latents": {
+            "dtype": "<f2",
+            "shape": [
+              4,
+              32,
+              32
+            ]
+          },
+          "mask": {
+            "dtype": "|b1",
+            "shape": [
+              77
+            ]
+          },
+          "text": {
+            "dtype": "<f2",
+            "shape": [
+              77,
+              512
+            ]
+          }
+        },
+        "vae": {
+          "files": {
+            "config.json": {
+              "bytes": 631,
+              "sha256": "f18b16fa4381c90ab44a3d7abd2e90afd05a2c31b8ca69998bc93c6453aeb7b7"
+            },
+            "diffusion_pytorch_model.safetensors": {
+              "bytes": 334643238,
+              "sha256": "1b909373b28f2137098b0fd9dbc6f97f8410854f31f84ddc9fa04b077b0ace2c"
+            }
+          },
+          "inference": "fp32/posterior_mean",
+          "lock_sha256": "a50db26012b0f1523f97cd2c4008393807092f9a2c207fb32d9b9e71e14617d1",
+          "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+          "scaling_factor": 0.13025
+        }
+      },
+      "subsets": {
+        "train": {
+          "count": 16,
+          "ordered_ids_sha256": "e6e4fbacb4ac7848ef205350465f41a3a086ccd3c054ce592afa565b30f46271"
+        },
+        "validation": {
+          "count": 16,
+          "ordered_ids_sha256": "c3c39401ed576d22216948774eeaf66fb7b552eab898bd1ab90897c215125bf1"
+        }
+      }
+    },
+    "device": "mps",
+    "model_class": "minigen.models.plain_dit.PlainConditionalDiT",
+    "recipe": {
+      "batch_size": 4,
+      "checkpoint_every": 100,
+      "checkpoint_steps": [
+        0,
+        100
+      ],
+      "condition_dropout": 0.1,
+      "cpu_threads": 5,
+      "device": "mps",
+      "ema_decay": 0.99,
+      "grad_accum": 1,
+      "grad_clip": 1.0,
+      "learning_rate": 0.0001,
+      "min_lr_ratio": 0.1,
+      "model": {
+        "architecture": "b0",
+        "depth": 8,
+        "hidden_size": 384,
+        "in_channels": 4,
+        "latent_size": 32,
+        "mlp_ratio": 4,
+        "num_heads": 6,
+        "patch_size": 2,
+        "text_dim": 512
+      },
+      "precision": "fp32",
+      "schedule_steps": 1000,
+      "seed": 0,
+      "validation_every": 50,
+      "warmup_steps": 20,
+      "weight_decay": 0.01
+    },
+    "source_sha256": "f3382149dd813ae8b68864639a5d8f7b07ac08f2a358c499bced845ce4d6f88a",
+    "tensors": {
+      "blocks.0.cross_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.cross_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.cross_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.cross_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.cross_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.cross_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.mlp.0.bias": [
+        [
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.mlp.0.weight": [
+        [
+          1536,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.mlp.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.mlp.2.weight": [
+        [
+          384,
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.modulation.1.bias": [
+        [
+          3456
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.modulation.1.weight": [
+        [
+          3456,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.self_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.self_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.self_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.self_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.self_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.0.self_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.cross_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.cross_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.cross_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.cross_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.cross_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.cross_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.mlp.0.bias": [
+        [
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.mlp.0.weight": [
+        [
+          1536,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.mlp.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.mlp.2.weight": [
+        [
+          384,
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.modulation.1.bias": [
+        [
+          3456
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.modulation.1.weight": [
+        [
+          3456,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.self_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.self_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.self_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.self_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.self_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.1.self_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.cross_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.cross_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.cross_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.cross_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.cross_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.cross_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.mlp.0.bias": [
+        [
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.mlp.0.weight": [
+        [
+          1536,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.mlp.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.mlp.2.weight": [
+        [
+          384,
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.modulation.1.bias": [
+        [
+          3456
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.modulation.1.weight": [
+        [
+          3456,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.self_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.self_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.self_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.self_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.self_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.2.self_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.cross_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.cross_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.cross_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.cross_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.cross_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.cross_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.mlp.0.bias": [
+        [
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.mlp.0.weight": [
+        [
+          1536,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.mlp.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.mlp.2.weight": [
+        [
+          384,
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.modulation.1.bias": [
+        [
+          3456
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.modulation.1.weight": [
+        [
+          3456,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.self_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.self_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.self_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.self_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.self_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.3.self_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.cross_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.cross_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.cross_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.cross_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.cross_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.cross_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.mlp.0.bias": [
+        [
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.mlp.0.weight": [
+        [
+          1536,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.mlp.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.mlp.2.weight": [
+        [
+          384,
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.modulation.1.bias": [
+        [
+          3456
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.modulation.1.weight": [
+        [
+          3456,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.self_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.self_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.self_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.self_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.self_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.4.self_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.cross_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.cross_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.cross_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.cross_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.cross_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.cross_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.mlp.0.bias": [
+        [
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.mlp.0.weight": [
+        [
+          1536,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.mlp.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.mlp.2.weight": [
+        [
+          384,
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.modulation.1.bias": [
+        [
+          3456
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.modulation.1.weight": [
+        [
+          3456,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.self_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.self_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.self_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.self_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.self_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.5.self_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.cross_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.cross_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.cross_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.cross_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.cross_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.cross_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.mlp.0.bias": [
+        [
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.mlp.0.weight": [
+        [
+          1536,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.mlp.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.mlp.2.weight": [
+        [
+          384,
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.modulation.1.bias": [
+        [
+          3456
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.modulation.1.weight": [
+        [
+          3456,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.self_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.self_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.self_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.self_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.self_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.6.self_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.cross_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.cross_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.cross_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.cross_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.cross_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.cross_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.mlp.0.bias": [
+        [
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.mlp.0.weight": [
+        [
+          1536,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.mlp.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.mlp.2.weight": [
+        [
+          384,
+          1536
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.modulation.1.bias": [
+        [
+          3456
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.modulation.1.weight": [
+        [
+          3456,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.self_attention.kv.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.self_attention.kv.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.self_attention.out.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.self_attention.out.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.self_attention.q.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "blocks.7.self_attention.q.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "final_modulation.1.bias": [
+        [
+          768
+        ],
+        "torch.float32"
+      ],
+      "final_modulation.1.weight": [
+        [
+          768,
+          384
+        ],
+        "torch.float32"
+      ],
+      "final_projection.bias": [
+        [
+          16
+        ],
+        "torch.float32"
+      ],
+      "final_projection.weight": [
+        [
+          16,
+          384
+        ],
+        "torch.float32"
+      ],
+      "patch_embed.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "patch_embed.weight": [
+        [
+          384,
+          16
+        ],
+        "torch.float32"
+      ],
+      "position": [
+        [
+          1,
+          256,
+          384
+        ],
+        "torch.float32"
+      ],
+      "text_embed.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "text_embed.weight": [
+        [
+          384,
+          512
+        ],
+        "torch.float32"
+      ],
+      "time_embed.0.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "time_embed.0.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ],
+      "time_embed.2.bias": [
+        [
+          384
+        ],
+        "torch.float32"
+      ],
+      "time_embed.2.weight": [
+        [
+          384,
+          384
+        ],
+        "torch.float32"
+      ]
+    },
+    "torch": "2.14.1"
+  },
+  "git_commit": "2f8ebcea9afc475054ea4ac8a26645dec9ad08c9",
+  "config": {
+    "output_dir": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/p3_local",
+    "model": {
+      "architecture": "b0",
+      "hidden_size": 384,
+      "num_heads": 6,
+      "depth": 8,
+      "patch_size": 2,
+      "latent_size": 32,
+      "in_channels": 4,
+      "text_dim": 512,
+      "mlp_ratio": 4
+    },
+    "device": "mps",
+    "precision": "fp32",
+    "seed": 0,
+    "batch_size": 4,
+    "grad_accum": 1,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "ema_decay": 0.99,
+    "condition_dropout": 0.1,
+    "max_steps": 500,
+    "max_seconds": 1800,
+    "checkpoint_every": 100,
+    "validation_every": 50,
+    "checkpoint_steps": [
+      0,
+      100
+    ],
+    "cpu_threads": 5,
+    "warmup_steps": 20,
+    "schedule_steps": 1000,
+    "min_lr_ratio": 0.1
+  },
+  "trainable_parameters": 30359824,
+  "resume": null
+}

@@ -1,0 +1,1562 @@
+{
+  "p3_eval_1000_train_blank": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "train",
+    "condition_mode": "blank",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 0.968454122543335,
+    "zero_velocity_baseline": 1.6983386278152466,
+    "per_sample_mse": [
+      0.8328279256820679,
+      1.1213059425354004,
+      1.2639296054840088,
+      1.1151924133300781,
+      1.027261734008789,
+      0.9398794174194336,
+      0.9885737299919128,
+      0.9318811297416687,
+      1.1898362636566162,
+      0.5815934538841248,
+      0.9005656838417053,
+      0.7149228453636169,
+      1.1390466690063477,
+      0.7353617548942566,
+      0.8202579617500305,
+      1.1928277015686035
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-24479",
+        "condition_sample_id": "ab-24479",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-14241",
+        "condition_sample_id": "ab-14241",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-38575",
+        "condition_sample_id": "ab-38575",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-30577",
+        "condition_sample_id": "ab-30577",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-26088",
+        "condition_sample_id": "ab-26088",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-14731",
+        "condition_sample_id": "ab-14731",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-45853",
+        "condition_sample_id": "ab-45853",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-26752",
+        "condition_sample_id": "ab-26752",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-18755",
+        "condition_sample_id": "ab-18755",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-26813",
+        "condition_sample_id": "ab-26813",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-43523",
+        "condition_sample_id": "ab-43523",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-44680",
+        "condition_sample_id": "ab-44680",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-32987",
+        "condition_sample_id": "ab-32987",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-43662",
+        "condition_sample_id": "ab-43662",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-11457",
+        "condition_sample_id": "ab-11457",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-28806",
+        "condition_sample_id": "ab-28806",
+        "caption": ""
+      }
+    ],
+    "checkpoint_sha256": "ca0bdb56b4759d9a44e5154b371885a35127919de1852d894a832e44385deacd",
+    "weights": "ema"
+  },
+  "p3_eval_1000_train_correct": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "train",
+    "condition_mode": "correct",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 0.6606602072715759,
+    "zero_velocity_baseline": 1.6983386278152466,
+    "per_sample_mse": [
+      0.575494110584259,
+      0.7460010647773743,
+      0.9071184992790222,
+      0.9528694748878479,
+      1.0324405431747437,
+      0.5539071559906006,
+      0.6107649207115173,
+      0.5518064498901367,
+      0.9117575883865356,
+      0.31389331817626953,
+      0.5928722620010376,
+      0.34983178973197937,
+      0.7316028475761414,
+      0.32185882329940796,
+      0.4445352554321289,
+      0.9738094806671143
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-24479",
+        "condition_sample_id": "ab-24479",
+        "caption": "Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido, depicting a woman in a kimono and a man in a traditional Japanese dress, with birds flying in the sky above them. The poster also contains text, likely describing the scene."
+      },
+      {
+        "sample_id": "ab-14241",
+        "condition_sample_id": "ab-14241",
+        "caption": "A painting of a group of people in a room, with a man lying on a bed in the center. The man is wearing a white robe and has a halo of light around his head, and is surrounded by a variety of figures, including angels, saints, and other religious figures."
+      },
+      {
+        "sample_id": "ab-38575",
+        "condition_sample_id": "ab-38575",
+        "caption": "This is a black and white picture. In this picture we can see a woman sitting on the bathtub and a man sitting on a chair. We can see this woman and a woman in the bathroom. On the left side of the picture, it looks like a table with a wash basin, a bowl and a vase on it. In the background, there is a door."
+      },
+      {
+        "sample_id": "ab-30577",
+        "condition_sample_id": "ab-30577",
+        "caption": "A man wearing a black dress and a black hat, standing in front of a wall. He has a serious expression on his face, and his hands are clasped in his lap. His hair is dark and his eyes are focused on something in the distance. The wall behind him is plain and unadorned, with no other objects in the frame."
+      },
+      {
+        "sample_id": "ab-26088",
+        "condition_sample_id": "ab-26088",
+        "caption": "A drawing of a man and woman in renaissance clothing, with text written on the paper. The man is wearing a long, flowing robe with intricate details, while the woman is wearing an ornate dress with a high neckline and long sleeves. Both of them have a crown on their heads, and the man is holding a staff in his right hand."
+      },
+      {
+        "sample_id": "ab-14731",
+        "condition_sample_id": "ab-14731",
+        "caption": "A painting of a woman holding a cross in her hands, with a wall in the background. The woman is believed to be the Virgin Mary. She is wearing a white robe with a blue sash and a golden halo around her head. Her eyes are closed and her hands are clasped in prayer. Her expression is peaceful and serene."
+      },
+      {
+        "sample_id": "ab-45853",
+        "condition_sample_id": "ab-45853",
+        "caption": "A painting of a man sitting under a palm tree, holding a coconut in his hand. In the background, there are other trees and a clear blue sky."
+      },
+      {
+        "sample_id": "ab-26752",
+        "condition_sample_id": "ab-26752",
+        "caption": "A painting of a group of people standing in front of a table with various objects on it, set against a dark background."
+      },
+      {
+        "sample_id": "ab-18755",
+        "condition_sample_id": "ab-18755",
+        "caption": "A painting of a man standing in the middle of a field, surrounded by trees and a sky with clouds in the background."
+      },
+      {
+        "sample_id": "ab-26813",
+        "condition_sample_id": "ab-26813",
+        "caption": "A painting of a man standing in front of a castle, with a cart in the foreground and a sky in the background. The painting is done in watercolor on paper and is. The man is wearing a long coat and a hat, and is holding a cannon in his right hand. The castle is tall and imposing, and the sky is a deep blue."
+      },
+      {
+        "sample_id": "ab-43523",
+        "condition_sample_id": "ab-43523",
+        "caption": "A Japanese woodblock print by Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido. It depicts a group of people, some of whom are holding objects, with text written on the paper."
+      },
+      {
+        "sample_id": "ab-44680",
+        "condition_sample_id": "ab-44680",
+        "caption": "A woman laying on the ground next to a man in a forest, surrounded by trees, rocks, and a starry night sky."
+      },
+      {
+        "sample_id": "ab-32987",
+        "condition_sample_id": "ab-32987",
+        "caption": "A painting of the Virgin Mary and Child Jesus, with Mary holding a book in her hands and a bird perched on her shoulder. The background of the painting is filled with trees and a clear blue sky."
+      },
+      {
+        "sample_id": "ab-43662",
+        "condition_sample_id": "ab-43662",
+        "caption": "A painting of a woman in a white dress, with a red background and text written on it. The woman is wearing a white and blue dress with a patterned shawl draped over her shoulders. Her hair is pulled back in a bun and she has a gentle expression on her face."
+      },
+      {
+        "sample_id": "ab-11457",
+        "condition_sample_id": "ab-11457",
+        "caption": "A painting of a river with a boat on it, surrounded by trees, grass, and a person standing on the ground. The sky is visible in the background, and the painting is by Claude Monet."
+      },
+      {
+        "sample_id": "ab-28806",
+        "condition_sample_id": "ab-28806",
+        "caption": "A painting of rolling hills with a blue sky in the background. The hills are painted in a variety of colors, including blues, greens, and yellows, and the sky is a deep, clear blue. The sun is shining brightly, illuminating the landscape and creating a peaceful atmosphere."
+      }
+    ],
+    "checkpoint_sha256": "ca0bdb56b4759d9a44e5154b371885a35127919de1852d894a832e44385deacd",
+    "weights": "ema"
+  },
+  "p3_eval_1000_train_shuffled": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "train",
+    "condition_mode": "shuffled",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 1.7836122512817383,
+    "zero_velocity_baseline": 1.6983386278152466,
+    "per_sample_mse": [
+      1.4252698421478271,
+      2.975861072540283,
+      4.027130603790283,
+      2.1307990550994873,
+      1.178384780883789,
+      1.4841912984848022,
+      1.7687102556228638,
+      2.153815507888794,
+      1.6551003456115723,
+      0.9020559191703796,
+      1.560647964477539,
+      1.0524704456329346,
+      1.8654128313064575,
+      1.613889217376709,
+      1.1481956243515015,
+      1.5958610773086548
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-24479",
+        "condition_sample_id": "ab-14241",
+        "caption": "A painting of a group of people in a room, with a man lying on a bed in the center. The man is wearing a white robe and has a halo of light around his head, and is surrounded by a variety of figures, including angels, saints, and other religious figures."
+      },
+      {
+        "sample_id": "ab-14241",
+        "condition_sample_id": "ab-38575",
+        "caption": "This is a black and white picture. In this picture we can see a woman sitting on the bathtub and a man sitting on a chair. We can see this woman and a woman in the bathroom. On the left side of the picture, it looks like a table with a wash basin, a bowl and a vase on it. In the background, there is a door."
+      },
+      {
+        "sample_id": "ab-38575",
+        "condition_sample_id": "ab-30577",
+        "caption": "A man wearing a black dress and a black hat, standing in front of a wall. He has a serious expression on his face, and his hands are clasped in his lap. His hair is dark and his eyes are focused on something in the distance. The wall behind him is plain and unadorned, with no other objects in the frame."
+      },
+      {
+        "sample_id": "ab-30577",
+        "condition_sample_id": "ab-26088",
+        "caption": "A drawing of a man and woman in renaissance clothing, with text written on the paper. The man is wearing a long, flowing robe with intricate details, while the woman is wearing an ornate dress with a high neckline and long sleeves. Both of them have a crown on their heads, and the man is holding a staff in his right hand."
+      },
+      {
+        "sample_id": "ab-26088",
+        "condition_sample_id": "ab-14731",
+        "caption": "A painting of a woman holding a cross in her hands, with a wall in the background. The woman is believed to be the Virgin Mary. She is wearing a white robe with a blue sash and a golden halo around her head. Her eyes are closed and her hands are clasped in prayer. Her expression is peaceful and serene."
+      },
+      {
+        "sample_id": "ab-14731",
+        "condition_sample_id": "ab-45853",
+        "caption": "A painting of a man sitting under a palm tree, holding a coconut in his hand. In the background, there are other trees and a clear blue sky."
+      },
+      {
+        "sample_id": "ab-45853",
+        "condition_sample_id": "ab-26752",
+        "caption": "A painting of a group of people standing in front of a table with various objects on it, set against a dark background."
+      },
+      {
+        "sample_id": "ab-26752",
+        "condition_sample_id": "ab-18755",
+        "caption": "A painting of a man standing in the middle of a field, surrounded by trees and a sky with clouds in the background."
+      },
+      {
+        "sample_id": "ab-18755",
+        "condition_sample_id": "ab-26813",
+        "caption": "A painting of a man standing in front of a castle, with a cart in the foreground and a sky in the background. The painting is done in watercolor on paper and is. The man is wearing a long coat and a hat, and is holding a cannon in his right hand. The castle is tall and imposing, and the sky is a deep blue."
+      },
+      {
+        "sample_id": "ab-26813",
+        "condition_sample_id": "ab-43523",
+        "caption": "A Japanese woodblock print by Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido. It depicts a group of people, some of whom are holding objects, with text written on the paper."
+      },
+      {
+        "sample_id": "ab-43523",
+        "condition_sample_id": "ab-44680",
+        "caption": "A woman laying on the ground next to a man in a forest, surrounded by trees, rocks, and a starry night sky."
+      },
+      {
+        "sample_id": "ab-44680",
+        "condition_sample_id": "ab-32987",
+        "caption": "A painting of the Virgin Mary and Child Jesus, with Mary holding a book in her hands and a bird perched on her shoulder. The background of the painting is filled with trees and a clear blue sky."
+      },
+      {
+        "sample_id": "ab-32987",
+        "condition_sample_id": "ab-43662",
+        "caption": "A painting of a woman in a white dress, with a red background and text written on it. The woman is wearing a white and blue dress with a patterned shawl draped over her shoulders. Her hair is pulled back in a bun and she has a gentle expression on her face."
+      },
+      {
+        "sample_id": "ab-43662",
+        "condition_sample_id": "ab-11457",
+        "caption": "A painting of a river with a boat on it, surrounded by trees, grass, and a person standing on the ground. The sky is visible in the background, and the painting is by Claude Monet."
+      },
+      {
+        "sample_id": "ab-11457",
+        "condition_sample_id": "ab-28806",
+        "caption": "A painting of rolling hills with a blue sky in the background. The hills are painted in a variety of colors, including blues, greens, and yellows, and the sky is a deep, clear blue. The sun is shining brightly, illuminating the landscape and creating a peaceful atmosphere."
+      },
+      {
+        "sample_id": "ab-28806",
+        "condition_sample_id": "ab-24479",
+        "caption": "Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido, depicting a woman in a kimono and a man in a traditional Japanese dress, with birds flying in the sky above them. The poster also contains text, likely describing the scene."
+      }
+    ],
+    "checkpoint_sha256": "ca0bdb56b4759d9a44e5154b371885a35127919de1852d894a832e44385deacd",
+    "weights": "ema"
+  },
+  "p3_eval_1000_validation_blank": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "validation",
+    "condition_mode": "blank",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 0.9879342317581177,
+    "zero_velocity_baseline": 1.61513090133667,
+    "per_sample_mse": [
+      1.09174382686615,
+      1.2788981199264526,
+      0.955897331237793,
+      1.196115255355835,
+      1.051957607269287,
+      1.1458806991577148,
+      0.8754106760025024,
+      0.7358511686325073,
+      1.3759185075759888,
+      0.9618131518363953,
+      0.6199042201042175,
+      0.4943404197692871,
+      1.3091613054275513,
+      0.5368863344192505,
+      0.7437571287155151,
+      1.4334118366241455
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-00001",
+        "condition_sample_id": "ab-00001",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00005",
+        "condition_sample_id": "ab-00005",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00009",
+        "condition_sample_id": "ab-00009",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00010",
+        "condition_sample_id": "ab-00010",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00016",
+        "condition_sample_id": "ab-00016",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00017",
+        "condition_sample_id": "ab-00017",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00019",
+        "condition_sample_id": "ab-00019",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00020",
+        "condition_sample_id": "ab-00020",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00029",
+        "condition_sample_id": "ab-00029",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00035",
+        "condition_sample_id": "ab-00035",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00036",
+        "condition_sample_id": "ab-00036",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00052",
+        "condition_sample_id": "ab-00052",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00075",
+        "condition_sample_id": "ab-00075",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00084",
+        "condition_sample_id": "ab-00084",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00089",
+        "condition_sample_id": "ab-00089",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00098",
+        "condition_sample_id": "ab-00098",
+        "caption": ""
+      }
+    ],
+    "checkpoint_sha256": "ca0bdb56b4759d9a44e5154b371885a35127919de1852d894a832e44385deacd",
+    "weights": "ema"
+  },
+  "p3_eval_1000_validation_correct": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "validation",
+    "condition_mode": "correct",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 1.2793340682983398,
+    "zero_velocity_baseline": 1.61513090133667,
+    "per_sample_mse": [
+      1.3754152059555054,
+      1.7858718633651733,
+      1.2024779319763184,
+      1.4152812957763672,
+      1.114250898361206,
+      1.547144889831543,
+      1.2633390426635742,
+      0.9619095325469971,
+      1.9628574848175049,
+      0.7760412693023682,
+      1.072641134262085,
+      0.5511881709098816,
+      1.8639812469482422,
+      0.631697416305542,
+      0.9554722309112549,
+      1.9897751808166504
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-00001",
+        "condition_sample_id": "ab-00001",
+        "caption": "A painting of a red house in the middle of a snowy field, with a horse cart in front of it. The house is surrounded by trees and hills, and the sky is visible at the top of the painting."
+      },
+      {
+        "sample_id": "ab-00005",
+        "condition_sample_id": "ab-00005",
+        "caption": "A painting of a forest with trees in the background, painted in oil on canvas. The trees are depicted in great detail, with their branches and leaves clearly visible. The colors used are vibrant and the brushstrokes are visible, giving the painting a realistic feel."
+      },
+      {
+        "sample_id": "ab-00009",
+        "condition_sample_id": "ab-00009",
+        "caption": "A painting of a cloudy sky over a body of water, with trees in the foreground. The sky is filled with dark, ominous clouds, and the water is a deep blue. The trees are a mix of evergreens and deciduous trees, with some of the leaves beginning to turn yellow and orange."
+      },
+      {
+        "sample_id": "ab-00010",
+        "condition_sample_id": "ab-00010",
+        "caption": "A painting of a wooded landscape with a stream running through it, surrounded by trees, rocks, and a house in the background, with a sky filled with clouds."
+      },
+      {
+        "sample_id": "ab-00016",
+        "condition_sample_id": "ab-00016",
+        "caption": "A painting of a woman in a white dress walking with two children, surrounded by trees in the background. The woman is wearing a long, flowing white dress with a high neckline and long sleeves, and her hair is pulled back in a bun. The two children are standing beside her, looking up at her with admiration."
+      },
+      {
+        "sample_id": "ab-00017",
+        "condition_sample_id": "ab-00017",
+        "caption": "A painting of an angel with wings, wearing a white dress and a laurel wreath on her head. She has a halo of light around her head and her wings are spread out behind her. Her facial features are delicate and her eyes are closed, giving her a peaceful and serene look."
+      },
+      {
+        "sample_id": "ab-00019",
+        "condition_sample_id": "ab-00019",
+        "caption": "A watercolor painting of a body of water with boats in it, surrounded by hills, trees, and a sky with clouds."
+      },
+      {
+        "sample_id": "ab-00020",
+        "condition_sample_id": "ab-00020",
+        "caption": "A painting of a mountain range with trees in the foreground. The painting depicts a rocky landscape with trees and a mountain in the background. The colors used in the painting are muted and earthy, giving the painting a peaceful and serene atmosphere."
+      },
+      {
+        "sample_id": "ab-00029",
+        "condition_sample_id": "ab-00029",
+        "caption": "A painting of an angel with wings standing in front of a mountain, surrounded by trees and a sky in the background."
+      },
+      {
+        "sample_id": "ab-00035",
+        "condition_sample_id": "ab-00035",
+        "caption": "A painting of a woman in a green dress against a dark background. The woman is believed to be a mother, with her hands clasped in front of her and a gentle expression on her face. Her hair is pulled back in a bun and she is wearing a light-colored dress with a patterned shawl draped over her shoulders."
+      },
+      {
+        "sample_id": "ab-00036",
+        "condition_sample_id": "ab-00036",
+        "caption": "A painting of a dirt road winding through a field, with a bright blue sky in the background. The painting is done in oil paint, giving it a glossy and vibrant look."
+      },
+      {
+        "sample_id": "ab-00052",
+        "condition_sample_id": "ab-00052",
+        "caption": "A painting of a mountain with a river in the foreground, surrounded by trees, plants, and a fence. The sky is filled with clouds, creating a peaceful atmosphere."
+      },
+      {
+        "sample_id": "ab-00075",
+        "condition_sample_id": "ab-00075",
+        "caption": "A painting of a vase filled with colorful flowers and two apples on a table. The vase is a deep blue color and the flowers are a mix of pink, yellow, and white. The apples are a bright red and are placed to the right of the vase. The table is a light wood color and has a smooth surface."
+      },
+      {
+        "sample_id": "ab-00084",
+        "condition_sample_id": "ab-00084",
+        "caption": "A painting of a house on a street with a tree in the foreground. The house is surrounded by lush green grass and a bright blue sky. The tree is tall and full, with its branches reaching up towards the sky. In the background, there are other houses and vehicles on the road, adding to the peaceful atmosphere of the painting."
+      },
+      {
+        "sample_id": "ab-00089",
+        "condition_sample_id": "ab-00089",
+        "caption": "A still life painting of a bowl of fruit and a bottle on a table. The bowl is filled with a variety of fruits, including apples, oranges, and grapes, and the bottle is a dark green color. The table is a light wood color and the background is a neutral color."
+      },
+      {
+        "sample_id": "ab-00098",
+        "condition_sample_id": "ab-00098",
+        "caption": "A painting of a church in the snow, surrounded by trees and a road. The sky is visible in the background, creating a peaceful atmosphere."
+      }
+    ],
+    "checkpoint_sha256": "ca0bdb56b4759d9a44e5154b371885a35127919de1852d894a832e44385deacd",
+    "weights": "ema"
+  },
+  "p3_eval_1000_validation_shuffled": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "validation",
+    "condition_mode": "shuffled",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 1.36366868019104,
+    "zero_velocity_baseline": 1.61513090133667,
+    "per_sample_mse": [
+      1.4094057083129883,
+      2.044729232788086,
+      1.259536623954773,
+      1.474957823753357,
+      1.103597640991211,
+      2.0133726596832275,
+      1.4418017864227295,
+      1.0219312906265259,
+      1.98038649559021,
+      1.0175492763519287,
+      0.9617936611175537,
+      0.6678246259689331,
+      1.6581995487213135,
+      0.7299547791481018,
+      1.0374534130096436,
+      1.9962044954299927
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-00001",
+        "condition_sample_id": "ab-00005",
+        "caption": "A painting of a forest with trees in the background, painted in oil on canvas. The trees are depicted in great detail, with their branches and leaves clearly visible. The colors used are vibrant and the brushstrokes are visible, giving the painting a realistic feel."
+      },
+      {
+        "sample_id": "ab-00005",
+        "condition_sample_id": "ab-00009",
+        "caption": "A painting of a cloudy sky over a body of water, with trees in the foreground. The sky is filled with dark, ominous clouds, and the water is a deep blue. The trees are a mix of evergreens and deciduous trees, with some of the leaves beginning to turn yellow and orange."
+      },
+      {
+        "sample_id": "ab-00009",
+        "condition_sample_id": "ab-00010",
+        "caption": "A painting of a wooded landscape with a stream running through it, surrounded by trees, rocks, and a house in the background, with a sky filled with clouds."
+      },
+      {
+        "sample_id": "ab-00010",
+        "condition_sample_id": "ab-00016",
+        "caption": "A painting of a woman in a white dress walking with two children, surrounded by trees in the background. The woman is wearing a long, flowing white dress with a high neckline and long sleeves, and her hair is pulled back in a bun. The two children are standing beside her, looking up at her with admiration."
+      },
+      {
+        "sample_id": "ab-00016",
+        "condition_sample_id": "ab-00017",
+        "caption": "A painting of an angel with wings, wearing a white dress and a laurel wreath on her head. She has a halo of light around her head and her wings are spread out behind her. Her facial features are delicate and her eyes are closed, giving her a peaceful and serene look."
+      },
+      {
+        "sample_id": "ab-00017",
+        "condition_sample_id": "ab-00019",
+        "caption": "A watercolor painting of a body of water with boats in it, surrounded by hills, trees, and a sky with clouds."
+      },
+      {
+        "sample_id": "ab-00019",
+        "condition_sample_id": "ab-00020",
+        "caption": "A painting of a mountain range with trees in the foreground. The painting depicts a rocky landscape with trees and a mountain in the background. The colors used in the painting are muted and earthy, giving the painting a peaceful and serene atmosphere."
+      },
+      {
+        "sample_id": "ab-00020",
+        "condition_sample_id": "ab-00029",
+        "caption": "A painting of an angel with wings standing in front of a mountain, surrounded by trees and a sky in the background."
+      },
+      {
+        "sample_id": "ab-00029",
+        "condition_sample_id": "ab-00035",
+        "caption": "A painting of a woman in a green dress against a dark background. The woman is believed to be a mother, with her hands clasped in front of her and a gentle expression on her face. Her hair is pulled back in a bun and she is wearing a light-colored dress with a patterned shawl draped over her shoulders."
+      },
+      {
+        "sample_id": "ab-00035",
+        "condition_sample_id": "ab-00036",
+        "caption": "A painting of a dirt road winding through a field, with a bright blue sky in the background. The painting is done in oil paint, giving it a glossy and vibrant look."
+      },
+      {
+        "sample_id": "ab-00036",
+        "condition_sample_id": "ab-00052",
+        "caption": "A painting of a mountain with a river in the foreground, surrounded by trees, plants, and a fence. The sky is filled with clouds, creating a peaceful atmosphere."
+      },
+      {
+        "sample_id": "ab-00052",
+        "condition_sample_id": "ab-00075",
+        "caption": "A painting of a vase filled with colorful flowers and two apples on a table. The vase is a deep blue color and the flowers are a mix of pink, yellow, and white. The apples are a bright red and are placed to the right of the vase. The table is a light wood color and has a smooth surface."
+      },
+      {
+        "sample_id": "ab-00075",
+        "condition_sample_id": "ab-00084",
+        "caption": "A painting of a house on a street with a tree in the foreground. The house is surrounded by lush green grass and a bright blue sky. The tree is tall and full, with its branches reaching up towards the sky. In the background, there are other houses and vehicles on the road, adding to the peaceful atmosphere of the painting."
+      },
+      {
+        "sample_id": "ab-00084",
+        "condition_sample_id": "ab-00089",
+        "caption": "A still life painting of a bowl of fruit and a bottle on a table. The bowl is filled with a variety of fruits, including apples, oranges, and grapes, and the bottle is a dark green color. The table is a light wood color and the background is a neutral color."
+      },
+      {
+        "sample_id": "ab-00089",
+        "condition_sample_id": "ab-00098",
+        "caption": "A painting of a church in the snow, surrounded by trees and a road. The sky is visible in the background, creating a peaceful atmosphere."
+      },
+      {
+        "sample_id": "ab-00098",
+        "condition_sample_id": "ab-00001",
+        "caption": "A painting of a red house in the middle of a snowy field, with a horse cart in front of it. The house is surrounded by trees and hills, and the sky is visible at the top of the painting."
+      }
+    ],
+    "checkpoint_sha256": "ca0bdb56b4759d9a44e5154b371885a35127919de1852d894a832e44385deacd",
+    "weights": "ema"
+  },
+  "p3_eval_500_train_blank": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "train",
+    "condition_mode": "blank",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 0.9990831017494202,
+    "zero_velocity_baseline": 1.6983386278152466,
+    "per_sample_mse": [
+      0.8647925853729248,
+      1.1333991289138794,
+      1.4839844703674316,
+      1.1424177885055542,
+      1.0969414710998535,
+      0.9771013855934143,
+      1.009659767150879,
+      0.9806514978408813,
+      1.174307942390442,
+      0.5477511882781982,
+      0.9468404054641724,
+      0.6631752252578735,
+      1.1498489379882812,
+      0.7591713666915894,
+      0.8742671608924866,
+      1.1810184717178345
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-24479",
+        "condition_sample_id": "ab-24479",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-14241",
+        "condition_sample_id": "ab-14241",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-38575",
+        "condition_sample_id": "ab-38575",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-30577",
+        "condition_sample_id": "ab-30577",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-26088",
+        "condition_sample_id": "ab-26088",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-14731",
+        "condition_sample_id": "ab-14731",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-45853",
+        "condition_sample_id": "ab-45853",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-26752",
+        "condition_sample_id": "ab-26752",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-18755",
+        "condition_sample_id": "ab-18755",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-26813",
+        "condition_sample_id": "ab-26813",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-43523",
+        "condition_sample_id": "ab-43523",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-44680",
+        "condition_sample_id": "ab-44680",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-32987",
+        "condition_sample_id": "ab-32987",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-43662",
+        "condition_sample_id": "ab-43662",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-11457",
+        "condition_sample_id": "ab-11457",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-28806",
+        "condition_sample_id": "ab-28806",
+        "caption": ""
+      }
+    ],
+    "checkpoint_sha256": "7e4f55e7eeec334da91a3ceb915f0ab029e9fe6d1b430bd1a7879e5fd783dc3c",
+    "weights": "ema"
+  },
+  "p3_eval_500_train_correct": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "train",
+    "condition_mode": "correct",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 0.85527503490448,
+    "zero_velocity_baseline": 1.6983386278152466,
+    "per_sample_mse": [
+      0.770527720451355,
+      1.0459706783294678,
+      1.1811134815216064,
+      1.1051899194717407,
+      1.0970102548599243,
+      0.7883623838424683,
+      0.8766391277313232,
+      0.82554030418396,
+      1.127682089805603,
+      0.3994240164756775,
+      0.820926308631897,
+      0.45169875025749207,
+      1.0081952810287476,
+      0.4301673471927643,
+      0.6204198598861694,
+      1.1355323791503906
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-24479",
+        "condition_sample_id": "ab-24479",
+        "caption": "Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido, depicting a woman in a kimono and a man in a traditional Japanese dress, with birds flying in the sky above them. The poster also contains text, likely describing the scene."
+      },
+      {
+        "sample_id": "ab-14241",
+        "condition_sample_id": "ab-14241",
+        "caption": "A painting of a group of people in a room, with a man lying on a bed in the center. The man is wearing a white robe and has a halo of light around his head, and is surrounded by a variety of figures, including angels, saints, and other religious figures."
+      },
+      {
+        "sample_id": "ab-38575",
+        "condition_sample_id": "ab-38575",
+        "caption": "This is a black and white picture. In this picture we can see a woman sitting on the bathtub and a man sitting on a chair. We can see this woman and a woman in the bathroom. On the left side of the picture, it looks like a table with a wash basin, a bowl and a vase on it. In the background, there is a door."
+      },
+      {
+        "sample_id": "ab-30577",
+        "condition_sample_id": "ab-30577",
+        "caption": "A man wearing a black dress and a black hat, standing in front of a wall. He has a serious expression on his face, and his hands are clasped in his lap. His hair is dark and his eyes are focused on something in the distance. The wall behind him is plain and unadorned, with no other objects in the frame."
+      },
+      {
+        "sample_id": "ab-26088",
+        "condition_sample_id": "ab-26088",
+        "caption": "A drawing of a man and woman in renaissance clothing, with text written on the paper. The man is wearing a long, flowing robe with intricate details, while the woman is wearing an ornate dress with a high neckline and long sleeves. Both of them have a crown on their heads, and the man is holding a staff in his right hand."
+      },
+      {
+        "sample_id": "ab-14731",
+        "condition_sample_id": "ab-14731",
+        "caption": "A painting of a woman holding a cross in her hands, with a wall in the background. The woman is believed to be the Virgin Mary. She is wearing a white robe with a blue sash and a golden halo around her head. Her eyes are closed and her hands are clasped in prayer. Her expression is peaceful and serene."
+      },
+      {
+        "sample_id": "ab-45853",
+        "condition_sample_id": "ab-45853",
+        "caption": "A painting of a man sitting under a palm tree, holding a coconut in his hand. In the background, there are other trees and a clear blue sky."
+      },
+      {
+        "sample_id": "ab-26752",
+        "condition_sample_id": "ab-26752",
+        "caption": "A painting of a group of people standing in front of a table with various objects on it, set against a dark background."
+      },
+      {
+        "sample_id": "ab-18755",
+        "condition_sample_id": "ab-18755",
+        "caption": "A painting of a man standing in the middle of a field, surrounded by trees and a sky with clouds in the background."
+      },
+      {
+        "sample_id": "ab-26813",
+        "condition_sample_id": "ab-26813",
+        "caption": "A painting of a man standing in front of a castle, with a cart in the foreground and a sky in the background. The painting is done in watercolor on paper and is. The man is wearing a long coat and a hat, and is holding a cannon in his right hand. The castle is tall and imposing, and the sky is a deep blue."
+      },
+      {
+        "sample_id": "ab-43523",
+        "condition_sample_id": "ab-43523",
+        "caption": "A Japanese woodblock print by Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido. It depicts a group of people, some of whom are holding objects, with text written on the paper."
+      },
+      {
+        "sample_id": "ab-44680",
+        "condition_sample_id": "ab-44680",
+        "caption": "A woman laying on the ground next to a man in a forest, surrounded by trees, rocks, and a starry night sky."
+      },
+      {
+        "sample_id": "ab-32987",
+        "condition_sample_id": "ab-32987",
+        "caption": "A painting of the Virgin Mary and Child Jesus, with Mary holding a book in her hands and a bird perched on her shoulder. The background of the painting is filled with trees and a clear blue sky."
+      },
+      {
+        "sample_id": "ab-43662",
+        "condition_sample_id": "ab-43662",
+        "caption": "A painting of a woman in a white dress, with a red background and text written on it. The woman is wearing a white and blue dress with a patterned shawl draped over her shoulders. Her hair is pulled back in a bun and she has a gentle expression on her face."
+      },
+      {
+        "sample_id": "ab-11457",
+        "condition_sample_id": "ab-11457",
+        "caption": "A painting of a river with a boat on it, surrounded by trees, grass, and a person standing on the ground. The sky is visible in the background, and the painting is by Claude Monet."
+      },
+      {
+        "sample_id": "ab-28806",
+        "condition_sample_id": "ab-28806",
+        "caption": "A painting of rolling hills with a blue sky in the background. The hills are painted in a variety of colors, including blues, greens, and yellows, and the sky is a deep, clear blue. The sun is shining brightly, illuminating the landscape and creating a peaceful atmosphere."
+      }
+    ],
+    "checkpoint_sha256": "7e4f55e7eeec334da91a3ceb915f0ab029e9fe6d1b430bd1a7879e5fd783dc3c",
+    "weights": "ema"
+  },
+  "p3_eval_500_train_shuffled": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "train",
+    "condition_mode": "shuffled",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 1.3931535482406616,
+    "zero_velocity_baseline": 1.6983386278152466,
+    "per_sample_mse": [
+      1.0487511157989502,
+      2.3624768257141113,
+      3.0620241165161133,
+      1.2697670459747314,
+      1.1216790676116943,
+      1.1673598289489746,
+      1.2671853303909302,
+      1.6951615810394287,
+      1.2578498125076294,
+      0.7818862795829773,
+      1.312830924987793,
+      0.8987913131713867,
+      1.377946138381958,
+      1.4437798261642456,
+      0.9789295196533203,
+      1.2440394163131714
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-24479",
+        "condition_sample_id": "ab-14241",
+        "caption": "A painting of a group of people in a room, with a man lying on a bed in the center. The man is wearing a white robe and has a halo of light around his head, and is surrounded by a variety of figures, including angels, saints, and other religious figures."
+      },
+      {
+        "sample_id": "ab-14241",
+        "condition_sample_id": "ab-38575",
+        "caption": "This is a black and white picture. In this picture we can see a woman sitting on the bathtub and a man sitting on a chair. We can see this woman and a woman in the bathroom. On the left side of the picture, it looks like a table with a wash basin, a bowl and a vase on it. In the background, there is a door."
+      },
+      {
+        "sample_id": "ab-38575",
+        "condition_sample_id": "ab-30577",
+        "caption": "A man wearing a black dress and a black hat, standing in front of a wall. He has a serious expression on his face, and his hands are clasped in his lap. His hair is dark and his eyes are focused on something in the distance. The wall behind him is plain and unadorned, with no other objects in the frame."
+      },
+      {
+        "sample_id": "ab-30577",
+        "condition_sample_id": "ab-26088",
+        "caption": "A drawing of a man and woman in renaissance clothing, with text written on the paper. The man is wearing a long, flowing robe with intricate details, while the woman is wearing an ornate dress with a high neckline and long sleeves. Both of them have a crown on their heads, and the man is holding a staff in his right hand."
+      },
+      {
+        "sample_id": "ab-26088",
+        "condition_sample_id": "ab-14731",
+        "caption": "A painting of a woman holding a cross in her hands, with a wall in the background. The woman is believed to be the Virgin Mary. She is wearing a white robe with a blue sash and a golden halo around her head. Her eyes are closed and her hands are clasped in prayer. Her expression is peaceful and serene."
+      },
+      {
+        "sample_id": "ab-14731",
+        "condition_sample_id": "ab-45853",
+        "caption": "A painting of a man sitting under a palm tree, holding a coconut in his hand. In the background, there are other trees and a clear blue sky."
+      },
+      {
+        "sample_id": "ab-45853",
+        "condition_sample_id": "ab-26752",
+        "caption": "A painting of a group of people standing in front of a table with various objects on it, set against a dark background."
+      },
+      {
+        "sample_id": "ab-26752",
+        "condition_sample_id": "ab-18755",
+        "caption": "A painting of a man standing in the middle of a field, surrounded by trees and a sky with clouds in the background."
+      },
+      {
+        "sample_id": "ab-18755",
+        "condition_sample_id": "ab-26813",
+        "caption": "A painting of a man standing in front of a castle, with a cart in the foreground and a sky in the background. The painting is done in watercolor on paper and is. The man is wearing a long coat and a hat, and is holding a cannon in his right hand. The castle is tall and imposing, and the sky is a deep blue."
+      },
+      {
+        "sample_id": "ab-26813",
+        "condition_sample_id": "ab-43523",
+        "caption": "A Japanese woodblock print by Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido. It depicts a group of people, some of whom are holding objects, with text written on the paper."
+      },
+      {
+        "sample_id": "ab-43523",
+        "condition_sample_id": "ab-44680",
+        "caption": "A woman laying on the ground next to a man in a forest, surrounded by trees, rocks, and a starry night sky."
+      },
+      {
+        "sample_id": "ab-44680",
+        "condition_sample_id": "ab-32987",
+        "caption": "A painting of the Virgin Mary and Child Jesus, with Mary holding a book in her hands and a bird perched on her shoulder. The background of the painting is filled with trees and a clear blue sky."
+      },
+      {
+        "sample_id": "ab-32987",
+        "condition_sample_id": "ab-43662",
+        "caption": "A painting of a woman in a white dress, with a red background and text written on it. The woman is wearing a white and blue dress with a patterned shawl draped over her shoulders. Her hair is pulled back in a bun and she has a gentle expression on her face."
+      },
+      {
+        "sample_id": "ab-43662",
+        "condition_sample_id": "ab-11457",
+        "caption": "A painting of a river with a boat on it, surrounded by trees, grass, and a person standing on the ground. The sky is visible in the background, and the painting is by Claude Monet."
+      },
+      {
+        "sample_id": "ab-11457",
+        "condition_sample_id": "ab-28806",
+        "caption": "A painting of rolling hills with a blue sky in the background. The hills are painted in a variety of colors, including blues, greens, and yellows, and the sky is a deep, clear blue. The sun is shining brightly, illuminating the landscape and creating a peaceful atmosphere."
+      },
+      {
+        "sample_id": "ab-28806",
+        "condition_sample_id": "ab-24479",
+        "caption": "Utagawa Kunisada Toyokuni III from the series Fifty-Three Stations of the Tokaido, depicting a woman in a kimono and a man in a traditional Japanese dress, with birds flying in the sky above them. The poster also contains text, likely describing the scene."
+      }
+    ],
+    "checkpoint_sha256": "7e4f55e7eeec334da91a3ceb915f0ab029e9fe6d1b430bd1a7879e5fd783dc3c",
+    "weights": "ema"
+  },
+  "p3_eval_500_validation_blank": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "validation",
+    "condition_mode": "blank",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 0.9811373353004456,
+    "zero_velocity_baseline": 1.61513090133667,
+    "per_sample_mse": [
+      1.077796220779419,
+      1.3156499862670898,
+      0.9832704067230225,
+      1.1566925048828125,
+      1.118971586227417,
+      1.1162126064300537,
+      0.9141482710838318,
+      0.7535437345504761,
+      1.3286361694335938,
+      0.8607621192932129,
+      0.717646598815918,
+      0.473663330078125,
+      1.262634515762329,
+      0.5380358099937439,
+      0.7217979431152344,
+      1.3587357997894287
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-00001",
+        "condition_sample_id": "ab-00001",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00005",
+        "condition_sample_id": "ab-00005",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00009",
+        "condition_sample_id": "ab-00009",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00010",
+        "condition_sample_id": "ab-00010",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00016",
+        "condition_sample_id": "ab-00016",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00017",
+        "condition_sample_id": "ab-00017",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00019",
+        "condition_sample_id": "ab-00019",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00020",
+        "condition_sample_id": "ab-00020",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00029",
+        "condition_sample_id": "ab-00029",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00035",
+        "condition_sample_id": "ab-00035",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00036",
+        "condition_sample_id": "ab-00036",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00052",
+        "condition_sample_id": "ab-00052",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00075",
+        "condition_sample_id": "ab-00075",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00084",
+        "condition_sample_id": "ab-00084",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00089",
+        "condition_sample_id": "ab-00089",
+        "caption": ""
+      },
+      {
+        "sample_id": "ab-00098",
+        "condition_sample_id": "ab-00098",
+        "caption": ""
+      }
+    ],
+    "checkpoint_sha256": "7e4f55e7eeec334da91a3ceb915f0ab029e9fe6d1b430bd1a7879e5fd783dc3c",
+    "weights": "ema"
+  },
+  "p3_eval_500_validation_correct": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "validation",
+    "condition_mode": "correct",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 1.040006160736084,
+    "zero_velocity_baseline": 1.61513090133667,
+    "per_sample_mse": [
+      1.154784917831421,
+      1.4548275470733643,
+      0.9921230673789978,
+      1.1724796295166016,
+      1.1193623542785645,
+      1.2595078945159912,
+      0.960274875164032,
+      0.7907459735870361,
+      1.4336459636688232,
+      0.6865811944007874,
+      0.8969972133636475,
+      0.4606631398200989,
+      1.424835205078125,
+      0.5593745708465576,
+      0.7763514518737793,
+      1.4975430965423584
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-00001",
+        "condition_sample_id": "ab-00001",
+        "caption": "A painting of a red house in the middle of a snowy field, with a horse cart in front of it. The house is surrounded by trees and hills, and the sky is visible at the top of the painting."
+      },
+      {
+        "sample_id": "ab-00005",
+        "condition_sample_id": "ab-00005",
+        "caption": "A painting of a forest with trees in the background, painted in oil on canvas. The trees are depicted in great detail, with their branches and leaves clearly visible. The colors used are vibrant and the brushstrokes are visible, giving the painting a realistic feel."
+      },
+      {
+        "sample_id": "ab-00009",
+        "condition_sample_id": "ab-00009",
+        "caption": "A painting of a cloudy sky over a body of water, with trees in the foreground. The sky is filled with dark, ominous clouds, and the water is a deep blue. The trees are a mix of evergreens and deciduous trees, with some of the leaves beginning to turn yellow and orange."
+      },
+      {
+        "sample_id": "ab-00010",
+        "condition_sample_id": "ab-00010",
+        "caption": "A painting of a wooded landscape with a stream running through it, surrounded by trees, rocks, and a house in the background, with a sky filled with clouds."
+      },
+      {
+        "sample_id": "ab-00016",
+        "condition_sample_id": "ab-00016",
+        "caption": "A painting of a woman in a white dress walking with two children, surrounded by trees in the background. The woman is wearing a long, flowing white dress with a high neckline and long sleeves, and her hair is pulled back in a bun. The two children are standing beside her, looking up at her with admiration."
+      },
+      {
+        "sample_id": "ab-00017",
+        "condition_sample_id": "ab-00017",
+        "caption": "A painting of an angel with wings, wearing a white dress and a laurel wreath on her head. She has a halo of light around her head and her wings are spread out behind her. Her facial features are delicate and her eyes are closed, giving her a peaceful and serene look."
+      },
+      {
+        "sample_id": "ab-00019",
+        "condition_sample_id": "ab-00019",
+        "caption": "A watercolor painting of a body of water with boats in it, surrounded by hills, trees, and a sky with clouds."
+      },
+      {
+        "sample_id": "ab-00020",
+        "condition_sample_id": "ab-00020",
+        "caption": "A painting of a mountain range with trees in the foreground. The painting depicts a rocky landscape with trees and a mountain in the background. The colors used in the painting are muted and earthy, giving the painting a peaceful and serene atmosphere."
+      },
+      {
+        "sample_id": "ab-00029",
+        "condition_sample_id": "ab-00029",
+        "caption": "A painting of an angel with wings standing in front of a mountain, surrounded by trees and a sky in the background."
+      },
+      {
+        "sample_id": "ab-00035",
+        "condition_sample_id": "ab-00035",
+        "caption": "A painting of a woman in a green dress against a dark background. The woman is believed to be a mother, with her hands clasped in front of her and a gentle expression on her face. Her hair is pulled back in a bun and she is wearing a light-colored dress with a patterned shawl draped over her shoulders."
+      },
+      {
+        "sample_id": "ab-00036",
+        "condition_sample_id": "ab-00036",
+        "caption": "A painting of a dirt road winding through a field, with a bright blue sky in the background. The painting is done in oil paint, giving it a glossy and vibrant look."
+      },
+      {
+        "sample_id": "ab-00052",
+        "condition_sample_id": "ab-00052",
+        "caption": "A painting of a mountain with a river in the foreground, surrounded by trees, plants, and a fence. The sky is filled with clouds, creating a peaceful atmosphere."
+      },
+      {
+        "sample_id": "ab-00075",
+        "condition_sample_id": "ab-00075",
+        "caption": "A painting of a vase filled with colorful flowers and two apples on a table. The vase is a deep blue color and the flowers are a mix of pink, yellow, and white. The apples are a bright red and are placed to the right of the vase. The table is a light wood color and has a smooth surface."
+      },
+      {
+        "sample_id": "ab-00084",
+        "condition_sample_id": "ab-00084",
+        "caption": "A painting of a house on a street with a tree in the foreground. The house is surrounded by lush green grass and a bright blue sky. The tree is tall and full, with its branches reaching up towards the sky. In the background, there are other houses and vehicles on the road, adding to the peaceful atmosphere of the painting."
+      },
+      {
+        "sample_id": "ab-00089",
+        "condition_sample_id": "ab-00089",
+        "caption": "A still life painting of a bowl of fruit and a bottle on a table. The bowl is filled with a variety of fruits, including apples, oranges, and grapes, and the bottle is a dark green color. The table is a light wood color and the background is a neutral color."
+      },
+      {
+        "sample_id": "ab-00098",
+        "condition_sample_id": "ab-00098",
+        "caption": "A painting of a church in the snow, surrounded by trees and a road. The sky is visible in the background, creating a peaceful atmosphere."
+      }
+    ],
+    "checkpoint_sha256": "7e4f55e7eeec334da91a3ceb915f0ab029e9fe6d1b430bd1a7879e5fd783dc3c",
+    "weights": "ema"
+  },
+  "p3_eval_500_validation_shuffled": {
+    "metric": "fixed_pair_flow_velocity_mse",
+    "generation_quality_evaluated": false,
+    "split": "validation",
+    "condition_mode": "shuffled",
+    "seed": 20261110,
+    "samples": 16,
+    "loss": 1.1098790168762207,
+    "zero_velocity_baseline": 1.61513090133667,
+    "per_sample_mse": [
+      1.1432163715362549,
+      1.662126898765564,
+      0.9935301542282104,
+      1.1634769439697266,
+      1.131714105606079,
+      1.5599262714385986,
+      1.1824536323547363,
+      0.8287249803543091,
+      1.4556103944778442,
+      0.927257776260376,
+      0.7911576628684998,
+      0.5716168284416199,
+      1.3625364303588867,
+      0.6374956369400024,
+      0.8501255512237549,
+      1.4970953464508057
+    ],
+    "times": [
+      0.4299558997154236,
+      0.5011999607086182,
+      0.40769439935684204,
+      0.8405349850654602,
+      0.9928274154663086,
+      0.45999038219451904,
+      0.4078206419944763,
+      0.29484647512435913,
+      0.7266067862510681,
+      0.007401227951049805,
+      0.2992381453514099,
+      0.018662095069885254,
+      0.49529898166656494,
+      0.061237871646881104,
+      0.2593638300895691,
+      0.7309219241142273
+    ],
+    "records": [
+      {
+        "sample_id": "ab-00001",
+        "condition_sample_id": "ab-00005",
+        "caption": "A painting of a forest with trees in the background, painted in oil on canvas. The trees are depicted in great detail, with their branches and leaves clearly visible. The colors used are vibrant and the brushstrokes are visible, giving the painting a realistic feel."
+      },
+      {
+        "sample_id": "ab-00005",
+        "condition_sample_id": "ab-00009",
+        "caption": "A painting of a cloudy sky over a body of water, with trees in the foreground. The sky is filled with dark, ominous clouds, and the water is a deep blue. The trees are a mix of evergreens and deciduous trees, with some of the leaves beginning to turn yellow and orange."
+      },
+      {
+        "sample_id": "ab-00009",
+        "condition_sample_id": "ab-00010",
+        "caption": "A painting of a wooded landscape with a stream running through it, surrounded by trees, rocks, and a house in the background, with a sky filled with clouds."
+      },
+      {
+        "sample_id": "ab-00010",
+        "condition_sample_id": "ab-00016",
+        "caption": "A painting of a woman in a white dress walking with two children, surrounded by trees in the background. The woman is wearing a long, flowing white dress with a high neckline and long sleeves, and her hair is pulled back in a bun. The two children are standing beside her, looking up at her with admiration."
+      },
+      {
+        "sample_id": "ab-00016",
+        "condition_sample_id": "ab-00017",
+        "caption": "A painting of an angel with wings, wearing a white dress and a laurel wreath on her head. She has a halo of light around her head and her wings are spread out behind her. Her facial features are delicate and her eyes are closed, giving her a peaceful and serene look."
+      },
+      {
+        "sample_id": "ab-00017",
+        "condition_sample_id": "ab-00019",
+        "caption": "A watercolor painting of a body of water with boats in it, surrounded by hills, trees, and a sky with clouds."
+      },
+      {
+        "sample_id": "ab-00019",
+        "condition_sample_id": "ab-00020",
+        "caption": "A painting of a mountain range with trees in the foreground. The painting depicts a rocky landscape with trees and a mountain in the background. The colors used in the painting are muted and earthy, giving the painting a peaceful and serene atmosphere."
+      },
+      {
+        "sample_id": "ab-00020",
+        "condition_sample_id": "ab-00029",
+        "caption": "A painting of an angel with wings standing in front of a mountain, surrounded by trees and a sky in the background."
+      },
+      {
+        "sample_id": "ab-00029",
+        "condition_sample_id": "ab-00035",
+        "caption": "A painting of a woman in a green dress against a dark background. The woman is believed to be a mother, with her hands clasped in front of her and a gentle expression on her face. Her hair is pulled back in a bun and she is wearing a light-colored dress with a patterned shawl draped over her shoulders."
+      },
+      {
+        "sample_id": "ab-00035",
+        "condition_sample_id": "ab-00036",
+        "caption": "A painting of a dirt road winding through a field, with a bright blue sky in the background. The painting is done in oil paint, giving it a glossy and vibrant look."
+      },
+      {
+        "sample_id": "ab-00036",
+        "condition_sample_id": "ab-00052",
+        "caption": "A painting of a mountain with a river in the foreground, surrounded by trees, plants, and a fence. The sky is filled with clouds, creating a peaceful atmosphere."
+      },
+      {
+        "sample_id": "ab-00052",
+        "condition_sample_id": "ab-00075",
+        "caption": "A painting of a vase filled with colorful flowers and two apples on a table. The vase is a deep blue color and the flowers are a mix of pink, yellow, and white. The apples are a bright red and are placed to the right of the vase. The table is a light wood color and has a smooth surface."
+      },
+      {
+        "sample_id": "ab-00075",
+        "condition_sample_id": "ab-00084",
+        "caption": "A painting of a house on a street with a tree in the foreground. The house is surrounded by lush green grass and a bright blue sky. The tree is tall and full, with its branches reaching up towards the sky. In the background, there are other houses and vehicles on the road, adding to the peaceful atmosphere of the painting."
+      },
+      {
+        "sample_id": "ab-00084",
+        "condition_sample_id": "ab-00089",
+        "caption": "A still life painting of a bowl of fruit and a bottle on a table. The bowl is filled with a variety of fruits, including apples, oranges, and grapes, and the bottle is a dark green color. The table is a light wood color and the background is a neutral color."
+      },
+      {
+        "sample_id": "ab-00089",
+        "condition_sample_id": "ab-00098",
+        "caption": "A painting of a church in the snow, surrounded by trees and a road. The sky is visible in the background, creating a peaceful atmosphere."
+      },
+      {
+        "sample_id": "ab-00098",
+        "condition_sample_id": "ab-00001",
+        "caption": "A painting of a red house in the middle of a snowy field, with a horse cart in front of it. The house is surrounded by trees and hills, and the sky is visible at the top of the painting."
+      }
+    ],
+    "checkpoint_sha256": "7e4f55e7eeec334da91a3ceb915f0ab029e9fe6d1b430bd1a7879e5fd783dc3c",
+    "weights": "ema"
+  }
+}

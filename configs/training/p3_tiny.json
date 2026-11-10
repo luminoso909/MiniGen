@@ -1,0 +1,31 @@
+{
+  "model": "configs/models/b0_tiny.json",
+  "training": {
+    "output_dir": "artifacts/runs/p3_tiny",
+    "device": "auto",
+    "precision": "fp32",
+    "seed": 0,
+    "batch_size": 4,
+    "grad_accum": 1,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "ema_decay": 0.99,
+    "condition_dropout": 0.1,
+    "max_steps": 3,
+    "max_seconds": 120,
+    "checkpoint_every": 1,
+    "validation_every": 1,
+    "cpu_threads": 5,
+    "warmup_steps": 20,
+    "schedule_steps": 1000,
+    "min_lr_ratio": 0.1,
+    "checkpoint_steps": [
+      0
+    ]
+  },
+  "data": {
+    "train_limit": 16,
+    "validation_limit": 16
+  }
+}

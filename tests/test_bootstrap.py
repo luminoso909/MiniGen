@@ -57,13 +57,13 @@ def test_doctor_json_real_cpu_autograd() -> None:
 
 
 @pytest.mark.parametrize("command", ["train", "sample", "evaluate", "cache"])
-def test_unimplemented_commands_fail_honestly(
+def test_missing_command_arguments_fail_honestly(
     command: str,
 ) -> None:
-    """验证未实现命令明确返回 2，不伪造标准输出。
+    """验证工程命令缺少必要参数时返回 2，不启动实验。
 
     Args:
-        command: 参数化的未实现命令名称。
+        command: 需要明确输入的工程命令名称。
 
     Raises:
         AssertionError: 结果偏离预期时失败；pytest.raises 中约定的异常被捕获，其他异常令测试失败。
@@ -73,7 +73,7 @@ def test_unimplemented_commands_fail_honestly(
     """
     result = run_cli(command)
     assert result.returncode == 2
-    assert "尚未实现" in result.stderr
+    assert "required" in result.stderr
     assert not result.stdout
 
 

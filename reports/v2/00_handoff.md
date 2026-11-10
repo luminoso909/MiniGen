@@ -4,7 +4,11 @@ ArtBench Public Domain 256x256 冻结版 `v1` 含 46,298 张，train 37,042、va
 
 **P2 已验收。** 固定 20 张的本机 CPU FP32 对照通过；VAE 和 CLIP 均使用 MPS FP32 构建正式缓存。train 37,042 行、validation 4,637 行全部通过独立回读；test 的 4,619 张保持封存。本地缓存位于 `artifacts/cache/artbench_pd_256/v1_formal`，缓存数组未入 Git。[P2 工程验收](02_p2_delivery.md) · [正式缓存回执](components/artbench_cache_formal.json) · [本机固定 20 张回执](components/artbench_local_fp32_20.json) · [P0/P1 交付](01_p0_p1_delivery.md)
 
-**停在 P3 入口。** 下一任务为 P3-01：统一 `Condition`、VAE 包装、`FlowObjective`、Euler Sampler 和 CFG 契约。P3、模型训练和 CUDA 运行均未开始。正式条件训练前仍需决定如何处理 Caption 噪声（P1 的 240 对中有 71 条明确事实错误）。[重构规划](../../docs/MiniGen2重构规划.md) · [待办清单](../../待办清单.md)
+**停在 P4 入口，等待用户下一轮指令。** 2026-11-10 已完成 P3-01～04 本地工程：统一 Flow/CFG/Euler/Heun、30,359,824 参数 B0、真实 CLI、Checkpoint 和恢复。164 项测试、CPU/MPS FP32 对照通过；16 张训练子集完成 500→1000 步真实恢复，循环累计 151.465 秒。固定采样仍是不可辨色块和重复纹理，**P3-05 质量未通过**；P3-06 入口/配置已准备，**CUDA/AMP/性能待云端验收**，不能称整个 P3 全部通过。[P3 阶段报告](03_p3_delivery.md) · [模型卡](p3/model_card.md) · [CUDA Pilot](p3/cuda_pilot.md)
+
+已执行：固定 8 张正确/空/打乱条件、500 步在线与 EMA、1000 步等 NFE Euler/Heun 对照。失败：可辨生成门槛；验证子集正确文本 MSE 不优于空条件。未执行：正式全量长训、B1/B2、P5 指标和 CUDA。实际收费 GPU/API 费用 0 元。权重与大型缓存未入 Git，历史课件及用户已有改动保留。
+
+**唯一下一任务**：用户启动 P4 工程回合后，先确认 B0 失败诊断的修复范围，再按同一接口接入 B1/B2 的本地实现与测试。按最新授权，P3–P5 主体代码先于统一云端训练推进，但质量与预算审批仍独立保留。本轮不自行进入 P4/P5。正式条件训练前仍需决定如何处理 Caption 噪声（P1 的 240 对中有 71 条明确事实错误）。[重构规划](../../docs/MiniGen2重构规划.md) · [待办清单](../../待办清单.md)
 
 ## **二、P0 历史交接**
 

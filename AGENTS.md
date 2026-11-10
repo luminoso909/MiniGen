@@ -18,9 +18,9 @@ B0 PlainConditionalDiT、B1 SingleStreamDiT、B2 HybridDiT 从随机初始化训
 
 ### **3. 当前可执行检查**
 
-`minigen doctor` 是现有功能入口。`train`、`sample`、`evaluate`、`cache` 仍明确返回未实现，`data` 和 `report` 尚未注册。环境同步用 `uv sync --locked`。已有环境的基础核查用 `uv run --locked --offline --no-sync minigen doctor --device cpu --json` 与 `uv run --locked --offline --no-sync pytest -p no:cacheprovider`。设备、测试与检查基线见 P0 审计。
+`minigen doctor` 是现有功能入口。`train`、`sample`、`evaluate`、`cache` 已提供真实 P3 入口；`evaluate` 仅为固定配对 Flow MSE，不是 P5 图像质量评测；`data` 和 `report` 尚未注册。环境同步用 `uv sync --locked`。已有环境的基础核查用 `uv run --locked --offline --no-sync minigen doctor --device cpu --json` 与 `uv run --locked --offline --no-sync pytest -p no:cacheprovider`。设备、测试与检查基线见 P0 审计。
 
-P2 离线入口、用户审批和数值验收见 [P2 交付](reports/v2/02_p2_delivery.md)。正式缓存禁止复用试点，身份须绑定用户视觉审核、本机数值验收和组件锁；只编码 train/validation，逐批写入、可恢复，验证完整后才供 P3 读取。项目源码在 `src/minigen/`；旧学习模块在 `docs/learning/src/`，只由 Notebook 执行工具、个人验收脚本和历史测试显式加载。
+P2 离线入口、用户审批和数值验收见 [P2 交付](reports/v2/02_p2_delivery.md)。正式缓存禁止复用试点，身份须绑定用户视觉审核、本机数值验收和组件锁；只编码 train/validation，逐批写入、可恢复，验证完整后才供 P3 读取。P3 本地交付见 [阶段报告](reports/v2/03_p3_delivery.md)：P3-01～04 本地通过，P3-05 可辨生成未通过，P3-06 CUDA 待验；当前停在 P4 入口，不因测试通过而批准长训。用户最新顺序为先完成 P3–P5 主体代码及本地小案例，云端正式运行另行批准。工程 Flow 实现不代替个人 TODO。项目源码在 `src/minigen/`；旧学习模块在 `docs/learning/src/`，只由 Notebook 执行工具、个人验收脚本和历史测试显式加载。
 
 ## **二、数据、实验与证据**
 

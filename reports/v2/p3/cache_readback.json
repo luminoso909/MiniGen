@@ -1,0 +1,68 @@
+{
+  "mode": "formal",
+  "verified_only": true,
+  "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+  "approval_sha256": "d93e2b44a40cbffaf95aa44a0c2cd6328126bf1255dec30adb6efcf172293a79",
+  "local_acceptance_sha256": "210b2da6100a52681936d5898d536646b9328f11552c9107163615b5983b689f",
+  "vae_device": "mps",
+  "clip_device": "mps",
+  "cache_index_sha256": "d065449f4d17c8f307325b8842cd687b611b52065ada43988c28cfe26a960d00",
+  "output": "/Users/lucius/projects/personal/MiniGen/artifacts/cache/artbench_pd_256/v1_formal",
+  "execution": {
+    "torch": "2.14.1",
+    "devices": {
+      "vae": "mps",
+      "clip": "mps"
+    },
+    "batch_size": 16,
+    "cpu_threads": 5
+  },
+  "counts": {
+    "train": 37042,
+    "validation": 4637
+  },
+  "verified_rows": {
+    "train": 37042,
+    "validation": 4637
+  },
+  "storage": {
+    "latents": {
+      "shape": [
+        4,
+        32,
+        32
+      ],
+      "dtype": "<f2"
+    },
+    "text": {
+      "shape": [
+        77,
+        512
+      ],
+      "dtype": "<f2"
+    },
+    "mask": {
+      "shape": [
+        77
+      ],
+      "dtype": "|b1"
+    }
+  },
+  "payload_sha256": {
+    "blank_mask.npy": "b221f6fdb2fdfcc0771aa8e409d36e28f61e5b6b2bba87f38dce1eb4c05136f7",
+    "blank_text.npy": "fb88376e2263a9ca2d9d4d750690fe1b03e7c997f1b21a4f54ee0e653c9317bb",
+    "train_latents.npy": "de998afa2783f662b344c7d9338c2157f780ed7c6196da53cc807319fefcd06c",
+    "train_mask.npy": "82857e8a26320323d01ff9de0ae040677eb0c8b0ca62ebe696b3a1d0bc1ea824",
+    "train_text.npy": "945a1600bf3614f2932fec5d0328859c4ae99fe87e9870017434a6900b653eb0",
+    "validation_latents.npy": "52d24e0cc6b5363ae60c227b3d188d2d6c8bbdbb5c1d9367fc17f8010c92ab50",
+    "validation_mask.npy": "6617f8708f289dc4a619e71618d1a869fc610e676f84895262ee026b30dc12b0",
+    "validation_text.npy": "cac0efcde295fe2b674a0eca0d28963d33afaeb3e8a8b9ecb838cfbb0fa26278"
+  },
+  "payload_bytes": 3631029392,
+  "blank_text_shape": [
+    77,
+    512
+  ],
+  "blank_valid_tokens": 2,
+  "elapsed_seconds": 4.677
+}

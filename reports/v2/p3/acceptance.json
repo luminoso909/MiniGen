@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-10",
+  "stage": "P3",
+  "status": "local_engineering_passed_quality_pending",
+  "tasks": {
+    "P3-01": "local_passed",
+    "P3-02": "local_passed",
+    "P3-03": "local_passed",
+    "P3-04": "local_passed_cuda_deferred",
+    "P3-05": "1000_updates_executed_visual_quality_failed",
+    "P3-06": "entry_prepared_cuda_not_run"
+  },
+  "parameters": 30359824,
+  "device": "mps",
+  "precision": "fp32",
+  "updates": 1000,
+  "train_subset": 16,
+  "validation_subset": 16,
+  "test_used": false,
+  "training_loop_seconds": 151.4653725840035,
+  "paid_gpu_api_cost_cny": 0,
+  "tests": {
+    "pytest_passed": 164,
+    "ruff": "passed_src_scripts_tests",
+    "format_files": 70,
+    "annotation_files": 78,
+    "annotation_functions": 384,
+    "annotation_classes": 49,
+    "protected_files": 98,
+    "local_markdown_links_checked": 203,
+    "lock": "uv lock --check --offline passed",
+    "cpu_doctor": "passed"
+  },
+  "source_sha256": "f3382149dd813ae8b68864639a5d8f7b07ac08f2a358c499bced845ce4d6f88a",
+  "cuda_run": false,
+  "formal_training_run": false,
+  "next_stage": "P4 entrance, await user instruction",
+  "limitations": [
+    "P3-05 generation remains unrecognizable",
+    "Only one seed and 16 training examples; validation prefix not representative",
+    "MPS resumed run is not claimed bitwise-equal to an independent uninterrupted run",
+    "CUDA AMP/pilot and DDP not validated; DDP not implemented",
+    "P5 generation-quality metrics not implemented"
+  ]
+}
