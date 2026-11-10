@@ -1,0 +1,54 @@
+{
+  "python": "3.12.14",
+  "packages": {
+    "minigen": {
+      "version": "0.1.0",
+      "status": "passed"
+    },
+    "torch": {
+      "version": "2.14.1",
+      "status": "passed"
+    },
+    "torchvision": {
+      "version": "0.29.1",
+      "status": "passed"
+    },
+    "numpy": {
+      "version": "2.5.4",
+      "status": "passed"
+    },
+    "pillow": {
+      "version": "12.3.0",
+      "status": "passed"
+    },
+    "pyyaml": {
+      "version": "6.0.3",
+      "status": "passed"
+    },
+    "matplotlib": {
+      "version": "3.11.2",
+      "status": "passed"
+    },
+    "tqdm": {
+      "version": "4.70.1",
+      "status": "passed"
+    }
+  },
+  "devices": {
+    "cpu": {
+      "status": "passed",
+      "loss": 28021.77734375,
+      "shape": [
+        3,
+        4
+      ]
+    },
+    "mps": {
+      "status": "unavailable"
+    },
+    "cuda": {
+      "status": "unavailable"
+    }
+  },
+  "ok": true
+}

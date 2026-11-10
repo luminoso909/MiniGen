@@ -102,13 +102,16 @@ def fixture_vae(
     return FixtureVAE()
 
 
+@pytest.mark.parametrize("architecture", ["b0", "b1", "b2"])
 def test_train_resume_sample_and_evaluate_cli(
+    architecture: str,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """通过真实 CLI 验证训练、恢复、模型加载、条件对照和结果保护。
+    """通过真实 CLI 验证三个主干共享的训练、恢复、采样和诊断。
 
     Args:
+        architecture: b0、b1 或 b2，切换工厂而不复制训练流程。
         tmp_path: 独立输出目录。
         monkeypatch: 只替换资产读取及冻结 VAE，保留实际 B0、优化器和采样。
 
@@ -121,7 +124,7 @@ def test_train_resume_sample_and_evaluate_cli(
     monkeypatch.setattr(commands, "open_cache", fixture_cache)
     monkeypatch.setattr(commands.FrozenVAE, "load", fixture_vae)
     model = {
-        "architecture": "b0",
+        "architecture": architecture,
         "hidden_size": 16,
         "num_heads": 2,
         "depth": 1,
@@ -130,6 +133,9 @@ def test_train_resume_sample_and_evaluate_cli(
         "text_dim": 8,
         "patch_size": 2,
     }
+    if architecture == "b2":
+        model.pop("depth")
+        model.update(double_depth=1, single_depth=1)
     (tmp_path / "model.json").write_text(json.dumps(model))
     config = {
         "model": "model.json",
@@ -173,9 +179,15 @@ def test_train_resume_sample_and_evaluate_cli(
         == 0
     )
     report = json.loads((tmp_path / "samples/samples.json").read_text())
+    assert report["schema"] == "minigen.samples.v1"
+    assert report["architecture"] == architecture
+    assert report["objective"] == "flow_velocity"
+    assert report["objective_source"] == "explicit"
+    assert report["run_id"] == json.loads((tmp_path / "run/result.json").read_text())["run_id"]
     assert report["solver_nfe"] == 4 and report["model_evaluations"] == 8
     assert report["records"][0]["condition_sample_id"] == "1"
     assert (tmp_path / "samples/grid.png").exists()
+    assert (tmp_path / "samples" / report["records"][0]["image_path"]).exists()
     assert (
         main(
             ["evaluate", *common, *ckpt, "--output", "evaluation.json", "--condition-mode", "blank"]
@@ -184,6 +196,9 @@ def test_train_resume_sample_and_evaluate_cli(
     )
     evaluation = json.loads((tmp_path / "evaluation.json").read_text())
     assert not evaluation["generation_quality_evaluated"] and evaluation["loss"] > 0
+    assert evaluation["architecture"] == architecture
+    assert evaluation["run_id"] == report["run_id"]
+    assert evaluation["schema"] == "minigen.flow-evaluation.v1"
     assert main(["evaluate", *common, *ckpt, "--output", "evaluation.json"]) == 2
     assert main(["sample", *common, *ckpt, "--output", "bad", "--steps", "0"]) == 2
     assert not (tmp_path / "bad").exists()

@@ -1,0 +1,37 @@
+{
+  "model": "configs/models/b2_30m.json",
+  "training": {
+    "output_dir": "artifacts/runs/p4_b2_local",
+    "device": "auto",
+    "precision": "fp32",
+    "seed": 0,
+    "batch_size": 2,
+    "grad_accum": 2,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "ema_decay": 0.99,
+    "condition_dropout": 0.1,
+    "max_steps": 12,
+    "max_seconds": 180,
+    "checkpoint_every": 4,
+    "validation_every": 4,
+    "cpu_threads": 5,
+    "warmup_steps": 2,
+    "schedule_steps": 32,
+    "min_lr_ratio": 0.1,
+    "checkpoint_steps": [
+      4
+    ]
+  },
+  "data": {
+    "train_indices": [
+      19606,
+      11409,
+      30882,
+      24453
+    ],
+    "train_limit": 4,
+    "validation_limit": 4
+  }
+}

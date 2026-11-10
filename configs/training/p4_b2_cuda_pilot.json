@@ -1,0 +1,29 @@
+{
+  "model": "configs/models/b2_30m.json",
+  "training": {
+    "output_dir": "artifacts/runs/p4_b2_cuda_pilot",
+    "device": "cuda",
+    "precision": "bf16",
+    "seed": 0,
+    "batch_size": 8,
+    "grad_accum": 8,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "ema_decay": 0.99,
+    "condition_dropout": 0.1,
+    "max_steps": 100,
+    "max_seconds": 3600,
+    "checkpoint_every": 100,
+    "validation_every": 101,
+    "cpu_threads": 5,
+    "warmup_steps": 20,
+    "schedule_steps": 1000,
+    "min_lr_ratio": 0.1,
+    "checkpoint_steps": []
+  },
+  "data": {
+    "train_limit": 256,
+    "validation_limit": 16
+  }
+}

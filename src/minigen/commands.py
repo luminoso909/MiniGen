@@ -23,7 +23,7 @@ from minigen.data.representation_cache import (
 )
 from minigen.objectives.flow import flow_interpolate, flow_loss
 from minigen.samplers.flow import integrate
-from minigen.training.checkpoint import load_checkpoint
+from minigen.training.checkpoint import load_checkpoint, run_identity
 from minigen.training.config import TrainConfig, build_model
 from minigen.training.engine import train_flow
 from minigen.training.runtime import resolve_device, synchronize
@@ -196,7 +196,9 @@ def train_command(
 
 def _loaded_run(
     args: Namespace,
-) -> tuple[TrainConfig, JsonDict, CacheSource, RepresentationCache, Condition, torch.nn.Module]:
+) -> tuple[
+    TrainConfig, JsonDict, CacheSource, RepresentationCache, Condition, torch.nn.Module, JsonDict
+]:
     """加载 Checkpoint 并核对训练时的数据身份，便于采样及独立评估共用。
 
     Args:
@@ -206,7 +208,7 @@ def _loaded_run(
         ValueError/OSError/RuntimeError: 身份不符、资产或权重无法读取。
 
     Results:
-        tuple: 配置、数据设置、来源、缓存、空条件及 eval 主干。
+        tuple: 配置、数据设置、来源、缓存、空条件、eval 主干及检查点身份摘要。
     """
     root = args.root.resolve()
     config, data = read_experiment(root, args.config)
@@ -218,8 +220,23 @@ def _loaded_run(
     torch.set_num_threads(config.cpu_threads)
     model = build_model(config.model).to(device)
     model.load_state_dict(state[args.weights], strict=True)
+    trainable_parameters = sum(
+        parameter.numel() for parameter in model.parameters() if parameter.requires_grad
+    )
     model.eval().requires_grad_(False)
-    return config, data, source, cache, blank.to(device), model
+    metadata: JsonDict = {
+        "objective": state["objective"],
+        "objective_source": state["objective_source"],
+        "run_id": run_identity(state["contract"]),
+        "source_sha256": state["contract"]["source_sha256"],
+        "architecture": config.model.get("architecture", "b0"),
+        "model_config": config.model,
+        "trainable_parameters": trainable_parameters,
+        "checkpoint_step": state["step"],
+        "checkpoint_sha256": hash_file(root / args.checkpoint),
+        "data_identity": identity,
+    }
+    return config, data, source, cache, blank.to(device), model, metadata
 
 
 def _conditions(
@@ -262,6 +279,10 @@ def _conditions(
         {
             "sample_id": rows[i]["sample_id"],
             "condition_sample_id": rows[j]["sample_id"],
+            "source_image_path": rows[i].get("image_path"),
+            "condition_image_path": rows[j].get("image_path")
+            if args.condition_mode != "blank"
+            else None,
             "caption": rows[j]["caption"] if args.condition_mode != "blank" else "",
         }
         for i, j in zip(indices, order, strict=True)
@@ -292,7 +313,7 @@ def sample_command(
     if output.exists():
         raise FileExistsError(output)
     started = perf_counter()
-    config, data, source, cache, blank, model = _loaded_run(args)
+    config, data, source, cache, blank, model, metadata = _loaded_run(args)
     device = next(model.parameters()).device
     if args.prompts is None:
         condition, records = _conditions(args, source, data, cache, blank, device)
@@ -303,14 +324,14 @@ def sample_command(
         text = FrozenCLIPText.from_lock(root / data["clip_lock"], root=root, device=device)
         encoded = text.encode(prompts)
         condition = Condition(encoded.features, encoded.mask)
-        records = [{"caption": prompt} for prompt in prompts]
+        records = [{"caption": prompt, "source_image_path": None} for prompt in prompts]
         del text
     generator = torch.Generator().manual_seed(args.seed)
     shape = (
         len(records),
-        config.model["in_channels"],
-        config.model["latent_size"],
-        config.model["latent_size"],
+        model.config.in_channels,
+        model.config.latent_size,
+        model.config.latent_size,
     )
     initial = torch.randn(shape, generator=generator).to(device)
     synchronize(device)
@@ -324,10 +345,13 @@ def sample_command(
     output.mkdir(parents=True)
     save_image(images, output / "grid.png", nrow=min(4, len(images)))
     for index, image in enumerate(images):
-        save_image(image, output / f"sample_{index:03d}.png")
+        relative = f"sample_{index:03d}.png"
+        save_image(image, output / relative)
+        records[index]["image_path"] = relative
     torch.save(result.samples.cpu(), output / "latents.pt")
     report = {
-        "checkpoint_sha256": hash_file(root / args.checkpoint),
+        **metadata,
+        "schema": "minigen.samples.v1",
         "weights": args.weights,
         "device": str(device),
         "precision": "fp32",
@@ -341,9 +365,11 @@ def sample_command(
         "split": args.split if args.prompts is None else "prompts",
         "records": records,
         "denoise_seconds": denoise_seconds,
+        "samples_per_denoise_second": len(records) / denoise_seconds,
         "timing_warmup": False,
         "total_seconds_including_load_decode_save": perf_counter() - started,
         "output": str(output),
+        "source_image_root": data["data_root"],
         "source": source.identity,
     }
     (output / "samples.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
@@ -371,7 +397,7 @@ def evaluate_command(
     output = args.root.resolve() / args.output
     if output.exists():
         raise FileExistsError(output)
-    _, data, source, cache, blank, model = _loaded_run(args)
+    _, data, source, cache, blank, model, metadata = _loaded_run(args)
     device = next(model.parameters()).device
     condition, records = _conditions(args, source, data, cache, blank, device)
     dataset = cache.split(args.split)
@@ -391,6 +417,8 @@ def evaluate_command(
             (predicted.float() - velocity.float()).square().flatten(1).mean(1).cpu().tolist()
         )
     report = {
+        **metadata,
+        "schema": "minigen.flow-evaluation.v1",
         "metric": "fixed_pair_flow_velocity_mse",
         "generation_quality_evaluated": False,
         "split": args.split,
@@ -402,7 +430,6 @@ def evaluate_command(
         "per_sample_mse": per_sample,
         "times": times.cpu().tolist(),
         "records": records,
-        "checkpoint_sha256": hash_file(args.root.resolve() / args.checkpoint),
         "weights": args.weights,
     }
     output.parent.mkdir(parents=True, exist_ok=True)

@@ -14,7 +14,8 @@ class TrainConfig:
 
     Args:
         output_dir: 独立运行目录；所有日志和检查点的根。
-        model: 模型构造参数，architecture 当前只支持 b0。
+        model: 模型构造参数，architecture 为 b0、b1 或 b2。
+        objective: 固定为 flow_velocity，禁止混用 DDPM 噪声预测目标。
         device: auto、cpu、mps 或 cuda。
         precision: fp32，或 CUDA 上的 fp16/bf16 自动混合精度。
         seed: 模型、噪声和数据排序的种子。
@@ -38,6 +39,7 @@ class TrainConfig:
 
     output_dir: str = "artifacts/runs/p3_local"
     model: JsonDict = field(default_factory=dict)
+    objective: str = "flow_velocity"
     device: str = "auto"
     precision: str = "fp32"
     seed: int = 0
@@ -96,6 +98,8 @@ class TrainConfig:
             raise ValueError("device must be auto/cpu/mps/cuda")
         if self.precision not in {"fp32", "fp16", "bf16"}:
             raise ValueError("precision must be fp32/fp16/bf16")
+        if self.objective != "flow_velocity":
+            raise ValueError("This trainer requires objective=flow_velocity")
 
     @classmethod
     def from_dict(
@@ -131,25 +135,33 @@ class TrainConfig:
 def build_model(
     specification: JsonDict,
 ) -> nn.Module:
-    """按显式架构名构造主干，为后续 B1/B2 保留统一接入点。
+    """按显式架构名构造三种共享速度接口的主干。
 
     Args:
         specification: architecture 和对应模型配置字段；省略架构时为 b0。
 
     Raises:
-        ValueError: 请求尚未实现的架构。
-        TypeError: B0 配置字段不存在或类型不符。
+        ValueError: 请求未定义的架构。
+        TypeError: 对应模型的配置字段不存在或类型不符。
 
     Results:
         nn.Module: 从随机初始化构建的速度预测模型。
     """
-    from minigen.models.plain_dit import PlainConditionalDiT, PlainDiTConfig
-
     options = dict(specification)
     architecture = options.pop("architecture", "b0")
-    if architecture != "b0":
-        raise ValueError(f"Architecture {architecture!r} is not implemented")
-    return PlainConditionalDiT(PlainDiTConfig(**options))
+    if architecture == "b0":
+        from minigen.models.plain_dit import PlainConditionalDiT, PlainDiTConfig
+
+        return PlainConditionalDiT(PlainDiTConfig(**options))
+    if architecture == "b1":
+        from minigen.models.single_dit import SingleDiTConfig, SingleStreamDiT
+
+        return SingleStreamDiT(SingleDiTConfig(**options))
+    if architecture == "b2":
+        from minigen.models.hybrid_dit import HybridDiT, HybridDiTConfig
+
+        return HybridDiT(HybridDiTConfig(**options))
+    raise ValueError(f"Architecture {architecture!r} is not implemented")
 
 
 def learning_rate_for_step(

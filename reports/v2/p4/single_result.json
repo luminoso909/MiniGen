@@ -1,0 +1,16 @@
+{
+  "status": "completed",
+  "step": 1000,
+  "elapsed_seconds": 102.54485916698468,
+  "device": "mps",
+  "precision": "fp32",
+  "trainable_parameters": 30359824,
+  "checkpoint": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/p3_close_single/last.pt",
+  "metrics": "/Users/lucius/projects/personal/MiniGen/artifacts/runs/p3_close_single/metrics.jsonl",
+  "train_samples": 1,
+  "validation_samples": 4,
+  "memory": {
+    "cuda_peak_allocated": null,
+    "cuda_peak_reserved": null
+  }
+}

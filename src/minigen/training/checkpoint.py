@@ -1,5 +1,7 @@
 """原子检查点、可移植张量和同设备随机状态恢复。"""
 
+import hashlib
+import json
 import os
 import random
 from pathlib import Path
@@ -8,8 +10,30 @@ from typing import Any
 import numpy as np
 import torch
 
-from minigen._typing import Checkpoint
+from minigen._typing import Checkpoint, JsonDict
 from minigen.training.runtime import device_rng
+
+FLOW_OBJECTIVE = "flow_velocity"
+CHECKPOINT_SCHEMA = "minigen.flow-training.v2"
+
+
+def run_identity(
+    contract: JsonDict,
+) -> str:
+    """把完整恢复契约转为训练、采样与评估共用的实验标识。
+
+    Args:
+        contract: 包含源码、配方、数据和设备身份的 JSON 契约。
+
+    Raises:
+        ValueError/TypeError: 契约不是合法有限 JSON。
+
+    Results:
+        str: 规范排序后契约内容的 SHA-256。
+    """
+    return hashlib.sha256(
+        json.dumps(contract, sort_keys=True, allow_nan=False).encode()
+    ).hexdigest()
 
 
 def cpu_tree(
@@ -111,19 +135,33 @@ def save_checkpoint(
 def load_checkpoint(
     path: Path,
 ) -> Checkpoint:
-    """只用安全权重模式读取本项目检查点，默认映射到 CPU。
+    """安全读取 Flow 检查点并核对目标，默认映射到 CPU。
 
     Args:
-        path: 当前 schema 的本地检查点。
+        path: v2 或明确历史 Flow v1 的本地检查点。
 
     Raises:
-        ValueError: 检查点不是本项目 Flow 训练格式。
+        ValueError: schema、训练目标或目标字段之间的约定不符。
         OSError/RuntimeError: 文件无法读取或反序列化。
 
     Results:
-        Checkpoint: 含模型和恢复状态的 CPU 对象；加载本身不恢复 RNG。
+        Checkpoint: CPU 对象；旧 v1 仅在内存中补充已知 Flow 目标，并标记来源。
+            objective_source: explicit 或 legacy_flow_schema；不会改写磁盘旧文件或恢复 RNG。
     """
     state = torch.load(path, map_location="cpu", weights_only=True)
-    if not isinstance(state, dict) or state.get("schema") != "minigen.flow-training.v1":
+    if not isinstance(state, dict) or state.get("schema") not in {
+        CHECKPOINT_SCHEMA,
+        "minigen.flow-training.v1",
+    }:
         raise ValueError("Unsupported Flow checkpoint schema")
+    legacy = state["schema"] == "minigen.flow-training.v1"
+    objective = state.get("objective", FLOW_OBJECTIVE if legacy else None)
+    if (
+        objective != FLOW_OBJECTIVE
+        or state.get("config", {}).get("objective", objective) != objective
+        or state.get("contract", {}).get("recipe", {}).get("objective", objective) != objective
+    ):
+        raise ValueError("Checkpoint requires objective=flow_velocity")
+    state["objective_source"] = "legacy_flow_schema" if "objective" not in state else "explicit"
+    state["objective"] = objective
     return state

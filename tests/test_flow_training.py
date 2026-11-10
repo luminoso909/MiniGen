@@ -256,3 +256,184 @@ def test_limits_schedule_and_device_errors(
         TrainConfig.from_dict({"typo": 1})
     with pytest.raises(ValueError, match="requires fp32"):
         resolve_device("cpu", "fp16")
+
+
+@pytest.mark.parametrize("architecture", ["b0", "b1", "b2"])
+def test_three_architecture_exact_resume(
+    architecture: str,
+    tmp_path: Path,
+) -> None:
+    """实际三种主干共享训练器，CPU 的连续更新与中断恢复保持相同轨迹。
+
+    Args:
+        architecture: b0、b1 或 b2 工厂分支。
+        tmp_path: 独立结果目录。
+
+    Raises:
+        AssertionError: 模型/EMA、优化状态、数据序列或日志无法精确恢复。
+
+    副作用:
+        构造小规格真实主干并执行 6 步以及 3+3 步 CPU 训练。
+    """
+    specification = {
+        "architecture": architecture,
+        "hidden_size": 32,
+        "num_heads": 4,
+        "latent_size": 2,
+        "in_channels": 4,
+        "text_dim": 3,
+        "patch_size": 2,
+        "mlp_ratio": 2,
+    }
+    specification.update(
+        {"double_depth": 1, "single_depth": 1} if architecture == "b2" else {"depth": 2}
+    )
+    config = TrainConfig(
+        output_dir=str(tmp_path / "full"),
+        model=specification,
+        device="cpu",
+        batch_size=2,
+        max_steps=6,
+        max_seconds=30,
+        checkpoint_steps=(),
+        checkpoint_every=3,
+        cpu_threads=1,
+        warmup_steps=1,
+        schedule_steps=8,
+    )
+    data = TinyData()
+    result = train_flow(config, data, blank_condition(), {"fixture": "three-model"})
+    split = replace(config, output_dir=str(tmp_path / "split"), max_steps=3)
+    train_flow(split, data, blank_condition(), {"fixture": "three-model"})
+    train_flow(
+        replace(split, max_steps=6),
+        data,
+        blank_condition(),
+        {"fixture": "three-model"},
+        resume=tmp_path / "split/last.pt",
+    )
+    full, resumed = (load_checkpoint(tmp_path / folder / "last.pt") for folder in ("full", "split"))
+    for name in ("model", "ema"):
+        for key, tensor in full[name].items():
+            assert torch.equal(tensor, resumed[name][key])
+    for key, states in full["optimizer"]["state"].items():
+        assert all(
+            torch.equal(tensor, resumed["optimizer"]["state"][key][name])
+            for name, tensor in states.items()
+        )
+    assert torch.equal(full["stream"]["order"], resumed["stream"]["order"])
+    assert torch.equal(full["rng"]["cpu"], resumed["rng"]["cpu"])
+    assert [row["loss"] for row in full["history"]] == [row["loss"] for row in resumed["history"]]
+    assert result["architecture"] == architecture and result["objective"] == "flow_velocity"
+    assert result["performance"]["samples_seen"] == 12
+    assert result["performance"]["samples_per_optimizer_second"] > 0
+    assert result["memory"]["mps_current_allocated_bytes"] is None
+
+
+def test_checkpoint_objective_and_legacy_boundary(
+    tmp_path: Path,
+) -> None:
+    """拒绝错误速度目标与 v2 缺失字段，明确兼容历史 v1 而不重写文件。
+
+    Args:
+        tmp_path: 测试检查点目录。
+
+    Raises:
+        AssertionError: 非 Flow 目标被接受，或旧文件读取产生内容变更。
+
+    副作用:
+        写入隔离的最小 schema 验证文件。
+    """
+    path = tmp_path / "checkpoint.pt"
+    legacy = {"schema": "minigen.flow-training.v1", "config": {}, "contract": {"recipe": {}}}
+    torch.save(legacy, path)
+    original = path.read_bytes()
+    state = load_checkpoint(path)
+    assert state["objective"] == "flow_velocity"
+    assert state["objective_source"] == "legacy_flow_schema"
+    assert path.read_bytes() == original
+    for bad in (
+        {**legacy, "objective": "epsilon"},
+        {**legacy, "config": {"objective": "epsilon"}},
+        {**legacy, "contract": {"recipe": {"objective": "epsilon"}}},
+        {**legacy, "schema": "minigen.flow-training.v2"},
+    ):
+        torch.save(bad, path)
+        with pytest.raises(ValueError, match="objective"):
+            load_checkpoint(path)
+    with pytest.raises(ValueError, match="objective"):
+        TrainConfig(objective="epsilon")
+
+
+def test_failure_receipt_preserves_valid_checkpoint(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """训练数值失败保留最后有效检查点和旧结果，身份错误不能覆写失败回执。
+
+    Args:
+        tmp_path: 独立结果目录。
+        monkeypatch: 显式注入非有限输出，验证失败路径。
+
+    Raises:
+        AssertionError: 失败状态、尝试身份、旧结果或有效恢复点丢失。
+
+    副作用:
+        执行成功与失败的短训练，并保存 failure.json。
+    """
+    config = TrainConfig(
+        output_dir=str(tmp_path),
+        device="cpu",
+        max_steps=1,
+        max_seconds=30,
+        checkpoint_steps=(),
+        cpu_threads=1,
+    )
+    train_flow(config, TinyData(), blank_condition(), {"fixture": 1}, model=TinyVelocity())
+    previous = (tmp_path / "result.json").read_bytes()
+
+    def nonfinite_forward(
+        self,
+        z: Float[Tensor, "b c h w"],
+        t: Float[Tensor, " b"],
+        condition: Condition,
+    ) -> Float[Tensor, "b c h w"]:
+        """模拟设备计算产生 NaN，测试训练器的有限值拒绝。
+
+        Args:
+            z: [b,c,h,w] 输入状态。
+            t: [b] 连续时间，测试故障不使用。
+            condition: 文本条件，测试故障不使用。
+
+        Results:
+            Float[Tensor, "b c h w"]: 含 NaN 的同形错误输出。
+        """
+        return z * self.weights[0] * float("nan")
+
+    monkeypatch.setattr(TinyVelocity, "forward", nonfinite_forward)
+    with pytest.raises(ValueError, match="Nonfinite"):
+        train_flow(
+            replace(config, max_steps=2),
+            TinyData(),
+            blank_condition(),
+            {"fixture": 1},
+            model=TinyVelocity(),
+            resume=tmp_path / "last.pt",
+        )
+    failure = json.loads((tmp_path / "failure.json").read_text())
+    assert failure["status"] == "failed" and failure["error_type"] == "ValueError"
+    assert failure["attempt_id"] != json.loads(previous)["attempt_id"]
+    assert failure["run_id"] == json.loads(previous)["run_id"]
+    assert load_checkpoint(tmp_path / "last.pt")["step"] == 1
+    assert (tmp_path / "result.json").read_bytes() == previous
+    previous_failure = (tmp_path / "failure.json").read_bytes()
+    with pytest.raises(ValueError, match="mismatch"):
+        train_flow(
+            replace(config, max_steps=2),
+            TinyData(),
+            blank_condition(),
+            {"fixture": 2},
+            model=TinyVelocity(),
+            resume=tmp_path / "last.pt",
+        )
+    assert (tmp_path / "failure.json").read_bytes() == previous_failure

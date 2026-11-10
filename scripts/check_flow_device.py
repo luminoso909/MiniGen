@@ -1,4 +1,4 @@
-"""对同一个 B0 Checkpoint 比较 CPU FP32 与指定设备的前向和梯度。"""
+"""对同一个 B0/B1/B2 Checkpoint 比较 CPU FP32 与指定设备的前向和梯度。"""
 
 import argparse
 import copy

@@ -1,0 +1,3264 @@
+{
+  "torch": "2.14.1",
+  "batch_size": 1,
+  "models": [
+    {
+      "trainable_parameters": 30359824,
+      "total_parameters": 30359824,
+      "device": "cpu",
+      "dtype": "torch.float32",
+      "latent_shape": [
+        1,
+        4,
+        32,
+        32
+      ],
+      "text_shape": [
+        1,
+        77,
+        512
+      ],
+      "output_shape": [
+        1,
+        4,
+        32,
+        32
+      ],
+      "linear_calls": [
+        {
+          "module": "patch_embed",
+          "input_features": 16,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 3145728
+        },
+        {
+          "module": "time_embed.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            384
+          ],
+          "flops": 294912
+        },
+        {
+          "module": "time_embed.2",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            384
+          ],
+          "flops": 294912
+        },
+        {
+          "module": "text_embed",
+          "input_features": 512,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 30277632
+        },
+        {
+          "module": "blocks.0.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            3456
+          ],
+          "flops": 2654208
+        },
+        {
+          "module": "blocks.0.self_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.0.self_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            768
+          ],
+          "flops": 150994944
+        },
+        {
+          "module": "blocks.0.self_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.0.cross_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.0.cross_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            768
+          ],
+          "flops": 45416448
+        },
+        {
+          "module": "blocks.0.cross_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.0.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.0.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.1.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            3456
+          ],
+          "flops": 2654208
+        },
+        {
+          "module": "blocks.1.self_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.1.self_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            768
+          ],
+          "flops": 150994944
+        },
+        {
+          "module": "blocks.1.self_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.1.cross_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.1.cross_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            768
+          ],
+          "flops": 45416448
+        },
+        {
+          "module": "blocks.1.cross_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.1.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.1.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.2.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            3456
+          ],
+          "flops": 2654208
+        },
+        {
+          "module": "blocks.2.self_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.2.self_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            768
+          ],
+          "flops": 150994944
+        },
+        {
+          "module": "blocks.2.self_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.2.cross_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.2.cross_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            768
+          ],
+          "flops": 45416448
+        },
+        {
+          "module": "blocks.2.cross_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.2.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.2.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.3.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            3456
+          ],
+          "flops": 2654208
+        },
+        {
+          "module": "blocks.3.self_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.3.self_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            768
+          ],
+          "flops": 150994944
+        },
+        {
+          "module": "blocks.3.self_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.3.cross_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.3.cross_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            768
+          ],
+          "flops": 45416448
+        },
+        {
+          "module": "blocks.3.cross_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.3.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.3.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.4.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            3456
+          ],
+          "flops": 2654208
+        },
+        {
+          "module": "blocks.4.self_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.4.self_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            768
+          ],
+          "flops": 150994944
+        },
+        {
+          "module": "blocks.4.self_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.4.cross_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.4.cross_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            768
+          ],
+          "flops": 45416448
+        },
+        {
+          "module": "blocks.4.cross_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.4.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.4.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.5.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            3456
+          ],
+          "flops": 2654208
+        },
+        {
+          "module": "blocks.5.self_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.5.self_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            768
+          ],
+          "flops": 150994944
+        },
+        {
+          "module": "blocks.5.self_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.5.cross_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.5.cross_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            768
+          ],
+          "flops": 45416448
+        },
+        {
+          "module": "blocks.5.cross_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.5.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.5.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.6.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            3456
+          ],
+          "flops": 2654208
+        },
+        {
+          "module": "blocks.6.self_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.6.self_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            768
+          ],
+          "flops": 150994944
+        },
+        {
+          "module": "blocks.6.self_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.6.cross_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.6.cross_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            768
+          ],
+          "flops": 45416448
+        },
+        {
+          "module": "blocks.6.cross_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.6.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.6.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.7.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            3456
+          ],
+          "flops": 2654208
+        },
+        {
+          "module": "blocks.7.self_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.7.self_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            768
+          ],
+          "flops": 150994944
+        },
+        {
+          "module": "blocks.7.self_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.7.cross_attention.q",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.7.cross_attention.kv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            768
+          ],
+          "flops": 45416448
+        },
+        {
+          "module": "blocks.7.cross_attention.out",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "blocks.7.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "blocks.7.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "final_modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            768
+          ],
+          "flops": 589824
+        },
+        {
+          "module": "final_projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            16
+          ],
+          "flops": 3145728
+        }
+      ],
+      "attention_calls": [
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 256,
+          "dense_attention_matrix_elements": 393216,
+          "qk_flops": 50331648,
+          "pv_flops": 50331648,
+          "flops": 100663296
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 77,
+          "dense_attention_matrix_elements": 118272,
+          "qk_flops": 15138816,
+          "pv_flops": 15138816,
+          "flops": 30277632
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 256,
+          "dense_attention_matrix_elements": 393216,
+          "qk_flops": 50331648,
+          "pv_flops": 50331648,
+          "flops": 100663296
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 77,
+          "dense_attention_matrix_elements": 118272,
+          "qk_flops": 15138816,
+          "pv_flops": 15138816,
+          "flops": 30277632
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 256,
+          "dense_attention_matrix_elements": 393216,
+          "qk_flops": 50331648,
+          "pv_flops": 50331648,
+          "flops": 100663296
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 77,
+          "dense_attention_matrix_elements": 118272,
+          "qk_flops": 15138816,
+          "pv_flops": 15138816,
+          "flops": 30277632
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 256,
+          "dense_attention_matrix_elements": 393216,
+          "qk_flops": 50331648,
+          "pv_flops": 50331648,
+          "flops": 100663296
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 77,
+          "dense_attention_matrix_elements": 118272,
+          "qk_flops": 15138816,
+          "pv_flops": 15138816,
+          "flops": 30277632
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 256,
+          "dense_attention_matrix_elements": 393216,
+          "qk_flops": 50331648,
+          "pv_flops": 50331648,
+          "flops": 100663296
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 77,
+          "dense_attention_matrix_elements": 118272,
+          "qk_flops": 15138816,
+          "pv_flops": 15138816,
+          "flops": 30277632
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 256,
+          "dense_attention_matrix_elements": 393216,
+          "qk_flops": 50331648,
+          "pv_flops": 50331648,
+          "flops": 100663296
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 77,
+          "dense_attention_matrix_elements": 118272,
+          "qk_flops": 15138816,
+          "pv_flops": 15138816,
+          "flops": 30277632
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 256,
+          "dense_attention_matrix_elements": 393216,
+          "qk_flops": 50331648,
+          "pv_flops": 50331648,
+          "flops": 100663296
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 77,
+          "dense_attention_matrix_elements": 118272,
+          "qk_flops": 15138816,
+          "pv_flops": 15138816,
+          "flops": 30277632
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 256,
+          "dense_attention_matrix_elements": 393216,
+          "qk_flops": 50331648,
+          "pv_flops": 50331648,
+          "flops": 100663296
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            77,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            256,
+            64
+          ],
+          "query_tokens": 256,
+          "key_tokens": 77,
+          "dense_attention_matrix_elements": 118272,
+          "qk_flops": 15138816,
+          "pv_flops": 15138816,
+          "flops": 30277632
+        }
+      ],
+      "linear_call_count": 78,
+      "attention_call_count": 16,
+      "dense_attention_matrix_elements": 4091904,
+      "linear_flops": 8878030848,
+      "attention_flops": 1047527424,
+      "dominant_forward_flops": 9925558272,
+      "scope": "一次前向的 Linear 与 SDPA QK/PV 密集矩阵乘法，乘加计 2 FLOPs。不含 bias、Norm、激活、softmax、RoPE、VAE/CLIP、反向、优化器或 CFG 额外分支。不是完整硬件 FLOPs/吞吐，不代表同参数即同计算预算。",
+      "config_file": "configs/models/b0_30m.json",
+      "config_sha256": "59b90c077b64cbf8a1e29f0bb92c6ca4b5d95e21271a0da01c5679efa51caff4",
+      "specification": {
+        "architecture": "b0",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "depth": 8,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4
+      },
+      "resolved_model_config": {
+        "hidden_size": 384,
+        "num_heads": 6,
+        "depth": 8,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4
+      }
+    },
+    {
+      "trainable_parameters": 30061456,
+      "total_parameters": 30061456,
+      "device": "cpu",
+      "dtype": "torch.float32",
+      "latent_shape": [
+        1,
+        4,
+        32,
+        32
+      ],
+      "text_shape": [
+        1,
+        77,
+        512
+      ],
+      "output_shape": [
+        1,
+        4,
+        32,
+        32
+      ],
+      "linear_calls": [
+        {
+          "module": "interface.patch_embed",
+          "input_features": 16,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 3145728
+        },
+        {
+          "module": "interface.text_embed",
+          "input_features": 512,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 30277632
+        },
+        {
+          "module": "interface.time_embed.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            384
+          ],
+          "flops": 294912
+        },
+        {
+          "module": "interface.time_embed.2",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            384
+          ],
+          "flops": 294912
+        },
+        {
+          "module": "blocks.0.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.0.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.0.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.0.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.0.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.1.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.1.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.1.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.1.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.1.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.2.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.2.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.2.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.2.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.2.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.3.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.3.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.3.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.3.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.3.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.4.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.4.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.4.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.4.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.4.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.5.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.5.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.5.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.5.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.5.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.6.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.6.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.6.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.6.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.6.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.7.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.7.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.7.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.7.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.7.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.8.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.8.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.8.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.8.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.8.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.9.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.9.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.9.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.9.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.9.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.10.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "blocks.10.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "blocks.10.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "blocks.10.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "blocks.10.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "interface.final_modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            768
+          ],
+          "flops": 589824
+        },
+        {
+          "module": "interface.final_projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            16
+          ],
+          "flops": 3145728
+        }
+      ],
+      "attention_calls": [
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        }
+      ],
+      "linear_call_count": 61,
+      "attention_call_count": 11,
+      "dense_attention_matrix_elements": 7318674,
+      "linear_flops": 13020364800,
+      "attention_flops": 1873580544,
+      "dominant_forward_flops": 14893945344,
+      "scope": "一次前向的 Linear 与 SDPA QK/PV 密集矩阵乘法，乘加计 2 FLOPs。不含 bias、Norm、激活、softmax、RoPE、VAE/CLIP、反向、优化器或 CFG 额外分支。不是完整硬件 FLOPs/吞吐，不代表同参数即同计算预算。",
+      "config_file": "configs/models/b1_30m.json",
+      "config_sha256": "7009ea154fdc7e2e08cc9a72e0d86901c03e8599b10d2a6e72814165602a4af6",
+      "specification": {
+        "architecture": "b1",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "depth": 11
+      },
+      "resolved_model_config": {
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "depth": 11
+      }
+    },
+    {
+      "trainable_parameters": 30061456,
+      "total_parameters": 30061456,
+      "device": "cpu",
+      "dtype": "torch.float32",
+      "latent_shape": [
+        1,
+        4,
+        32,
+        32
+      ],
+      "text_shape": [
+        1,
+        77,
+        512
+      ],
+      "output_shape": [
+        1,
+        4,
+        32,
+        32
+      ],
+      "linear_calls": [
+        {
+          "module": "interface.patch_embed",
+          "input_features": 16,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 3145728
+        },
+        {
+          "module": "interface.text_embed",
+          "input_features": 512,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 30277632
+        },
+        {
+          "module": "interface.time_embed.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            384
+          ],
+          "flops": 294912
+        },
+        {
+          "module": "interface.time_embed.2",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            384
+          ],
+          "flops": 294912
+        },
+        {
+          "module": "double_blocks.0.image_branch.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "double_blocks.0.image_branch.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1152
+          ],
+          "flops": 226492416
+        },
+        {
+          "module": "double_blocks.0.text_branch.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "double_blocks.0.text_branch.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            1152
+          ],
+          "flops": 68124672
+        },
+        {
+          "module": "double_blocks.0.image_branch.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "double_blocks.0.image_branch.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "double_blocks.0.image_branch.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "double_blocks.0.text_branch.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 22708224
+        },
+        {
+          "module": "double_blocks.0.text_branch.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            1536
+          ],
+          "flops": 90832896
+        },
+        {
+          "module": "double_blocks.0.text_branch.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 90832896
+        },
+        {
+          "module": "double_blocks.1.image_branch.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "double_blocks.1.image_branch.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1152
+          ],
+          "flops": 226492416
+        },
+        {
+          "module": "double_blocks.1.text_branch.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "double_blocks.1.text_branch.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            1152
+          ],
+          "flops": 68124672
+        },
+        {
+          "module": "double_blocks.1.image_branch.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "double_blocks.1.image_branch.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "double_blocks.1.image_branch.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "double_blocks.1.text_branch.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 22708224
+        },
+        {
+          "module": "double_blocks.1.text_branch.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            1536
+          ],
+          "flops": 90832896
+        },
+        {
+          "module": "double_blocks.1.text_branch.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 90832896
+        },
+        {
+          "module": "double_blocks.2.image_branch.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "double_blocks.2.image_branch.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1152
+          ],
+          "flops": 226492416
+        },
+        {
+          "module": "double_blocks.2.text_branch.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "double_blocks.2.text_branch.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            1152
+          ],
+          "flops": 68124672
+        },
+        {
+          "module": "double_blocks.2.image_branch.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 75497472
+        },
+        {
+          "module": "double_blocks.2.image_branch.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            1536
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "double_blocks.2.image_branch.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            256,
+            384
+          ],
+          "flops": 301989888
+        },
+        {
+          "module": "double_blocks.2.text_branch.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 22708224
+        },
+        {
+          "module": "double_blocks.2.text_branch.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            77,
+            1536
+          ],
+          "flops": 90832896
+        },
+        {
+          "module": "double_blocks.2.text_branch.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            77,
+            384
+          ],
+          "flops": 90832896
+        },
+        {
+          "module": "single_blocks.0.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "single_blocks.0.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "single_blocks.0.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "single_blocks.0.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.0.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.1.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "single_blocks.1.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "single_blocks.1.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "single_blocks.1.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.1.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.2.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "single_blocks.2.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "single_blocks.2.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "single_blocks.2.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.2.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.3.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "single_blocks.3.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "single_blocks.3.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "single_blocks.3.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.3.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.4.modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            2304
+          ],
+          "flops": 1769472
+        },
+        {
+          "module": "single_blocks.4.qkv",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1152
+          ],
+          "flops": 294617088
+        },
+        {
+          "module": "single_blocks.4.projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 98205696
+        },
+        {
+          "module": "single_blocks.4.mlp.0",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            333,
+            1536
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "single_blocks.4.mlp.2",
+          "input_features": 1536,
+          "output_shape": [
+            1,
+            333,
+            384
+          ],
+          "flops": 392822784
+        },
+        {
+          "module": "interface.final_modulation.1",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            768
+          ],
+          "flops": 589824
+        },
+        {
+          "module": "interface.final_projection",
+          "input_features": 384,
+          "output_shape": [
+            1,
+            256,
+            16
+          ],
+          "flops": 3145728
+        }
+      ],
+      "attention_calls": [
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        },
+        {
+          "query_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "key_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "value_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "output_shape": [
+            1,
+            6,
+            333,
+            64
+          ],
+          "query_tokens": 333,
+          "key_tokens": 333,
+          "dense_attention_matrix_elements": 665334,
+          "qk_flops": 85162752,
+          "pv_flops": 85162752,
+          "flops": 170325504
+        }
+      ],
+      "linear_call_count": 61,
+      "attention_call_count": 8,
+      "dense_attention_matrix_elements": 5322672,
+      "linear_flops": 9484959744,
+      "attention_flops": 1362604032,
+      "dominant_forward_flops": 10847563776,
+      "scope": "一次前向的 Linear 与 SDPA QK/PV 密集矩阵乘法，乘加计 2 FLOPs。不含 bias、Norm、激活、softmax、RoPE、VAE/CLIP、反向、优化器或 CFG 额外分支。不是完整硬件 FLOPs/吞吐，不代表同参数即同计算预算。",
+      "config_file": "configs/models/b2_30m.json",
+      "config_sha256": "ddc43bf044cb2c56e6a43a3972052d75d4fc05d69b5996eb8685e9a9af80df09",
+      "specification": {
+        "architecture": "b2",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "double_depth": 3,
+        "single_depth": 5
+      },
+      "resolved_model_config": {
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "double_depth": 3,
+        "single_depth": 5
+      }
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "checkpoint_sha256": "226fa6a01aa36bbc0878ba6b80d8c5338b3b4b9b301bbf601f5d37071fa4df51",
+  "step": 1000,
+  "device": "mps",
+  "seed": 90210,
+  "sample_ids": [
+    "ab-30577",
+    "ab-30577",
+    "ab-30577",
+    "ab-30577"
+  ],
+  "oracle_endpoint_max_abs": 4.76837158203125e-06,
+  "latent_scaling_factor": 0.13025,
+  "latent_std": 0.8873229622840881,
+  "time_slices": {
+    "model": [
+      {
+        "t": 0.0,
+        "velocity_mse": 0.03330967575311661,
+        "endpoint_estimate_mse": 0.03330967575311661
+      },
+      {
+        "t": 0.01,
+        "velocity_mse": 0.02988772839307785,
+        "endpoint_estimate_mse": 0.029292963445186615
+      },
+      {
+        "t": 0.1,
+        "velocity_mse": 0.025549519807100296,
+        "endpoint_estimate_mse": 0.02069511078298092
+      },
+      {
+        "t": 0.25,
+        "velocity_mse": 0.024493619799613953,
+        "endpoint_estimate_mse": 0.013777662068605423
+      },
+      {
+        "t": 0.5,
+        "velocity_mse": 0.023284558206796646,
+        "endpoint_estimate_mse": 0.0058211395516991615
+      },
+      {
+        "t": 0.75,
+        "velocity_mse": 0.030103912577033043,
+        "endpoint_estimate_mse": 0.0018814945360645652
+      },
+      {
+        "t": 0.9,
+        "velocity_mse": 0.08007360994815826,
+        "endpoint_estimate_mse": 0.0008007369469851255
+      },
+      {
+        "t": 0.99,
+        "velocity_mse": 0.8861262798309326,
+        "endpoint_estimate_mse": 8.861242531565949e-05
+      },
+      {
+        "t": 1.0,
+        "velocity_mse": 1.1760938167572021,
+        "endpoint_estimate_mse": 0.0
+      }
+    ],
+    "ema": [
+      {
+        "t": 0.0,
+        "velocity_mse": 0.03481264039874077,
+        "endpoint_estimate_mse": 0.03481264039874077
+      },
+      {
+        "t": 0.01,
+        "velocity_mse": 0.03122076392173767,
+        "endpoint_estimate_mse": 0.030599471181631088
+      },
+      {
+        "t": 0.1,
+        "velocity_mse": 0.026755530387163162,
+        "endpoint_estimate_mse": 0.021671978756785393
+      },
+      {
+        "t": 0.25,
+        "velocity_mse": 0.025325484573841095,
+        "endpoint_estimate_mse": 0.014245585538446903
+      },
+      {
+        "t": 0.5,
+        "velocity_mse": 0.023448456078767776,
+        "endpoint_estimate_mse": 0.005862114019691944
+      },
+      {
+        "t": 0.75,
+        "velocity_mse": 0.028379343450069427,
+        "endpoint_estimate_mse": 0.0017737089656293392
+      },
+      {
+        "t": 0.9,
+        "velocity_mse": 0.08470552414655685,
+        "endpoint_estimate_mse": 0.0008470561588183045
+      },
+      {
+        "t": 0.99,
+        "velocity_mse": 0.887802004814148,
+        "endpoint_estimate_mse": 8.877999789547175e-05
+      },
+      {
+        "t": 1.0,
+        "velocity_mse": 1.1683828830718994,
+        "endpoint_estimate_mse": 0.0
+      }
+    ]
+  },
+  "samples": [
+    {
+      "name": "online_euler40",
+      "latent_target_mse": 0.005134665407240391,
+      "decoded_reference_mse": 0.00023087528825271875,
+      "solver_nfe": 40,
+      "model_evaluations": 40
+    },
+    {
+      "name": "ema_euler40",
+      "latent_target_mse": 0.005133230239152908,
+      "decoded_reference_mse": 0.00022061851632315665,
+      "solver_nfe": 40,
+      "model_evaluations": 40
+    },
+    {
+      "name": "ema_heun20",
+      "latent_target_mse": 0.005935331806540489,
+      "decoded_reference_mse": 0.00023948271700646728,
+      "solver_nfe": 40,
+      "model_evaluations": 40
+    },
+    {
+      "name": "ema_euler200",
+      "latent_target_mse": 0.005396377295255661,
+      "decoded_reference_mse": 0.00022780564904678613,
+      "solver_nfe": 200,
+      "model_evaluations": 200
+    },
+    {
+      "name": "ema_cfg3",
+      "latent_target_mse": 0.006195954978466034,
+      "decoded_reference_mse": 0.0002825203991960734,
+      "solver_nfe": 40,
+      "model_evaluations": 80
+    }
+  ],
+  "quality_passed": null,
+  "scope": "目标误差是固定训练图诊断，不是正式生成质量指标；需独立看图"
+}

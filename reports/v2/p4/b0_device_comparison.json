@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "device": "mps",
+  "precision": "fp32",
+  "torch": "2.14.1",
+  "samples": [
+    "ab-24479",
+    "ab-14241"
+  ],
+  "atol": 0.0002,
+  "rtol": 0.0002,
+  "cpu_loss": 1.4712262153625488,
+  "device_loss": 1.4712262153625488,
+  "output_max_abs_error": 1.043081283569336e-07,
+  "gradient_max_abs_error": 2.0489096641540527e-08,
+  "errors": [],
+  "scope": "2条固定表示前反向；不代表跨设备训练逐位一致或 CUDA AMP 验收"
+}

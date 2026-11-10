@@ -1,0 +1,50 @@
+{
+  "torch": "2.14.1",
+  "device": "cpu",
+  "dtype": "float32",
+  "seed_before_model_initialization": 221,
+  "cpu_threads": 2,
+  "input_shape": [
+    2,
+    4,
+    4,
+    4
+  ],
+  "text_shape": [
+    2,
+    5,
+    8
+  ],
+  "nonzero_heads_and_modulation": true,
+  "results": [
+    {
+      "architecture": "b1",
+      "hidden_size": 32,
+      "depth": {
+        "single": 5,
+        "double": 0
+      },
+      "masked_gradient_max": 0.0,
+      "valid_gradient_max": 6.472415407188237e-06,
+      "masked_change_max": 0.0,
+      "append_padding_change_max": 1.4901161193847656e-08,
+      "append_padding_tolerance": 2e-06,
+      "status": "passed"
+    },
+    {
+      "architecture": "b2",
+      "hidden_size": 32,
+      "depth": {
+        "single": 5,
+        "double": 3
+      },
+      "masked_gradient_max": 0.0,
+      "valid_gradient_max": 9.960373063222505e-06,
+      "masked_change_max": 0.0,
+      "append_padding_change_max": 4.470348358154297e-08,
+      "append_padding_tolerance": 2e-06,
+      "status": "passed"
+    }
+  ],
+  "scope": "新构造小模型的数值隔离测试；不训练、不加载或修改真实检查点，不代表生成质量。"
+}

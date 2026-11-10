@@ -9,20 +9,20 @@
 | P0 仓库审计与迁移 | 当前文件与代码映射，五份 Notebook 哈希，基础检查，统一文档入口 | 已完成，见 [审计](reports/v2/00_repository_audit.md)、[迁移差异](reports/v2/00_migration_diff.md)、[交接](reports/v2/00_handoff.md) |
 | P1 数据接入与审计 | ArtBench 全量 46,298 张，固定来源、逐图解码、组级切分与图文复核 | 全量接入、Caption 清洗与 240 张图文抽查完成。见 [P0/P1 交付](reports/v2/01_p0_p1_delivery.md) |
 | P2 冻结组件 | 随机 200 张重建、人审，CLIP 单段特征与 mask，固定 20 张本机验收，冻结版本化缓存 | 已完成，见 [P2 工程交付](reports/v2/02_p2_delivery.md)。train 37,042 行、validation 4,637 行均通过 [独立回读](reports/v2/components/artbench_cache_formal.json) |
-| P3 B0 工程 | 共用 Flow 契约和 B0，真实 CLI，短跑、采样、恢复与成本估算 | P3-01～04 本地工程通过；1000 步采样仍不可辨，P3-05 质量未通过；P3-06 待 CUDA。见 [P3 交付](reports/v2/03_p3_delivery.md) |
-| P4 三主干工程与正式训练 | 按用户新顺序先完成本地 B1/B2 工程，正式云端运行另行批准 | 停在入口；B0 质量诊断、核心/短跑和预算门槛仍保留 |
-| P5 MiniGen-Bench | 训练前冻结测试设计，按同更新步数和同算力报告，匹配 NFE 对照采样 | 待做。预登记提前，正式评测依赖可比检查点 |
+| P3 B0 工程 | 共用 Flow 契约和 B0，真实 CLI，短跑、采样、恢复与成本估算 | P3-01～04 本地通过；单图可辨，16 图有限对照仍未通过 P3-05；P3-06 待 CUDA。见 [P3 收尾](reports/v2/03_p3_closeout.md) |
+| P4 三主干工程与正式训练 | 本地完成 B1/B2 与共享接口；正式云端运行另行批准 | P4-03/05 本地工程通过，三模型 MPS 8+4 步闭环及 180 项测试通过；P4-01/02/04/06/07 正式实验未完成。见 [P4 交付](reports/v2/04_p4_delivery.md) |
+| P5 MiniGen-Bench | 训练前冻结测试设计，按同更新步数和同算力报告，匹配 NFE 对照采样 | 当前停在本地工程入口，等待下一轮指令；尚未实现 P5，正式评测依赖可比检查点。见 [交接](reports/v2/05_local_handoff.md) |
 | P6 可选扩展 | 第二种子、单一架构的 10M/50M 扩展或 Chimera-Lite | 默认跳过，由用户在主结果明确后决定 |
 | P7 交付与复现 | 数据卡、模型卡、报告、运行入口、失败分析和可复现示例 | 待做，依赖 P5 |
 
-正式对照采用 256×256 ArtBench、冻结 SDXL VAE/CLIP-B/32 与同一 Flow Matching 目标，训练三个从零初始化的约 30M 条件主干。层数与计算预算由参数计数、短跑和审批冻结。配置、短训、个人理解、生成质量和正式结果分别登记。
+正式对照采用 256×256 ArtBench、冻结 SDXL VAE/CLIP-B/32 与同一 Flow Matching 目标，训练三个从零初始化的约 30M 条件主干。B0 实际 30,359,824 参数，B1/B2 各 30,061,456 参数；正式计算预算仍需 CUDA Pilot 和审批冻结。按用户更新的顺序先完成 P3–P5 主体代码与本地小案例，再制作云端操作手册，由用户安排正式运行。配置、短训、个人理解、生成质量和正式结果分别登记，P4 工程完成不等于正式实验完成。
 
 ### **2. 个人学习与既有证据**
 
 S4-01 从线性 Flow、Euler/Heun 与 NFE 开始，再按 [课程顺序](docs/MiniGen2学习目录.md) 进入 Plain、Joint Attention/2D RoPE、Single-Stream、Hybrid 和实验评测。首份课件由用户启动学习回合后交付。
 
 - S1 的 DDPM/VAE 个人数学核心已验收，教学结果和理解收尾分别记录。见 [S1 验收](reports/stage1/s1_acceptance_2026-10-30.md)。
-- S2 保留几何数据、冻结表示、缓存和训练恢复证据。历史生成质量未达标。当前工作树 L03 小案例通过，完整模型的 v2 适配待验。见 [S2 第四周报告](reports/stage2/week4.md) 与 [P0 审计](reports/v2/00_repository_audit.md)。
+- S2 保留几何数据、冻结表示、缓存和训练恢复证据。历史生成质量未达标。L03 小案例通过，完整模型的 v2 工程验收另记于 P3/P4，不代替个人理解验收。见 [S2 第四周报告](reports/stage2/week4.md) 与 [P0 审计](reports/v2/00_repository_audit.md)。
 - S3 保留条件实验、人工待审、封存测试与二维 Flow。见 [S3 报告](reports/stage3/stage3.md)。
 - 五份课件从 [只读学习导航](docs/learning/README.md) 打开，个人任务见 [任务导航](learning/README.md)。
 

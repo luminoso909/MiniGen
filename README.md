@@ -2,11 +2,11 @@
 
 MiniGen 在同一套 ArtBench Public Domain 256x256 数据的训练切分上，从随机初始化训练三个约 30M 可训练参数的文本条件生成主干。三者共享冻结的 SDXL VAE、CLIP-B/32 文本塔和 Flow Matching 速度目标，比较画质、提示词遵循与计算成本。
 
-| 主干 | 图文条件路径 | 顺序 |
+| 主干 | 图文条件路径 | 可训练参数 |
 | --- | --- | --- |
-| B0 PlainConditionalDiT | 图像自注意力读取图像 token，Cross-Attention 读取文本 token | 先验证数据、训练、采样和恢复，再正式训练 |
-| B1 SingleStreamDiT | 图文 token 拼接，共用 Transformer 块 | B0 稳定后接入相同训练接口 |
-| B2 HybridDiT | 前段保留图文双流，通过 Joint Attention 交互，后段合流 | B1 后接入相同训练接口 |
+| B0 PlainConditionalDiT | 图像自注意力读取图像 token，Cross-Attention 读取文本 token | 30,359,824 |
+| B1 SingleStreamDiT | 图文 token 拼接，共用 Transformer 块 | 30,061,456 |
+| B2 HybridDiT | 前段保留图文双流，通过 Joint Attention 交互，后段合流 | 30,061,456 |
 
 正式范围、阶段门槛和实验矩阵以 [MiniGen v2 重构规划](docs/MiniGen2重构规划.md) 为准。阶段状态见 [任务索引](MiniGen项目任务清单与学习路径.md)，阶段证据和下一项工作见 [当前交接](reports/v2/00_handoff.md)。
 
@@ -15,9 +15,9 @@ MiniGen 在同一套 ArtBench Public Domain 256x256 数据的训练切分上，�
 | 功能 | 当前状态 |
 | --- | --- |
 | `minigen doctor` | 可用。支持 `--device` 和 `--json`，检查依赖与小张量前向、反向 |
-| `minigen train`、`sample`、`evaluate`、`cache` | 已可用：B0 Flow 训练/恢复、Euler/Heun 采样、固定配对 MSE 诊断、正式缓存构建/回读；P5 图像质量评测尚未实现 |
+| `minigen train`、`sample`、`evaluate`、`cache` | 已可用：B0/B1/B2 统一 Flow 训练/恢复、Euler/Heun 采样、固定配对 MSE 诊断、正式缓存构建/回读；P5 图像质量评测尚未实现 |
 | `minigen data`、`report` | 计划中的入口，尚未注册 |
-| 数据、冻结组件与训练工具 | ArtBench 46,298 张已接入，离线数据准备使用 `scripts/prepare_artbench.py`。冻结 VAE、CLIP 和 train/validation 正式缓存已完成 [P2 验收](reports/v2/02_p2_delivery.md)。P3 本地工程已交付，停在 P4 入口；1000 步短训可辨质量未通过，CUDA 待验 |
+| 数据、冻结组件与训练工具 | ArtBench 46,298 张已接入，离线数据准备使用 `scripts/prepare_artbench.py`。冻结 VAE、CLIP 和 train/validation 正式缓存已完成 [P2 验收](reports/v2/02_p2_delivery.md)。P3 诊断与 P4 本地主体工程已交付，停在 P5 本地工程入口；16 图生成质量及 CUDA 仍待验收 |
 | 个人学习核心 | DDPM、VAE 数学已验收。当前 DiT 的 L03 独立小案例通过。文本 Cross-Attention、CFG、Flow 仍待实现 |
 
 项目使用 Python 3.12.14 和 uv。初始化或恢复依赖时使用 `uv sync --locked`。已有环境可以执行以下离线检查：
@@ -28,19 +28,19 @@ uv run --locked --offline --no-sync minigen doctor --device cpu --json
 uv run --locked --offline --no-sync pytest -p no:cacheprovider
 ```
 
-P0 的 CPU 诊断和独立 L03 检查通过。旧 DiT 启动测试已修复。历史环境基线和最新验收分别见 [仓库审计](reports/v2/00_repository_audit.md)、[P2 工程交付](reports/v2/02_p2_delivery.md) 与 [P3 工程交付](reports/v2/03_p3_delivery.md)。当前完整 pytest 164 通过；CPU/MPS 数值和本地训练验收与将来的 CUDA/AMP 分开记录。
+P0 的 CPU 诊断和独立 L03 检查通过。旧 DiT 启动测试已修复。历史环境基线和最新验收分别见 [仓库审计](reports/v2/00_repository_audit.md)、[P2 工程交付](reports/v2/02_p2_delivery.md) 与 [P4 工程交付](reports/v2/04_p4_delivery.md)。当前完整 pytest 180 通过；三个约 30M 模型均完成 MPS 8 步训练、恢复至 12 步、采样和 Flow MSE 诊断。CPU/MPS 本地验收与将来的 CUDA/AMP 分开记录。
 
-B0 实际参数量 **30,359,824**。本地 16 图、1000 步损失下降，但固定采样主体仍不可辨；当前属于可靠工程入口与真实失败实验，尚不是合格艺术图像生成模型。[训练曲线与全部对照](reports/v2/03_p3_delivery.md) · [模型规格](reports/v2/p3/model_card.md)。
+B0 单图 1000 步诊断已产生可辨主体；固定 16 图、学习率 `2e-4` 的有限对照仍未通过可辨生成门槛，P3-05 保持未完成。三模型的 8+4 步运行只证明工程闭环，不能据此比较生成质量。P4-03/05 本地工程完成，其余正式训练与架构对照仍待执行。[P3 质量诊断](reports/v2/03_p3_closeout.md) · [三模型本地实验](reports/v2/p4/local_experiments.md)。
 
 以下命令需要已验收的 P2 缓存；环境已有可选组件时使用 `--no-sync` 保留它们。新实验先复制配置并设置新的 `output_dir`，避免覆盖既有结果：
 
 ```bash
 uv run --locked --offline --no-sync minigen train --config configs/training/p3_tiny.json --device cpu
-uv run --locked --offline --no-sync minigen train --config configs/training/p3_local.json --device mps
-uv run --locked --offline --no-sync minigen sample --config configs/training/p3_local.json --checkpoint artifacts/runs/p3_local/last.pt --output artifacts/runs/example_samples --device mps --count 8 --steps 40
+uv run --locked --offline --no-sync minigen train --config configs/training/p4_b1_local.json --device mps
+uv run --locked --offline --no-sync minigen sample --config configs/training/p4_b1_local.json --checkpoint artifacts/runs/p4_b1_local/last.pt --output artifacts/runs/example_samples --device mps --count 4 --steps 8
 ```
 
-恢复、条件对照和 CUDA Pilot 见 [P3 命令与边界](reports/v2/03_p3_delivery.md)。使用 CPU 可显式改 `--device cpu`；CUDA 代码分支已预留但本轮没有实机验收，多卡尚未实现。
+三模型的本地配置、恢复配置与 CUDA Pilot 配置见 [配置导航](configs/README.md)，本轮真实命令见 [本地实验](reports/v2/p4/local_experiments.md)。恢复严格校验源码与数据身份；旧 P3 权重可显式读取，不等于可以跨源码版本精确续训。使用 CPU 可显式改 `--device cpu`；CUDA/AMP 尚未实机验收，多卡尚未实现。当前停止在 [P5 本地工程交接](reports/v2/05_local_handoff.md)，不自动运行 P5 或云端训练。
 
 ## **三、数据、实验与协作**
 

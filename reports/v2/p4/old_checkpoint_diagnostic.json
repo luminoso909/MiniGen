@@ -1,0 +1,114 @@
+{
+  "checkpoint": "artifacts/runs/p3_local/last.pt",
+  "checkpoint_step": 1000,
+  "weights": "ema",
+  "device": "cpu",
+  "dtype": "float32",
+  "seed": 90210,
+  "sample_ids": [
+    "ab-24479",
+    "ab-14241"
+  ],
+  "train_indices": [
+    19606,
+    11409
+  ],
+  "latent": {
+    "mean": -0.022577060386538506,
+    "std": 0.7376466393470764,
+    "min": -2.427734375,
+    "max": 2.349609375
+  },
+  "fixed_pair_time_grid": [
+    {
+      "t": 0.0,
+      "velocity_mse": 0.2973397374153137,
+      "x0_estimate_mse": 0.2973397374153137,
+      "velocity_std": 1.1652708053588867,
+      "negative_noise_projection": 1.0183304347581807
+    },
+    {
+      "t": 0.01,
+      "velocity_mse": 0.3008438050746918,
+      "x0_estimate_mse": 0.294856995344162,
+      "velocity_std": 1.167312741279602,
+      "negative_noise_projection": 1.0182389008059904
+    },
+    {
+      "t": 0.1,
+      "velocity_mse": 0.3456012010574341,
+      "x0_estimate_mse": 0.2799369692802429,
+      "velocity_std": 1.1307010650634766,
+      "negative_noise_projection": 0.9710182672271697
+    },
+    {
+      "t": 0.25,
+      "velocity_mse": 0.44785284996032715,
+      "x0_estimate_mse": 0.2519172430038452,
+      "velocity_std": 1.058038353919983,
+      "negative_noise_projection": 0.8720406850859822
+    },
+    {
+      "t": 0.5,
+      "velocity_mse": 0.7197355031967163,
+      "x0_estimate_mse": 0.17993387579917908,
+      "velocity_std": 0.8819442987442017,
+      "negative_noise_projection": 0.6118581181602659
+    },
+    {
+      "t": 0.75,
+      "velocity_mse": 1.0735235214233398,
+      "x0_estimate_mse": 0.06709522008895874,
+      "velocity_std": 0.6686598658561707,
+      "negative_noise_projection": 0.23141009223859976
+    },
+    {
+      "t": 0.9,
+      "velocity_mse": 1.1672499179840088,
+      "x0_estimate_mse": 0.011672504246234894,
+      "velocity_std": 0.636060893535614,
+      "negative_noise_projection": -0.007183152868840274
+    },
+    {
+      "t": 0.99,
+      "velocity_mse": 1.0686415433883667,
+      "x0_estimate_mse": 0.00010686393943615258,
+      "velocity_std": 0.7079978585243225,
+      "negative_noise_projection": 0.003395980405589049
+    },
+    {
+      "t": 1.0,
+      "velocity_mse": 1.0662446022033691,
+      "x0_estimate_mse": 0.0,
+      "velocity_std": 0.6955115795135498,
+      "negative_noise_projection": 0.009245356224800364
+    }
+  ],
+  "sampling": {
+    "euler": {
+      "steps": 40,
+      "nfe": 40,
+      "oracle_max_abs_error": 2.6226043701171875e-06,
+      "generated_target_latent_mse": 0.4846653342247009,
+      "generated_std": 0.713966965675354,
+      "generated_mean": -0.013659091666340828
+    },
+    "heun": {
+      "steps": 20,
+      "nfe": 40,
+      "oracle_max_abs_error": 1.3113021850585938e-06,
+      "generated_target_latent_mse": 0.4996272623538971,
+      "generated_std": 0.7228941321372986,
+      "generated_mean": -0.013814832083880901
+    }
+  },
+  "ema_online_parameter_rms_difference": 0.00012604937466984784,
+  "limits": [
+    "Only two fixed training examples; not population or visual quality evidence",
+    "Oracle uses known target and initial noise; passing proves numerical integration, not learned generation",
+    "At t=1, independent training noise is unobserved: velocity MSE near 1 is not by itself a bug",
+    "Generated-to-selected-target latent MSE is a diagnostic only; conditional generation can be multimodal"
+  ],
+  "checkpoint_sha256": "ca0bdb56b4759d9a44e5154b371885a35127919de1852d894a832e44385deacd",
+  "source_sha256": "f3382149dd813ae8b68864639a5d8f7b07ac08f2a358c499bced845ce4d6f88a"
+}

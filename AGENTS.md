@@ -18,9 +18,11 @@ B0 PlainConditionalDiT、B1 SingleStreamDiT、B2 HybridDiT 从随机初始化训
 
 ### **3. 当前可执行检查**
 
-`minigen doctor` 是现有功能入口。`train`、`sample`、`evaluate`、`cache` 已提供真实 P3 入口；`evaluate` 仅为固定配对 Flow MSE，不是 P5 图像质量评测；`data` 和 `report` 尚未注册。环境同步用 `uv sync --locked`。已有环境的基础核查用 `uv run --locked --offline --no-sync minigen doctor --device cpu --json` 与 `uv run --locked --offline --no-sync pytest -p no:cacheprovider`。设备、测试与检查基线见 P0 审计。
+`minigen doctor` 是现有功能入口。`train`、`sample`、`evaluate`、`cache` 已提供真实入口，B0/B1/B2 共用训练、采样和恢复；`evaluate` 仅为固定配对 Flow MSE，不是 P5 图像质量评测；`data` 和 `report` 尚未注册。环境同步用 `uv sync --locked`。已有环境的基础核查用 `uv run --locked --offline --no-sync minigen doctor --device cpu --json` 与 `uv run --locked --offline --no-sync pytest -p no:cacheprovider`。设备、测试与检查基线见 P0 审计，最新本地验收见 P4 交付。
 
-P2 离线入口、用户审批和数值验收见 [P2 交付](reports/v2/02_p2_delivery.md)。正式缓存禁止复用试点，身份须绑定用户视觉审核、本机数值验收和组件锁；只编码 train/validation，逐批写入、可恢复，验证完整后才供 P3 读取。P3 本地交付见 [阶段报告](reports/v2/03_p3_delivery.md)：P3-01～04 本地通过，P3-05 可辨生成未通过，P3-06 CUDA 待验；当前停在 P4 入口，不因测试通过而批准长训。用户最新顺序为先完成 P3–P5 主体代码及本地小案例，云端正式运行另行批准。工程 Flow 实现不代替个人 TODO。项目源码在 `src/minigen/`；旧学习模块在 `docs/learning/src/`，只由 Notebook 执行工具、个人验收脚本和历史测试显式加载。
+P2 离线入口、用户审批和数值验收见 [P2 交付](reports/v2/02_p2_delivery.md)。正式缓存禁止复用试点，身份须绑定用户视觉审核、本机数值验收和组件锁；只编码 train/validation，逐批写入、可恢复，验证完整后才供训练读取，本轮不重建。P3-01～04 本地通过；[P3 收尾](reports/v2/03_p3_closeout.md) 的单图可辨，但 16 图有限对照仍未通过 P3-05，P3-06 CUDA 待验。[P4 交付](reports/v2/04_p4_delivery.md) 已完成 P4-03/05 本地主体工程、三模型 MPS 8+4 步闭环和完整 180 项测试；P4-01/02/04/06/07 正式实验未完成。当前停在 [P5 本地工程入口](reports/v2/05_local_handoff.md)，等待下一轮指令，不因冒烟通过而批准长训或质量对照。用户最新顺序为先完成 P3–P5 主体代码及本地小案例，再单独编写基于真实入口的云端操作手册，云端正式运行另行批准。工程 Flow 实现不代替个人 TODO。项目源码在 `src/minigen/`；旧学习模块在 `docs/learning/src/`，只由 Notebook 执行工具、个人验收脚本和历史测试显式加载。
+
+训练、采样和诊断产物保留 `run_id`、配方、数据与源码身份及 `flow_velocity` 输出语义。恢复严格检查完整源码哈希；旧 P3 v1 Checkpoint 的显式读取兼容不表示跨源码精确恢复。失败回执与最后有效 Checkpoint 分开，不能把旧成功结果当作最新尝试成功。MPS 当前分配量不是峰值显存，固定配对 Flow MSE 不是图像质量分数；未来 P5 须按这些边界读取产物。
 
 ## **二、数据、实验与证据**
 
@@ -76,5 +78,5 @@ Tensor 使用 jaxtyping 的 Float、Int、Bool 等。维度统一为 b（批量�
 ## **六、S1–S3 历史资产与个人复验**
 
 - S1 的 DDPM/VAE 个人数学核心已验收。入口为 `scripts/check_ddpm_core.py` 和 `scripts/check_vae_core.py`，见 [S1 证据](reports/stage1/s1_acceptance_2026-10-30.md)。训练恢复按相同数据顺序和日程检查，基础 `train_denoiser` 的 DDPM 日程校验限制仍存在。
-- S2 用固定 SDXL VAE、128px 几何数据、后验均值与独立缓存。第三周试点和第四周全量缓存、教学训练、采样及失败分别见 [S2 报告](reports/README.md)。第四周包装层额外验证完整日程、缓存、模型来源和数据顺序。当前 `scripts/check_dit_core.py` 的 L03 独立小案例通过，B0 完整验收留待 P3。
+- S2 用固定 SDXL VAE、128px 几何数据、后验均值与独立缓存。第三周试点和第四周全量缓存、教学训练、采样及失败分别见 [S2 报告](reports/README.md)。第四周包装层额外验证完整日程、缓存、模型来源和数据顺序。`scripts/check_dit_core.py` 的 L03 独立小案例通过；B0/B1/B2 的 v2 工程验收另见 P3/P4，不能代替个人理解验收。
 - S3 的两段 CLIP、DDPM/DDIM 教学运行及几何评测保留旧身份。个人文本注意力与 CFG 复验为 `scripts/check_conditioning_core.py`、`scripts/check_cfg_core.py`，缺少实现时退出 2。S3 人工评分待完成且测试封存，旧门槛与结果见 [S3 交接](reports/tasks/stage3.md)。

@@ -6,9 +6,13 @@ import hashlib
 import json
 import math
 import random
+import resource
 import subprocess
+import sys
+from datetime import UTC, datetime
 from pathlib import Path
 from time import perf_counter
+from uuid import uuid4
 
 import numpy as np
 import torch
@@ -20,7 +24,14 @@ from minigen.contracts import Condition
 from minigen.data.representation_cache import Representation
 from minigen.data.stateful import StatefulBatchStream
 from minigen.objectives.flow import drop_condition, flow_interpolate, flow_loss
-from minigen.training.checkpoint import load_checkpoint, restore_rng, rng_state, save_checkpoint
+from minigen.training.checkpoint import (
+    CHECKPOINT_SCHEMA,
+    load_checkpoint,
+    restore_rng,
+    rng_state,
+    run_identity,
+    save_checkpoint,
+)
 from minigen.training.config import TrainConfig, build_model, learning_rate_for_step
 from minigen.training.runtime import autocast_context, resolve_device, synchronize
 
@@ -183,7 +194,7 @@ def train_flow(
         dataset: 可确定索引的训练表示；包含 sample_id、latent、text 和 mask。
         blank: 同一编码器的单条独立空条件，用于条件丢弃。
         data_identity: 已验收缓存及子集的身份，恢复时逐字段一致。
-        model: 显式注入的速度预测模型；省略时由配置构造 B0。
+        model: 显式注入的速度预测模型；省略时由配置构造 B0/B1/B2。
         resume: 同设备兼容检查点，允许延长停止上限。
         validation: 可选验证表示；使用独立固定噪声和时间。
 
@@ -234,7 +245,7 @@ def _train(
         JsonDict: 保存到 result.json 的实际运行摘要。
 
     副作用:
-        更新模型、优化状态及随机数，写入独立目录。
+        更新模型、优化状态及随机数，写入独立目录；身份核验后的训练失败另存回执。
     """
     device = resolve_device(config.device, config.precision)
     torch.set_num_threads(config.cpu_threads)
@@ -247,7 +258,7 @@ def _train(
     model = (model if model is not None else build_model(config.model)).to(device)
     original_mode = model.training
     contract = _contract(config, data_identity, model, device)
-    identity_digest = hashlib.sha256(json.dumps(contract, sort_keys=True).encode()).hexdigest()
+    identity_digest = run_identity(contract)
     stream = StatefulBatchStream(
         dataset, config.batch_size * config.grad_accum, data_id=identity_digest, seed=config.seed
     )
@@ -290,6 +301,8 @@ def _train(
         "contract"
     ] != contract:
         raise ValueError("Output directory belongs to another run identity")
+    attempt_id = uuid4().hex
+    started_at = datetime.now(UTC).isoformat()
     git = subprocess.run(
         ["git", "rev-parse", "HEAD"],
         cwd=Path(__file__).resolve().parents[3],
@@ -300,6 +313,12 @@ def _train(
     _json_write(
         directory / "run.json",
         {
+            "schema": "minigen.run.v1",
+            "run_id": identity_digest,
+            "attempt_id": attempt_id,
+            "started_at": started_at,
+            "objective": config.objective,
+            "architecture": config.model.get("architecture", "b0"),
             "contract": contract,
             "git_commit": git.stdout.strip() if git.returncode == 0 else None,
             "config": config.to_dict(),
@@ -430,6 +449,16 @@ def _train(
             snapshot=step in config.checkpoint_steps,
         )
         result: JsonDict = {
+            "schema": "minigen.training-result.v1",
+            "run_id": identity_digest,
+            "attempt_id": attempt_id,
+            "started_at": started_at,
+            "finished_at": datetime.now(UTC).isoformat(),
+            "objective": config.objective,
+            "architecture": config.model.get("architecture", "b0"),
+            "model_config": config.model,
+            "source_sha256": contract["source_sha256"],
+            "data_identity": data_identity,
             "status": reason,
             "step": step,
             "elapsed_seconds": elapsed,
@@ -440,17 +469,64 @@ def _train(
             "metrics": str(directory / "metrics.jsonl"),
             "train_samples": len(dataset),
             "validation_samples": len(validation) if validation is not None else 0,
+            "performance": {
+                "optimizer_steps": len(history),
+                "samples_seen": sum(row["samples"] for row in history),
+                "optimizer_step_seconds": sum(row["step_seconds"] for row in history),
+                "samples_per_optimizer_second": (
+                    sum(row["samples"] for row in history)
+                    / sum(row["step_seconds"] for row in history)
+                )
+                if history
+                else None,
+                "data_seconds": sum(row["data_seconds"] for row in history),
+                "scope": "累计更新耗时含数据访问/同步，不含验证和检查点写盘；非预热性能基准",
+            },
             "memory": {
+                "cpu_process_peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                * (1 if sys.platform == "darwin" else 1024),
                 "cuda_peak_allocated": torch.cuda.max_memory_allocated(device)
                 if device.type == "cuda"
                 else None,
                 "cuda_peak_reserved": torch.cuda.max_memory_reserved(device)
                 if device.type == "cuda"
                 else None,
+                "mps_current_allocated_bytes": torch.mps.current_allocated_memory()
+                if device.type == "mps"
+                else None,
+                "mps_driver_allocated_bytes": torch.mps.driver_allocated_memory()
+                if device.type == "mps"
+                else None,
+                "scope": "CPU 为进程峰值；CUDA 为本次调用峰值；MPS 为当前值，非峰值",
             },
         }
         _json_write(directory / "result.json", result)
         return result
+    except Exception as error:
+        # 仅在身份核验后记录失败，不覆写旧成功结果；时间与 attempt_id 区分不同尝试。
+        try:
+            _json_write(
+                directory / "failure.json",
+                {
+                    "schema": "minigen.training-failure.v1",
+                    "run_id": identity_digest,
+                    "attempt_id": attempt_id,
+                    "started_at": started_at,
+                    "failed_at": datetime.now(UTC).isoformat(),
+                    "status": "failed",
+                    "error_type": type(error).__name__,
+                    "message": str(error),
+                    "step_at_failure": step,
+                    "last_published_checkpoint": str(directory / "last.pt")
+                    if (directory / "last.pt").exists()
+                    else None,
+                    "resume": str(resume) if resume else None,
+                },
+            )
+        except (OSError, TypeError, ValueError):
+            # 磁盘故障可能同时阻止回执写入，原始训练异常仍必须向上传播。
+            pass
+        raise
     finally:
         model.train(original_mode)
 
@@ -495,7 +571,8 @@ def _save(
         原子写入 last.pt，并按需保留命名快照。
     """
     payload: Checkpoint = {
-        "schema": "minigen.flow-training.v1",
+        "schema": CHECKPOINT_SCHEMA,
+        "objective": config.objective,
         "model": model.state_dict(),
         "ema": ema.state_dict(),
         "optimizer": optimizer.state_dict(),

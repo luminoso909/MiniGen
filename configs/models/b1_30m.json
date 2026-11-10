@@ -1,0 +1,12 @@
+{
+  "architecture": "b1",
+  "hidden_size": 384,
+  "num_heads": 6,
+  "patch_size": 2,
+  "latent_size": 32,
+  "in_channels": 4,
+  "text_dim": 512,
+  "mlp_ratio": 4,
+  "position_encoding": "image_2d_rope_text_clip",
+  "depth": 11
+}
