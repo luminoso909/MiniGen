@@ -1,0 +1,86 @@
+{
+  "cross_split_overlap": {
+    "group_id": 0,
+    "near_pairs": 0,
+    "original_sha256": 0,
+    "pixel_sha256": 0,
+    "sha256": 0
+  },
+  "deduplicated_rows": 36547,
+  "dhash_matches": 1507,
+  "exact_duplicates_removed": 703,
+  "groups": 35259,
+  "groups_with_multiple_rows": 1174,
+  "hair_color_counts": {
+    "train": {
+      "aqua": 20,
+      "beige": 81,
+      "black": 2361,
+      "blonde": 1655,
+      "blue": 3309,
+      "blue-gray": 17,
+      "brown": 3842,
+      "dark": 144,
+      "gray": 954,
+      "green": 281,
+      "light": 160,
+      "orange": 1709,
+      "other": 2743,
+      "pink": 3117,
+      "purple": 4225,
+      "red": 3969,
+      "silver": 175,
+      "teal": 2,
+      "white": 4128
+    },
+    "validation": {
+      "aqua": 1,
+      "beige": 9,
+      "black": 263,
+      "blonde": 182,
+      "blue": 369,
+      "blue-gray": 2,
+      "brown": 430,
+      "dark": 17,
+      "gray": 104,
+      "green": 30,
+      "light": 17,
+      "orange": 193,
+      "other": 302,
+      "pink": 348,
+      "purple": 470,
+      "red": 440,
+      "silver": 19,
+      "white": 459
+    }
+  },
+  "largest_group": 13,
+  "manifest_sha256": "759b4df234d98ac9c11d96d4e05638a7e4b952df24348231641bd4ba11b7b597",
+  "near_method": "64-bit dHash Hamming <= 3 and 4x4 RGB mean absolute difference <= 12",
+  "near_pairs": 1454,
+  "rank_counts": {
+    "train": {
+      "0": 745,
+      "1": 21375,
+      "2": 9436,
+      "3": 1336
+    },
+    "validation": {
+      "0": 83,
+      "1": 2379,
+      "2": 1043,
+      "3": 150
+    }
+  },
+  "schema": "minigen.anime_faces.b1.split.v1",
+  "source_id": "puruchinera/anime-faces-256",
+  "source_manifest_sha256": "d2bf8a68159eb05119460e9c146e7e0b5c645eba651f4c9e8c885699a11f1a3e",
+  "source_revision": "0f01ad9151f6d53f2ed7227d0a3d2373808f2abd",
+  "source_rows": 37250,
+  "split_counts": {
+    "train": 32892,
+    "validation": 3655
+  },
+  "split_seed": 20261113,
+  "validation_target": 3655
+}

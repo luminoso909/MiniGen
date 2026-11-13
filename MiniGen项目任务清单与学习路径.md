@@ -9,17 +9,17 @@
 | P0 仓库审计与迁移 | 当前文件与代码映射，五份 Notebook 哈希，基础检查，统一文档入口 | 已完成，见 [审计](reports/v2/00_repository_audit.md)、[迁移差异](reports/v2/00_migration_diff.md)、[交接](reports/v2/00_handoff.md) |
 | P1 数据接入与审计 | ArtBench 全量 46,298 张，固定来源、逐图解码、组级切分与图文复核 | 全量接入、Caption 清洗与 240 张图文抽查完成。见 [P0/P1 交付](reports/v2/01_p0_p1_delivery.md) |
 | P2 冻结组件 | 随机 200 张重建、人审，CLIP 单段特征与 mask，固定 20 张本机验收，冻结版本化缓存 | 已完成，见 [P2 工程交付](reports/v2/02_p2_delivery.md)。train 37,042 行、validation 4,637 行均通过 [独立回读](reports/v2/components/artbench_cache_formal.json) |
-| P3 B0 工程 | 共用 Flow 契约和 B0，真实 CLI，短跑、采样、恢复与成本估算 | P3-01～04 本地通过；单图可辨，16 图有限对照仍未通过 P3-05；P3-06 待 CUDA。见 [P3 收尾](reports/v2/03_p3_closeout.md) |
-| P4 三主干工程与正式训练 | 本地完成 B1/B2 与共享接口；正式云端运行另行批准 | P4-03/05 本地工程通过，三模型 MPS 8+4 步闭环及 180 项测试通过；P4-01/02/04/06/07 正式实验未完成。见 [P4 交付](reports/v2/04_p4_delivery.md) |
+| P3 B0 工程 | 共用 Flow 契约和 B0，真实 CLI，短跑、采样、恢复与成本估算 | P3-01～04 本地通过；P3-05 质量待过；P3-06 的 AutoDL 工程 Pilot 已实测，正式成本及预算待定。见 [AutoDL B0 回执](reports/v2/p3/autodl_pretrain_2026-11-12.md) |
+| P4 三主干工程与正式训练 | B0/B1/B2 共享工程和云端全量训练 | 三模型各完成 10,000 步及检查点验收；固定验证主体仍难稳定辨认，正式选型标准待定。[B0](reports/v2/p4/autodl_b0_full_10000_2026-11-12.md) · [B1/B2 与三模型对照](reports/v2/p4/autodl_b1_b2_full_10000_2026-11-12.md) |
 | P5 MiniGen-Bench | 训练前冻结测试设计，按同更新步数和同算力报告，匹配 NFE 对照采样 | 本地主体工程、候选协议、小样本指标与云端手册已交付；正式评测依赖用户审核、可比检查点、真实 VQA 与人工校准。见 [P5 交付](reports/v2/05_p5_delivery.md) |
 | P6 可选扩展 | 第二种子、单一架构的 10M/50M 扩展或 Chimera-Lite | 默认跳过，由用户在主结果明确后决定 |
 | P7 交付与复现 | 数据卡、模型卡、报告、运行入口、失败分析和可复现示例 | 待做，依赖 P5 |
 
-正式对照采用 256×256 ArtBench、冻结 SDXL VAE/CLIP-B/32 与同一 Flow Matching 目标，训练三个从零初始化的约 30M 条件主干。B0 实际 30,359,824 参数，B1/B2 各 30,061,456 参数；正式计算预算仍需 CUDA Pilot 和审批冻结。按用户更新的顺序先完成 P3–P5 主体代码与本地小案例，再制作云端操作手册，由用户安排正式运行。配置、短训、个人理解、生成质量和正式结果分别登记，P4 工程完成不等于正式实验完成。
+正式对照采用 256×256 ArtBench、冻结 SDXL VAE/CLIP-B/32 与同一 Flow Matching 目标，训练三个从零初始化的约 30M 条件主干。B0 实际 30,359,824 参数，B1/B2 各 30,061,456 参数。已完成同更新步数的全量训练及固定验证对照。等算力和正式 Benchmark 评测仍待执行。
 
 ### **2. 个人学习与既有证据**
 
-本轮云端前最终交接见 [最终摘要](reports/v2/final/P3_P4_P5工程最终验收摘要.md)。[Benchmark 审核包](reports/v2/benchmark/MiniGen_Benchmark_最终审核包.md) 与 [预登记](reports/v2/final/MiniGen_正式实验预登记.md) 保持待用户批准；未把 P3-05/P3-06、P4 正式训练或 P5 正式评测勾选完成。
+云端前历史复核见 [最终摘要](reports/v2/final/P3_P4_P5工程最终验收摘要.md)，后续 AutoDL 训练与独立动漫 B1 准备见 [当前交接](reports/v2/00_handoff.md)。[Benchmark 审核包](reports/v2/benchmark/MiniGen_Benchmark_最终审核包.md) 与 [预登记](reports/v2/final/MiniGen_正式实验预登记.md) 仍待用户批准。
 
 S4-01 从线性 Flow、Euler/Heun 与 NFE 开始，再按 [课程顺序](docs/MiniGen2学习目录.md) 进入 Plain、Joint Attention/2D RoPE、Single-Stream、Hybrid 和实验评测。首份课件由用户启动学习回合后交付。
 

@@ -1,79 +1,161 @@
-## **一、MiniGen v2.0**
+## **一、MiniGen**
 
-MiniGen 在同一套 ArtBench Public Domain 256x256 数据的训练切分上，从随机初始化训练三个约 30M 可训练参数的文本条件生成主干。三者共享冻结的 SDXL VAE、CLIP-B/32 文本塔和 Flow Matching 速度目标，比较画质、提示词遵循与计算成本。
+MiniGen 是一个文本条件图像生成研究项目。三个约 30M 参数的 Latent DiT 从随机初始化训练，共享 ArtBench 绘画、冻结的 SDXL VAE、CLIP ViT-B/32 文本塔和 Flow Matching 速度目标。模型在潜空间生成图像，最后由 VAE 解码为 256×256 RGB。
 
-| 主干 | 图文条件路径 | 可训练参数 |
-| --- | --- | --- |
-| B0 PlainConditionalDiT | 图像自注意力读取图像 token，Cross-Attention 读取文本 token | 30,359,824 |
-| B1 SingleStreamDiT | 图文 token 拼接，共用 Transformer 块 | 30,061,456 |
-| B2 HybridDiT | 前段保留图文双流，通过 Joint Attention 交互，后段合流 | 30,061,456 |
+| 主干 | 图文交互 | 可训练参数 |
+| --- | --- | ---: |
+| B0 · Plain Conditional DiT | 图像自注意力加文本交叉注意力 | 30,359,824 |
+| B1 · Single Stream DiT | 拼接图文 token，在单流中共同计算 | 30,061,456 |
+| B2 · Hybrid DiT | 前段双流联合注意力，后段合为单流 | 30,061,456 |
 
-正式范围、阶段门槛和实验矩阵以 [MiniGen v2 重构规划](docs/MiniGen2重构规划.md) 为准。阶段状态见 [任务索引](MiniGen项目任务清单与学习路径.md)，阶段证据和下一项工作见 [当前交接](reports/v2/00_handoff.md)。
+ArtBench 的三个主干已在 AutoDL 各完成 **10,000 步**，同一组 256 条固定验证配对的 Flow MSE 分别为 0.7852、0.7698、0.7712。16 条固定描述的生成主体仍难稳定辨认，正式 MiniGen-Bench 待批准。动漫头像是独立的 B1 实验，已通过缓存回读和 AutoDL CPU 前向，CUDA 训练待执行。见 [B0 运行报告](reports/v2/p4/autodl_b0_full_10000_2026-11-12.md)、[B1/B2 运行报告](reports/v2/p4/autodl_b1_b2_full_10000_2026-11-12.md)、[三模型样图对照](reports/v2/p4/B0-B2_训练对比.html) 和 [当前交接](reports/v2/00_handoff.md)。
 
-## **二、当前可用功能与验证**
+## **二、克隆与环境**
 
-云端前最终审查已完成：见 [工程摘要](reports/v2/final/P3_P4_P5工程最终验收摘要.md)、[Benchmark 最终审核包](reports/v2/benchmark/MiniGen_Benchmark_最终审核包.md)、[实验预登记](reports/v2/final/MiniGen_正式实验预登记.md) 和 [执行前清单](docs/cloud/MiniGen_云端执行前检查清单.md)。代码可交付用户进行单卡 Pilot；Benchmark 评分覆盖问题、16 图质量、CUDA 和正式预算仍待解决，不代表已经批准长训。
-
-| 功能 | 当前状态 |
-| --- | --- |
-| `minigen doctor` | 可用。支持 `--device` 和 `--json`，检查依赖与小张量前向、反向 |
-| `minigen train`、`sample`、`evaluate`、`cache` | 已可用：B0/B1/B2 统一 Flow 训练/恢复、Euler/Heun 采样、固定配对 MSE 诊断、正式缓存构建/回读；图像质量由独立 `bench` 入口负责 |
-| `minigen bench` | 已实现 prepare/generate/score/review/profile/report；本地工程与正式成绩分别记录 |
-| `minigen data`、顶层 `report` | 未注册；报告入口为 `minigen bench report` |
-| 数据、冻结组件与训练工具 | ArtBench 46,298 张已接入，离线数据准备使用 `scripts/prepare_artbench.py`。冻结 VAE、CLIP 和 train/validation 正式缓存已完成 [P2 验收](reports/v2/02_p2_delivery.md)。P3 诊断与 P4 本地主体工程已交付，P5 本地评测已接入；16 图生成质量及 CUDA 仍待验收 |
-| 个人学习核心 | DDPM、VAE 数学已验收。当前 DiT 的 L03 独立小案例通过。文本 Cross-Attention、CFG、Flow 仍待实现 |
-
-项目使用 Python 3.12.14 和 uv。初始化或恢复依赖时使用 `uv sync --locked`。已有环境可以执行以下离线检查：
+在 Mac 上使用具备仓库读取权限的 GitHub 账号。HTTPS 如需认证，使用本机已配置的凭据管理器。
 
 ```bash
+git clone https://github.com/luminoso909/MiniGen.git
+cd MiniGen
+uv sync --locked --extra artbench --extra conditioning --extra latent
 uv run --locked --offline --no-sync minigen --help
-uv run --locked --offline --no-sync minigen doctor --device cpu --json
-uv run --locked --offline --no-sync pytest -p no:cacheprovider
 ```
 
-P0 的 CPU 诊断和独立 L03 检查通过。旧 DiT 启动测试已修复。历史环境基线和最新验收分别见 [仓库审计](reports/v2/00_repository_audit.md)、[P2 工程交付](reports/v2/02_p2_delivery.md) 与 [P4 工程交付](reports/v2/04_p4_delivery.md)。P4 基线完整 pytest 为 180 通过，本轮结果见 [P5 交付](reports/v2/05_p5_delivery.md)；三个约 30M 模型均完成 MPS 8 步训练、恢复至 12 步、采样和 Flow MSE 诊断。CPU/MPS 本地验收与将来的 CUDA/AMP 分开记录。
+项目使用 Python 3.12 和 uv。评测环境增加 `--extra evaluation`。Mac 用于编辑代码；本项目的 Python 测试、训练和评测在 AutoDL 上执行。使用已配置的 `autodl` SSH 别名。新实例可在数据盘执行 `git clone`，或从 Mac 传入 Git bundle 后克隆固定提交。已有实例通过 rsync 同步需要更新的源码、配置和脚本。数据、模型权重、虚拟环境在远端单独准备。见 [AutoDL 环境记录](docs/cloud/MiniGen_AutoDL无卡准备.md) 和 [云端操作手册](docs/cloud/MiniGen_云端训练与评测完整操作手册.md)。
 
-B0 单图 1000 步诊断已产生可辨主体；固定 16 图、学习率 `2e-4` 的有限对照仍未通过可辨生成门槛，P3-05 保持未完成。三模型的 8+4 步运行只证明工程闭环，不能据此比较生成质量。P4-03/05 本地工程完成，其余正式训练与架构对照仍待执行。[P3 质量诊断](reports/v2/03_p3_closeout.md) · [三模型本地实验](reports/v2/p4/local_experiments.md)。
+## **三、数据集与缓存**
 
-以下命令需要已验收的 P2 缓存；环境已有可选组件时使用 `--no-sync` 保留它们。新实验先复制配置并设置新的 `output_dir`，避免覆盖既有结果：
+### **1. ArtBench 主实验**
+
+使用 ArtBench Public Domain 256×256 的固定 Parquet 版本。项目按图像及作品分组重新划分，英文 Caption 清洗后送入 CLIP。训练阶段读取 VAE latent、CLIP token 特征和 mask。Test 用于锁定后的 Benchmark。见 [数据卡](https://huggingface.co/datasets/alfredplpl/artbench-pd-256x256)、[数据规范](docs/data.md) 和 [冻结来源](configs/datasets/artbench_pd_256.yaml)。
+
+| 划分 | 张数 | 用途 |
+| --- | ---: | --- |
+| Train | 37,042 | 优化主干参数 |
+| Validation | 4,637 | 固定验证损失和采样对照 |
+| Test | 4,619 | 独立评测 |
+
+在 AutoDL 的项目目录运行以下步骤。首次执行需要下载固定分片和冻结模型。成功后可复用已有文件。准备脚本只使用 CPU。
 
 ```bash
-uv run --locked --offline --no-sync minigen train --config configs/training/p3_tiny.json --device cpu
-uv run --locked --offline --no-sync minigen train --config configs/training/p4_b1_local.json --device mps
-uv run --locked --offline --no-sync minigen sample --config configs/training/p4_b1_local.json --checkpoint artifacts/runs/p4_b1_local/last.pt --output artifacts/runs/example_samples --device mps --count 4 --steps 8
+ssh autodl
+cd /root/autodl-tmp/minigen
+(
+  set -e
+  for step in env dataset models worker prepare verify; do
+    bash scripts/setup_autodl_cpu.sh "$step"
+  done
+)
 ```
 
-三模型的本地配置、恢复配置与 CUDA Pilot 配置见 [配置导航](configs/README.md)，本轮真实命令见 [本地实验](reports/v2/p4/local_experiments.md)。恢复严格校验源码与数据身份；旧 P3 权重可显式读取，不等于可以跨源码版本精确续训。使用 CPU 可显式改 `--device cpu`；CUDA/AMP 尚未实机验收，多卡尚未实现。当前停止在用户审核 [Benchmark](reports/v2/benchmark/README.md) 和 [完整云端手册](docs/cloud/MiniGen_云端训练与评测完整操作手册.md) 的入口，后续由用户亲自执行 CUDA Pilot。
+处理结果在 `data/processed/artbench_pd_256/v1/`，包含图像、Caption、组与划分的 `manifest.jsonl`。AutoDL 可在设备就绪后独立生成全量 CUDA 缓存。P2 在 Mac 上已验收的 `v1_formal` 缓存具有独立身份，标准 `minigen train/sample` 使用该缓存。下面的 AutoDL 启动器使用远端独立全量缓存。见 [P2 数据与组件验收](reports/v2/02_p2_delivery.md)。
 
-### **1. P5 独立评测**
+### **2. 动漫头像独立实验**
 
-首次准备评测 Python 依赖使用 `uv sync --locked --extra evaluation`；若还需本机生成，增加 `--extra latent --extra conditioning`。这不会下载模型权重；权重显式下载与版本核验见手册。基础环境运行完整新测试前也需要 `evaluation` 组。
+使用 `puruchinera/anime-faces-256` 的已清洗头像与标签。按组划分后保留 36,547 张，训练 32,892 张、验证 3,655 张。划分脚本的起点是已经准备好的 `data/processed/anime_faces_256/color_front_v1/`，其中包含清洗清单与图像。由它生成 `b1_v1/`，再编码到 `artifacts/cache/anime_faces_256/b1_v1/`。原始数据到清洗输入的工具仍保存在原实验目录。AutoDL 上已部署这套派生缓存。见 [准备与验收记录](reports/v2/00_handoff.md)、[划分入口](scripts/prepare_anime_faces_split.py) 和 [缓存入口](scripts/cache_anime_faces.py)。
+
+## **四、终端训练、恢复与采样**
+
+### **1. AutoDL 上运行 ArtBench**
+
+从远端项目根目录开始。先检查 GPU 和可用显存。新构建缓存使用镜像 CUDA PyTorch，以及上一节准备好的组件依赖。已有全量缓存时，设置 `CACHE_RUN` 指向它的运行根目录并直接执行 `verify`。
 
 ```bash
-uv run --locked --offline --no-sync minigen bench --help
-uv run --locked --offline --no-sync python scripts/prepare_eval_assets.py --models inception clip --verify-only
-uv run --locked --offline --no-sync minigen bench prepare --output reports/v2/benchmark/artbench_v1
+cd /root/autodl-tmp/minigen
+nvidia-smi
+CACHE_RUN=artifacts/runs/autodl-b0-full-10000-20261112
+if [ ! -s "$CACHE_RUN/full_cache/index.json" ]; then
+  bash scripts/run_artbench_autodl.sh "$CACHE_RUN" build --batch-size 8
+fi
+bash scripts/run_artbench_autodl.sh "$CACHE_RUN" verify
 ```
 
-评测使用独立 Inception 与完整 CLIP L/14@336；生成条件仍是 CLIP-B/32 文本塔。本地三个短跑检查点只能验证工程；VQA Mock 不计成绩，真实 BLIP 与绘画域人工校准待云端。真实图片与完整画廊在 `artifacts/evaluations/p5/smoke/`，小型回执见 [P5 实验报告](reports/v2/experiments/p5_local.md)。同一 Benchmark 的题目冻结不等于人工批准。
+默认以 B0 的约 30M 模型做 20 步短跑。`MODEL` 可设为 `b0`、`b1` 或 `b2`。需要按历史 ArtBench 配方重跑 10,000 步时，将 `RUN_KIND` 改成 `full`。全量模式使用 CUDA BF16、有效 batch 64 和 6 小时进程时限，开跑前先确认本轮预算。
 
-## **三、数据、实验与协作**
+```bash
+MODEL=b0
+RUN_KIND=smoke
+RUN="artifacts/runs/artbench-${MODEL}-${RUN_KIND}-$(date +%Y%m%d-%H%M%S)"
+mkdir -p "$RUN"
+/root/miniconda3/bin/python - "$MODEL" "$RUN_KIND" "$RUN" "$CACHE_RUN" <<'PY'
+import json
+import sys
+from pathlib import Path
 
-- 正式数据采用 ArtBench Public Domain 256x256。三份固定 Parquet 共 46,298 张，按组分为训练、验证和测试，保留原生 256×256 RGB。使用清洗后的英文 Caption；图文语义噪声见实际审计。[P0/P1 交付](reports/v2/01_p0_p1_delivery.md) · [数据管理](docs/data.md) · [P0–P7 下载清单](docs/MiniGen2下载清单.md)
-- P2 保留随机 200 张重建统计、9 张诊断与 LPIPS 最差 20 张；用户已接受 SDXL VAE 用于普通绘画。正式缓存依赖本机固定 20 张数值检查，可用通过检查的 MPS 或 CPU，CUDA 训练运行另行验收。P3 先做 B0 小样本验证与单卡成本试验，训练预算由你审批。
-- MiniGen-Bench 在正式训练前冻结提示词与对照协议，分别报告图像质量、文本遵循、质量与算力曲线。完整矩阵见 [重构规划第 7–8 章](docs/MiniGen2重构规划.md)。
-- 工程阶段用 P0–P7 编号，个人课程用 S4–S7 编号。课件从 S4-01 开始，按反馈逐课交付。来源明确的工程实现、课程参考与个人 TODO 分别验收。见 [学习目录](docs/MiniGen2学习目录.md)、[个人任务入口](learning/README.md) 和 [AI 工作流](docs/ai-workflow.md)。
+model, kind, run, cache_run = sys.argv[1:]
+config = json.loads(Path(f"configs/training/p4_{model}_cuda_pilot.json").read_text())
+config["data"]["cache"] = f"{cache_run}/full_cache"
+config["training"]["output_dir"] = f"{run}/train"
+if kind == "smoke":
+    config["data"].update(train_limit=16, validation_limit=4)
+    config["training"].update(
+        precision="fp32", batch_size=2, grad_accum=1, max_steps=20,
+        max_seconds=300, schedule_steps=20, warmup_steps=2,
+        checkpoint_every=10, validation_every=10, checkpoint_steps=[10, 20],
+    )
+elif kind == "full":
+    every = 500 if model == "b0" else 1000
+    config["data"].update(train_limit=None, validation_limit=256)
+    config["training"].update(
+        max_steps=10000, max_seconds=21600, schedule_steps=10000, warmup_steps=500,
+        checkpoint_every=every, validation_every=every,
+        checkpoint_steps=list(range(every, 10001, every)),
+    )
+else:
+    raise SystemExit("RUN_KIND must be smoke or full")
+Path(run, "config.json").write_text(json.dumps(config, indent=2) + "\n")
+PY
+bash scripts/run_artbench_autodl.sh "$CACHE_RUN" minigen train \
+  --config "$RUN/config.json" --device cuda
+bash scripts/run_artbench_autodl.sh "$CACHE_RUN" minigen sample \
+  --config "$RUN/config.json" --checkpoint "$RUN/train/last.pt" \
+  --output "$RUN/samples" --device cuda --split validation --count 4 \
+  --seed 1234 --steps 40 --method euler --guidance 1
+```
 
-## **四、S1–S3 历史学习与实验**
+训练结果看 `train/result.json` 的 `status` 和 `step`，训练曲线取 `train/metrics.jsonl`，采样网格在 `samples/grid.png`。中断后，用同一配置、源码和数据身份恢复。
 
-| 阶段 | 只读 Notebook | 实际证据 |
-| --- | --- | --- |
-| S1 第一周 | [DDPM 原理与 MNIST 实验](docs/learning/S1_第1周_DDPM原理与MNIST实验.ipynb) | [短训与采样](reports/stage1/week1.md) |
-| S1 第二周 | [VAE 原理与潜空间实验](docs/learning/S1_第2周_VAE原理与潜空间实验.ipynb) | [教学实验](reports/stage1/week2.md)、[个人数学验收](reports/stage1/s1_acceptance_2026-10-30.md) |
-| S2 第三周 | [图标数据与潜空间 DiT 基础](docs/learning/S2_第3周_图标数据与潜空间DiT基础.ipynb) | [几何数据、重建与固定监督拟合](reports/stage2/week3.md) |
-| S2 第四周 | [潜空间扩散训练与采样](docs/learning/S2_第4周_潜空间扩散训练与采样.ipynb) | [训练与恢复](reports/stage2/week4.md)，8 张样本中 6 张解析失败 |
-| S3 | [文本条件、CFG 与可信评测](docs/learning/S3_文本条件CFG与可信评测.ipynb) | [两种子实验](reports/stage3/stage3.md)，正确条件成功 2/24、1/24，人工评测待验且正式测试封存 |
+```bash
+bash scripts/run_artbench_autodl.sh "$CACHE_RUN" minigen train \
+  --config "$RUN/config.json" --device cuda --resume "$RUN/train/last.pt"
+```
 
-旧 DDPM 对 Flow 的正式比较和 Sana/OpenMoji/LoRA 方案已归档。相关计划与预研分别见 [旧预登记](configs/experiments/s4_preregistered.yaml) 和 [Sana 预研](reports/research/s3_sana_feasibility.md)。
+全量配方的学习率峰值为 1e-4，验证 MSE 固定取 256 条。复现历史的 16 张验证样图时，将采样的 `--count` 改为 `16`。配置来源、预算与评测步骤见 [训练配置导航](configs/README.md)、[正式实验预登记](reports/v2/final/MiniGen_正式实验预登记.md) 和 [云端任务清单](docs/cloud/云端任务清单.md)。
 
-正式包位于 `src/minigen/`：`data/` 管数据与表示缓存，`autoencoders/` 和 `conditioning/` 管冻结编码器，`evaluation/` 管独立审计，`models/`、`objectives/`、`samplers/`、`training/` 分别管理速度主干、目标、积分与恢复训练。旧课程实现已移至 [学习源码](docs/learning/src/README.md)；正式包不加载它们。测试位于 `tests/`。查看 [配置导航](configs/README.md)、[学习导航](docs/learning/README.md)、[论文导航](docs/papers/README.md) 与 [报告导航](reports/README.md)。实际数据和缓存分别放 `data/` 与 `artifacts/`，由 Git 忽略规则管理。
+### **2. AutoDL 上运行动漫 B1**
+
+先验收完整缓存与单张前向，再按独立配方运行。该配方设置 CUDA BF16、有效批量 64、最多 10,000 步。
+
+```bash
+cd /root/autodl-tmp/minigen
+nvidia-smi
+bash scripts/run_anime_b1_autodl.sh check --device cuda
+bash scripts/run_anime_b1_autodl.sh train --config configs/training/anime_b1_10000.json
+```
+
+恢复时给 `train` 追加 `--resume artifacts/runs/anime_faces_256/b1_v1_10000/last.pt`。检查点和日志都在同一运行目录。见 [动漫 B1 配方](configs/training/anime_b1_10000.json)。
+
+## **五、仓库层级与阅读入口**
+
+```text
+MiniGen/
+├── src/minigen/           运行时 Python 包与命令入口
+│   ├── models/            B0、B1、B2 主干与注意力组件
+│   ├── objectives/        Flow Matching 插值、速度目标与损失
+│   ├── samplers/          Euler、Heun 和 CFG
+│   ├── autoencoders/      冻结 VAE 的编码、解码和缩放
+│   ├── conditioning/      冻结 CLIP 文本条件
+│   ├── data/              数据清单、表示缓存及读写校验
+│   ├── training/          训练循环、优化、EMA、检查点与恢复
+│   └── evaluation/        Benchmark、生成、评分与汇总
+├── configs/               数据和模型锁、训练配方、评测协议
+├── scripts/               资源准备、云端启动器、验收和诊断
+├── tests/                 单元测试与工程回归
+├── docs/                  数据与云端说明、学习笔记、问答和论文
+├── learning/              个人练习和复验入口
+├── reports/               实验报告、阶段交接和验收记录
+├── data/                  本地数据、处理后的图像和清单
+└── artifacts/             模型资产、缓存、训练日志和检查点
+```
+
+代码和配置随 Git 克隆。实际数据、模型权重、缓存、检查点及大型运行产物由 Git 忽略。小型结构化回执和报告放在 `reports/`。正式生成质量通过 `minigen bench` 评测，`minigen evaluate` 输出固定配对 Flow MSE。见 [Benchmark 审核包](reports/v2/benchmark/MiniGen_Benchmark_最终审核包.md)、[项目任务索引](MiniGen项目任务清单与学习路径.md) 和 [学习导航](docs/learning/README.md)。

@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "schema": "minigen.anime_faces.representation.v1",
+  "mode": "anime_full",
+  "manifest_sha256": "759b4df234d98ac9c11d96d4e05638a7e4b952df24348231641bd4ba11b7b597",
+  "split_receipt_sha256": "c59bc60c79254ea4cfb4b617b26db3367238b1c00b87d887b2be6093656dafe0",
+  "cache_index_sha256": "3693afe4e62220b979a0b663e3c542944db0262e8a0dabc6bca8007dc75fb725",
+  "verified_rows": {
+    "train": 32892,
+    "validation": 3655
+  },
+  "unique_captions": 27833,
+  "execution": {
+    "torch": "2.14.1",
+    "devices": {
+      "vae": "mps",
+      "clip": "mps"
+    },
+    "batch_size": 8,
+    "cpu_threads": 4
+  },
+  "storage": {
+    "latents": {
+      "shape": [
+        4,
+        32,
+        32
+      ],
+      "dtype": "<f2"
+    },
+    "text": {
+      "shape": [
+        77,
+        512
+      ],
+      "dtype": "<f2"
+    },
+    "mask": {
+      "shape": [
+        77
+      ],
+      "dtype": "|b1"
+    }
+  },
+  "payload_sha256": {
+    "blank_mask.npy": "b221f6fdb2fdfcc0771aa8e409d36e28f61e5b6b2bba87f38dce1eb4c05136f7",
+    "blank_text.npy": "fb88376e2263a9ca2d9d4d750690fe1b03e7c997f1b21a4f54ee0e653c9317bb",
+    "train_latents.npy": "7a02692f2a10ca77dfef83d013705f136d8ee0ae7a8b0b5780c8d5e6176cfadf",
+    "train_mask.npy": "fb4e36d68e82eb906b2def01c9ec10ffa660e21d3e3958891bd6f44d2e0965d6",
+    "train_text.npy": "0d365d539ab05afb35068cf1d45d4f4fc38409c0e9c0b0d3d78d6b385d8797c4",
+    "validation_latents.npy": "592afdec3cce02ae4b23d762ed2fc07064ebe7ad0691e19dff463711cc8beb35",
+    "validation_mask.npy": "a24b5938543e65d50d6b3419ed09ff61deb19fbd78c93b2333e2d4aaa7f83bf2",
+    "validation_text.npy": "0b5f77d0f9d6cf4bbb748169df0ba4a503cc678af1b9f1a73fec8289cde3e09c"
+  },
+  "payload_bytes": 3183944948,
+  "blank_text_shape": [
+    77,
+    512
+  ],
+  "blank_valid_tokens": 2,
+  "elapsed_seconds": 62.985
+}

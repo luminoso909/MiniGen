@@ -1,0 +1,335 @@
+{
+  "status": "passed",
+  "run_id": "389d1db6396ceb96a60c00b45356c6c958d05c88753cc20a569bb818981444e8",
+  "architecture": "b0",
+  "objective": "flow_velocity",
+  "device": "cuda",
+  "hardware": "NVIDIA GeForce RTX 4080 SUPER",
+  "precision": "bf16",
+  "trainable_parameters": 30359824,
+  "git_commit": "f0ea839925e7303832252de5c3359ba278751fe4",
+  "source_sha256": "a27dc33a3c6e1946907be183467e2ac340afb67e4c1bfb8d2b9a303d1d5aac36",
+  "config_sha256": "05e256eed23759662ff32ce27867d70e17baaf55c8b388c42709441305cf0471",
+  "metrics_sha256": "e920f4c223c72fa6f5ff728809196fed758f6b0f43fae1f1ee51d4cda7e9797c",
+  "training_result_sha256": "a150cb429868b9bfa0e120d4cb62f8d4e691a663e8c84fded2b1100a3196f13d",
+  "cache_readback_sha256": "cbcaa6439d09352ff45e9bb97d22fbed5a26db6695404a1f7e91bf97f2697146",
+  "cache_index_sha256": "d35fa3ff26eb765c5fe76634a8a24836b509db6bcfc401709e5307b2dad95df1",
+  "data_identity": {
+    "cache_index_sha256": "d35fa3ff26eb765c5fe76634a8a24836b509db6bcfc401709e5307b2dad95df1",
+    "source": {
+      "cache_scope": "autodl_independent_full_cuda",
+      "caption_field": "caption",
+      "caption_policy": "artbench-caption-v1",
+      "clip": {
+        "blank": "empty caption",
+        "encoding": {
+          "bos_token_id": 49406,
+          "compute_dtype": "float32",
+          "context_tokens": 77,
+          "eos_token_id": 49407,
+          "features": "last_hidden_state",
+          "hidden_width": 512,
+          "mask": "true for BOS/content/EOS; false for right padding",
+          "max_content_tokens": 75,
+          "pad_token_id": 49407,
+          "version": "clip-text-single-v1"
+        },
+        "files": {
+          "config.json": {
+            "bytes": 943,
+            "sha256": "412ab5681034d6c7496d8bbcc1f4995a8efaf14b64ff0515cbf56680a1e63bc2"
+          },
+          "merges.txt": {
+            "bytes": 524657,
+            "sha256": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85"
+          },
+          "model.safetensors": {
+            "bytes": 252684896,
+            "sha256": "73c3428fc48ba1fe924733f5bc81282980f2c7a128851745e75ab343e231e504"
+          },
+          "special_tokens_map.json": {
+            "bytes": 389,
+            "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf"
+          },
+          "tokenizer.json": {
+            "bytes": 2224041,
+            "sha256": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842"
+          },
+          "tokenizer_config.json": {
+            "bytes": 592,
+            "sha256": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad"
+          },
+          "vocab.json": {
+            "bytes": 862328,
+            "sha256": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363"
+          }
+        },
+        "lock_sha256": "f3075c34e5cbb575fcfa75b46220d036ac89cd7310a650ace9d57b5130aeca88",
+        "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+      },
+      "covered_splits": {
+        "train": 37042,
+        "validation": 4637
+      },
+      "dataset_version": "v1",
+      "encoding_device": "cuda",
+      "encoding_math": "fp32_no_tf32",
+      "freeze_sha256": "ebeb5748a79455c8bc625d0397571f8271907d6fb574349a53c4c239b4196eaf",
+      "image_preprocessing": "RGB/256x256/no-resize/[-1,1]",
+      "kind": "pilot",
+      "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+      "pilot_rows_per_split": null,
+      "schema": "minigen.artbench.representation.v1",
+      "storage": {
+        "latents": {
+          "dtype": "<f2",
+          "shape": [
+            4,
+            32,
+            32
+          ]
+        },
+        "mask": {
+          "dtype": "|b1",
+          "shape": [
+            77
+          ]
+        },
+        "text": {
+          "dtype": "<f2",
+          "shape": [
+            77,
+            512
+          ]
+        }
+      },
+      "vae": {
+        "files": {
+          "config.json": {
+            "bytes": 631,
+            "sha256": "f18b16fa4381c90ab44a3d7abd2e90afd05a2c31b8ca69998bc93c6453aeb7b7"
+          },
+          "diffusion_pytorch_model.safetensors": {
+            "bytes": 334643238,
+            "sha256": "1b909373b28f2137098b0fd9dbc6f97f8410854f31f84ddc9fa04b077b0ace2c"
+          }
+        },
+        "inference": "fp32/posterior_mean",
+        "lock_sha256": "a50db26012b0f1523f97cd2c4008393807092f9a2c207fb32d9b9e71e14617d1",
+        "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+        "scaling_factor": 0.13025
+      }
+    },
+    "subsets": {
+      "train": {
+        "count": 37042,
+        "ordered_ids_sha256": "74387766ad3a37624da9aba467eaf94d6a015bc47aaaaeb94ae40db11885329a"
+      },
+      "validation": {
+        "count": 256,
+        "ordered_ids_sha256": "ba9f44f3534685041dee0b61d25611df71e4049ea8996672606ce61f3cfacd89"
+      }
+    }
+  },
+  "train_samples": 37042,
+  "validation_samples": 256,
+  "optimizer_steps": 10000,
+  "samples_seen": 639762,
+  "train_loss_first_100_mean": 1.6411342696845532,
+  "train_loss_last_100_mean": 0.8068575464189053,
+  "validation_flow_mse": {
+    "500": 0.9739691149443388,
+    "1000": 0.8768068887293339,
+    "1500": 0.8513153567910194,
+    "2000": 0.825717706233263,
+    "2500": 0.814288854598999,
+    "3000": 0.8072625584900379,
+    "3500": 0.8031254168599844,
+    "4000": 0.7988668438047171,
+    "4500": 0.7965129166841507,
+    "5000": 0.7948804125189781,
+    "5500": 0.7927746064960957,
+    "6000": 0.7912142593413591,
+    "6500": 0.7903324123471975,
+    "7000": 0.7890258394181728,
+    "7500": 0.7880794443190098,
+    "8000": 0.7873150259256363,
+    "8500": 0.7868126519024372,
+    "9000": 0.7862020302563906,
+    "9500": 0.7857261803001165,
+    "10000": 0.7852487713098526
+  },
+  "selected_validation_flow_mse": {
+    "2500": 0.814288854598999,
+    "5000": 0.7948804125189781,
+    "10000": 0.7852487713098526
+  },
+  "training_elapsed_seconds": 5243.124732288532,
+  "training_performance": {
+    "optimizer_steps": 10000,
+    "samples_seen": 639762,
+    "optimizer_step_seconds": 5170.380279793404,
+    "samples_per_optimizer_second": 123.73596628864664,
+    "data_seconds": 60.74945950694382,
+    "scope": "累计更新耗时含数据访问/同步，不含验证和检查点写盘；非预热性能基准"
+  },
+  "memory": {
+    "cpu_process_peak_rss_bytes": 7899881472,
+    "cuda_peak_allocated": 1199975936,
+    "cuda_peak_reserved": 1321205760,
+    "mps_current_allocated_bytes": null,
+    "mps_driver_allocated_bytes": null,
+    "scope": "CPU 为进程峰值；CUDA 为本次调用峰值；MPS 为当前值，非峰值"
+  },
+  "final_attempt_resume": null,
+  "snapshots": [
+    {
+      "file": "step_000500.pt",
+      "step": 500,
+      "bytes": 487154523,
+      "sha256": "808393dca1aafb3a1c5e033cceec54145bbe3c80229caa7edbf92109b70d1e15"
+    },
+    {
+      "file": "step_001000.pt",
+      "step": 1000,
+      "bytes": 487208027,
+      "sha256": "47e863770a107176f9810c61a150d83b8aadaaeeb4bed32e41858373e03fd605"
+    },
+    {
+      "file": "step_001500.pt",
+      "step": 1500,
+      "bytes": 487261531,
+      "sha256": "4a8ed910649dce91a310be75fd02916a895bb7d5faecdd28b44372fe47def20e"
+    },
+    {
+      "file": "step_002000.pt",
+      "step": 2000,
+      "bytes": 487315035,
+      "sha256": "6af28b3e767065502cef75fdd060960543e83772396700013e628a8966bf6155"
+    },
+    {
+      "file": "step_002500.pt",
+      "step": 2500,
+      "bytes": 487368603,
+      "sha256": "f402e7a2ae4ade5fbd9406f5b3e19efa5efec16441935885f75a35d11b93f3ed"
+    },
+    {
+      "file": "step_003000.pt",
+      "step": 3000,
+      "bytes": 487422107,
+      "sha256": "62b1ba19d3e775be5f58dd4330a05bcc2f25ac883ea7938c2abe9dbf26b75b94"
+    },
+    {
+      "file": "step_003500.pt",
+      "step": 3500,
+      "bytes": 487475611,
+      "sha256": "54fdd6f234c1f408dcc14880e71976d1fedf8b2ecaa870d8518d40c063e2b07d"
+    },
+    {
+      "file": "step_004000.pt",
+      "step": 4000,
+      "bytes": 487529115,
+      "sha256": "cefa288bb07ac208d56efeb844ca1d7a58b6830424ccc40f5a8da0663948a6f3"
+    },
+    {
+      "file": "step_004500.pt",
+      "step": 4500,
+      "bytes": 487582619,
+      "sha256": "58e162212a52ca5ec94329f7608b08a8ad82eb3bd049279c2d26cdd0750b7a35"
+    },
+    {
+      "file": "step_005000.pt",
+      "step": 5000,
+      "bytes": 487636123,
+      "sha256": "0bdf8d3627e519877a4af29dd90327707f635d605389d6e791e7c0bec6f8a90d"
+    },
+    {
+      "file": "step_005500.pt",
+      "step": 5500,
+      "bytes": 487689691,
+      "sha256": "3daedbddd0c3b49fce328a468ebeb05cb18f22068f69ec1573fb6bd399d8b3a5"
+    },
+    {
+      "file": "step_006000.pt",
+      "step": 6000,
+      "bytes": 487743195,
+      "sha256": "b350e13ab5e6ea0f7e2131c7d5a3f609851a6cd8bde03176e3e894bafa9f595d"
+    },
+    {
+      "file": "step_006500.pt",
+      "step": 6500,
+      "bytes": 487796699,
+      "sha256": "7b5e960e861b872b0622df090e50ff09212ac80a31ad7a2daeb2646442b97187"
+    },
+    {
+      "file": "step_007000.pt",
+      "step": 7000,
+      "bytes": 487850203,
+      "sha256": "022bfc119882db6791daa2573289c0e294d6235f28b01082bc91b3c992801643"
+    },
+    {
+      "file": "step_007500.pt",
+      "step": 7500,
+      "bytes": 487903707,
+      "sha256": "4bcd2bc13dc8042dd80cdf519ae26416cf79202080bc92357ef3f57c7f2669b4"
+    },
+    {
+      "file": "step_008000.pt",
+      "step": 8000,
+      "bytes": 487957211,
+      "sha256": "144270422b360b244770a79c2d7925e0f6fe60e93ca0efe1ed6e2d035bd07124"
+    },
+    {
+      "file": "step_008500.pt",
+      "step": 8500,
+      "bytes": 488010779,
+      "sha256": "58158d8b1e6bbf8441add950abde3cc6ffddeae8fdb4fc7dc9aada6e529af715"
+    },
+    {
+      "file": "step_009000.pt",
+      "step": 9000,
+      "bytes": 488064283,
+      "sha256": "7b2475eeed03dcfcebdc87349a8ffaecfd353902a18b6724b0973b7424f35ea8"
+    },
+    {
+      "file": "step_009500.pt",
+      "step": 9500,
+      "bytes": 488117787,
+      "sha256": "0cf6444462891cb1b42240d434defff19bf2e262037fda11957d53377f6418d6"
+    },
+    {
+      "file": "step_010000.pt",
+      "step": 10000,
+      "bytes": 488171291,
+      "sha256": "e14fc54aaec29ff69514a8452c56c2ef511fa5659fd9f0af6bb6c322db972325"
+    }
+  ],
+  "last_checkpoint": {
+    "file": "last.pt",
+    "step": 10000,
+    "bytes": 488171291,
+    "sha256": "1d071b470094116ec44aa1512d6acf583a14c23507f1238c80700f8c419a036b"
+  },
+  "checkpoint_bytes_total": 10241429431,
+  "previews": {
+    "file": "previews/comparison_verified.json",
+    "sha256": "7ac727450b213a55ae3a57e1d4bbfe2f44203f91f477d922b72b7ec657577952",
+    "training_steps": [
+      2500,
+      5000,
+      10000
+    ],
+    "sample_count_per_checkpoint": 16,
+    "panel_files": [
+      {
+        "path": "panels/validation_01-08.png",
+        "sha256": "ab1810008853fe7933b5f7945b5fd8f9001caaa3e65eeae75faec611ed036144"
+      },
+      {
+        "path": "panels/validation_09-16.png",
+        "sha256": "7de3a884f62d30ef1190c711b73c8992302f1d4964036aa6de667633adf50944"
+      }
+    ]
+  },
+  "acceptance_elapsed_seconds": 22.572
+}

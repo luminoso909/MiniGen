@@ -1,0 +1,35 @@
+{
+  "model": "configs/models/b1_30m.json",
+  "training": {
+    "output_dir": "artifacts/runs/anime_faces_256/b1_v1_10000",
+    "objective": "flow_velocity",
+    "device": "cuda",
+    "precision": "bf16",
+    "seed": 0,
+    "batch_size": 8,
+    "grad_accum": 8,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "ema_decay": 0.99,
+    "condition_dropout": 0.1,
+    "max_steps": 10000,
+    "max_seconds": 21600,
+    "checkpoint_every": 1000,
+    "validation_every": 1000,
+    "checkpoint_steps": [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000],
+    "cpu_threads": 5,
+    "warmup_steps": 500,
+    "schedule_steps": 10000,
+    "min_lr_ratio": 0.1
+  },
+  "data": {
+    "cache": "artifacts/cache/anime_faces_256/b1_v1",
+    "data_root": "data/processed/anime_faces_256/color_front_v1",
+    "freeze": "data/processed/anime_faces_256/b1_v1/split_receipt.json",
+    "vae_lock": "configs/models/sdxl_vae.json",
+    "clip_lock": "configs/models/clip_text.json",
+    "train_limit": null,
+    "validation_limit": 256
+  }
+}

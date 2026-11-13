@@ -1,0 +1,242 @@
+{
+  "status": "passed",
+  "run_id": "a797e48e9c557ec7f20c0aa1cf16c2364051bac28590b54031cf6f635330db47",
+  "architecture": "b2",
+  "objective": "flow_velocity",
+  "device": "cuda",
+  "hardware": "NVIDIA GeForce RTX 4080 SUPER",
+  "precision": "bf16",
+  "trainable_parameters": 30061456,
+  "git_commit": "f0ea839925e7303832252de5c3359ba278751fe4",
+  "source_sha256": "a27dc33a3c6e1946907be183467e2ac340afb67e4c1bfb8d2b9a303d1d5aac36",
+  "config_sha256": "795b5fd2bc220d6eb39ed3de1791d99445b36768a60b3ea0c6e9a145be5c108f",
+  "metrics_sha256": "c929e04d2fc35656c4df25fd4ca976d92a23af6f43407a93d2701009743abbc6",
+  "training_result_sha256": "410365983e6347dabf596f170e2e96043930604bf730982df7542b2e48b60e0a",
+  "cache_readback_sha256": "cbcaa6439d09352ff45e9bb97d22fbed5a26db6695404a1f7e91bf97f2697146",
+  "cache_index_sha256": "d35fa3ff26eb765c5fe76634a8a24836b509db6bcfc401709e5307b2dad95df1",
+  "data_identity": {
+    "cache_index_sha256": "d35fa3ff26eb765c5fe76634a8a24836b509db6bcfc401709e5307b2dad95df1",
+    "source": {
+      "cache_scope": "autodl_independent_full_cuda",
+      "caption_field": "caption",
+      "caption_policy": "artbench-caption-v1",
+      "clip": {
+        "blank": "empty caption",
+        "encoding": {
+          "bos_token_id": 49406,
+          "compute_dtype": "float32",
+          "context_tokens": 77,
+          "eos_token_id": 49407,
+          "features": "last_hidden_state",
+          "hidden_width": 512,
+          "mask": "true for BOS/content/EOS; false for right padding",
+          "max_content_tokens": 75,
+          "pad_token_id": 49407,
+          "version": "clip-text-single-v1"
+        },
+        "files": {
+          "config.json": {
+            "bytes": 943,
+            "sha256": "412ab5681034d6c7496d8bbcc1f4995a8efaf14b64ff0515cbf56680a1e63bc2"
+          },
+          "merges.txt": {
+            "bytes": 524657,
+            "sha256": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85"
+          },
+          "model.safetensors": {
+            "bytes": 252684896,
+            "sha256": "73c3428fc48ba1fe924733f5bc81282980f2c7a128851745e75ab343e231e504"
+          },
+          "special_tokens_map.json": {
+            "bytes": 389,
+            "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf"
+          },
+          "tokenizer.json": {
+            "bytes": 2224041,
+            "sha256": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842"
+          },
+          "tokenizer_config.json": {
+            "bytes": 592,
+            "sha256": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad"
+          },
+          "vocab.json": {
+            "bytes": 862328,
+            "sha256": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363"
+          }
+        },
+        "lock_sha256": "f3075c34e5cbb575fcfa75b46220d036ac89cd7310a650ace9d57b5130aeca88",
+        "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+      },
+      "covered_splits": {
+        "train": 37042,
+        "validation": 4637
+      },
+      "dataset_version": "v1",
+      "encoding_device": "cuda",
+      "encoding_math": "fp32_no_tf32",
+      "freeze_sha256": "ebeb5748a79455c8bc625d0397571f8271907d6fb574349a53c4c239b4196eaf",
+      "image_preprocessing": "RGB/256x256/no-resize/[-1,1]",
+      "kind": "pilot",
+      "manifest_sha256": "0b95e7b783b2b62d6e2ff58646a95d173607a61b4184c6e250db7dfa1303cc0a",
+      "pilot_rows_per_split": null,
+      "schema": "minigen.artbench.representation.v1",
+      "storage": {
+        "latents": {
+          "dtype": "<f2",
+          "shape": [
+            4,
+            32,
+            32
+          ]
+        },
+        "mask": {
+          "dtype": "|b1",
+          "shape": [
+            77
+          ]
+        },
+        "text": {
+          "dtype": "<f2",
+          "shape": [
+            77,
+            512
+          ]
+        }
+      },
+      "vae": {
+        "files": {
+          "config.json": {
+            "bytes": 631,
+            "sha256": "f18b16fa4381c90ab44a3d7abd2e90afd05a2c31b8ca69998bc93c6453aeb7b7"
+          },
+          "diffusion_pytorch_model.safetensors": {
+            "bytes": 334643238,
+            "sha256": "1b909373b28f2137098b0fd9dbc6f97f8410854f31f84ddc9fa04b077b0ace2c"
+          }
+        },
+        "inference": "fp32/posterior_mean",
+        "lock_sha256": "a50db26012b0f1523f97cd2c4008393807092f9a2c207fb32d9b9e71e14617d1",
+        "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+        "scaling_factor": 0.13025
+      }
+    },
+    "subsets": {
+      "train": {
+        "count": 37042,
+        "ordered_ids_sha256": "74387766ad3a37624da9aba467eaf94d6a015bc47aaaaeb94ae40db11885329a"
+      },
+      "validation": {
+        "count": 256,
+        "ordered_ids_sha256": "ba9f44f3534685041dee0b61d25611df71e4049ea8996672606ce61f3cfacd89"
+      }
+    }
+  },
+  "train_samples": 37042,
+  "validation_samples": 256,
+  "optimizer_steps": 10000,
+  "samples_seen": 639762,
+  "train_loss_first_100_mean": 1.6316599030792713,
+  "train_loss_last_100_mean": 0.7948174896836281,
+  "validation_flow_mse": {
+    "1000": 0.8601899836212397,
+    "2000": 0.8223176449537277,
+    "3000": 0.7993024401366711,
+    "4000": 0.7886270321905613,
+    "5000": 0.7821108568459749,
+    "6000": 0.7775844801217318,
+    "7000": 0.7748515978455544,
+    "8000": 0.7728558499366045,
+    "9000": 0.7719379588961601,
+    "10000": 0.7711677327752113
+  },
+  "training_started_at": "2026-11-12T11:58:03.031059+00:00",
+  "training_finished_at": "2026-11-12T13:31:55.412272+00:00",
+  "training_elapsed_seconds": 5630.8577590323985,
+  "training_performance": {
+    "optimizer_steps": 10000,
+    "samples_seen": 639762,
+    "optimizer_step_seconds": 5588.929033428431,
+    "samples_per_optimizer_second": 114.46951574683875,
+    "data_seconds": 67.87350792530924,
+    "scope": "累计更新耗时含数据访问/同步，不含验证和检查点写盘；非预热性能基准"
+  },
+  "memory": {
+    "cpu_process_peak_rss_bytes": 6784864256,
+    "cuda_peak_allocated": 1205186560,
+    "cuda_peak_reserved": 1302331392,
+    "mps_current_allocated_bytes": null,
+    "mps_driver_allocated_bytes": null,
+    "scope": "CPU 为进程峰值；CUDA 为本次调用峰值；MPS 为当前值，非峰值"
+  },
+  "final_attempt_resume": null,
+  "snapshots": [
+    {
+      "file": "step_001000.pt",
+      "step": 1000,
+      "bytes": 481732385,
+      "sha256": "6847950a70b2fff41e6e18b8cc3320a2d06e3bc241e04b15bd7085524d97e50e"
+    },
+    {
+      "file": "step_002000.pt",
+      "step": 2000,
+      "bytes": 481839393,
+      "sha256": "a33a42d97753a25bd108212c676c2d1d6d85ccd751a99f88847336884d7e6e83"
+    },
+    {
+      "file": "step_003000.pt",
+      "step": 3000,
+      "bytes": 481946401,
+      "sha256": "b2c7e8265ade866c0d7d664c4215fc09b9f58df94af6b6fb0a2a301cfba55ef2"
+    },
+    {
+      "file": "step_004000.pt",
+      "step": 4000,
+      "bytes": 482053409,
+      "sha256": "420e495bcdb52cbfedd8cee66b6adbcc40b2cab2e258bfd405093540d67ae13b"
+    },
+    {
+      "file": "step_005000.pt",
+      "step": 5000,
+      "bytes": 482160481,
+      "sha256": "a5ec1fd239d16b41bb3e4e77aae1f002beb3a22a9586bcbd217da7aea8662f02"
+    },
+    {
+      "file": "step_006000.pt",
+      "step": 6000,
+      "bytes": 482267489,
+      "sha256": "f92489908ce94b75dc71070083e4df103eaad189610356c70d28fdbc4b1cf912"
+    },
+    {
+      "file": "step_007000.pt",
+      "step": 7000,
+      "bytes": 482374497,
+      "sha256": "d85bb79b0b414fa88498e1f8fc84147d1a2885e8ea26d9e00f22326454f20875"
+    },
+    {
+      "file": "step_008000.pt",
+      "step": 8000,
+      "bytes": 482481505,
+      "sha256": "baa0a8969c39565f8dbe0e06a1c1382f4a37f922e3a4cb34494a1e9a7e0e4389"
+    },
+    {
+      "file": "step_009000.pt",
+      "step": 9000,
+      "bytes": 482588513,
+      "sha256": "da632b8b119e07756d1e8eb02d9b5b962e089e7b0a37f2a5cdd1e003e4138570"
+    },
+    {
+      "file": "step_010000.pt",
+      "step": 10000,
+      "bytes": 482695521,
+      "sha256": "4161cbdac87d7514442175538f8a31d94b3765b20508920a90bfc3901f913c6a"
+    }
+  ],
+  "last_checkpoint": {
+    "file": "last.pt",
+    "step": 10000,
+    "bytes": 482695521,
+    "sha256": "21569f1f72f2b60c77b38a52f9ec9aa52fd8704585a6f0342fb222051fe4c57e"
+  },
+  "checkpoint_bytes_total": 5304835115,
+  "acceptance_elapsed_seconds": 11.94
+}

@@ -1,0 +1,96 @@
+{
+  "status": "passed",
+  "cache_mode": "anime_full",
+  "verified_rows": {
+    "train": 32892,
+    "validation": 3655
+  },
+  "cache_index_sha256": "3693afe4e62220b979a0b663e3c542944db0262e8a0dabc6bca8007dc75fb725",
+  "manifest_sha256": "759b4df234d98ac9c11d96d4e05638a7e4b952df24348231641bd4ba11b7b597",
+  "split_receipt_sha256": "c59bc60c79254ea4cfb4b617b26db3367238b1c00b87d887b2be6093656dafe0",
+  "subsets": {
+    "train": {
+      "count": 32892,
+      "ordered_ids_sha256": "cd42558c3bf081305c5c9aaa8c4c2cedf97a7d10e6b1a6b063a62aeb745ff6dd"
+    },
+    "validation": {
+      "count": 256,
+      "ordered_ids_sha256": "d05a6d4061b419f47af47818e2ef3e1c050d4948b3d2e88e86328a79949d51dd"
+    }
+  },
+  "blank_valid_tokens": 2,
+  "forward": {
+    "device": "cpu",
+    "precision": "fp32",
+    "torch": "2.8.0+cu128",
+    "compiled_cuda": "12.8",
+    "sample_id": "af-13209",
+    "latent_shape": [
+      1,
+      4,
+      32,
+      32
+    ],
+    "condition_shape": [
+      1,
+      77,
+      512
+    ],
+    "condition_valid_tokens": 21,
+    "velocity_shape": [
+      1,
+      4,
+      32,
+      32
+    ],
+    "flow_mse": 1.8763526678085327,
+    "parameters": 30061456,
+    "optimizer_updates": 0
+  },
+  "training_recipe": {
+    "output_dir": "/root/autodl-tmp/minigen/artifacts/runs/anime_faces_256/b1_v1_10000",
+    "model": {
+      "architecture": "b1",
+      "hidden_size": 384,
+      "num_heads": 6,
+      "patch_size": 2,
+      "latent_size": 32,
+      "in_channels": 4,
+      "text_dim": 512,
+      "mlp_ratio": 4,
+      "position_encoding": "image_2d_rope_text_clip",
+      "depth": 11
+    },
+    "objective": "flow_velocity",
+    "device": "cuda",
+    "precision": "bf16",
+    "seed": 0,
+    "batch_size": 8,
+    "grad_accum": 8,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "ema_decay": 0.99,
+    "condition_dropout": 0.1,
+    "max_steps": 10000,
+    "max_seconds": 21600,
+    "checkpoint_every": 1000,
+    "validation_every": 1000,
+    "checkpoint_steps": [
+      1000,
+      2000,
+      3000,
+      4000,
+      5000,
+      6000,
+      7000,
+      8000,
+      9000,
+      10000
+    ],
+    "cpu_threads": 5,
+    "warmup_steps": 500,
+    "schedule_steps": 10000,
+    "min_lr_ratio": 0.1
+  }
+}
