@@ -1,0 +1,9 @@
+{
+  "schema": "minigen.anime_faces.benchmark_approval.v1",
+  "approved": true,
+  "benchmark_sha256": "ebea3b6efbd283c7346181f165668adfc3552fa579dc339b83988a586cf3e113",
+  "rubric_sha256": "b55d37e9a24936928222a673aebd5e261f1c7831c190ea9a05e8be89ce87ae02",
+  "reviewer": "user",
+  "reviewed_at": "2026-11-17T01:11:12+08:00",
+  "scope": "用户在当前对话确认题库与盲评标准定稿，授权使用已训练的 Uniform 和 Mid60 生成 512 张正式评测图。"
+}

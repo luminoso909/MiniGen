@@ -1,0 +1,46 @@
+{
+  "schema": "minigen.anime_b2_p1_mid60.scope.v1",
+  "arm": "b2_50m_p1",
+  "parent_step": 25000,
+  "final_step": 30000,
+  "parent_sha256": "e9a78ba5b49eaa643194206e66cc7e976554b0ddae86537276fd6ac36a910775",
+  "parent_run_id": "40d97242a4020e813118c3ed2046a2c27b0004337e503188edec0304663e1862",
+  "parent_checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b2_50m_p1/step_025000.pt",
+  "baseline_sha256": "9a7a4e0fd757586335118be3e2d570da6ac358e6ee1f28b50b28e62a1116f5a2",
+  "baseline_checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b2_50m_p1/step_030000.pt",
+  "source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3",
+  "hardware": "NVIDIA GeForce RTX 4080 SUPER",
+  "baseline_receipt": "artifacts/exports/anime-faces-b1/four_50m_30k_benchmark/generation/b2_50m_p1/receipt.json",
+  "baseline_receipt_sha256": "4a0b20665fdd804068ec2e821fb643eff0958668e8f55492607679fcadab4578",
+  "middle_probability": 0.6,
+  "middle_range": [
+    0.3,
+    0.7
+  ],
+  "sampling": {
+    "resolution": 256,
+    "weights": "ema",
+    "solver": "euler",
+    "steps": 40,
+    "cfg": 3,
+    "precision": "fp32",
+    "noise": "For each seed, draw one CPU float32 tensor [104,4,32,32] in ordered regular then pairs order. Both models and both endpoints share the corresponding row. Record row and batch SHA-256."
+  },
+  "seeds": [
+    2026111401,
+    2026111402
+  ],
+  "benchmark_sha256": "ebea3b6efbd283c7346181f165668adfc3552fa579dc339b83988a586cf3e113",
+  "rubric_sha256": "b55d37e9a24936928222a673aebd5e261f1c7831c190ea9a05e8be89ce87ae02",
+  "evaluation": {
+    "questions": 208,
+    "images_per_arm": 256,
+    "new_images": 256,
+    "face_min_net": 13,
+    "iris_min_net": 8,
+    "both_seeds_strictly_positive": true,
+    "freeze_before_reveal": true
+  },
+  "optimizer_updates": 5000,
+  "shutdown_after_verified_export": true
+}

@@ -90,6 +90,30 @@ class HybridDiT(nn.Module):
         Results:
             Float[Tensor, "b c h w"]: 同形图像速度，文本部分不参与输出损失。
         """
+        velocity, _ = self.forward_with_image_tokens(z, t, condition)
+        return velocity
+
+    def forward_with_image_tokens(
+        self,
+        z: Float[Tensor, "b c h w"],
+        t: Float[Tensor, " b"],
+        condition: Condition,
+    ) -> tuple[Float[Tensor, "b c h w"], Float[Tensor, "b n d"]]:
+        """返回图像速度及双流末端的图像 token，用于空间表示对齐。
+
+        Args:
+            z: [b,c,h,w] 当前 Flow 潜状态。
+            t: [b] 位于 [0,1] 的连续时间。
+            condition: [b,n_t,text_dim] 文本特征及有效掩码。
+
+        Raises:
+            ValueError: 输入未满足共享形状、时间或设备约定。
+
+        Results:
+            tuple: 同形图像速度和图像流特征。
+                velocity: [b,c,h,w] 单流处理结束后的图像速度。
+                image: [b,n,d] 双流末端按网格顺序排列的图像 token，保留梯度。
+        """
         parts = self.interface.prepare(z, t, condition)
         image, text = parts.image, parts.text
         for block in self.double_blocks:
@@ -97,4 +121,5 @@ class HybridDiT(nn.Module):
         tokens = torch.cat((text, image), dim=1)
         for block in self.single_blocks:
             tokens = block(tokens, parts.time, parts.mask, parts.cosine, parts.sine)
-        return self.interface.finish(tokens[:, text.shape[1] :], parts.time)
+        velocity = self.interface.finish(tokens[:, text.shape[1] :], parts.time)
+        return velocity, image

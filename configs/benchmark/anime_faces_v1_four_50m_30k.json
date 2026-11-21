@@ -1,0 +1,171 @@
+{
+  "schema": "minigen.anime_faces.four_50m_30k_scope.v1",
+  "comparison": "anime_faces_v1_four_50m_30k",
+  "authorization": {
+    "date": "2026-11-18",
+    "prepare_now": true,
+    "generate_only_after_user_gpu_ready": true,
+    "training_updates": 0,
+    "shutdown_after_gpu_sampling_and_export": true
+  },
+  "benchmark": "configs/benchmark/anime_faces_v1.json",
+  "benchmark_sha256": "ebea3b6efbd283c7346181f165668adfc3552fa579dc339b83988a586cf3e113",
+  "rubric": "reports/v2/anime/benchmark_v1_rubric.md",
+  "rubric_sha256": "b55d37e9a24936928222a673aebd5e261f1c7831c190ea9a05e8be89ce87ae02",
+  "benchmark_lock_sha256": "451d8f69101e60d7dc653948d864703b298da369b04afc0608e99cb5b2aafecb",
+  "approval_sha256": "70250ed62d22b2e74988f9882f6e2a7657b54baabdbcd445f198d2d7b5dd2f9e",
+  "training_acceptance": "artifacts/runs/anime_faces_256/six_30k_v1/acceptance.json",
+  "training_acceptance_sha256": "f7b3e1e7201b266b5b0944e17e30afcf41c8ac377b994768cd658ee99f024b8e",
+  "seeds": [
+    2026111401,
+    2026111402
+  ],
+  "sampling": {
+    "resolution": 256,
+    "weights": "ema",
+    "solver": "euler",
+    "steps": 40,
+    "cfg": 3,
+    "precision": "fp32",
+    "noise": "For each seed, draw one CPU float32 tensor [104,4,32,32] in ordered regular then pairs order. Both models and both endpoints share the corresponding row. Record row and batch SHA-256."
+  },
+  "counts": {
+    "questions_per_seed": 104,
+    "cards": 208,
+    "endpoint_prompts": 128,
+    "images_per_model": 256,
+    "models": 4,
+    "images": 1024
+  },
+  "candidates": {
+    "b1_50m_p2": {
+      "architecture": "b1",
+      "config": "configs/training/anime_six_30k/b1_50m_p2.json",
+      "checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b1_50m_p2/step_030000.pt",
+      "checkpoint_sha256": "4566d21e0ebb928aa8ef16662e33eca39f2d687e089730324ba0b78e6eac1983",
+      "checkpoint_bytes": 782818917,
+      "checkpoint_step": 30000,
+      "run_id": "8316be73fa4e1c0e81192db23ce657ff9e0d6e272c5da43a677bbaa2c3dc08d2",
+      "parameters": 48681232,
+      "model_config": {
+        "architecture": "b1",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "depth": 18
+      },
+      "source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3"
+    },
+    "b2_50m_p2": {
+      "architecture": "b2",
+      "config": "configs/training/anime_six_30k/b2_50m_p2.json",
+      "checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b2_50m_p2/step_030000.pt",
+      "checkpoint_sha256": "dc362ff23b4e4141f095829027227e06378872b08745448faf3a0367484fb74e",
+      "checkpoint_bytes": 782826277,
+      "checkpoint_step": 30000,
+      "run_id": "03f316ce4795fbbab7b2e797354ea33486dd4f9bdb367cb44e37cd87311c20e6",
+      "parameters": 48681232,
+      "model_config": {
+        "architecture": "b2",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 2,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "double_depth": 5,
+        "single_depth": 8
+      },
+      "source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3"
+    },
+    "b1_50m_p1": {
+      "architecture": "b1",
+      "config": "configs/training/anime_six_30k/b1_50m_p1.json",
+      "checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b1_50m_p1/step_030000.pt",
+      "checkpoint_sha256": "912b9963c9d5d14ff7f39d61f07c6465fb476051c5ad5b62ec661858f0285bf5",
+      "checkpoint_bytes": 783064421,
+      "checkpoint_step": 30000,
+      "run_id": "a982109247704d77379f655a5fec17494b5fc38587fb29480ab50bc49fdd1874",
+      "parameters": 48672004,
+      "model_config": {
+        "architecture": "b1",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 1,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "depth": 18
+      },
+      "source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3"
+    },
+    "b2_50m_p1": {
+      "architecture": "b2",
+      "config": "configs/training/anime_six_30k/b2_50m_p1.json",
+      "checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b2_50m_p1/step_030000.pt",
+      "checkpoint_sha256": "9a7a4e0fd757586335118be3e2d570da6ac358e6ee1f28b50b28e62a1116f5a2",
+      "checkpoint_bytes": 783071781,
+      "checkpoint_step": 30000,
+      "run_id": "40d97242a4020e813118c3ed2046a2c27b0004337e503188edec0304663e1862",
+      "parameters": 48672004,
+      "model_config": {
+        "architecture": "b2",
+        "hidden_size": 384,
+        "num_heads": 6,
+        "patch_size": 1,
+        "latent_size": 32,
+        "in_channels": 4,
+        "text_dim": 512,
+        "mlp_ratio": 4,
+        "position_encoding": "image_2d_rope_text_clip",
+        "double_depth": 5,
+        "single_depth": 8
+      },
+      "source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3"
+    }
+  },
+  "ranking": {
+    "primary": "face",
+    "tie_breakers": [
+      "iris",
+      "eye_color",
+      "swap_joint"
+    ],
+    "order": "descending_success_counts",
+    "top_k": 2,
+    "complete_ties": "report_tie_do_not_force_architecture_winner",
+    "seed_consistency": "report_per_seed_and_discordance",
+    "absolute_usability": "report_counts_and_failures_relative_ranking_is_not_deployment_acceptance"
+  },
+  "review_extension": {
+    "defects": {
+      "eye_fragmentation": "可见眼周断裂、重复、错位或与旁物粘连",
+      "nose_mouth_missing": "无遮挡鼻口缺失、熔化或移位，正常动漫简笔鼻不算缺陷",
+      "contour_fusion": "脸颊下颌与头发衣服背景不合理粘连"
+    },
+    "states": [
+      "present",
+      "absent",
+      "uncertain",
+      "not_applicable"
+    ],
+    "source": "reports/v2/anime/six_30k_2026-11-18/blind_protocol.json",
+    "source_sha256": "939000ab05f3315a6e753bdccbd3db3be0e47d80ad7b13ccf842ea0ac25d2447"
+  },
+  "evidence_boundary": "Fixed reused benchmark; not a new unseen test; one training seed42 and two fixed initial noise seeds; AI blind review with preserved audit trail.",
+  "blind_review": {
+    "primary_reviewers": "Fresh Codex visual reviewers receive disjoint anonymous cards only, without model mapping or identified comparison grids.",
+    "root_audit": "Before reading primary scores, independently inspect the first two opaque card IDs sorted within each kind/category stratum.",
+    "score_reconciliation": "Preserve original scores and reasons for corrections; complete all rubric reconciliation before score lock and reveal.",
+    "human_review": false
+  }
+}

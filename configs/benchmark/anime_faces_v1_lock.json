@@ -1,0 +1,25 @@
+{
+  "schema": "minigen.anime_faces.benchmark_lock.v1",
+  "status": "pending_user_review",
+  "benchmark_sha256": "ebea3b6efbd283c7346181f165668adfc3552fa579dc339b83988a586cf3e113",
+  "rubric_sha256": "b55d37e9a24936928222a673aebd5e261f1c7831c190ea9a05e8be89ce87ae02",
+  "source_manifest_sha256": "759b4df234d98ac9c11d96d4e05638a7e4b952df24348231641bd4ba11b7b597",
+  "group_exclusions_sha256": "5005ded80453ad0fe853341c4cacd5a30c7367d658502373033a60fafe2cef3e",
+  "counts": {
+    "regular": 80,
+    "pairs": 24,
+    "source_groups": 104,
+    "endpoint_prompts": 128,
+    "seeds": 2,
+    "outputs_per_model": 256,
+    "outputs_two_models": 512
+  },
+  "verification": {
+    "source_files_sha256": 104,
+    "train_group_overlap": 0,
+    "previous_use_group_overlap": 0,
+    "duplicate_endpoint_tag_set": 0,
+    "endpoint_tags_all_in_train_vocabulary": true,
+    "endpoint_tag_sets_exactly_occurring_in_train_captions": 29
+  }
+}

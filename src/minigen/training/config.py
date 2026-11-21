@@ -35,6 +35,7 @@ class TrainConfig:
         warmup_steps: 固定日程的线性预热步数。
         schedule_steps: 固定余弦日程终点，独立于停止上限。
         min_lr_ratio: 日程末端学习率相对峰值的比例。
+        time_mid_probability: 训练时刻落入 [0.3,0.7] 的概率，None 沿用均匀采样。
     """
 
     output_dir: str = "artifacts/runs/p3_local"
@@ -59,6 +60,7 @@ class TrainConfig:
     warmup_steps: int = 20
     schedule_steps: int = 1000
     min_lr_ratio: float = 0.1
+    time_mid_probability: float | None = None
 
     def __post_init__(self) -> None:
         """拒绝拼写错误之外的非法取值与不明确的精度组合。
@@ -94,6 +96,8 @@ class TrainConfig:
             raise ValueError("Invalid EMA or condition dropout")
         if not 0 <= self.min_lr_ratio <= 1 or not self.output_dir:
             raise ValueError("Invalid minimum learning rate or output path")
+        if self.time_mid_probability is not None and not 0 < self.time_mid_probability < 1:
+            raise ValueError("Time sampler must cover the full interval")
         if self.device not in {"auto", "cpu", "mps", "cuda"}:
             raise ValueError("device must be auto/cpu/mps/cuda")
         if self.precision not in {"fp32", "fp16", "bf16"}:

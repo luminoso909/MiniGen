@@ -1,0 +1,40 @@
+{
+  "schema": "minigen.anime_faces.p1_time_repa_scope.v1",
+  "benchmark_sha256": "ebea3b6efbd283c7346181f165668adfc3552fa579dc339b83988a586cf3e113",
+  "rubric_sha256": "b55d37e9a24936928222a673aebd5e261f1c7831c190ea9a05e8be89ce87ae02",
+  "parent_step": 25000,
+  "final_step": 30000,
+  "seeds": [2026111401, 2026111402],
+  "candidates": {
+    "b1_p1_uniform": {
+      "arm": "b1_50m_p1",
+      "receipt_sha256": "0fd06783bb54e630bca52a23fa8786bbc1124e7f84e476008cb52c1a87f83e44"
+    },
+    "b1_p1_mid60": {
+      "baseline": "b1_p1_uniform",
+      "run": "b1_50m_p1_mid60_25k_30k",
+      "parent_sha256": "0b51858e5780ab4f9a44cc1c0a57385bfa34ca952cd30d1d84151e927bee0576"
+    },
+    "b1_p1_repa": {
+      "baseline": "b1_p1_uniform",
+      "run": "b1_50m_p1_repa_25k_30k",
+      "parent_sha256": "0b51858e5780ab4f9a44cc1c0a57385bfa34ca952cd30d1d84151e927bee0576"
+    },
+    "b2_p1_uniform": {
+      "arm": "b2_50m_p1",
+      "receipt_sha256": "4a0b20665fdd804068ec2e821fb643eff0958668e8f55492607679fcadab4578"
+    },
+    "b2_p1_repa": {
+      "baseline": "b2_p1_uniform",
+      "run": "b2_50m_p1_repa_25k_30k",
+      "parent_sha256": "e9a78ba5b49eaa643194206e66cc7e976554b0ddae86537276fd6ac36a910775"
+    }
+  },
+  "baseline_pairs": [
+    ["b1_p1_uniform", "b1_p1_mid60"],
+    ["b1_p1_uniform", "b1_p1_repa"],
+    ["b2_p1_uniform", "b2_p1_repa"]
+  ],
+  "thresholds": {"face": 13, "iris": 8},
+  "both_seeds_positive": true
+}

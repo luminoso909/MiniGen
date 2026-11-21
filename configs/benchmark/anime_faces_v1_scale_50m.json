@@ -1,0 +1,31 @@
+{
+  "schema": "minigen.anime_faces.scale_50m_scope.v1",
+  "comparison": "anime_faces_v1_scale_50m",
+  "plan": "reports/v2/anime/b1_b2_50m_benchmark_plan_2026-11-17.md",
+  "plan_sha256": "82ee1a3a668bea85f006e64111ef426d4f25382a69404aa1246c23d97fc18639",
+  "benchmark_sha256": "ebea3b6efbd283c7346181f165668adfc3552fa579dc339b83988a586cf3e113",
+  "rubric_sha256": "b55d37e9a24936928222a673aebd5e261f1c7831c190ea9a05e8be89ce87ae02",
+  "baseline": {
+    "arm": "uniform20k",
+    "receipt_sha256": "07ee9fdcf7bf5dfe2902dafebed9e070b0ca839a6e49ff96417f62f814dd7f46",
+    "checkpoint_sha256": "dd8d3ac3b735744959757b77645530567a029dd00f42262bf2fba6fe6fe740d1"
+  },
+  "candidates": {
+    "b1_50m_20k": {
+      "architecture": "b1",
+      "config": "configs/training/anime_b1_50m_20000.json",
+      "checkpoint": "artifacts/runs/anime_faces_256/b1_50m_20000/step_020000.pt",
+      "checkpoint_sha256": "0317d68dc169e9240414fa5158cb0282b34167cd62e29d797e9e08a9fc12d157",
+      "run_id": "e36913cc64f910723ebb8cb76970f7065fcf01da169f6fd82e30267c3b809fc4",
+      "parameters": 48681232
+    },
+    "b2_50m_20k": {
+      "architecture": "b2",
+      "config": "configs/training/anime_b2_50m_20000.json",
+      "checkpoint": "artifacts/runs/anime_faces_256/b2_50m_20000/step_020000.pt",
+      "checkpoint_sha256": "289db105636596e42731e8be7d013fdb384a66d0b572489e0151dd7e53baff12",
+      "run_id": "4cccdb24652b39a564ffdc05a19d267e41c1552fb428e6a17c81022078772710",
+      "parameters": 48681232
+    }
+  }
+}

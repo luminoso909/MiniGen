@@ -88,6 +88,9 @@ select = ["E", "F", "I", "UP", "B"]
 
 # jaxtyping 形状字符串不是前向类型引用；只豁免这些文件的 F722，保留 F821。
 "src/minigen/_typing.py" = ["F722"]
+"src/minigen/training/engine.py" = ["F722"]
+"src/minigen/training/time_sampling.py" = ["F722"]
+"scripts/train_anime_b2_repa.py" = ["F722"]
 "docs/learning/src/minigen/autoencoders/frozen.py" = ["F722"]
 "docs/learning/src/minigen/autoencoders/vae_core.py" = ["F722"]
 "docs/learning/src/minigen/evaluation/latent.py" = ["F722"]

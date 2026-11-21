@@ -24,12 +24,20 @@ secrets*.json
 *.key
 .netrc
 
-# Local payloads: keep only directory explanations under version control
+# Local datasets, including processed images and manifests
 /data/*
 !/data/README.md
+/configs/benchmark/anime_faces_v1.json
+/configs/benchmark/anime_faces_v1_exclusions.json
+/configs/evaluation/anime_b1_time_eyes.json
+/configs/evaluation/anime_repa_teacher_probe.json
+
+# Generated experiment artifacts and raw evaluation output
 /artifacts/*
 !/artifacts/README.md
 /reports/raw/
+
+# Model weights, generated arrays, and bulk data
 *.pt
 *.pth
 *.ckpt
@@ -42,3 +50,10 @@ secrets*.json
 *.sqlite*
 *.db
 *.log
+
+# Generated archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z

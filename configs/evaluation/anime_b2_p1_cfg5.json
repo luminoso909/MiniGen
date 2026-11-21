@@ -1,0 +1,49 @@
+{
+  "schema": "minigen.anime_faces.b2_p1_cfg5_scope.v1",
+  "benchmark_sha256": "ebea3b6efbd283c7346181f165668adfc3552fa579dc339b83988a586cf3e113",
+  "rubric_sha256": "b55d37e9a24936928222a673aebd5e261f1c7831c190ea9a05e8be89ce87ae02",
+  "final_step": 30000,
+  "seeds": [2026111401, 2026111402],
+  "variants": {
+    "uniform": {
+      "original_receipt": "artifacts/exports/anime-faces-b1/four_50m_30k_benchmark/generation/b2_50m_p1/receipt.json",
+      "original_receipt_sha256": "4a0b20665fdd804068ec2e821fb643eff0958668e8f55492607679fcadab4578",
+      "original_arm": "b2_50m_p1",
+      "checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b2_50m_p1/step_030000.pt",
+      "checkpoint_sha256": "9a7a4e0fd757586335118be3e2d570da6ac358e6ee1f28b50b28e62a1116f5a2",
+      "inference_source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3"
+    },
+    "mid60": {
+      "original_receipt": "artifacts/exports/anime-faces-b1/b2_p1_mid60_benchmark/generation/mid60/receipt.json",
+      "original_receipt_sha256": "fb674a8fb4834b35a09538390a34e5a322d9eefd0294db70a755f2cf7cba02d1",
+      "original_arm": "mid60",
+      "checkpoint": "artifacts/runs/anime_faces_256/b2_50m_p1_mid60_25k_30k/step_030000.pt",
+      "checkpoint_sha256": "93b1962ace89d5957c0036d6852539e436478393e76f1a9c15d5e514fb7f545c",
+      "inference_source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3"
+    },
+    "repa": {
+      "original_receipt": "artifacts/exports/anime-faces-b1/p1_time_repa_benchmark/generation/b2_p1_repa/receipt.json",
+      "original_receipt_sha256": "b8d25b6aed5fec3522c24fd8b106afb26f162a2bca5fc09bc2064dd24a821e2e",
+      "original_arm": "b2_p1_repa",
+      "checkpoint": "artifacts/runs/anime_faces_256/b2_50m_p1_repa_25k_30k/step_030000.pt",
+      "checkpoint_sha256": "fba14f0ad9b941546674ac524a8586a5619fdee59b4650943951420d7fead5f4",
+      "inference_source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3"
+    }
+  },
+  "candidates": {
+    "uniform_cfg3": {"variant": "uniform", "cfg": 3},
+    "uniform_cfg5": {"variant": "uniform", "cfg": 5},
+    "mid60_cfg3": {"variant": "mid60", "cfg": 3},
+    "mid60_cfg5": {"variant": "mid60", "cfg": 5},
+    "repa_cfg3": {"variant": "repa", "cfg": 3},
+    "repa_cfg5": {"variant": "repa", "cfg": 5}
+  },
+  "baseline_pairs": [
+    ["uniform_cfg3", "uniform_cfg5"],
+    ["mid60_cfg3", "mid60_cfg5"],
+    ["repa_cfg3", "repa_cfg5"]
+  ],
+  "thresholds": {"face": 13, "iris": 8},
+  "both_seeds_positive": true,
+  "report_title": "B2-p1 30k EMA · CFG 3 与 5 配对评测"
+}

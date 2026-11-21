@@ -9,6 +9,7 @@ import random
 import resource
 import subprocess
 import sys
+from collections.abc import Callable, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
 from time import perf_counter
@@ -16,7 +17,8 @@ from uuid import uuid4
 
 import numpy as np
 import torch
-from torch import nn
+from jaxtyping import Float
+from torch import Tensor, nn
 from torch.utils.data import Dataset, default_collate
 
 from minigen._typing import Checkpoint, JsonDict
@@ -39,6 +41,19 @@ from minigen.training.runtime import (
     resolve_device,
     synchronize,
 )
+from minigen.training.time_sampling import flow_training_times
+
+MicrobatchLoss = Callable[
+    [
+        nn.Module,
+        Float[Tensor, "b c_z h_z w_z"],
+        Float[Tensor, " b"],
+        Condition,
+        Float[Tensor, "b c_z h_z w_z"],
+        Sequence[str],
+    ],
+    tuple[Float[Tensor, ""], Float[Tensor, ""]],
+]
 
 
 def _json_write(
@@ -67,6 +82,8 @@ def _contract(
     identity: JsonDict,
     model: nn.Module,
     device: torch.device,
+    initialization: JsonDict | None,
+    auxiliary_module: nn.Module | None = None,
 ) -> JsonDict:
     """冻结会影响数值轨迹的配置、数据身份和模型张量规格。
 
@@ -75,6 +92,8 @@ def _contract(
         identity: 调用方传入的数据、缓存和子集身份。
         model: 实际注入的模型。
         device: 实际训练设备。
+        initialization: 显式权重初始化的来源，默认随机初始化。
+        auxiliary_module: 仅在训练使用的独立模块，其张量规格纳入恢复身份。
 
     Results:
         JsonDict: 不含输出路径及可延长停止上限的兼容性契约。
@@ -86,25 +105,27 @@ def _contract(
     recipe = config.to_dict()
     for key in ("output_dir", "max_steps", "max_seconds"):
         recipe.pop(key)
+    if recipe["time_mid_probability"] is None:
+        recipe.pop("time_mid_probability")
+    contract: JsonDict = {
+        "source_sha256": digest.hexdigest(),
+        "recipe": recipe,
+        "data": identity,
+        "model_class": f"{type(model).__module__}.{type(model).__qualname__}",
+        "tensors": {
+            key: [list(value.shape), str(value.dtype)] for key, value in model.state_dict().items()
+        },
+        "torch": str(torch.__version__),
+        "device": str(device),
+        **({"initialization": initialization} if initialization is not None else {}),
+    }
+    if auxiliary_module is not None:
+        contract["auxiliary_tensors"] = {
+            key: [list(value.shape), str(value.dtype)]
+            for key, value in auxiliary_module.state_dict().items()
+        }
     # JSON 规范化让 YAML 中的 list 与 dataclass 默认 tuple 使用同一身份。
-    return json.loads(
-        json.dumps(
-            {
-                "source_sha256": digest.hexdigest(),
-                "recipe": recipe,
-                "data": identity,
-                "model_class": f"{type(model).__module__}.{type(model).__qualname__}",
-                "tensors": {
-                    key: [list(value.shape), str(value.dtype)]
-                    for key, value in model.state_dict().items()
-                },
-                "torch": str(torch.__version__),
-                "device": str(device),
-            },
-            sort_keys=True,
-            allow_nan=False,
-        )
-    )
+    return json.loads(json.dumps(contract, sort_keys=True, allow_nan=False))
 
 
 @torch.no_grad()
@@ -191,6 +212,9 @@ def train_flow(
     model: nn.Module | None = None,
     resume: Path | None = None,
     validation: Dataset[Representation] | None = None,
+    initialization: JsonDict | None = None,
+    microbatch_loss: MicrobatchLoss | None = None,
+    auxiliary_module: nn.Module | None = None,
 ) -> JsonDict:
     """对注入的缓存做有步数和时间边界的单卡 Flow 训练。
 
@@ -202,6 +226,10 @@ def train_flow(
         model: 显式注入的速度预测模型；省略时由配置构造 B0/B1/B2。
         resume: 同设备兼容检查点，允许延长停止上限。
         validation: 可选验证表示；使用独立固定噪声和时间。
+        initialization: 显式传入模型的初始化来源，纳入恢复身份。
+        microbatch_loss: 可选辅助目标，返回未加权的 Flow 和已加权的辅助标量。
+            调用方在 initialization 记录辅助目标及数据身份。
+        auxiliary_module: 辅助目标独用的可训练模块，使用独立的 AdamW 并单独保存。
 
     Raises:
         ValueError: 数据、设备、恢复身份或运行目录不兼容。
@@ -219,7 +247,18 @@ def train_flow(
     directory.mkdir(parents=True, exist_ok=True)
     with (directory / ".training.lock").open("a+b") as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-        return _train(config, dataset, blank, data_identity, model, resume, validation)
+        return _train(
+            config,
+            dataset,
+            blank,
+            data_identity,
+            model,
+            resume,
+            validation,
+            initialization,
+            microbatch_loss,
+            auxiliary_module,
+        )
 
 
 def _train(
@@ -230,6 +269,9 @@ def _train(
     model: nn.Module | None,
     resume: Path | None,
     validation: Dataset[Representation] | None,
+    initialization: JsonDict | None,
+    microbatch_loss: MicrobatchLoss | None,
+    auxiliary_module: nn.Module | None,
 ) -> JsonDict:
     """在独占运行目录中执行训练，检查点只在完整优化更新后保存。
 
@@ -241,6 +283,9 @@ def _train(
         model: 可选显式模型对象。
         resume: 可选恢复路径。
         validation: 可选固定验证集。
+        initialization: 显式权重初始化的来源。
+        microbatch_loss: 可选逐微批 Flow 和辅助损失计算。
+        auxiliary_module: 可选仅训练时更新的辅助模块，不纳入主模型裁剪或 EMA。
 
     Raises:
         ValueError: 身份、检查点、样本或损失不合法。
@@ -262,7 +307,7 @@ def _train(
         raise ValueError("Run directory already contains training; use explicit resume")
     model = (model if model is not None else build_model(config.model)).to(device)
     original_mode = model.training
-    contract = _contract(config, data_identity, model, device)
+    contract = _contract(config, data_identity, model, device, initialization, auxiliary_module)
     identity_digest = run_identity(contract)
     stream = StatefulBatchStream(
         dataset, config.batch_size * config.grad_accum, data_id=identity_digest, seed=config.seed
@@ -273,6 +318,13 @@ def _train(
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
     )
+    auxiliary = None
+    if auxiliary_module is not None:
+        auxiliary_module.to(device).train()
+        auxiliary_optimizer = torch.optim.AdamW(
+            auxiliary_module.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
+        )
+        auxiliary = (auxiliary_module, auxiliary_optimizer)
     scaler = torch.amp.GradScaler(
         "cuda", enabled=device.type == "cuda" and config.precision == "fp16"
     )
@@ -298,6 +350,9 @@ def _train(
         model.load_state_dict(state["model"], strict=True)
         ema.load_state_dict(state["ema"], strict=True)
         optimizer.load_state_dict(state["optimizer"])
+        if auxiliary is not None:
+            auxiliary[0].load_state_dict(state["auxiliary"]["model"], strict=True)
+            auxiliary[1].load_state_dict(state["auxiliary"]["optimizer"])
         scaler.load_state_dict(state["scaler"])
         stream.load_state_dict(state["stream"])
         elapsed_before = state["elapsed_seconds"]
@@ -354,6 +409,7 @@ def _train(
             device,
             elapsed_before,
             snapshot=step in config.checkpoint_steps,
+            auxiliary=auxiliary,
         )
         while step < config.max_steps:
             if perf_counter() - started >= config.max_seconds:
@@ -367,7 +423,8 @@ def _train(
                 raise ValueError("Nonfinite cached latent")
             # 每次更新先生成整个有效 batch 的随机量；微批划分不改变抽样顺序。
             noise = torch.randn(data.shape).to(device)
-            times = torch.rand(len(data)).to(device)
+            cpu_times = flow_training_times(torch.rand(len(data)), config.time_mid_probability)
+            times = cpu_times.to(device)
             dropped = (torch.rand(len(data)) < config.condition_dropout).to(device)
             condition = drop_condition(
                 Condition(batch.text.detach(), batch.mask).to(device), blank, dropped
@@ -377,24 +434,49 @@ def _train(
             for group in optimizer.param_groups:
                 group["lr"] = lr
             optimizer.zero_grad(set_to_none=True)
+            if auxiliary is not None:
+                for group in auxiliary[1].param_groups:
+                    group["lr"] = lr
+                auxiliary[1].zero_grad(set_to_none=True)
             total_loss = 0.0
+            total_aux = 0.0
             for start in range(0, len(data), config.batch_size):
                 stop = min(start + config.batch_size, len(data))
                 micro = Condition(condition.features[start:stop], condition.mask[start:stop])
                 with autocast_context(device, config.precision):
-                    loss = flow_loss(
-                        model(zt[start:stop], times[start:stop], micro), target[start:stop]
-                    )
+                    if microbatch_loss is None:
+                        loss = flow_loss(
+                            model(zt[start:stop], times[start:stop], micro), target[start:stop]
+                        )
+                    else:
+                        flow, aux = microbatch_loss(
+                            model,
+                            zt[start:stop],
+                            times[start:stop],
+                            micro,
+                            target[start:stop],
+                            batch.sample_id[start:stop],
+                        )
+                        loss = flow + aux
                 if not torch.isfinite(loss):
                     raise ValueError("Nonfinite training loss")
                 weighted = loss * (stop - start) / len(data)
                 total_loss += float(weighted.detach())
+                if microbatch_loss is not None:
+                    total_aux += float(aux.detach()) * (stop - start) / len(data)
                 scaler.scale(weighted).backward()
             scaler.unscale_(optimizer)
             norm = torch.nn.utils.clip_grad_norm_(
                 model.parameters(), config.grad_clip, error_if_nonfinite=True
             )
+            if auxiliary is not None:
+                scaler.unscale_(auxiliary[1])
+                torch.nn.utils.clip_grad_norm_(
+                    auxiliary[0].parameters(), config.grad_clip, error_if_nonfinite=True
+                )
             scaler.step(optimizer)
+            if auxiliary is not None:
+                scaler.step(auxiliary[1])
             scaler.update()
             with torch.no_grad():
                 for avg, current in zip(ema.parameters(), model.parameters(), strict=True):
@@ -413,6 +495,11 @@ def _train(
                 "step_seconds": perf_counter() - update_start,
                 "elapsed_seconds": elapsed_before + perf_counter() - started,
             }
+            if config.time_mid_probability is not None:
+                row["mid_time_samples"] = int(((cpu_times >= 0.3) & (cpu_times < 0.7)).sum())
+            if microbatch_loss is not None:
+                row["aux_loss"] = total_aux
+                row["flow_loss"] = total_loss - total_aux
             if validation is not None and (
                 step % config.validation_every == 0 or step == config.max_steps
             ):
@@ -436,6 +523,7 @@ def _train(
                     device,
                     elapsed_before + perf_counter() - started,
                     snapshot=step in config.checkpoint_steps,
+                    auxiliary=auxiliary,
                 )
         synchronize(device)
         elapsed = elapsed_before + perf_counter() - started
@@ -453,6 +541,7 @@ def _train(
             device,
             elapsed,
             snapshot=step in config.checkpoint_steps,
+            auxiliary=auxiliary,
         )
         result: JsonDict = {
             "schema": "minigen.training-result.v1",
@@ -553,6 +642,7 @@ def _save(
     elapsed: float,
     *,
     snapshot: bool,
+    auxiliary: tuple[nn.Module, torch.optim.Optimizer] | None = None,
 ) -> None:
     """保存完成更新后的全部恢复状态及按需的保留快照。
 
@@ -570,6 +660,7 @@ def _save(
         device: 实际训练设备。
         elapsed: 累计训练调用墙钟秒数。
         snapshot: 是否额外保留该步快照。
+        auxiliary: 需要单独保存的训练辅助模块和其 AdamW 状态。
 
     Raises:
         OSError/RuntimeError: 状态序列化或写盘失败。
@@ -600,6 +691,11 @@ def _save(
         "history": history,
         "elapsed_seconds": elapsed,
     }
+    if auxiliary is not None:
+        payload["auxiliary"] = {
+            "model": auxiliary[0].state_dict(),
+            "optimizer": auxiliary[1].state_dict(),
+        }
     save_checkpoint(directory / "last.pt", payload)
     snapshot_path = directory / f"step_{step:06d}.pt"
     if snapshot and not snapshot_path.exists():

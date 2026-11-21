@@ -1,0 +1,110 @@
+{
+  "frozen_at_utc": "2026-11-18T07:23:53.744091+00:00",
+  "sampler_file_sha256": "2ff4f04e91daa08599a8501c0172fbbbd20c0aa813c204c6a6eaa85bf70cea8f",
+  "scope": {
+    "prompts": 16,
+    "noise_seeds": [
+      5001
+    ],
+    "models": 6,
+    "conditions_per_model": 8,
+    "images": 768,
+    "cards": 128
+  },
+  "criteria": {
+    "SEED": 5001,
+    "GUIDANCE": [
+      0,
+      1,
+      3,
+      5
+    ],
+    "SOLVERS": [
+      [
+        "euler",
+        40
+      ],
+      [
+        "heun",
+        20
+      ]
+    ],
+    "COLUMNS": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F"
+    ],
+    "SCHEMA": "minigen.anime_six.blind_scores.v1",
+    "FACE": [
+      "usable",
+      "distorted",
+      "unrecognizable",
+      "failure"
+    ],
+    "IRIS": [
+      "readable",
+      "unreadable",
+      "not_applicable",
+      "failure"
+    ],
+    "HEAD": [
+      "clear",
+      "broken",
+      "uncertain",
+      "failure"
+    ],
+    "CLARITY": [
+      "clear",
+      "unclear",
+      "uncertain",
+      "failure"
+    ],
+    "QUALITY": [
+      "good",
+      "acceptable",
+      "poor",
+      "failure"
+    ],
+    "DEFECT": [
+      "present",
+      "absent",
+      "uncertain",
+      "not_applicable"
+    ],
+    "ATTRIBUTE": [
+      "correct",
+      "wrong",
+      "unreadable",
+      "failure"
+    ],
+    "RUBRIC": {
+      "face": "头像可用要求头部明确，五官及轮廓连贯。明显错位或断裂记 distorted。",
+      "iris": "至少一只应睁开可见的眼睛有独立虹膜，能与眼皮、肤色及阴影分开。",
+      "head_contour": "头部及下颌轮廓可追踪且没有无法解释的断裂记 clear。",
+      "face_clarity": "可见五官的位置与边缘清楚记 clear；自然遮挡按可见部分判断。",
+      "image_quality": "good 为清楚完整，acceptable 为主体完整且有轻微伪影，poor 有明显生成伪影。",
+      "eye_fragmentation": "可见眼皮、眼球或眼眶出现断裂、重复、错位或与旁物粘连。",
+      "nose_mouth_missing": "无遮挡面部的鼻口无法定位、熔化或移位。正常动漫简笔鼻不算缺陷。",
+      "contour_fusion": "脸颊或下颌与头发、衣服或背景不合理融为一体。",
+      "uncertainty": "自然遮挡、侧脸、裁切和正常画风本身不算缺陷，证据不足时记 uncertain。",
+      "cfg0": "CFG 0 为无条件生成。文本属性不评分，虹膜按实际可见睁眼判断，双眼自然闭合可记不适用。",
+      "preferred": "选择同题中最适合做头像的列，可同时选择并列最佳；六列无明确差异时全选。"
+    }
+  },
+  "grading": {
+    "assignment": "three primary reviewers receive disjoint cards, every card includes all six anonymous columns",
+    "root_audit_selection": "within each CFG/solver condition, sort opaque card ids and independently review the first two cards; total16",
+    "audit_resolution": "resolve disagreements from anonymous images, preserve original shard scores and audit notes; lock final scores before reading assignment mapping",
+    "human_review": false
+  },
+  "reporting": {
+    "reference_setting": "cfg3_euler40",
+    "all_eight_settings_reported": true,
+    "cfg0_text_adherence": "not_applicable",
+    "cfg0_iris_reporting": "report readable/16 and applicable/16 coverage as well as readable/applicable",
+    "statistical_scope": "one training seed and one initial noise seed on sixteen reused development prompts; no independent208-question result claimed"
+  }
+}

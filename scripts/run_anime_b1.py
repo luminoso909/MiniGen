@@ -1,4 +1,4 @@
-"""用独立动漫缓存驱动 MiniGen 的 B1 前向验收、训练和采样。"""
+"""用独立动漫缓存驱动 MiniGen 的 B0/B1/B2 前向验收、训练和采样。"""
 
 import argparse
 import hashlib
@@ -89,11 +89,11 @@ def check_forward(
     config: TrainConfig,
     data: JsonDict,
 ) -> JsonDict:
-    """逐行回读缓存后，用真实验证表示执行无梯度的单样本 B1 前向。
+    """逐行回读缓存后，用真实验证表示执行无梯度的单样本前向。
 
     Args:
         args: 项目根、缓存覆盖路径、设备、线程数和可选的 smoke 前缀。
-        config: 已验证架构为 B1 的训练配方。
+        config: 已验证架构为 B0、B1 或 B2 的训练配方。
         data: 与本次模型配方配套的缓存及子集配置。
 
     Raises:
@@ -163,7 +163,7 @@ def check_forward(
 
 
 def parse_args() -> argparse.Namespace:
-    """声明独立 B1 的验收、训练和采样入口。
+    """声明动漫头像实验的验收、训练和采样入口。
 
     Raises:
         SystemExit: 命令行参数不合法或仅请求帮助。
@@ -174,9 +174,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     subcommands = parser.add_subparsers(dest="command", required=True)
     for name, help_text in (
-        ("check", "逐行回读缓存并执行一次无更新 B1 前向"),
-        ("train", "从完整动漫缓存训练或恢复 B1"),
-        ("sample", "使用动漫 B1 检查点和已有 Flow 采样入口"),
+        ("check", "逐行回读缓存并执行一次无更新前向"),
+        ("train", "从完整动漫缓存训练或恢复模型"),
+        ("sample", "使用动漫头像检查点和已有 Flow 采样入口"),
     ):
         child = subcommands.add_parser(name, help=help_text)
         child.add_argument("--root", type=Path, default=ROOT)
@@ -213,7 +213,7 @@ def main() -> None:
 
     Raises:
         OSError: 配置、缓存或输出无法访问。
-        ValueError: 配置不是 B1，或运行设备、缓存或张量不符合契约。
+        ValueError: 配置架构、运行设备、缓存或张量不符合契约。
         RuntimeError: 底层前向、训练或采样失败。
 
     副作用:
@@ -222,8 +222,8 @@ def main() -> None:
     args = parse_args()
     args.root = args.root.resolve()
     config, data = commands.read_experiment(args.root, args.config)
-    if config.model.get("architecture") != "b1":
-        raise ValueError("Anime B1 runner requires a B1 architecture")
+    if config.model.get("architecture") not in ("b0", "b1", "b2"):
+        raise ValueError("Anime face runner requires a B0, B1 or B2 architecture")
     if args.command == "check":
         if args.cpu_threads < 1:
             raise ValueError("CPU threads must be positive")

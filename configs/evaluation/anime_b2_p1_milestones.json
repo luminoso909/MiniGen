@@ -1,0 +1,62 @@
+{
+  "schema": "minigen.anime_b2_milestones.scope.v1",
+  "arm": "b2_50m_p1",
+  "config": "configs/training/anime_six_30k/b2_50m_p1.json",
+  "source_sha256": "1ee21e71c25b432737dfa5309af8479120c1ca5610fafc7f2c78d48881b8dce3",
+  "run_id": "40d97242a4020e813118c3ed2046a2c27b0004337e503188edec0304663e1862",
+  "training_seed": 42,
+  "model_config": {
+    "architecture": "b2",
+    "hidden_size": 384,
+    "num_heads": 6,
+    "patch_size": 1,
+    "latent_size": 32,
+    "in_channels": 4,
+    "text_dim": 512,
+    "mlp_ratio": 4,
+    "position_encoding": "image_2d_rope_text_clip",
+    "double_depth": 5,
+    "single_depth": 8
+  },
+  "trainable_parameters": 48672004,
+  "seed": 5001,
+  "sampling": {
+    "guidance": 3,
+    "method": "euler",
+    "steps": 40,
+    "precision": "fp32",
+    "sampling_batch_size": 4,
+    "count": 16
+  },
+  "reference_receipt": "artifacts/exports/anime-faces-b1/six_30k_v1/generation/b2_50m_p1/cfg3_euler40/receipt.json",
+  "reference_receipt_sha256": "f933ddaf7b424577fea3a62d689b50ae76e052fe4286633387e165789ddde2e3",
+  "checkpoints": {
+    "10000": {
+      "checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b2_50m_p1/step_010000.pt",
+      "bytes": 780931429,
+      "sha256": "946d1f06af61839298dc0919ba2d30a7f9dce033abae167e81d5b30ef41fa11a",
+      "samples_seen": 639924,
+      "equivalent_epochs": 19.45530828164903,
+      "validation_flow_mse": 0.8154639545828104
+    },
+    "20000": {
+      "checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b2_50m_p1/step_020000.pt",
+      "bytes": 782001637,
+      "sha256": "9f7a25fa8cbf64508d351dadfd3fe9f8af1eb6cd5ed8523ef186fc49e20a7d63",
+      "samples_seen": 1279848,
+      "equivalent_epochs": 38.91061656329806,
+      "validation_flow_mse": 0.7948219384998083
+    },
+    "30000": {
+      "checkpoint": "artifacts/runs/anime_faces_256/six_30k_v1/b2_50m_p1/step_030000.pt",
+      "bytes": 783071781,
+      "sha256": "9a7a4e0fd757586335118be3e2d570da6ac358e6ee1f28b50b28e62a1116f5a2",
+      "samples_seen": 1919768,
+      "equivalent_epochs": 58.36580323482914,
+      "validation_flow_mse": 0.789827685803175
+    }
+  },
+  "training_updates": 0,
+  "shutdown_after_verified_export": true,
+  "scope": "Fixed 16 reused development tags; descriptive checkpoint progression, not independent benchmark."
+}
