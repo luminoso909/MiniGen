@@ -223,7 +223,7 @@ for name in ("backbone", "calibration"):
 PY
 ```
 
-下载后以 CPU FP32 为基准做实际 CUDA 特征对照：
+运行下列命令前，按 [ArtBench 题库入口](../../reports/v2/benchmark/README.md) 在当前执行机恢复本地 `reports/v2/benchmark/artbench_v1/benchmark.json`。仓库提供同目录的内容锁。下载评测组件后，以 CPU FP32 为基准做实际 CUDA 特征对照：
 
 ```bash
 uv run --locked --no-sync python scripts/check_eval_backends.py \

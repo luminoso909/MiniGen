@@ -31,7 +31,7 @@ P4 三组本地配置使用相同 4 张训练图、有效 batch 4、FP32 和固�
 ## **三、P5 Benchmark 与云端配置**
 
 - `models/evaluation.json`：独立 Inception/完整 CLIP/BLIP 的精确下载与离线文件身份；大权重不在仓库。
-- `benchmark/prompt_catalog.json`：候选题族与固定种子；生成后由 `reports/v2/benchmark/artbench_v1/lock.json` 固定内容，用户批准另存。
+- `benchmark/prompt_catalog.json`：候选题族与固定种子。生成的 ArtBench 题库保存在本地，由内容锁核验，用户批准另存。见 [题库入口](../reports/v2/benchmark/README.md)。
 - `benchmark/sampling_matrix.json`：Euler/Heun 匹配 solver NFE、CFG 和 naive/SDPA 单变量扫描。
 - `experiments/p5_comparison.json`：三架构/30M/seed0 与后续扩展身份；目标预算、最终采样设置及正式批准仍为空或待确认。
 - `scripts/prepare_cloud_run.py`：依据对应真实 CUDA Pilot 生成全数据正式配置，不把 P4 的 12 步 smoke 配置冒充正式配方。

@@ -2,9 +2,30 @@
 
 本版本将历史图标题型改为艺术绘画场景。正式主数据仍为 ArtBench Public Domain 256×256，未修改原始图像、Caption、分组或划分；P2 表示缓存未重建。
 
-内容位于 [benchmark.json](artbench_v1/benchmark.json)，内容锁位于 [lock.json](artbench_v1/lock.json)。2026-11-10 的内容摘要为 `ff18ef2f5538538cf54411d4d4934e135bdd712c53d62247512825aaea4c62e5`。**内容已锁定，人工语义审核仍待完成**。程序能核验数量、字段和身份，但不能自行批准题目质量。协议同时绑定 `configs/models/evaluation.json` 与 `configs/benchmark/sampling_matrix.json` 的文件哈希，明确 KID/CMMD/CLIPScore 数学、VQA 四状态及保守分母、人工 1–5 分锚点。正式加载会再次检查绑定配置；小型测试 fixture 缺少资产绑定时不能获准正式执行。前一份未批准候选保留在 `artifacts/runs/p5_baseline/benchmark_candidate_previous/`，本轮 8+8 页面验证仍保留当时身份，不重跑伪造新记录。
+题库含真实样本的 Caption、路径和分组元数据，保存在本地 `reports/v2/benchmark/artbench_v1/benchmark.json`。仓库保留 [内容锁](artbench_v1/lock.json)，2026-11-10 的规范 JSON SHA-256 为 `ff18ef2f5538538cf54411d4d4934e135bdd712c53d62247512825aaea4c62e5`。**内容已锁定，人工语义审核仍待完成**。协议同时绑定 `configs/models/evaluation.json` 与 `configs/benchmark/sampling_matrix.json`，正式运行会核对绑定配置与独立的人工批准回执。
 
-### **1. 两套独立用途**
+### **1. 准备本地题库与运行冒烟**
+
+已有冻结题库可继续使用原路径。新检出需从本地备份恢复原文件，或在恢复冻结 ArtBench 数据和清单后，使用 `bench prepare` 生成到尚不存在的忽略目录。生成的锁与仓库内容锁一致后，再复制题库文件。
+
+```bash
+uv run --locked --offline --no-sync minigen bench prepare \
+  --output artifacts/benchmark-prep/artbench_v1
+cmp artifacts/benchmark-prep/artbench_v1/lock.json \
+  reports/v2/benchmark/artbench_v1/lock.json && \
+  cp -n artifacts/benchmark-prep/artbench_v1/benchmark.json \
+  reports/v2/benchmark/artbench_v1/benchmark.json
+```
+
+冒烟入口默认读取上述本地题库。`--benchmark` 可指定其他路径，相对路径由 `--root` 解析。题库旁须有对应的 `lock.json`。真实冒烟还需要已准备的 ArtBench 数据、P4 检查点、表示缓存及评测组件，输出写入新的本地目录。
+
+```bash
+uv run --locked --offline --no-sync python scripts/run_p5_smoke.py \
+  --benchmark reports/v2/benchmark/artbench_v1/benchmark.json \
+  --output artifacts/evaluations/p5/smoke-local --device cpu
+```
+
+### **2. 两套独立用途**
 
 | 数据 | 数量 | 用途和限制 |
 | --- | ---: | --- |
@@ -16,7 +37,7 @@
 
 参考选择以 seed=20261110 和 sample_id 的规范 JSON SHA-256 排序，取前 N 个；不根据模型输出更换参考样本。图像路径、文件 SHA、group_id、来源 Caption 和 artist 都保留。训练/验证/测试的组与文件哈希交叉隔离检查通过；所选参考图片实际文件哈希通过。未使用测试图片训练或调参，没有执行正式 2,000 图生成或评分。
 
-### **2. Prompt 定义和适用真值**
+### **3. Prompt 定义和适用真值**
 
 题目目录为 `configs/benchmark/prompt_catalog.json`。场景包括人物庭院、乡村和河流风景、海上船只、建筑、动物、静物与室内。主体、颜色、数量、属性绑定及空间关系要求保存在 `requirements`；这些表示 **Prompt 要求**，并不预先宣称生成图符合要求。
 

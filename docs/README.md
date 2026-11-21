@@ -1,14 +1,18 @@
 ## **一、MiniGen v2 文档导航**
 
+### **1. 工程与评测**
+
 | 入口 | 内容 |
 | --- | --- |
-| [重构规划](MiniGen2重构规划.md) | 正式范围、P0–P7 门槛和实验矩阵 |
-| [任务索引](../MiniGen项目任务清单与学习路径.md) | 当前进度与可展开的 v1 历史清单 |
-| [当前交接](../reports/v2/00_handoff.md) | P2 组件验收、缓存与下一步 |
-| [数据与权重下载清单](MiniGen2下载清单.md) | P0–P7 所需数据、模型角色、本机状态及固定来源 |
-| [全量资源待办](../待办清单.md) | 已验证的资产、VAE 用户批准与正式缓存进度 |
-| [数据管理](data.md) | ArtBench 审计、Caption 清洗、划分与冻结组件 |
-| [AI 工作流](ai-workflow.md) | 阶段、授权、实现来源和交接规范 |
-| [学习目录](MiniGen2学习目录.md) | S4–S7 课程及个人练习 |
-| [历史学习笔记](learning/README.md) | 五份只读 Notebook 与实验报告 |
-| [论文与阅读](papers/README.md) | 固定论文、历史阅读与 v2 参考入口 |
+| [任务索引](../MiniGen项目任务清单与学习路径.md) · [重构规划](MiniGen2重构规划.md) | 工程阶段、验收门槛和实验矩阵 |
+| [数据规范](data.md) · [数据与权重下载清单](MiniGen2下载清单.md) | 数据来源、划分、Caption 清洗和冻结组件 |
+| [云端操作手册](cloud/MiniGen_云端训练与评测完整操作手册.md) | AutoDL 环境、资产准备、训练、恢复和采样 |
+| [P5 Benchmark 指南](../reports/v2/benchmark/README.md) | ArtBench 本地题库、内容锁和评测入口 |
+| [动漫头像评测指南](anime-evaluation.md) | 本地资产、合成回归和历史盲评复现 |
+| [AI 工作流](ai-workflow.md) · [工程交接](../reports/v2/00_handoff.md) | 工程协作和阶段验收记录 |
+
+### **2. 学习资料**
+
+- [学习目录](MiniGen2学习目录.md) 含课程顺序和个人练习。
+- [历史学习笔记](learning/README.md) 含五份只读 Notebook 与实验报告。
+- [论文与阅读](papers/README.md) 汇总论文和 v2 参考资料。

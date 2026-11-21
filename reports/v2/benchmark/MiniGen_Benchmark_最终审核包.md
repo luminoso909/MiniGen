@@ -4,7 +4,7 @@
 
 本轮没有更改题目、候选锁、数据划分或批准回执，没有读取测试图作调参，没有运行模型或下载资产。此前 217 项回归与真实本地评测证据继续复用；本次新增的是全量题目、清单和协议的只读核验及逐题审查，不冒充人工视觉审核。
 
-- 候选：[benchmark.json](artbench_v1/benchmark.json)；锁：[lock.json](artbench_v1/lock.json)。
+- 候选保存在本地 `artbench_v1/benchmark.json`，恢复方式见 [题库入口](README.md)。仓库保留 [内容锁](artbench_v1/lock.json)。
 - 内容 SHA-256：`ff18ef2f5538538cf54411d4d4934e135bdd712c53d62247512825aaea4c62e5`。
 - 文件 SHA-256：`8574e2a05ae797780ccdf427e7aef1fe16932f7771ff5544fdb35041a96b8cc4`。内容规范哈希与文件字节哈希用途不同，不可互换。
 - 机器可读审查：[benchmark_audit.json](final_review/benchmark_audit.json)，含全部 240 题、40 对改写逐项核对和问题 ID。

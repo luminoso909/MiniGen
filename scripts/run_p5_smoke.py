@@ -8,24 +8,29 @@ import sys
 from pathlib import Path
 from time import perf_counter
 
+DEFAULT_BENCHMARK = Path("reports/v2/benchmark/artbench_v1/benchmark.json")
+
 
 def run_smoke(
     root: Path,
     output: Path,
     device: str,
     max_seconds: float,
+    benchmark: Path = DEFAULT_BENCHMARK,
 ) -> dict[str, object]:
     """以真实 CLI 顺序生成、评分、剖析和汇总，每步原子记录结果。
 
     Args:
-        root: 含 P4 检查点和冻结 Benchmark 的项目根目录。
+        root: 含 P4 检查点的项目根目录。
         output: 新验收目录；不覆盖已有实验。
         device: cpu 或 mps，禁止本入口启动 CUDA 或训练。
         max_seconds: 所有子命令共享的执行上限，最多 1800 秒。
+        benchmark: 本地冻结题库，旁边须有 lock.json；相对路径以 root 为基准。
 
     Raises:
         ValueError: 时限或设备不属于本机有限验收范围。
         FileExistsError: 输出目录已存在。
+        FileNotFoundError: 本地题库或同目录的 lock.json 缺失，或路径不是文件。
         OSError: 目录或子进程启动失败。
 
     Results:
@@ -36,11 +41,23 @@ def run_smoke(
     """
     if device not in {"cpu", "mps"} or not 0 < max_seconds <= 1800:
         raise ValueError("Local smoke requires cpu/mps and at most 1800 seconds")
+    root = root.resolve()
     output = root / output
     if output.exists():
         raise FileExistsError(output)
+    benchmark_path = root / benchmark
+    if not benchmark_path.is_file():
+        raise FileNotFoundError(
+            f"Local ArtBench benchmark file not found: {benchmark_path}. "
+            "Restore the frozen benchmark or pass --benchmark PATH."
+        )
+    lock_path = benchmark_path.with_name("lock.json")
+    if not lock_path.is_file():
+        raise FileNotFoundError(
+            f"Local ArtBench benchmark lock not found: {lock_path}. "
+            "Restore the matching lock.json alongside the benchmark."
+        )
     output.mkdir(parents=True)
-    benchmark = "reports/v2/benchmark/artbench_v1/benchmark.json"
     commands = []
     prefix = [sys.executable, "-m", "minigen", "bench"]
     for arch in ("b0", "b1", "b2"):
@@ -54,7 +71,7 @@ def run_smoke(
                 "--checkpoint",
                 f"artifacts/runs/p4_{arch}_local/last.pt",
                 "--benchmark",
-                benchmark,
+                str(benchmark_path),
                 "--output",
                 str(folder),
                 "--device",
@@ -80,7 +97,7 @@ def run_smoke(
                 "--generation",
                 str(folder / "samples.json"),
                 "--reference",
-                benchmark,
+                str(benchmark_path),
                 "--output",
                 str(folder / "scores.json"),
                 "--device",
@@ -119,7 +136,7 @@ def run_smoke(
             "--checkpoint",
             "artifacts/runs/p4_b0_local/last.pt",
             "--benchmark",
-            benchmark,
+            str(benchmark_path),
             "--output",
             str(output / "profile.json"),
             "--device",
@@ -201,10 +218,10 @@ def run_smoke(
 
 
 def main() -> None:
-    """读取显式设备和新输出目录，执行本机小样本验收。
+    """读取本地题库、显式设备和新输出目录，执行本机小样本验收。
 
     Raises:
-        SystemExit: 参数缺失，或本轮包含失败/未完成命令时退出 1。
+        SystemExit: 参数错误或题库及内容锁缺失时退出 2，命令失败或未完成时退出 1。
         OSError/ValueError: 路径或资源设置错误。
 
     副作用:
@@ -213,9 +230,19 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path.cwd())
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--benchmark",
+        type=Path,
+        default=DEFAULT_BENCHMARK,
+        help=f"Local benchmark beside lock.json, relative to --root or absolute "
+        f"(default: {DEFAULT_BENCHMARK})",
+    )
     parser.add_argument("--device", choices=("cpu", "mps"), default="cpu")
     parser.add_argument("--max-seconds", type=float, default=1800)
-    result = run_smoke(**vars(parser.parse_args()))
+    try:
+        result = run_smoke(**vars(parser.parse_args()))
+    except FileNotFoundError as exc:
+        parser.error(str(exc))
     raise SystemExit(0 if result["complete"] else 1)
 
 

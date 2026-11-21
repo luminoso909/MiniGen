@@ -27,6 +27,7 @@ secrets*.json
 # Local datasets, including processed images and manifests
 /data/*
 !/data/README.md
+/reports/v2/benchmark/artbench_v1/benchmark.json
 /configs/benchmark/anime_faces_v1.json
 /configs/benchmark/anime_faces_v1_exclusions.json
 /configs/evaluation/anime_b1_time_eyes.json
